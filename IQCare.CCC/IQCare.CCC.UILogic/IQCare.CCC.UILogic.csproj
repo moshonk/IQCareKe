@@ -187,7 +187,9 @@
     <Compile Include="Triage\PatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningMethodManager.cs" />
+    <Compile Include="Triage\PatientPIAPregnancySymptomManager.cs" />
     <Compile Include="Triage\PatientPregnancyIndicatorManager.cs" />
+    <Compile Include="Triage\PatientPregnancyIntentionAssessmentManager.cs" />
     <Compile Include="Triage\PatientPregnancyManager.cs" />
     <Compile Include="Tb\PatientIcfActionManager.cs" />
     <Compile Include="Tb\PatientIcfManager.cs" />
