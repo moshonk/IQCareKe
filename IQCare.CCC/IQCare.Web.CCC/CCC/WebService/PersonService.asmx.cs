@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
@@ -8,17 +7,16 @@ using System.Web.Services;
 using Entities.CCC.Enrollment;
 using Entities.Common;
 using Entities.PatientCore;
-using IQCare.CCC.UILogic;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
-using Application.Common;
 using Entities.CCC.Lookup;
-using IQCare.CCC.UILogic.Enrollment;
 using IQCare.Events;
 using Microsoft.JScript;
 using Convert = System.Convert;
 using Interface.CCC.Patient;
 using Application.Presentation;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 using Entities.CCC.Appointment;
 
 namespace IQCare.Web.CCC.WebService
