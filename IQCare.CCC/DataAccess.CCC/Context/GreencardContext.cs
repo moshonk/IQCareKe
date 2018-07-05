@@ -63,6 +63,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
         public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
         public DbSet<PatientAdverseEventOutcome> PatientAdverseEventOutcome { get; set; }
+        public DbSet<PatientPregnancyIntentionAssessment> PatientPregnancyIntentionAssessment { get; set; }
 
 
         //Visit
