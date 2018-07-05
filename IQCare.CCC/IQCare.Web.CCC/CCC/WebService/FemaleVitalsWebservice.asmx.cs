@@ -132,6 +132,122 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public string AddPatientPregnancyIntentionAssessment(int patientId, int patientMasterVisitId, DateTime visitDate, int partnerHivStatus, string clientEligibleForFP, int serviceForEligibleClient, int reasonForFPIneligibility, string planningToConceive3M, string regularMenses, string initiatedOnART, int userId)
+        {
+            //try
+            //{
+            patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
+
+            var pia = new PatientPregnancyIntentionAssessmentManager();
+            var piaId = pia.CheckIfPatientHasPregnancyIntentionAssessment(patientId, visitDate);
+            if (piaId > 0)
+            {
+                result = pia.UpdatePregnancyIntentionAssessment(piaId, visitDate, partnerHivStatus, clientEligibleForFP, serviceForEligibleClient, reasonForFPIneligibility, planningToConceive3M, regularMenses, initiatedOnART, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+            }
+            else
+            {
+                result = pia.AddPregnancyIntentionAssessment(patientId, patientMasterVisitId, visitDate, partnerHivStatus, clientEligibleForFP, serviceForEligibleClient, reasonForFPIneligibility, planningToConceive3M, regularMenses, initiatedOnART, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+            }
+            jsonMessage = (result > 0) ? "{\"id\":" + result + ",\"message\":\"Pregnancy Intention Assessment added successfully!\"}" : "";
+
+            //}
+            //catch (Exception e)
+            //{
+            //   jsonMessage = e.Message;
+            //}
+            return jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientPregnancyIntentionAssessment(int patientId, DateTime visitDate)
+        {
+            try
+            {
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+                patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
+
+                var piaManager = new PatientPregnancyIntentionAssessmentManager();
+                var pias = piaManager.GetPatientPregnancyIntentionAssessment(patientId, visitDate);
+
+                if (pias.Count > 0)
+                {
+                    jsonMessage = new JavaScriptSerializer().Serialize(pias.FirstOrDefault());
+                }
+                else
+                {
+                    jsonMessage = "";
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                jsonMessage = e.Message;
+            }
+            return jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientPregnancySymptom(int patientId, int patientPIAId, string patientPregnancySymptoms)
+        {
+            try
+            {
+                patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+
+                var pregnancySymptomManager = new PatientPIAPregnancySymptomManager();
+                var pregnancySymptoms = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(patientPregnancySymptoms);
+
+                pregnancySymptomManager.DeletePregnancySymptoms(patientPIAId);
+
+                int count = pregnancySymptoms.Count();
+                if (count > 0)
+                {
+                    foreach (var ps in pregnancySymptoms)
+                    {
+                        result = pregnancySymptomManager.AddPIAPregnancySymptom(patientId, patientPIAId, Convert.ToInt32(ps.ToString()), Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                        jsonMessage = (result > 0) ? "Pregnancy symptom added successfully" : "";
+                    }
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                jsonMessage = e.Message;
+            }
+            return jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientPIAPregancySymptoms(int patientPIAId)
+        {
+            try
+            {
+
+                var piaPregnancySymptomManager = new PatientPIAPregnancySymptomManager();
+                var piaPregnancySymptomList = piaPregnancySymptomManager.GetPatientPIAPregnancySymptoms(patientPIAId);
+
+                if (piaPregnancySymptomList.Count > 0)
+                {
+                    jsonMessage = new JavaScriptSerializer().Serialize(piaPregnancySymptomList);
+                }
+                else
+                {
+                    jsonMessage = "";
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                jsonMessage = e.Message;
+            }
+            return jsonMessage;
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPatientScreening(int patientId, int patientMasterVisitid, DateTime visitDate, int screeningTypeId, int screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try

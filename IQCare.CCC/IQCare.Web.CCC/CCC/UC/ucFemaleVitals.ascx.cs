@@ -117,6 +117,48 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
+            List<LookupItemView> fpIneligibilityReason = lookupManager.GetLookItemByGroup("FpIneligibilityReason");
+            if (fpIneligibilityReason != null && fpIneligibilityReason.Count > 0)
+            {
+                FpIneligibilityReason.Items.Add(new ListItem("select", "0"));
+                foreach (var item in fpIneligibilityReason)
+                {
+                    FpIneligibilityReason.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+
+            List<LookupItemView> fpServiceOffered = lookupManager.GetLookItemByGroup("FpServiceOffered");
+            if (fpServiceOffered != null && fpServiceOffered.Count > 0)
+            {
+                FpServiceOffered.Items.Add(new ListItem("select", "0"));
+                foreach (var item in fpServiceOffered)
+                {
+                    FpServiceOffered.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+
+            List<LookupItemView> partnerHivStatus = lookupManager.GetLookItemByGroup("PartnerHivStatus");
+            if (partnerHivStatus != null && partnerHivStatus.Count > 0)
+            {
+                PartnerHivStatus.Items.Add(new ListItem("select", "0"));
+                foreach (var item in partnerHivStatus)
+                {
+                    PartnerHivStatus.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+
+            CheckBoxList cblPregnancySymptoms = new CheckBoxList();
+            ListItem li;
+            List<LookupItemView> pregnancySymptomsLookup = lookupManager.GetLookItemByGroup("pregnancySymptoms");
+            foreach (var item in pregnancySymptomsLookup)
+            {
+                li = new ListItem(item.ItemDisplayName, item.ItemId.ToString());
+                li.Attributes.Add("data-value", item.ItemId.ToString());
+                li.Attributes.Add("class", "pull-left");
+                cblPregnancySymptoms.Items.Add(li);
+            }
+            pregnancySymptoms.Controls.Add(cblPregnancySymptoms);
+
             string gender = Session["Gender"].ToString();
 
             if (gender == "Female")
