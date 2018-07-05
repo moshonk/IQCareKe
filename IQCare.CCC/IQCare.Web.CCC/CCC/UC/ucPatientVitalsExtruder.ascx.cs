@@ -27,6 +27,7 @@ namespace IQCare.Web.CCC.UC
             
             var patientVitals = new PatientVitalsManager();
             var pregnancyStatus=new PatientPregnancyManager();
+            var pregnancyIntention = new PatientPregnancyIntentionAssessmentManager();
 
             double bmi = 0.0;
             string bmiZ;
@@ -232,7 +233,19 @@ namespace IQCare.Web.CCC.UC
                     //lblEDD.Text = "N/A";
                     lblPregnancyStatus.Text = "<span class='label label-success'> Not Pregnant </span>";
                 }
-                
+
+                int pgIntentionStatus = pregnancyIntention.CheckIfPatientHasPregnancyIntentionAssessment(PatientId);
+                var pgIntentionList = pregnancyIntention.GetPatientPregnancyIntentionAssessment(PatientId);
+                if (pgIntentionList != null && pgIntentionList.Count > 0)
+                {
+                    var item = pgIntentionList.OrderByDescending(x => x.CreateDate).FirstOrDefault();
+
+                    lblPIADate.Text = "<span class='label label-info'>Assessment Date  : " + item.CreateDate.ToString("dd-MMM-yyyy") + "</span>";
+
+                    lblPregnancyIntention.Text = "<span class='label label-info'>Planning to conceive in 3 Months? : " + (item.PlanningToConceive3M == "Y" ? "Yes" : "No") + "</span>";
+
+                }
+
             }
             else
             {
