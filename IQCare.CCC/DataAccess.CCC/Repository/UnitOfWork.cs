@@ -113,6 +113,8 @@ namespace DataAccess.CCC.Repository
         private IPatientPregnancyRepository _PatientPregnancyRepository;
         private IPatientScreeningRepository _PatientScreeningRepository;
         private IPatientAdverseEventOutcomeRepository _patientAdverseEventOutcomeRepository;
+        private IPatientPIAPregnancySymptomRepository _PatientPIAPregnancySymptomRepository;
+        private IPatientPregnancyIntentionAssessmentRepository _PatientPregnancyIntentionAssessmentRepository;
 
         /*Baseline*/
         // private IPatientDisclosureRepository _patientDisclosureRepository;
@@ -820,6 +822,16 @@ namespace DataAccess.CCC.Repository
         public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));
 
         // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
+
+        public IPatientPIAPregnancySymptomRepository PatientPIAPregnancySymptomRepository
+        {
+            get { return _PatientPIAPregnancySymptomRepository ?? (_PatientPIAPregnancySymptomRepository = new PatientPIAPregnancySymptomRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientPregnancyIntentionAssessmentRepository PatientPregnancyIntentionAssessmentRepository
+        {
+            get { return _PatientPregnancyIntentionAssessmentRepository ?? (_PatientPregnancyIntentionAssessmentRepository = new PatientPregnancyIntentionAssessmentRepository((GreencardContext)_context)); }
+        }
 
         public int Complete()
         {
