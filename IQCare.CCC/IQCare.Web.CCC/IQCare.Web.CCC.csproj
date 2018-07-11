@@ -424,6 +424,8 @@
     <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff2" />
     <Content Include="CCC\Scripts\sass\mdb.scss" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
