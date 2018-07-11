@@ -850,6 +850,50 @@
 
         }
 
+         function addPregnancySymptoms(patientId, patientPIAId, pregnancySymptoms) {
+             if (patientPIAId != null) {
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancySymptom",
+                     data: "{'patientId':'" + patientId + "','patientPIAId':'" + patientPIAId + "','patientPregnancySymptoms':'" + pregnancySymptoms + "'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+             }
+         }
+
+         function getPregnancySymptoms(patientPIAId) {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPIAPregancySymptoms",
+                 data: "{'patientPIAId':'" + patientPIAId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $.each(response, function () {
+                             $("#<%=pregnancySymptoms.ClientID%>").find("span[data-value=" + this.PregnancySymptomId + "]").children("input[type=checkbox]").attr("checked", true);
+                         })
+                     }
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+
+         }
+
+
          function doesPIAFormExist() {
              $.ajax({
                  type: "POST",
