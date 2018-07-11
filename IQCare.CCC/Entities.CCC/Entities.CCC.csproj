@@ -176,8 +176,10 @@
     <Compile Include="Encounter\PatientPhdp.cs" />
     <Compile Include="Triage\PatientFamilyPlanning.cs" />
     <Compile Include="Triage\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Triage\PatientPIAPregnancySymptom.cs" />
     <Compile Include="Triage\PatientPreganancy.cs" />
     <Compile Include="Triage\PatientPregnancyIndicator.cs" />
+    <Compile Include="Triage\PatientPregnancyIntentionAssessment.cs" />
     <Compile Include="Triage\PatientVital.cs" />
     <Compile Include="Triage\PregnancyOutcomeLookup.cs" />
     <Compile Include="Visit\PatientLabTracker.cs" />

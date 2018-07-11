@@ -130,8 +130,10 @@
     <Compile Include="Screening\IPatientScreeningManager.cs" />
     <Compile Include="Triage\IPatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\IpatientFamilyPlanningManager.cs" />
+    <Compile Include="Triage\IPatientPIAPregnancySymptomManager.cs" />
     <Compile Include="Triage\IpatientPregnancyIndicatorManager.cs" />
     <Compile Include="Triage\IPatientFamilyPlanningMethodManager.cs" />
+    <Compile Include="Triage\IPatientPregnancyIntentionAssessmentManager.cs" />
     <Compile Include="Triage\IPatientPregnancyManager.cs" />
     <Compile Include="Tb\IPateintIptOutcome.cs" />
     <Compile Include="Tb\IPatientIcf.cs" />
