@@ -5,8 +5,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'registration',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
+    },
+    {
+        path: 'dashboard',
+        loadChildren: '../dashboard/dashboard.module#DashboardModule'
     },
     {
         path: 'hts',
@@ -16,6 +20,10 @@ const routes: Routes = [
         path: 'registration',
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
+    /*{
+        path: 'pmtct',
+        loadChildren: '../pmtct/pmtct.module#pmtctModule'
+    },*/
     {
         path: '**',
         component: NotFoundComponent
