@@ -17,5 +17,6 @@ namespace Interface.CCC.Patient
         List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId);
         List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk);
         void UpdatePatientType(int PatientId, int PatientType);
+        System.Data.DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate);
     }
 }
