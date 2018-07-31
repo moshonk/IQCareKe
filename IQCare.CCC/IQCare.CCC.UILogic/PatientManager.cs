@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Web.Services.Discovery;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Helpers;
+using System.Collections;
 
 namespace IQCare.CCC.UILogic
 {
@@ -115,6 +116,11 @@ namespace IQCare.CCC.UILogic
         public int GetPersonId(int patientId)
         {
             return _mgr.GetPersonId(patientId);
+        }
+
+        public System.Data.DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            return _mgr.GetDuplicatePatientRecords(matchFirstName, matchLastName, matchMiddleName, matchSex, matchEnrolmentNumber, matchDob, matchEnrolmentDate, matchARTStartDate, matchHIVDiagnosisDate);
         }
     }
 }

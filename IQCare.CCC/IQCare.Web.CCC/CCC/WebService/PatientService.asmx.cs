@@ -24,6 +24,7 @@ using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
+using System.Data;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -810,6 +811,32 @@ namespace IQCare.Web.CCC.WebService
 
             return appointment;
         }
+
+        [WebMethod]
+        public List<PatientEntity> GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            List<PatientEntity> duplicatePatientRecords = new List<PatientEntity>();
+            try
+            {
+                var patientRecordManager = new PatientManager();
+
+                DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrolmentNumber,  matchDob,  matchEnrolmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
+                foreach (DataRow row in theDT.Rows)
+                {
+                    int patientId = Convert.ToInt32(row["patientId"]);
+                    PatientEntity patient = patientRecordManager.GetPatientEntity(patientId);
+                    duplicatePatientRecords.Add(patient);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return duplicatePatientRecords;
+        }
+
+
     }
 
 
