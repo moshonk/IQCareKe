@@ -815,18 +815,43 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod]
         public List<PatientEntity> GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
         {
-            List<PatientEntity> duplicatePatientRecords = new List<PatientEntity>();
+            List<PatientLookup> duplicatePatientRecords = new List<PatientLookup>();
             try
             {
-                var patientRecordManager = new PatientManager();
+                var patientRecordManager = new PatientLookupManager();
 
                 DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrolmentNumber,  matchDob,  matchEnrolmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
                 foreach (DataRow row in theDT.Rows)
                 {
-                    int patientId = Convert.ToInt32(row["patientId"]);
-                    PatientEntity patient = patientRecordManager.GetPatientEntity(patientId);
+                    int personId = Convert.ToInt32(row["personId"]);
+                    PatientLookup patient = patientRecordManager.GetPatientByPersonId(personId);
                     duplicatePatientRecords.Add(patient);
                 }
+
+                var json = new
+                {
+                    //draw = sEcho,
+                    //recordsTotal = totalCount,
+                    //recordsFiltered = filteredRecords,
+                    // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
+
+                    data = duplicatePatientRecords.Select(x => new string[]
+                    {
+                            x.FirstName,
+                            x.MiddleName,
+                            x.LastName,
+                            x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                            x.EnrollmentNumber.ToString(),
+                            LookupLogic.GetLookupNameById(x.Sex),
+                            x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                            "".ToString(),
+                            x.Id.ToString()
+                        //,utility.Decrypt(x.MobileNumber)
+                    })
+                };
+
+                //output = JsonConvert.SerializeObject(json);
+                output = new JavaScriptSerializer().Serialize(json);
 
             }
             catch (Exception e)

@@ -205,25 +205,5 @@ namespace BusinessProcess.CCC.Patient
             }
         }
 
-        public DataTable GetDuplicatePatientRecords(string matchFirstName, string matchLastName, string matchMiddleName, string matchSex, string matchEnrolmentNumber, string matchDob, string matchEnrolmentDate, string matchARTStartDate, string matchHIVDiagnosisDate)
-        {
-            lock (this)
-            {
-                ClsObject Patient = new ClsObject();
-                ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@matchFirstName", SqlDbType.Bit, matchFirstName);
-                ClsUtility.AddParameters("@matchLastName", SqlDbType.Bit, matchLastName);
-                ClsUtility.AddParameters("@matchMiddleName", SqlDbType.Bit, matchMiddleName);
-                ClsUtility.AddParameters("@matchSex", SqlDbType.Bit, matchSex);
-                ClsUtility.AddParameters("@matchEnrolmentNumber", SqlDbType.Bit, matchEnrolmentNumber);
-                ClsUtility.AddParameters("@matchDOB", SqlDbType.Bit, matchDob);
-                ClsUtility.AddParameters("@matchEnrolmentDate", SqlDbType.Bit, matchEnrolmentDate);
-                ClsUtility.AddParameters("@matchARTStartDate", SqlDbType.Bit, matchARTStartDate);
-                ClsUtility.AddParameters("@matchHIVDiagnosisDate", SqlDbType.Bit, matchHIVDiagnosisDate);
-
-                return (DataTable)Patient.ReturnObject(ClsUtility.theParams, "sp_GetDuplicatePatientRecords", ClsUtility.ObjectEnum.DataTable);
-            }
-
-        }
     }
 }
