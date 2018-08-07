@@ -59,6 +59,7 @@
     <Content Include="CCC\IL\MessageViewer.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
+    <Content Include="CCC\Patient\PatientDuplicateFinder.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.min.css" />
     <Content Include="CCC\Scripts\css\bootstrap.css" />
@@ -301,6 +302,13 @@
     </Compile>
     <Compile Include="CCC\Patient\PatientConsent.aspx.designer.cs">
       <DependentUpon>PatientConsent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientDuplicateFinder.aspx.cs">
+      <DependentUpon>PatientDuplicateFinder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientDuplicateFinder.aspx.designer.cs">
+      <DependentUpon>PatientDuplicateFinder.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
