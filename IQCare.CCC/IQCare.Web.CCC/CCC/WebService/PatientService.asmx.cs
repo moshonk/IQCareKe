@@ -24,6 +24,7 @@ using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
+using System.Data;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -857,6 +858,84 @@ namespace IQCare.Web.CCC.WebService
 
             return appointment;
         }
+
+        [WebMethod]
+        public string GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            var output = "";
+            List<PatientLookup> duplicatePatientRecords = new List<PatientLookup>();
+            try
+            {
+                var patientRecordManager = new PatientLookupManager();
+
+                DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrollmentNumber,  matchDob,  matchEnrollmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
+                foreach (DataRow row in theDT.Rows)
+                {
+                    int personId = Convert.ToInt32(row["personId"]);
+                    PatientLookup patient = patientRecordManager.GetPatientByPersonId(personId);
+                    if (patient != null)
+                    {
+                        patient.categorization = Convert.ToInt32(row["GroupingFilter"]);
+                        duplicatePatientRecords.Add(patient);
+                    }
+                }
+
+                duplicatePatientRecords = duplicatePatientRecords.Take(10).ToList();
+
+                var json = new
+                {
+                    draw = 1,
+                    recordsTotal = duplicatePatientRecords.Count(),
+                    recordsFiltered = duplicatePatientRecords.Count(),
+                    // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
+
+                    data = duplicatePatientRecords.Select(x => new string[]
+                       {
+                                                x.FirstName,
+                                                x.MiddleName,
+                                                x.LastName,
+                                                x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                                                x.EnrollmentNumber.ToString(),
+                                                LookupLogic.GetLookupNameById(x.Sex),
+                                                x.RegistrationDate.Value.ToString("dd-MMM-yyyy"),
+                                                x.MobileNumber,
+                                                x.Id.ToString(),
+                                                x.categorization.ToString()
+                       })
+
+            };
+
+                output = new JavaScriptSerializer().Serialize(json);
+
+            }
+            catch (Exception e)
+            {
+                output = e.Message;
+            }
+            return output;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string MergePatientRecords(int preferredPatientId, int unPreferredPatientId)
+        {
+
+            try
+            {
+                var patientMgr = new PatientManager();
+                var userId = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+                Result = patientMgr.MergePatientRecords(preferredPatientId, unPreferredPatientId, userId);
+                if (Result > 0)
+                {
+                    Msg = "Patient records merged Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
     }
 
 
