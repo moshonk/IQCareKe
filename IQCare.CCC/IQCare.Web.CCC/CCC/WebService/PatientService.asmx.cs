@@ -813,54 +813,81 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public List<PatientEntity> GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        public string GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
         {
+            var output = "";
             List<PatientLookup> duplicatePatientRecords = new List<PatientLookup>();
             try
             {
                 var patientRecordManager = new PatientLookupManager();
 
-                DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrolmentNumber,  matchDob,  matchEnrolmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
+                DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrollmentNumber,  matchDob,  matchEnrollmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
                 foreach (DataRow row in theDT.Rows)
                 {
                     int personId = Convert.ToInt32(row["personId"]);
                     PatientLookup patient = patientRecordManager.GetPatientByPersonId(personId);
-                    duplicatePatientRecords.Add(patient);
+                    if (patient != null)
+                    {
+                        patient.categorization = Convert.ToInt32(row["GroupingFilter"]);
+                        duplicatePatientRecords.Add(patient);
+                    }
                 }
+
+                duplicatePatientRecords = duplicatePatientRecords.Take(10).ToList();
 
                 var json = new
                 {
-                    //draw = sEcho,
-                    //recordsTotal = totalCount,
-                    //recordsFiltered = filteredRecords,
+                    draw = 1,
+                    recordsTotal = duplicatePatientRecords.Count(),
+                    recordsFiltered = duplicatePatientRecords.Count(),
                     // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
 
                     data = duplicatePatientRecords.Select(x => new string[]
-                    {
-                            x.FirstName,
-                            x.MiddleName,
-                            x.LastName,
-                            x.DateOfBirth.ToString("dd-MMM-yyyy"),
-                            x.EnrollmentNumber.ToString(),
-                            LookupLogic.GetLookupNameById(x.Sex),
-                            x.RegistrationDate.ToString("dd-MMM-yyyy"),
-                            "".ToString(),
-                            x.Id.ToString()
-                        //,utility.Decrypt(x.MobileNumber)
-                    })
-                };
+                       {
+                                                x.FirstName,
+                                                x.MiddleName,
+                                                x.LastName,
+                                                x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                                                x.EnrollmentNumber.ToString(),
+                                                LookupLogic.GetLookupNameById(x.Sex),
+                                                x.RegistrationDate.Value.ToString("dd-MMM-yyyy"),
+                                                x.MobileNumber,
+                                                x.Id.ToString(),
+                                                x.categorization.ToString()
+                       })
 
-                //output = JsonConvert.SerializeObject(json);
+            };
+
                 output = new JavaScriptSerializer().Serialize(json);
 
             }
             catch (Exception e)
             {
-                Msg = e.Message;
+                output = e.Message;
             }
-            return duplicatePatientRecords;
+            return output;
         }
 
+        [WebMethod(EnableSession = true)]
+        public string MergePatientRecords(int preferredPatientId, int unPreferredPatientId)
+        {
+
+            try
+            {
+                var patientMgr = new PatientManager();
+                var userId = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+                Result = patientMgr.MergePatientRecords(preferredPatientId, unPreferredPatientId, userId);
+                if (Result > 0)
+                {
+                    Msg = "Patient records merged Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
 
     }
 

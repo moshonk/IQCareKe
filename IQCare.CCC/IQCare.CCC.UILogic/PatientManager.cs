@@ -118,6 +118,10 @@ namespace IQCare.CCC.UILogic
             return _mgr.GetPersonId(patientId);
         }
 
+        public int MergePatientRecords(int preferredPatientId, int unpreferredPatientId, int userId)
+        {
+            return _mgr.MergePatientRecords(preferredPatientId, unpreferredPatientId, userId);
 
+        }
     }
 }
