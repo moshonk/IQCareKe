@@ -842,7 +842,7 @@ namespace IQCare.Web.CCC.WebService
                     recordsFiltered = duplicatePatientRecords.Count(),
                     // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
 
-                    data = duplicatePatientRecords.Select(x => new string[]
+                    data = duplicatePatientRecords.OrderBy(z => z.categorization).Select(x => new string[]
                        {
                                                 x.FirstName,
                                                 x.MiddleName,
