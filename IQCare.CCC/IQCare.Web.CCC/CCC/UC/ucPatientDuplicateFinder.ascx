@@ -262,7 +262,7 @@
                 "bProcessing": true,
                 "bServerSide": true,
                 "ordering": true,
-                "searching": false,
+                "searching": true,
                 "info": true,
                 "bDestroy": true,
                 "sAjaxSource": "../WebService/PatientService.asmx/GetDuplicatePatientRecords",
