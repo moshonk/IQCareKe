@@ -36,12 +36,12 @@
             <input type="checkbox" name="chkEnrollmentDate" id="chkEnrollmentDate" value="1" checked="checked" class="form-control" />
             <label>Enrollment Date</label>
         </div>
-        <div class="col-md-12">
-            <input type="checkbox" name="chkARTStartdate" id="chkARTStartdate" value="1" checked="checked" class="form-control" />
+        <div class="col-md-12 hidden">
+            <input type="checkbox" name="chkARTStartdate" id="chkARTStartdate" value="1" class="form-control" />
             <label>ART Start Date</label>
         </div>
-        <div class="col-md-12">
-            <input type="checkbox" name="chkHIVDiagnosisDate" id="chkHIVDiagnosisDate" value="1" checked="checked" class="form-control" />
+        <div class="col-md-12 hidden">
+            <input type="checkbox" name="chkHIVDiagnosisDate" id="chkHIVDiagnosisDate" value="1" class="form-control" />
             <label>HIV Diagnosis Date</label>
         </div>
     </div>
@@ -182,6 +182,32 @@
 
     $().ready(function () {
 
+        //Extend data tables to delay search until at least 3 characters hae been entered in the search box and enter pressed
+        jQuery.fn.dataTableExt.oApi.fnSetFilteringEnterPress = function (oSettings) {
+            var _that = this;
+
+            this.each(function (i) {
+                $.fn.dataTableExt.iApiIndex = i;
+                var
+                    $this = this,
+                    oTimerId = null,
+                    sPreviousSearch = null,
+                    anControl = $('input', _that.fnSettings().aanFeatures.f);
+
+                anControl
+                    .unbind('keyup')
+                    .bind('keyup', function (e) {
+
+                        if (anControl.val().length > 2 && e.keyCode == 13) {
+                            _that.fnFilter(anControl.val());
+                        }
+                    });
+
+                return this;
+            });
+            return this;
+        }
+
         $("#duplicateFinder").hide();
         $("#infoGrid").hide();
         $("#infoGridMessage").hide();
@@ -189,6 +215,13 @@
 
         var table = null;
         $("#btnSearch").click(function (e) {
+
+            var selectedCriteria = $("#searchGrid").find("input[type=checkbox]:checked");
+
+            if (selectedCriteria.length < 3) {
+                toastr.error("Select at least 3 Search criteria");
+                return;
+            }
 
             $("#divAction").show("fast");
             $("#divActionString").text("Consolidating table and data features..");
@@ -201,7 +234,7 @@
                 "bProcessing": true,
                 "bServerSide": true,
                 "ordering": true,
-                "searching": false,
+                "searching": true,
                 "info": true,
                 "bDestroy": true,
                 "sAjaxSource": "../WebService/PatientService.asmx/GetDuplicatePatientRecords",
@@ -234,17 +267,15 @@
                 }],
                 "fnServerData": function (sSource, aoData, fnCallback) {
 
-                    var dataPayLoad = {
-                        matchFirstName: $("#chkFirstName").is(":checked"),
-                        matchLastName: $("#chkLastName").is(":checked"),
-                        matchMiddleName: $("#chkMiddleName").is(":checked"),
-                        matchSex: $("#chkSex").is(":checked"),
-                        matchEnrollmentNumber: $("#chkEnrollmentNo").is(":checked"),
-                        matchDob: $("#chkDOB").is(":checked"),
-                        matchEnrollmentDate: $("#chkEnrollmentDate").is(":checked"),
-                        matchARTStartDate: $("#chkARTStartdate").is(":checked"),
-                        matchHIVDiagnosisDate: $("#chkHIVDiagnosisDate").is(":checked")
-                    };
+                    aoData.push({ "name": "matchFirstName", "value": "" + $("#chkFirstName").is(":checked") + "" });
+                    aoData.push({ "name": "matchLastName", "value": "" + $("#chkLastName").is(":checked") + "" });
+                    aoData.push({ "name": "matchMiddleName", "value": "" + $("#chkMiddleName").is(":checked") + "" });
+                    aoData.push({ "name": "matchSex", "value": "" + $("#chkSex").is(":checked") + "" });
+                    aoData.push({ "name": "matchEnrollmentNumber", "value": "" + $("#chkEnrollmentNo").is(":checked") + "" });
+                    aoData.push({ "name": "matchDob", "value": "" + $("#chkDOB").is(":checked") + "" });
+                    aoData.push({ "name": "matchEnrollmentDate", "value": "" + $("#chkEnrollmentDate").is(":checked") + "" });
+                    aoData.push({ "name": "matchARTStartDate", "value": "" + $("#chkARTStartdate").is(":checked") + "" });
+                    aoData.push({ "name": "matchHIVDiagnosisDate", "value": "" + $("#chkHIVDiagnosisDate").is(":checked") + "" });
 
                     $("#divActionString").text("Data features and table preparation complete");
                     var arrayReturn = [];
@@ -254,7 +285,7 @@
                         "contentType": "application/json; charset=utf-8",
                         "type": "POST",
                         "url": sSource,
-                        "data": JSON.stringify(dataPayLoad),
+                        "data": JSON.stringify({ dataPayLoad: aoData }),
                         "success": function (msg) {
                             $("#divActionString").text("Rendering patients data...");
                             var json = jQuery.parseJSON(msg.d);
@@ -282,7 +313,7 @@
                         }
                     });
                 }
-            });
+            }).fnSetFilteringEnterPress();
 
         });
 
