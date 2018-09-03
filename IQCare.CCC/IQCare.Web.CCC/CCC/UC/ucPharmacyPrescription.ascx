@@ -766,10 +766,10 @@
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
 
-        DrugPrescriptionTable
+       /* DrugPrescriptionTable
                     .clear()
                     .draw();
-
+        */
         drugNameArr = [];
     }
 
