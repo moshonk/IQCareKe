@@ -13,6 +13,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 export class LinkageComponent implements OnInit {
     linkage: Linkage;
     isEdit: boolean = false;
+    public cccPattern = /^((?!(0))[0-9]{10})$/;
 
     constructor(private linkageService: LinkageReferralService,
         private router: Router,
@@ -20,6 +21,7 @@ export class LinkageComponent implements OnInit {
         public zone: NgZone,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService) { }
+
     ngOnInit() {
         this.linkage = new Linkage();
 
@@ -56,6 +58,9 @@ export class LinkageComponent implements OnInit {
                     this.linkage.facility = res[i].facility;
                     this.linkage.healthworker = res[i].healthWorker;
                     this.linkage.id = res[i].id;
+                    this.linkage.artstartdate = res[i].artStartDate;
+                    this.linkage.remarks = res[i].comments;
+
 
                     this.isEdit = true;
                     // this.linkage.remarks = res[i].cadre;

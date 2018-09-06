@@ -296,7 +296,7 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 var personPopulations = await _unitOfWork.Repository<PersonPopulation>()
-                    .Get(x => x.PersonId == personId).ToListAsync();
+                    .Get(x => x.PersonId == personId && x.DeleteFlag == false).ToListAsync();
                 foreach (var population in personPopulations)
                 {
                     population.DeleteFlag = true;
@@ -601,12 +601,21 @@ namespace IQCare.Common.BusinessProcess.Services
 
 
         public async Task<List<MstPatient>> InsertIntoBlueCard(string firstName, string lastName, string midName, DateTime dateOfEnrollment, 
-            string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy)
+            string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy, string posId)
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                midName = string.IsNullOrWhiteSpace(midName) ? "" : midName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
-                Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                Facility facility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == posId).FirstOrDefaultAsync();
+                if (facility == null)
+                {
+                    facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                }
+
                 var referralId = await lookupLogic.GetDecodeIdByName("VCT", 17);
 
                 var maritalStatusId = await lookupLogic.GetDecodeIdByName(maritalStatusName, 17);
@@ -672,6 +681,8 @@ namespace IQCare.Common.BusinessProcess.Services
             }
             catch (Exception e)
             {
+                Log.Error(e.Message);
+                Log.Error(e.InnerException.ToString());
                 throw e;
             }
         }
@@ -865,11 +876,16 @@ namespace IQCare.Common.BusinessProcess.Services
             try
             {
                 StringBuilder sql = new StringBuilder();
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
-                           $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}' WHERE Id = {personId}; ");
+                           $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
+                           $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                            $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM Person WHERE Id = '{personId}';");
@@ -888,6 +904,10 @@ namespace IQCare.Common.BusinessProcess.Services
         {
             try
             {
+                firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
+                middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
+                lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
                     "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
