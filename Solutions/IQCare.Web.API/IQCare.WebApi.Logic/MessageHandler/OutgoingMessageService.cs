@@ -19,7 +19,7 @@ using System.Web.Script.Serialization;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {
-    public class OutgoingMessageService :  IOutgoingMessageService
+    public class OutgoingMessageService : IOutgoingMessageService
     {
         private readonly IJsonEntityMapper _jsonEntityMapper;
         private readonly IApiOutboxManager _apiOutboxManager = (IApiOutboxManager)ObjectFactory.CreateInstance("BusinessProcess.WebApi.BApiOutBox, BusinessProcess.WebApi");
@@ -39,75 +39,77 @@ namespace IQCare.WebApi.Logic.MessageHandler
 
         public void Handle(MessageEventArgs messageEvent)
         {
-            switch (messageEvent.MessageType)
+            if (AppSettings.EnableOutgoingMessages().Equals("TRUE"))
             {
-                case MessageType.NewClientRegistration:
-                    HandleNewClientRegistration(messageEvent);
-                    break;
+                switch (messageEvent.MessageType)
+                {
+                    case MessageType.NewClientRegistration:
+                        HandleNewClientRegistration(messageEvent);
+                        break;
 
-                case MessageType.PatientTransferIn:
-                    HandlePatientTransferIn(messageEvent);
-                    break;
+                    case MessageType.PatientTransferIn:
+                        HandlePatientTransferIn(messageEvent);
+                        break;
 
-                case MessageType.UpdatedClientInformation:
-                    HandleUpdatedClientInformation(messageEvent);
-                    break;
+                    case MessageType.UpdatedClientInformation:
+                        HandleUpdatedClientInformation(messageEvent);
+                        break;
 
-                case MessageType.PatientTransferOut:
-                    HandlePatientTransferOut(messageEvent);
-                    break;
+                    case MessageType.PatientTransferOut:
+                        HandlePatientTransferOut(messageEvent);
+                        break;
 
-                case MessageType.RegimenChange:
-                    HandleRegimenChange(messageEvent);
-                    break;
+                    case MessageType.RegimenChange:
+                        HandleRegimenChange(messageEvent);
+                        break;
 
-                case MessageType.StopDrugs:
-                    HandleStopDrugs(messageEvent);
-                    break;
+                    case MessageType.StopDrugs:
+                        HandleStopDrugs(messageEvent);
+                        break;
 
-                case MessageType.DrugPrescriptionRaised:
-                    HandleDrugPrescriptionRaised(messageEvent);
-                    break;
+                    case MessageType.DrugPrescriptionRaised:
+                        HandleDrugPrescriptionRaised(messageEvent);
+                        break;
 
-                case MessageType.DrugOrderCancel:
-                    HandleDrugOrdercancel(messageEvent);
-                    break;
+                    case MessageType.DrugOrderCancel:
+                        HandleDrugOrdercancel(messageEvent);
+                        break;
 
-                case MessageType.DrugOrderFulfilment:
-                    HandleDrugOrderFulfilment(messageEvent);
-                    break;
+                    case MessageType.DrugOrderFulfilment:
+                        HandleDrugOrderFulfilment(messageEvent);
+                        break;
 
-                case MessageType.AppointmentScheduling:
-                    HandleAppointmentScheduling(messageEvent);
-                    break;
+                    case MessageType.AppointmentScheduling:
+                        HandleAppointmentScheduling(messageEvent);
+                        break;
 
-                case MessageType.AppointmentUpdated:
-                    HandleAppointmentUpdated(messageEvent);
-                    break;
+                    case MessageType.AppointmentUpdated:
+                        HandleAppointmentUpdated(messageEvent);
+                        break;
 
-                case MessageType.AppointmentRescheduling:
-                    HandleAppointmentRescheduling(messageEvent);
-                    break;
+                    case MessageType.AppointmentRescheduling:
+                        HandleAppointmentRescheduling(messageEvent);
+                        break;
 
-                case MessageType.AppointmentCanceled:
-                    HandleAppointmentCancelled(messageEvent);
-                    break;
+                    case MessageType.AppointmentCanceled:
+                        HandleAppointmentCancelled(messageEvent);
+                        break;
 
-                case MessageType.AppointmentHonored:
-                    HandleAppointmentHonored(messageEvent);
-                    break;
+                    case MessageType.AppointmentHonored:
+                        HandleAppointmentHonored(messageEvent);
+                        break;
 
-                case MessageType.UniquePatientIdentification:
-                    HandleUniquePatientIdentification(messageEvent);
-                    break;
+                    case MessageType.UniquePatientIdentification:
+                        HandleUniquePatientIdentification(messageEvent);
+                        break;
 
-                case MessageType.ViralLoadLabOrder:
-                    HandleViralLoadLabOrder(messageEvent);
-                    break;
-                case MessageType.ObservationResult:
-                    HandleObservationResult(messageEvent);
-                    break;
-
+                    case MessageType.ViralLoadLabOrder:
+                        HandleViralLoadLabOrder(messageEvent);
+                        break;
+                    case MessageType.ObservationResult:
+                        HandleObservationResult(messageEvent);
+                        break;
+                }
             }
         }
 
@@ -241,7 +243,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var drugPrescriptionMessage = new DrugPrescriptionMessage();
                 //DrugPrescriptionMessage drugPrescriptionMessage = new DrugPrescriptionMessage();
 
-                var prescriptiondPrescriptionSourceEntitiesToDto = drugPrescriptionMessage.PreparePrescriptionSourceDto(messageEvent.PatientId,messageEvent.EntityId,messageEvent.PatientMasterVisitId);
+                var prescriptiondPrescriptionSourceEntitiesToDto = drugPrescriptionMessage.PreparePrescriptionSourceDto(messageEvent.PatientId, messageEvent.EntityId, messageEvent.PatientMasterVisitId);
 
                 if (prescriptiondPrescriptionSourceEntitiesToDto != null)
                 {

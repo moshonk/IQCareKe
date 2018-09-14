@@ -22,6 +22,7 @@ namespace IQCare.Web.Api
             //DependencyResolver.SetResolver(StructureMapDependencyScope);
             //GlobalConfiguration.Configuration.DependencyResolver = new StructureMapDependencyResolver(container);
             //DynamicModuleUtility.RegisterModule(typeof(StructureMapScopeModule));
+
         }
 
         #endregion

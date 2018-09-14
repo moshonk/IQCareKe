@@ -1,14 +1,30 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Extensions.Configuration;
+using System.ComponentModel;
 using System.Configuration;
 
 namespace IQCare.WebApi.Logic.Helpers
 {
     public class AppSettings
     {
+        IConfiguration _configuration;
+
         public static string IlServer()
         {
             return ConfigurationManager.AppSettings.Get("ilServer");
         }
+
+        public static string EnableOutgoingMessages()
+        {
+            return _configuration.GetSection("ILServer").GetSection("ilEnableOutgoingMessages").Value;
+
+            //return ConfigurationManager.AppSettings.Get("ilEnableOutgoingMessages");
+        }
+
+        public static string ProcessIncomingMessages()
+        {
+            return ConfigurationManager.AppSettings.Get("ilProcessIncomingMessages");
+        }
+
     }
 
     public enum Senders
