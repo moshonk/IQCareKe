@@ -399,7 +399,9 @@
                         prefix = $("#" + value.Prefix).val();
                         fieldName = prefix + "-" + fieldName;
                     }
-                    identifiers[value.ID] = fieldName;
+                    if (fieldName.trim() !== '') {
+                        identifiers[value.ID] = fieldName;
+                    }
                 });
 
                 /*if (patType == "Transit" && (code == prefix)) {
