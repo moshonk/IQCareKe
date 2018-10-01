@@ -175,7 +175,7 @@ namespace BusinessProcess.CCC.visit
                         unitOfWork.PatientMasterVisitRepository.Update(item);
 
                         Result = unitOfWork.Complete();
-                        unitOfWork.Dispose();
+                        //unitOfWork.Dispose();
                     }
                 }
             }
