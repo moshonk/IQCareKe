@@ -3,7 +3,11 @@ using Entities.CCC.Enrollment;
 using Interface.CCC.Patient;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Web.Services.Discovery;
 using Entities.CCC.Lookup;
+using IQCare.CCC.UILogic.Helpers;
+using System.Collections;
 
 namespace IQCare.CCC.UILogic
 {
@@ -40,15 +44,18 @@ namespace IQCare.CCC.UILogic
                 throw e;
             }
         }
-
-        public List<PatientEntity> CheckPersonEnrolled(int personId)
+        public PatientEntity GetPatientEntityByPersonId(int personId)
         {
-            return _mgr.CheckPersonEnrolled(personId);
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.GetPatientEntityByPersonId(personId));
+        }
+        public PatientEntity CheckPersonEnrolled(int personId)
+        {
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.CheckPersonEnrolled(personId));
         }
 
         public PatientEntity GetPatientEntity(int patientId)
         {
-            return _mgr.GetPatient(patientId);
+            return PatientEntityHelper.MapFromPatientPersonView(_mgr.GetPatient(patientId));
         }
 
         public string GetPatientType(int patientId)
@@ -67,6 +74,18 @@ namespace IQCare.CCC.UILogic
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk)
+        {
+            try
+            {
+                return _mgr.GetPatientByPtn_Pk(ptn_pk);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
@@ -92,6 +111,17 @@ namespace IQCare.CCC.UILogic
             
             return String.Format("Age: {0} Year(s) {1} Month(s)",
             Years, Months);
+        }
+
+        public int GetPersonId(int patientId)
+        {
+            return _mgr.GetPersonId(patientId);
+        }
+
+        public int MergePatientRecords(int preferredPatientId, int unpreferredPatientId, int userId)
+        {
+            return _mgr.MergePatientRecords(preferredPatientId, unpreferredPatientId, userId);
+
         }
     }
 }
