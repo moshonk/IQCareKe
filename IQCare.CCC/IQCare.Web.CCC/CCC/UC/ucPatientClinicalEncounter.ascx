@@ -1950,7 +1950,7 @@
 							<div class="col-md-12 form-group">
 								<label class="control-label pull-left">Select PHDP services offered from the list below</label>
 							</div>
-							<div class="form-group col-md-12" style="text-align: left">
+							<div class="form-group col-md-12" style="text-align: left" id ="phdp">
 								<asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
 							</div>
 						</div>
@@ -4564,7 +4564,32 @@
 					toastr.error(response.d, "Patient Management Error");
 				}
 			});
-		}
+        }
+
+        function checkPrescription() {
+            var deferred = $.Deferred();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var hasPrescription = response.d.length > 0;
+                    if (hasPrescription == true) {
+                        deferred.resolve(hasPrescription);
+                    } else {
+                        deferred.reject(hasPrescription);
+                    }
+                },
+                error: function (response) {
+                    $.Deferred().reject();
+                }
+            });
+
+            return deferred.promise();
+
+        }
 
 		function addPatientIcf() {
 			var cough = $("#<%=ddlICFCough.ClientID%>").val();
