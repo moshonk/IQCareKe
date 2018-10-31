@@ -4709,25 +4709,50 @@
 
         }
 
-        function addPatientIcf() {
-            var cough = $("#<%=ddlICFCough.ClientID%>").val();
-            var weightLoss = $("#<%=ddlICFWeight.ClientID%>").val();
-            var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").val();
-            var fever = $("#<%=ddlICFFever.ClientID%>").val();
-            var onIpt = $("#<%=ddlICFCurrentlyOnIPT.ClientID%>").val();
-            var onAntiTbDrugs = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
-            var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            var everBeenOnIpt = $("#<%=ddlICFEverBeenOnIPT.ClientID%>").val();
+        function checkPrescription() {
+            var deferred = $.Deferred();
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientTbService.asmx/AddPatientIcf",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "','everBeenOnIpt': '" + everBeenOnIpt + "'}",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    toastr.success(response.d, "Patient ICF saved successfully");
+                    var hasPrescription = response.d.length > 0;
+                    if (hasPrescription == true) {
+                        deferred.resolve(hasPrescription);
+                    } else {
+                        deferred.reject(hasPrescription);
+                    }
                 },
+                error: function (response) {
+                    $.Deferred().reject();
+                }
+            });
+
+            return deferred.promise();
+
+        }
+
+		function addPatientIcf() {
+			var cough = $("#<%=ddlICFCough.ClientID%>").val();
+			var weightLoss = $("#<%=ddlICFWeight.ClientID%>").val();
+			var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").val();
+			var fever = $("#<%=ddlICFFever.ClientID%>").val();
+			var onIpt = $("#<%=ddlICFCurrentlyOnIPT.ClientID%>").val();
+			var onAntiTbDrugs = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
+			var patientId = <%=PatientId%>;
+			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+			var everBeenOnIpt = $("#<%=ddlICFStartIPT.ClientID%>").val();
+			$.ajax({
+				type: "POST",
+				url: "../WebService/PatientTbService.asmx/AddPatientIcf",
+				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "','everBeenOnIpt': '" + everBeenOnIpt + "'}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (response) {
+					toastr.success(response.d, "Patient ICF saved successfully");
+				},
                 error: function (response) {
                     alert(JSON.stringify(response));
                     toastr.error(response.d, "Patient ICF not saved");
