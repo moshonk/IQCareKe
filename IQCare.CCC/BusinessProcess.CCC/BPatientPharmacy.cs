@@ -247,6 +247,20 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public DataTable getLastARTPharmacyPrescriptionBeforeDate(string PatientId, DateTime VisitDate)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientId", SqlDbType.Int, PatientId);
+                ClsUtility.AddParameters("@Visitdate", SqlDbType.Date, VisitDate.ToString("yyyy/MM/dd"));
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getLastARTPharmacyPrescriptionBeforeDate", ClsUtility.ObjectEnum.DataTable);
+
+            }
+        }
+
         public DataTable getPharmacyPendingPrescriptions(string patientMasterVisitID, string PatientID)
         {
             lock (this)
