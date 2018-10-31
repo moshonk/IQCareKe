@@ -22,6 +22,11 @@ namespace IQCare.Web.CCC.UC
     {
         public int PatientEncounterExists { get; set; }
 
+        public bool PatientHasPreviousARTPrescriptions
+        {
+            get; set;
+        }
+
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         public string visitdateval = "";
         public string LMPval = "";
@@ -351,6 +356,8 @@ namespace IQCare.Web.CCC.UC
             //else
             //    visitdateval = "";
 
+            PatientHasPreviousARTPrescriptions = loadLastPrescriptionBeforeVisitDate().Rows.Count > 0;
+
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
@@ -565,6 +572,15 @@ namespace IQCare.Web.CCC.UC
                // (PatientId).ToArray();
                 //.getPatientClinicalNotes(PatientId).ToArray();
             Session["patientNotesData"] = patientNotesData;
+        }
+
+        private DataTable loadLastPrescriptionBeforeVisitDate() {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            var visitDate = visitdateval == "" ? DateTime.Now.ToString("yyyyMMdd") : visitdateval;
+
+            DataTable theDT = patientEncounter.loadPatientLastPharmacyPrescriptionAfterDate(Session["PatientPK"].ToString(), Convert.ToDateTime(visitDate));
+
+            return theDT;
         }
     }
 }
