@@ -1416,7 +1416,7 @@
 							<div class="col-md-12 form-group">
 								<label class="control-label pull-left">Select PHDP services offered from the list below</label>
 							</div>
-							<div class="form-group col-md-12" style="text-align: left">
+							<div class="form-group col-md-12" style="text-align: left" id ="phdp">
 								<asp:CheckBoxList ID="cblPHDP" runat="server" RepeatDirection="Horizontal" RepeatColumns="3" Width="100%"></asp:CheckBoxList>
 							</div>
 						</div>
@@ -3166,25 +3166,59 @@
 						return;
 					} else {
 						//savePatientPatientManagement();
-						if ($('#AppointmentForm').parsley().validate()) {
+                        if ($('#AppointmentForm').parsley().validate()) {
+
+                            var valid = true;
+                            var previousPrescriptions = ('<%=PatientHasPreviousARTPrescriptions%>' == 'True') ;
+
+                            if ($('#arvAdherance').val() == 0 && previousPrescriptions == true) {
+                                toastr.error("Adherence Assessment Not done");
+                                valid = false;
+                            }
+
+                            if ($('#stabilityStatus').val() == 0) {
+                                toastr.error("Stability Assessment Not done");
+                                valid = false;
+                            }
+
+                            var phdpContainer = $('#phdp');
+                            phdpContainer.find('label:contains("STI Screening")').siblings('input').first().is(':checked' )
+                            var stiScreeeningDone = phdpContainer.find('label:contains("STI Screening")').siblings('input').first().is(':checked' )
+                            if (stiScreeeningDone == false) {
+                                toastr.error("STI Screening Not done");
+                                valid = false;
+                            }
+
 							var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
 							var appDate = $("#<%=AppointmentDate.ClientID%>").val();
 							if (moment('' + appDate + '').isAfter(futureDate)) {
-								toastr.error("Appointment date cannot be set to over 7 months");
-								return false;
+                                toastr.error("Appointment date cannot be set to over 7 months");
+                                valid = false;
 							}
-							//save patient management
-							$.when(savePatientPatientManagement()).then(function() {
-								setTimeout(function() {
-										window.location
-											.href =
-											'<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-									},
-									2000);
-							});
 
-							//save appointment
-							checkExistingAppointment();
+                            if (valid == false) {
+                                return false;
+                            }
+
+                            $.when(checkPrescription()).then(function (response) {
+                                //save patient management
+                                $.when(savePatientPatientManagement()).then(function () {
+                                    setTimeout(function () {
+                                        window.location
+                                            .href =
+                                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                    },
+                                        2000);
+                                });
+
+                                //save appointment
+                                checkExistingAppointment();
+                            }, function () {
+                                toastr.error("No drug prescription provided");
+                                return false;
+                            });
+
+
 						} else {
 							stepError = $('.parsley-error').length === 0;
 							totalError += stepError;
@@ -3473,7 +3507,32 @@
 					toastr.error(response.d, "Patient Management Error");
 				}
 			});
-		}
+        }
+
+        function checkPrescription() {
+            var deferred = $.Deferred();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var hasPrescription = response.d.length > 0;
+                    if (hasPrescription == true) {
+                        deferred.resolve(hasPrescription);
+                    } else {
+                        deferred.reject(hasPrescription);
+                    }
+                },
+                error: function (response) {
+                    $.Deferred().reject();
+                }
+            });
+
+            return deferred.promise();
+
+        }
 
 		function addPatientIcf() {
 			var cough = $("#<%=cough.ClientID%>").val();
