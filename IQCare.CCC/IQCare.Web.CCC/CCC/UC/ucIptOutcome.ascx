@@ -133,6 +133,11 @@
      var tomorrow = new Date();
         var today = new Date();
     $(document).ready(function () {
+        getIptOutcome();
+
+        if ($("#<%=discontinuation.ClientID%>").val() === '') {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+        }
        
     tomorrow.setDate(today.getDate() + 1);
         $("#<%=discontinuation.ClientID%>").prop('disabled', true);

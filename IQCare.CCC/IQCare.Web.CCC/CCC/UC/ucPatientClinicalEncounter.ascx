@@ -3804,7 +3804,7 @@
             $('#IptOutcomeModal').modal('hide');
         });
 
-        //Save patient IPT Outcome
+		//Save patient IPT Outcome
         $("#btnSaveIptOutcome").click(function () {
             var IPTDate = $('#IPTDate').val();
             if (IPTDate == "" || IPTDate == undefined) {
