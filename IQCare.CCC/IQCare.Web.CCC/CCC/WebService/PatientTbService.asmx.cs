@@ -233,7 +233,8 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
-                IPTOutComeDate=IPTDate
+                IPTOutComeDate=IPTDate,
+                IptDiscontinuationReason = iptDiscontinuationReason
             };
             try
             {
@@ -275,8 +276,9 @@ namespace IQCare.Web.CCC.WebService
                         PatientMasterVisitId = x.PatientMasterVisitId,
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
-                        Id = x.Id,
-                        IPTOutComeDate=x.IPTOutComeDate
+                        IPTOutComeDate=x.IPTOutComeDate,
+                        IptDiscontinuationReason = x.IptDiscontinuationReason,
+                        Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
 

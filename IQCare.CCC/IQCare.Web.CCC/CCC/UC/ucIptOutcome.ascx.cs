@@ -29,6 +29,17 @@ namespace IQCare.Web.CCC.UC
                 iptEvent.SelectedIndex = 0;
             }
 
+            List<LookupItemView> iptDiscontinuationReasons = mgr.GetLookItemByGroup("IPTDiscontinuationReason");
+            if (iptDiscontinuationReasons != null && iptDiscontinuationReasons.Count > 0)
+            {
+                iptDiscontinuationReason.Items.Add(new ListItem("select", "0"));
+                foreach (var k in iptDiscontinuationReasons)
+                {
+                    iptDiscontinuationReason.Items.Add(new ListItem(k.ItemDisplayName, k.ItemId.ToString()));
+                }
+                iptDiscontinuationReason.SelectedIndex = 0;
+            }
+
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
         }
     }
