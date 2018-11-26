@@ -117,6 +117,10 @@
                 <label class="control-label pull-left">Reason For Discontinuation</label>
             </div>
             <div class="col-md-12">
+                  <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptDiscontinuationReason" ClientIDMode="Static" onclick="IptDiscontinuationReasonEvent();" />
+            </div>
+            <div class="col-md-12">
+                <label class="control-label pull-left">Specify, if other </label>
                 <asp:TextBox runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="discontinuation" ClientIDMode="Static" />
             </div>
         </div>
@@ -129,11 +133,19 @@
      var tomorrow = new Date();
         var today = new Date();
     $(document).ready(function () {
+        getIptOutcome();
+
+        if ($("#<%=discontinuation.ClientID%>").val() === '') {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+        }
        
     tomorrow.setDate(today.getDate() + 1);
         $("#<%=discontinuation.ClientID%>").prop('disabled', true);
 
-        getIptOutcome();
+        if ($("#<%=iptDiscontinuationReason.ClientID%>").val() === '') {
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', true);
+        }
+        
     });
 
     $('#IPTOutcomeDate').datepicker({
@@ -148,12 +160,21 @@
 
     function IptOutcomeEvent() {
         if ($("#iptEvent :selected").text() === "Discontinued") {
-            $("#<%=discontinuation.ClientID%>").prop('disabled', false);
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', false);
         } else {
             $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', true);
         }
     }
 
+    function IptDiscontinuationReasonEvent() {
+        if ($("#<%=iptDiscontinuationReason.ClientID%> :selected").text() === "Other") {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', false);
+        } else {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+            $("#<%=discontinuation.ClientID%>").val('');
+        }
+    }
 
     function getIptOutcome() {
         
@@ -176,6 +197,7 @@
                     if (ipt.IPTOutComeDate != null || ipt.IPTOutComeDate != undefined || ipt.IPTOutComeDate != "") {
                         $('#IPTDate').val(ipt.IPTOutComeDate);
                     }
+                    $("#<%=iptDiscontinuationReason.ClientID%>").val(ipt.IptDiscontinuationReason)
                 }
             },
             error: function (response) {

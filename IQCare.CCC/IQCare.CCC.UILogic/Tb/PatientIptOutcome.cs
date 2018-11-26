@@ -18,6 +18,7 @@ namespace IQCare.CCC.UILogic.Tb
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 IptEvent = p.IptEvent,
                 ReasonForDiscontinuation = p.ReasonForDiscontinuation,
+                IptDiscontinuationReason = p.IptDiscontinuationReason,
                 CreatedBy = SessionManager.UserId
             };
             return _patientIptOutcome.AddPatientIptOutcome(patientIptOutcome);
@@ -43,8 +44,9 @@ namespace IQCare.CCC.UILogic.Tb
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 IptEvent = p.IptEvent,
                 ReasonForDiscontinuation = p.ReasonForDiscontinuation,
-                CreatedBy = SessionManager.UserId,
                 IPTOutComeDate=p.IPTOutComeDate
+                IptDiscontinuationReason = p.IptDiscontinuationReason,
+                CreatedBy = SessionManager.UserId
             };
             return _patientIptOutcome.UpdatePatientIptOutcome(patientIptOutcome);
         }

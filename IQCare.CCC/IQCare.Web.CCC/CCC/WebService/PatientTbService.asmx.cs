@@ -229,7 +229,7 @@ namespace IQCare.Web.CCC.WebService
         }
        
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptOutcome(int patientId,DateTime? IPTDate,int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation)
+        public string AddPatientIptOutcome(int patientId, DateTime? IPTDate, int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation, int iptDiscontinuationReason)
         {
            
      
@@ -239,6 +239,7 @@ namespace IQCare.Web.CCC.WebService
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
+                IptDiscontinuationReason = iptDiscontinuationReason,
                 IPTOutComeDate=IPTDate
             };
             try
@@ -363,6 +364,7 @@ namespace IQCare.Web.CCC.WebService
                         PatientMasterVisitId = x.PatientMasterVisitId,
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
+                        IptDiscontinuationReason = x.IptDiscontinuationReason,
                         Id = x.Id,
                         IPTOutComeDate=x.IPTOutComeDate
                     };
