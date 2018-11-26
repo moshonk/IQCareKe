@@ -3043,7 +3043,17 @@
 		});
 
 		//Save patient IPT Outcome
-		$("#btnSaveIptOutcome").click(function () {
+        $("#btnSaveIptOutcome").click(function () {
+            if ($('#iptEvent :selected').text() == 'Discontinued' && $('#iptDiscontinuationReason :selected').text() == 'select') {
+                toastr.error('Enter reason for discontinuation', 'Missing discontinuation reason');
+                return;
+            }
+
+            if ($('#iptDiscontinuationReason :selected').text() == 'Other' && $('#discontinuation').val() == '') {
+                toastr.error('Specify other', 'Missing value');
+                return;
+            }
+
 			addPatientIptOutcome();
 			$('#IptOutcomeModal').modal('hide');
 		});
@@ -3640,14 +3650,15 @@
 		}
 
 		function addPatientIptOutcome() {
-			var iptEvent = $("#iptEvent").val();
+            var iptEvent = $("#iptEvent").val();
+            var iptDiscontinuationReason = $("#iptDiscontinuationReason").val();
 			var reasonForDiscontinuation = $("#discontinuation").val();
 			var patientId = <%=PatientId%>;
 			var patientMasterVisitId = <%=PatientMasterVisitId%>;
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "','iptDiscontinuationReason': '" + iptDiscontinuationReason + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (response) {

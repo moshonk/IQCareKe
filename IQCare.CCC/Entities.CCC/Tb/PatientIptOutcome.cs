@@ -15,5 +15,6 @@ namespace Entities.CCC.Tb
         public int PatientId { get; set; }
         public int IptEvent { get; set; }
         public string ReasonForDiscontinuation { get; set; }
+        public int IptDiscontinuationReason { get; set; }
     }
 }

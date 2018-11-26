@@ -15,6 +15,10 @@
                 <label class="control-label pull-left">Reason For Discontinuation</label>
             </div>
             <div class="col-md-12">
+                  <asp:DropDownList runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="iptDiscontinuationReason" ClientIDMode="Static" onclick="IptDiscontinuationReasonEvent();" />
+            </div>
+            <div class="col-md-12">
+                <label class="control-label pull-left">Specify, if other </label>
                 <asp:TextBox runat="server" AutoPostBack="False" CssClass="form-control input-sm" ID="discontinuation" ClientIDMode="Static" />
             </div>
         </div>
@@ -23,19 +27,35 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#<%=discontinuation.ClientID%>").prop('disabled', true);
-
         getIptOutcome();
+
+        if ($("#<%=discontinuation.ClientID%>").val() === '') {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+        }
+
+        if ($("#<%=iptDiscontinuationReason.ClientID%>").val() === '') {
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', true);
+        }
+        
     });
 
     function IptOutcomeEvent() {
         if ($("#iptEvent :selected").text() === "Discontinued") {
-            $("#<%=discontinuation.ClientID%>").prop('disabled', false);
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', false);
         } else {
             $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+            $("#<%=iptDiscontinuationReason.ClientID%>").prop('disabled', true);
         }
     }
 
+    function IptDiscontinuationReasonEvent() {
+        if ($("#<%=iptDiscontinuationReason.ClientID%> :selected").text() === "Other") {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', false);
+        } else {
+            $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+            $("#<%=discontinuation.ClientID%>").val('');
+        }
+    }
 
     function getIptOutcome() {
         
@@ -54,6 +74,7 @@
                     var ipt = JSON.parse(response.d);
                     $('#iptEvent').val(ipt.IptEvent);
                     $("#<%=discontinuation.ClientID%>").val(ipt.ReasonForDiscontinuation)
+                    $("#<%=iptDiscontinuationReason.ClientID%>").val(ipt.IptDiscontinuationReason)
                 }
             },
             error: function (response) {
