@@ -2316,7 +2316,7 @@
 													</div>
 													<div class="col-md-12">
 														<div class="col-md-8">
-															<label class="control-lable pull-left">Most recent VL < 1,000 copies/ml</label>
+															<label class="control-lable pull-left">Most recent VL of LDL</label>
 														</div>
 														<div class="col-md-4">
 															<div class="col-md-12">
@@ -2912,7 +2912,7 @@
                     else
                         radioOINo.checked = true;
 
-                    if (serverData[0][2] < 1000)
+                    if (serverData[0][2] <= 50)
                         radioVlCopiesYes.checked = true;
                     else
                         radioVlCopiesNo.checked = true;
