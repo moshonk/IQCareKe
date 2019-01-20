@@ -230,6 +230,8 @@
 									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
 								</a>
 							  
+                               <asp:LinkButton ID="menuCervialCancerScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_CxCaScreening_Click">
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Cervical cancer screening</strong></asp:LinkButton>
                                
                                <asp:LinkButton ID="menuScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_Depression_Click">
 								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">DepressionScreening</strong></asp:LinkButton>
@@ -538,6 +540,7 @@
 				$("#MenuOneTimeEventsTracker").hide();
 				$("#menuStopEncounter").hide();
                 $("#menuScreening").hide();
+                $("#menuCervialCancerScreening").hide();
                 $("#menuGenderBasedScreening").hide();
                 $("#menuAlcoholScreening").hide();
                 $("#menuEnhanceAdherence").hide();
@@ -570,6 +573,7 @@
 				$("#MenuOneTimeEventsTracker").show();
                 $("#menuStopEncounter").show();
                 $("#menuScreening").show();
+                $("#menuCervialCancerScreening").show();
                 $("#menuGenderBasedScreening").show();
                 $("#menuAlcoholScreening").show();
                 $("#menuEnhanceAdherence").show();
