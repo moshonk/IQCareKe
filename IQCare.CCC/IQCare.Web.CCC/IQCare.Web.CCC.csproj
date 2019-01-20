@@ -87,6 +87,7 @@
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Screening\AlcoholDrugAbuseScreening.aspx" />
     <Content Include="CCC\Screening\DepressionScreening.aspx" />
+    <Content Include="CCC\Screening\CervicalCancerScreening.aspx" />
     <Content Include="CCC\Screening\GBVScreening.aspx" />
     <Content Include="CCC\Screening\PatientDisclosure.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -162,6 +163,7 @@
     <Content Include="CCC\UC\Depression\ucGBVScreening.ascx" />
     <Content Include="CCC\UC\Depression\ucScreeningHome.ascx" />
     <Content Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx" />
+    <Content Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx" />
     <Content Include="CCC\UC\ucCaseSummary.ascx" />
     <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
@@ -787,6 +789,13 @@
     <Compile Include="CCC\Screening\DepressionScreening.aspx.designer.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Screening\CervicalCancerScreening.aspx.cs">
+      <DependentUpon>CervicalCancerScreening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Screening\CervicalCancerScreening.aspx.designer.cs">
+      <DependentUpon>CervicalCancerScreening.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Screening\GBVScreening.aspx.cs">
       <DependentUpon>GBVScreening.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -856,6 +865,13 @@
     </Compile>
     <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.designer.cs">
       <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx.cs">
+      <DependentUpon>ucCervicalCancerScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx.designer.cs">
+      <DependentUpon>ucCervicalCancerScreening.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucCaseSummary.ascx.cs">
       <DependentUpon>ucCaseSummary.ascx</DependentUpon>

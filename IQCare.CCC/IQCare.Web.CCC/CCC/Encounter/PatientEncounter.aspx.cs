@@ -6,7 +6,6 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-using IQCare.Web.Laboratory;
 using System.Web.Services;
 using System.Web.UI;
 

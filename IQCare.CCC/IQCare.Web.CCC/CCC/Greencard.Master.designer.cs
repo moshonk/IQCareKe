@@ -211,6 +211,15 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.Label lblAppointments;
         
         /// <summary>
+        /// menuCervialCancerScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuCervialCancerScreening;
+        
+        /// <summary>
         /// menuScreening control.
         /// </summary>
         /// <remarks>
