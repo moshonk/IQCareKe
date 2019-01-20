@@ -79,6 +79,21 @@ namespace IQCare.Web.CCC.Patient
             }
 
 
+            int patientId = Convert.ToInt32(Session["PatientPK"]);
+            int personId = Convert.ToInt32(Session["personId"]);
+
+            DateTime DoB;
+            int personAge = 0;
+            PatientLookupManager pMgr = new PatientLookupManager();
+
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummaryBrief(patientId, personId);
+            if (null != thisPatient)
+            {
+                DoB = Convert.ToDateTime(thisPatient.DateOfBirth);
+                personAge = PatientManager.CalculateAgeInYears(DoB);
+
+            }
+
             if (objTransfer.Count > 0)
             {
                 foreach (var item in objTransfer)
@@ -365,23 +380,48 @@ namespace IQCare.Web.CCC.Patient
 
                             case "complete":
                             case "completed":
-                                if (lastVL.ResultValues >= 1000)
+                                if (personAge >= 25)
                                 {
-                                    lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                                    if (lastVL.ResultValues >= 1000)
+                                    {
+                                        lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                                    }
+                                    else
+                                    if (lastVL.ResultValues <= 50)
+                                    {
+
+                                        lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+
+                                    }
+                                    else
+                                    {
+                                        lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+
+                                    }
                                 }
-                                else if (lastVL.ResultValues <= 50)
-                                {
+                                else {
+                                    if (lastVL.ResultValues >= 1000)
+                                    {
+                                        lblVL.Text = "<span class='label label-danger'>" + lastVL.ResultValues + " copies/ml (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(3).ToString("dd-MMM-yyyy") + "</span>";
+                                    }
+                                    else
+                                    if (lastVL.ResultValues <= 50)
+                                    {
 
-                                    lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+                                        lblVL.Text = "<span class='label label-success'> Undetectable VL (" + Convert.ToDateTime(lastVL.SampleDate).ToString("dd-MMM-yyyy") + ")</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
 
-                                }
-                                else
-                                {
-                                    lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
-                                    lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(12).ToString("dd-MMM-yyyy") + "</span>";
+                                    }
+                                    else
+                                    {
+                                        lblVL.Text = "<span class='label label-success' > Complete | Results : " + lastVL.ResultValues + " copies/ml</span>";
+                                        lblvlDueDate.Text = "<span class='label label-success' > " + ((DateTime)lastVL.SampleDate).AddMonths(6).ToString("dd-MMM-yyyy") + "</span>";
 
+                                    }
                                 }
                                 break;
                             default:
