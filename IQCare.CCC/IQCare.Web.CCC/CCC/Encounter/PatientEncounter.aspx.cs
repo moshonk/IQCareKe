@@ -24,10 +24,12 @@ namespace IQCare.Web.CCC.Encounter
 
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);           
+            UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
+
+            CheckPatientBaselineData();
 
         }
     }
