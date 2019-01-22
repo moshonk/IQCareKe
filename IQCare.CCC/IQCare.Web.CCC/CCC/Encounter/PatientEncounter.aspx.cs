@@ -53,7 +53,7 @@ namespace IQCare.Web.CCC.Encounter
 
             if (missingBaseline == true)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", " alert('This patient is missing important baseline info. Please update this info before you start a new clinical encounter'); window.location.href = '" + ResolveClientUrl("~/CCC/OneTimeEvents/Baseline.aspx") + "';", true);              
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", " alert('This patient is missing important baseline info. You will be redirected to update this info before you can proceed'); window.location.href = '" + ResolveClientUrl("~/CCC/OneTimeEvents/Baseline.aspx") + "';", true);              
             }
         }
     }
