@@ -166,6 +166,7 @@
     <Content Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx" />
     <Content Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx" />
     <Content Include="CCC\UC\ucCaseSummary.ascx" />
+    <Content Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx" />
     <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFamilyFinder.ascx" />
@@ -891,6 +892,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucCaseSummary.ascx.designer.cs">
       <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx.cs">
+      <DependentUpon>ucCervicalCancerScreeningAssessment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx.designer.cs">
+      <DependentUpon>ucCervicalCancerScreeningAssessment.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
       <DependentUpon>ucEvaluation.ascx</DependentUpon>

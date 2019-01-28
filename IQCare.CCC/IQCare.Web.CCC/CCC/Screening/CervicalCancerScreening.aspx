@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="CervicalCancerScreening.aspx.cs" Inherits="IQCare.Web.CCC.Screening.GBVScreening" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="CervicalCancerScreening.aspx.cs" Inherits="IQCare.Web.CCC.Screening.CervicalCancerScreening" %>
 
 <%@ Register TagPrefix="uc" TagName="tnCxCaScreening" Src="~/CCC/UC/Screening/ucCervicalCancerScreening.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
