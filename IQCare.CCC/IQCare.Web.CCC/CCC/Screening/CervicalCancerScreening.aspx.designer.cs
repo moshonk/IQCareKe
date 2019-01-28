@@ -10,7 +10,7 @@
 namespace IQCare.Web.CCC.Screening {
     
     
-    public partial class GBVScreening {
+    public partial class CervicalCancerScreening {
         
         /// <summary>
         /// CervicalCancerScreeningScreeningPanel control.
