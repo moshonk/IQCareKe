@@ -55,7 +55,6 @@
 
         function addCxCaScreeningEncounter(visitDate) {
             var patientId = <%=PatientId%>;
-            var dateOfVisit = $("#PersonVisitDate").val();
             var ServiceAreaId = 203;
             var EncounterType = "CxCaScreening";
             var userId = <%=userId%>;
@@ -64,7 +63,7 @@
 
                 type: "POST",
                 url: "../WebService/PatientScreeningService.asmx/GetPatientMasterVisitId",
-                data: "{'PatientId': '" + patientId + "','ServiceAreaId':'" + ServiceAreaId + "','UserId':'" + userId + "','EncounterType':'" + EncounterType + "','visitDate': '" + dateOfVisit + "'}",
+                data: "{'PatientId': '" + patientId + "','ServiceAreaId':'" + ServiceAreaId + "','UserId':'" + userId + "','EncounterType':'" + EncounterType + "','visitDate': '" + visitDate + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
