@@ -102,6 +102,16 @@ namespace BusinessProcess.CCC.Screening
             }
         }
 
+        public List<PatientScreening> GetPatientScreening(int patientId, int patientMasterVisitId, int screeningTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.PatientMasterVisitId == patientMasterVisitId && x.ScreeningTypeId == screeningTypeId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+        }
+
         public int CheckIfPatientScreeningExists(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -160,6 +170,16 @@ namespace BusinessProcess.CCC.Screening
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningValueId == statusId & !x.DeleteFlag).OrderByDescending(x=>x.PatientMasterVisitId).ToList();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+        }
+
+        public List<PatientScreening> GetPatientScreening(int patientId, int screeningTypeId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningTypeId == screeningTypeId & !x.DeleteFlag).OrderByDescending(x => x.ScreeningDate).ToList();
                 unitOfWork.Dispose();
                 return screeningList;
             }

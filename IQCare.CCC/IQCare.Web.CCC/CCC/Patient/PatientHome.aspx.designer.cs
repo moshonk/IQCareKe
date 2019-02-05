@@ -58,6 +58,33 @@ namespace IQCare.Web.CCC.Patient {
         protected global::System.Web.UI.WebControls.Label lblAdheranceStatus;
         
         /// <summary>
+        /// phCervicalCancerScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phCervicalCancerScreening;
+        
+        /// <summary>
+        /// lblCervicalCancerScreeningAsessment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCervicalCancerScreeningAsessment;
+        
+        /// <summary>
+        /// lblCervicalCancerScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCervicalCancerScreening;
+        
+        /// <summary>
         /// updateEnrollment control.
         /// </summary>
         /// <remarks>

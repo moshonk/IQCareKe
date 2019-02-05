@@ -2,12 +2,14 @@
 using Entities.CCC.Lookup;
 using Entities.CCC.Screening;
 using Entities.CCC.Visit;
+using Interface.Administration;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Screening;
 using IQCare.CCC.UILogic.Visit;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -17,47 +19,100 @@ namespace IQCare.Web.CCC.UC.Screening
 {
     public partial class ucCervicalCancerScreening : System.Web.UI.UserControl
     {
-        public int PatientId, PatientMasterVisitId, userId, SocialHistoryId;
+        public int patientId, userId, SocialHistoryId;
         public DateTime? VisitDate;
         public int screenTypeId = 0, recordId = 0;
         public RadioButtonList rbList;
         public int NotesId;
-        public int PmVisitId;
-        protected int screeningTypeId;
+        public int pmVisitId;
         public int serviceAreaId;
         protected ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+        protected int ScreeningTypeId
+        {
+            get
+            {
+                var cxcaAssessmentId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreening"));
+                return cxcaAssessmentId;
+            }
+        }
+        protected int ScreeningAssessmentId
+        {
+            get
+            {
+                var cxcaAssessmentId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreeningAssessment"));
+                return cxcaAssessmentId;
+            }
+        }
 
-
+        protected int PatientMasterVisitId
+        {
+            get
+            {
+                var vistId = Convert.ToInt32(Request.QueryString["visitId"] ?? HttpContext.Current.Session["PatientMasterVisitId"]);
+                return vistId;
+            }
+        }
         protected string DateOfEnrollment
         {
             get { return Session["DateOfEnrollment"].ToString(); }
         }
+
+        protected string Gender
+        {
+            get { return Convert.ToString(HttpContext.Current.Session["Gender"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
-            PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+            patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             userId = Convert.ToInt32(Session["AppUserId"]);
-            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
-            screeningTypeId = lookupManager.GetLookUpMasterId("CervicalCancerScreening");
+            pmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
 
             PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
             List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
-            visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
+            visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(patientId, PatientMasterVisitId);
             VisitDate = visitPatientMasterVisit[0].VisitDate;
             PatientLookupManager patientLookupManager = new PatientLookupManager();
-            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
-            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(patientId);
             serviceAreaId = Convert.ToInt32(LookupLogic.GetLookupItemId("MoH 257 GREENCARD"));
             if (!IsPostBack)
             {
-                GetCervicalCancerScreeningCTRLs("Ever been screened in the past 1 year", "ScreenedInLastOneYear", phScreenedInLastOneYear);
                 GetCervicalCancerScreeningCTRLs("Visit Type", "CxCaScreeningVisitType", phVisitType);
                 GetCervicalCancerScreeningCTRLs("Screening method and result", "CxCaScreeningMethod", phScreeningMethod);
                 GetCervicalCancerScreeningCTRLs("Treatment", "CxCaTreatment", phTreatment);
                 GetCervicalCancerScreeningCTRLs("ReferralReasons", "CxCaReferralReasons", phReferralReasons);
                 GetCervicalCancerScreeningCTRLs("Referred Out?", "Referred", phReferred);
             }
+
+            GetLastScreeningAssessment();
         }
+
+        private void GetLastScreeningAssessment()
+        {
+            var psm = new PatientScreeningManager();
+            var ps = psm.GetPatientScreening(patientId, PatientMasterVisitId, ScreeningAssessmentId);
+            ps.FindAll(x => x.VisitDate <= VisitDate);
+            if (ps.Count > 0)
+            {
+                AssessmentDate.Text = Convert.ToDateTime(ps[0].VisitDate).ToString("dd-MMM-yyyy");
+                Iuser _mgr = (Iuser)ObjectFactory.CreateInstance("BusinessProcess.Administration.BUser, BusinessProcess.Administration");
+                DataSet ds = _mgr.GetUserRecord(ps[0].CreatedBy);
+                if (ds.Tables.Count > 0)
+                {
+                    var dt = ds.Tables[0];
+                    if (dt != null && dt.Rows.Count == 1)
+                    {
+                        AssessmentBy.Text = String.Format("{0} {1}", dt.Rows[0]["UserFirstName"], dt.Rows[0]["UserLastName"]);
+                    }
+                }
+            }
+            else
+            {
+                AssessmentDate.Text = "Not done";
+                AssessmentBy.Text = "Not done";
+            }
+        }
+
         public void GetCervicalCancerScreeningCTRLs(string title, string lookupName, Control placeholder)
         {
             LookupLogic lookUp = new LookupLogic();
@@ -143,8 +198,8 @@ namespace IQCare.Web.CCC.UC.Screening
 
         public void GetCervicalCancerScreeningData(int PatientId)
         {
-            var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
+            var psm = new PatientScreeningManager();
+            List<PatientScreening> screeningList = psm.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
