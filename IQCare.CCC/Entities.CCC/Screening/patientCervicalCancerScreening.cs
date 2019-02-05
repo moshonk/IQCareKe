@@ -9,22 +9,17 @@ using System.Text;
 namespace Entities.CCC.Screening
 {
     [Serializable]
-    [Table("PatientScreening")]
-    public class PatientScreening : BaseObject
+    [Table("PatientCervicalCancerScreening")]
+    public class PatientCervicalCancerScreening : BaseObject
     {
         [Column]
 
-        public int Id {get; set;}
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public DateTime? VisitDate { get; set; }
-        public int? ScreeningTypeId { get; set; }
-        public bool? ScreeningDone { get; set; }
-        public DateTime? ScreeningDate { get; set; }
-        public int? ScreeningCategoryId { get; set; }
-        public int   ScreeningValueId { get; set; }
-        public string Comment { get; set; }
+        public DateTime? AppointmentDate { get; set; }
+        public String ReferredTo { get; set; }
     }
 }

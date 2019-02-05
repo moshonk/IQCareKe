@@ -22,6 +22,24 @@ namespace IQCare.Web.CCC.UC.Screening {
         protected global::System.Web.UI.WebControls.TextBox PersonVisitDate;
         
         /// <summary>
+        /// AssessmentBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AssessmentBy;
+        
+        /// <summary>
+        /// AssessmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AssessmentDate;
+        
+        /// <summary>
         /// phScreenedInLastOneYear control.
         /// </summary>
         /// <remarks>
@@ -76,13 +94,13 @@ namespace IQCare.Web.CCC.UC.Screening {
         protected global::System.Web.UI.WebControls.PlaceHolder phReferred;
         
         /// <summary>
-        /// phReferredTo control.
+        /// referredTo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox phReferredTo;
+        protected global::System.Web.UI.WebControls.TextBox referredTo;
         
         /// <summary>
         /// phReferralReasons control.
@@ -94,21 +112,12 @@ namespace IQCare.Web.CCC.UC.Screening {
         protected global::System.Web.UI.WebControls.PlaceHolder phReferralReasons;
         
         /// <summary>
-        /// phFollowupDate control.
+        /// appointmentDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phFollowupDate;
-        
-        /// <summary>
-        /// followpDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox followpDate;
+        protected global::System.Web.UI.WebControls.TextBox appointmentDate;
     }
 }

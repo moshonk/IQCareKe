@@ -52,6 +52,7 @@ namespace DataAccess.CCC.Context
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
+        public DbSet<PatientCervicalCancerScreening> PatientCervicalCancerScreenings { get; set; }
 
         //Triage
         public DbSet<PatientAdverseEvent> PatientAdverseEvents { get; set; }

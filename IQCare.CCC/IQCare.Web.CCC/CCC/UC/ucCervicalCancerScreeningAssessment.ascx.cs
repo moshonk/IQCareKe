@@ -18,26 +18,47 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucCervicalCancerScreeningAssessment : System.Web.UI.UserControl
     {
-        public int PatientId, PatientMasterVisitId, userId, SocialHistoryId;
+        public int PatientId, userId, SocialHistoryId;
         public DateTime? VisitDate;
         public int screenTypeId = 0, recordId = 0;
         public RadioButtonList rbList;
         public int NotesId;
         public int PmVisitId;
-        protected int screeningTypeId;
         public int serviceAreaId;
         protected ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-        public string wtf;
+        protected int ScreeningTypeId
+        {
+            get
+            {
+                var cxcaAssessmentId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreeningAssessment"));
+                return cxcaAssessmentId;
+            }
+        }
+        protected int CervicalCancerScreeningId
+        {
+            get
+            {
+                var cxcaScreeningId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreening"));
+                return cxcaScreeningId;
+            }
+        }
+
+        protected int PatientMasterVisitId
+        {
+            get
+            {
+                var vistId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+                return vistId;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             userId = Convert.ToInt32(Session["AppUserId"]);
-            screeningTypeId = lookupManager.GetLookUpMasterId("CervicalCancerScreening");
 
             List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
             PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
-            PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
             visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
             VisitDate = visitPatientMasterVisit[0].VisitDate;
             PatientLookupManager pm = new PatientLookupManager();
@@ -71,7 +92,7 @@ namespace IQCare.Web.CCC.UC
 
             rbList = new RadioButtonList
             {
-                ID = "cxcarb" + screeningCategoryId.ToString(),
+                ID = screeningCategoryId.ToString(),
                 RepeatColumns = 2,
                 ClientIDMode = System.Web.UI.ClientIDMode.Static,
                 CssClass = "cxcarbList"
