@@ -1,4 +1,4 @@
-/****** Object:  StoredProcedure [dbo].[sp_getCurrentRegimen]    Script Date: 2/7/2019 2:56:55 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_getCurrentRegimen]    Script Date: 2/8/2019 9:52:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -28,8 +28,8 @@ Set Nocount On;
 	--order by V.RegimenStartDate desc
 
 	SELECT V.RegimenId,V.RegimenLineId, V.RegimenStartDate FROM (
-		select  V.RegimenId,V.RegimenLineId, V.RegimenStartDate, ROW_NUMBER() OVER (PARTITION BY PatientId ORDER BY RegimenStartDate) as RowNum from PatientTreatmentTrackerView V
-		where v.PatientId=9210 AND v.RegimenId <> 0
+		select  V.RegimenId,V.RegimenLineId, V.RegimenStartDate, ROW_NUMBER() OVER (PARTITION BY PatientId ORDER BY RegimenStartDate DESC, id desc) as RowNum from PatientTreatmentTrackerView V
+		where v.PatientId=@PatientID AND v.RegimenId <> 0
     ) v WHERE v.RowNum = 1
 	
 End
