@@ -15,7 +15,11 @@ import {
   MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 @NgModule({
-  declarations: [ActiveFormReportComponent],
+  declarations: [
+    ActiveFormReportComponent,
+    ReportIndicatorResultComponent,
+    IndicatorReportingPeriodComponent
+  ],
   imports: [
     CommonModule,
     AirRoutingModule,
