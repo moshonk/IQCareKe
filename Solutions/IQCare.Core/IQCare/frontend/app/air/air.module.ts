@@ -18,7 +18,8 @@ import {
   declarations: [
     ActiveFormReportComponent,
     ReportIndicatorResultComponent,
-    IndicatorReportingPeriodComponent
+    IndicatorReportingPeriodComponent,
+    IndicatorResultsGridComponent
   ],
   imports: [
     CommonModule,
