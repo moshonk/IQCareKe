@@ -13,10 +13,6 @@ const routes: Routes = [
         loadChildren: '../dashboard/dashboard.module#DashboardModule'
     },
     {
-    path:'ReportingForm',
-    loadChildren: '../air/air.module#AirModule'
-    },
-    {
         path: 'hts',
         loadChildren: '../hts/hts.module#HtsModule'
     },
