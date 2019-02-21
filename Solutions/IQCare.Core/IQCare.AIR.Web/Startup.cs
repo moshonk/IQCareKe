@@ -53,6 +53,7 @@ namespace IQCare.AIR.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
 
             app.UseCors(builder => builder
