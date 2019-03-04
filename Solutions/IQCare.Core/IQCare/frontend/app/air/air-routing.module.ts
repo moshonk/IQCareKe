@@ -10,7 +10,7 @@ const routes: Routes = [
       component : IndicatorReportingPeriodComponent,
       children : [
         {
-           path: 'report',
+           path: 'report/:reportingFormId',
            component : IndicatorReportingPeriodComponent,
            pathMatch : 'full'
         }
