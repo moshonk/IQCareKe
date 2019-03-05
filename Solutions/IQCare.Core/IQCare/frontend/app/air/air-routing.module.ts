@@ -6,30 +6,33 @@ import { ReportIndicatorResultComponent } from './report-indicator-result/report
 
 const routes: Routes = [
      {
-      path: '',
-      component : IndicatorReportingPeriodComponent,
-      children : [
-        {
            path: 'report/:reportingFormId',
            component : IndicatorReportingPeriodComponent,
            pathMatch : 'full'
-        }
-      ],
      },
      {
-      path: 'indicator/result/:reportingPeriodId',
+      path: 'indicator/result/:reportingFormId/:reportingPeriodId',
       component : ReportIndicatorResultComponent,
       pathMatch : 'full'
     },
     {
-        path: 'formdetails/:id/:reportingformid',
-       component: ActiveFormReportComponent,
-      resolve: {
+        path: 'formdetails/:reportingFormId',
+        component: ActiveFormReportComponent,
+        resolve: {
           FormDetails: FormDetailResolver
-         }
+         },
+         data : { isEdit : false}
      },
      {
-         path: 'sections/:id',
+        path: 'formdetails/edit/:reportingFormId',
+        component: ActiveFormReportComponent,
+        resolve: {
+          FormDetails: FormDetailResolver
+         },
+         data : { isEdit : true}
+     },
+     {
+         path: 'sections/:reportingFormId',
          component: ReportSectionSettingComponent,
          pathMatch: 'full'
 
