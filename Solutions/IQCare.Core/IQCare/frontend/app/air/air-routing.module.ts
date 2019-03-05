@@ -24,7 +24,7 @@ const routes: Routes = [
          data : { isEdit : false}
      },
      {
-        path: 'formdetails/edit/:reportingFormId',
+        path: 'formdetails/edit/:reportingFormId/:reportingPeriodId',
         component: ActiveFormReportComponent,
         resolve: {
           FormDetails: FormDetailResolver
