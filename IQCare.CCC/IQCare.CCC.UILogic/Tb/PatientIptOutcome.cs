@@ -46,6 +46,8 @@ namespace IQCare.CCC.UILogic.Tb
                 ReasonForDiscontinuation = p.ReasonForDiscontinuation,
                 IptDiscontinuationReason = p.IptDiscontinuationReason,
                 CreatedBy = SessionManager.UserId
+                CreatedBy = SessionManager.UserId,
+                IPTOutComeDate=p.IPTOutComeDate
             };
             return _patientIptOutcome.UpdatePatientIptOutcome(patientIptOutcome);
         }

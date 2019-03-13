@@ -40,8 +40,8 @@ namespace IQCare.CCC.UILogic
         public List<PatientLookup> GetPatientSearchListPayload(string patientId,string isEnrolled, string firstName = null, string middleName = null, string lastName =null)
         {
             var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId,isEnrolled, firstName, middleName, lastName);
-
-            return patientDetails;
+            var patienttable = patientDetails;
+            return patienttable;
         }
 
         public List<PatientLookup> GetPatientSearchListPayload(string isEnrolled)
@@ -167,7 +167,27 @@ namespace IQCare.CCC.UILogic
                         }
                         else
                         {
-                            patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            var lookupLogic = new LookupLogic();
+                            var facility = lookupLogic.GetFacility();
+                            if (cccNumberLength == 5)
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode +  cccNumber);
+                            }
+                            else if (cccNumberLength < 5)
+                            {
+                                var count = 5 - cccNumberLength;
+                                var stringPadding = "";
+                                while (count > 0)
+                                {
+                                    stringPadding += '0';
+                                    count--;
+                                }
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode + stringPadding + cccNumber);
+                            }
+                            else
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            }
                         }
                     }
                 }

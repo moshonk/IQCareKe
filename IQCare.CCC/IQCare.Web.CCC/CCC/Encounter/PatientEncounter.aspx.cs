@@ -7,8 +7,9 @@ using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using IQCare.Web.Laboratory;
-using System.Text;
+using System.Web.Services;
 using System.Web.UI;
+
 
 namespace IQCare.Web.CCC.Encounter
 {

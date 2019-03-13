@@ -15,7 +15,7 @@ FOR /F %%I IN ("%0") DO SET BATDIR=%%~dpI
 CD /D %BATDIR%
 @echo %BATDIR%
 
-Set config=debug 
+Set config=debug
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe
 @Echo Cleaning references folder
@@ -130,12 +130,44 @@ xcopy /d %BATDIR%\Library\EntityFramework.SqlServer.dll %BATDIR%\package\web\bin
 dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/api
 
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
+@echo ********** END OF BUILINDING IQCare API ********** >> %log%
 
-@echo ********** END OF BUILINDING FRONTEND ********** >> %log%
+
+@echo "********** Building IQCare LAB **********" >> %log%
+@echo ********** Building IQCare LAB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab
+
+@echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
+
+
+
+@echo "********** Building IQCare MATERNITY **********" >> %log%
+@echo ********** Building IQCare MATERNITY **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.WebApi.csproj -o ../../../package/maternity
+
+@echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
+@echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
+
+
+@echo "********** Building IQCare COMMON WEB **********" >> %log%
+@echo ********** Building IQCare COMMON WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o ../../../package/common
+
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
+
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
+
 
 cd Solutions/IQCare.Core/IQCare
 
-ng build --base-href "/frontend/" --prod
+ng build --base-href "/frontend/" --prod --aot --output-hashing=all
 
 pause
 

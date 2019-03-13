@@ -745,6 +745,8 @@
         
 </div><%-- .container-fluid--%>
 <script type="text/javascript">
+    var ArrayVaccinationList = [];
+    
     $(document).ready(function () {
         /*$('#Stage1').datepicker();
         $('#Stage2').datepicker();
@@ -769,14 +771,25 @@
         });
 
         var Age = $("#Age").val();
-        if (Age <= 14 || Age >= 6) {
-            $("#<%=Stage1Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage1").addClass("noneevents");
-            $("#<%=Stage2Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage2").addClass("noneevents");
-            $("#<%=Stage3Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage3").addClass("noneevents");
+        if (Age <= 19 && Age >= 6) {
+   
+            $("#Stage1").datepicker('enable');
+           // $("#Stage1").addClass("noneevents");
+     
+            $("#Stage2").datepicker('enable');
+            //$("#Stage2").addClass("noneevents");
+     
+            $("#Stage3").datepicker('enable');
+            //$("#Stage3").addClass("noneevents");
+        } else {
+            $("#Stage1").datepicker('disable');
+            //$("#Stage1").addClass("noneevents");
+            $("#Stage2").datepicker('disable');
+            //$("#Stage2").addClass("noneevents");
+            $("#Stage3").datepicker('disable');
+            //$("#Stage3").addClass("noneevents");
         }
+
         if (Age <= 14) {
             $("#<%=SexPartnerDate.ClientID%>").attr('disabled', 'disbaled');
             $("#SexPartner").addClass("noneevents");
@@ -855,7 +868,8 @@
                 //vaccinesList[vaccineTypeId] = vaccineStageId;
                 vaccinesList[vaccineStage] = vaccineStageId;
                 console.log(vaccinesList);
-
+                  ArrayVaccinationList.push({  'VaccineStage': vaccineStage, 'Vaccine': vaccineType, 'DeleteFlag': 0 ,'Exist':0});
+                console.log(ArrayVaccinationList);
                 var tr = "<tr><td align='left'></td><td align='left'>" + vaccineType + "</td><td align='left'>" + vaccineStage + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                 $("#tblVaccines>tbody:first").append('' + tr + '');
             }
@@ -867,8 +881,26 @@
             $(this).closest('tr').remove();
             var x = $(this).closest('tr').find('td').eq(2).html();
             var exists = vaccinesList[x];
+            for (var i = 0; i < ArrayVaccinationList.length; i++) {
+                if (ArrayVaccinationList[i].VaccineStage === x) {
+                    if(ArrayVaccinationList[i].Exist === 0) {
+                         console.log("Exists completed deleted");
+                        
+                        ArrayVaccinationList.splice($.inArray(x,ArrayVaccinationList),1);
+                        console.log(ArrayVaccinationList);
+                    }
+                    else if (ArrayVaccinationList[i].Exist === 1) {
+                        console.log("Exists but not deleted");
+                        ArrayVaccinationList[i].DeleteFlag = 1;
+                        console.log(ArrayVaccinationList);
+                    }
+                   
+                }
+            }
+
             if (typeof exists != 'undefined' && exists > 0) {
                 delete vaccinesList[x];
+               
                 //vaccinesList.splice(x, 1);
             }
         });
@@ -1093,8 +1125,9 @@
                     return false;
                 }
 
+               
                 //console.log(vaccineAdult);
-                addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult);
+                addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult,ArrayVaccinationList);
 
             } else {
                 return false;
@@ -1102,16 +1135,16 @@
         });
 
 
-        function addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult) {
+        function addOneTimeEventTracker(_fp, Stage1DateValue, Stage2DateValue, Stage3DateValue, SexPartnerDateValue, INHStartDateValue, INHCompletion, INHCompletionDateValue, vaccineAdult,ArrayVaccinationList) {
             var vaccines = JSON.stringify(_fp);
             var adultVaccine = JSON.stringify(vaccineAdult);
-
+            var vaccinationList = JSON.stringify(ArrayVaccinationList);
             $.ajax({
                 type: "POST",
                 url: "../WebService/OneTimeEventsTrackerService.asmx/addOneTimeEventsTracker",
                 data: "{'Stage1DateValue':'" + Stage1DateValue + "','Stage2DateValue':'" + Stage2DateValue + "', 'Stage3DateValue': '" +
                     Stage3DateValue + "', 'SexPartnerDateValue':'" + SexPartnerDateValue + "','INHStartDateValue': '" + INHStartDateValue +
-                    "','INHCompletion': '" + INHCompletion + "','CompletionDate': '" + INHCompletionDateValue + "','adultVaccine': '" + adultVaccine + "','vaccines': '" + vaccines + "'}",
+                    "','INHCompletion': '" + INHCompletion + "','CompletionDate': '" + INHCompletionDateValue + "','adultVaccine': '" + adultVaccine + "','vaccines': '" + vaccines + "','VaccinationList':'"+vaccinationList+ "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -1191,12 +1224,14 @@
 
                         $.each(oneTimeEvents.ChildVaccination, function (index, value) {
                             //console.log(value);
+                            ArrayVaccinationList.push({ 'VaccineStage': value.VaccineStage, 'Vaccine': value.Name, 'DeleteFlag': 0 ,'Exist':1});
+                            
                             vaccinesList[value.VaccineStage] = value.Vaccine;
                             var tr = "<tr><td align='left'></td><td align='left'>" + value.Name + "</td><td align='left'>" + value.VaccineStage + "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                             $("#tblVaccines>tbody:first").append('' + tr + '');
                         });
 
-                        console.log(vaccinesList);
+                       
                     }
                 },
                 error: function (response) {

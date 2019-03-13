@@ -87,6 +87,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 case "KENYAEMR":
                     senderId = (int) Senders.KENYAEMR;
                     break;
+                case "HAPI":
+                    senderId = (int) Senders.HAPI;
+                    break;
                     default:
                         senderId = 1;
                     break;
@@ -259,11 +262,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 var msg = processPharmacyDispense.Process(drugDispensed);
                 incomingMessage.LogMessage = msg;
                 //update message that it has been processed
-                incomingMessage.DateProcessed = DateTime.Now;
-                incomingMessage.Processed = true;
-                _apiInboxmanager.EditApiInbox(incomingMessage);
-
-                incomingMessage.DateProcessed = DateTime.Now;
+                incomingMessage.DateProcessed = DateTime.Now;             
                 incomingMessage.Processed = true;
                 incomingMessage.IsSuccess = true;
                 _apiInboxmanager.EditApiInbox(incomingMessage);
@@ -273,7 +272,7 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 incomingMessage.LogMessage = e.Message;
                 incomingMessage.Processed = true;
                 incomingMessage.IsSuccess = false;
-                _apiInboxmanager.AddApiInbox(incomingMessage);
+                _apiInboxmanager.EditApiInbox(incomingMessage);
             }
         }
 

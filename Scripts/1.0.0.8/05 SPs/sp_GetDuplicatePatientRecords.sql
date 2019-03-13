@@ -2,7 +2,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Ge
 DROP PROCEDURE [dbo].[sp_GetDuplicatePatientRecords]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_GetDuplicatePatientRecords]    Script Date: 10/11/2018 6:13:44 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetDuplicatePatientRecords]    Script Date: 9/10/2018 10:36:13 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ GO
 -- Create date: 25-07-2018
 -- Description:	Get all possible duplicates based on selected criteria
 -- =============================================
-ALTER PROCEDURE [dbo].[sp_GetDuplicatePatientRecords] 
+CREATE PROCEDURE [dbo].[sp_GetDuplicatePatientRecords] 
 	@matchFirstName bit = 1, 
 	@matchMiddleName bit = 0,
 	@matchLastname as Bit = 1,
@@ -43,28 +43,19 @@ BEGIN
 	SELECT 
 		ptn_pk,PatientId,PersonId,EnrollmentNumber,FirstName,MiddleName,LastName,Sex, EnrollmentDate,DateOfBirth,MobileNumber, PatientEnrollmentId,
 		SOUNDEX(FirstName) as sFirstName,SOUNDEX(MiddleName) as sMiddleName,SOUNDEX(LastName) as sLastName, SOUNDEX(CONCAT(FirstName,LastName)) as sFirstLastName,SOUNDEX(CONCAT(FirstName,MiddleName,LastName)) as sFirstMiddleLastName ,
-		CASE LEN(EnrollmentNumber) - LEN(REPLACE(EnrollmentNumber,'-','')) 
-		 WHEN 3 THEN
-				SUBSTRING(EnrollmentNumber,CHARINDEX('-',EnrollmentNumber,0)+1,LEN(EnrollmentNumber) - CHARINDEX('-',REVERSE(EnrollmentNumber),0) - CHARINDEX('-',EnrollmentNumber,0))		
-		 WHEN 2 THEN
-			RIGHT(CONCAT('00000',
-				SUBSTRING(EnrollmentNumber,CHARINDEX('-',EnrollmentNumber,0)+1,LEN(EnrollmentNumber) - CHARINDEX('-',REVERSE(EnrollmentNumber),0) - CHARINDEX('-',EnrollmentNumber,0))
-			), 5)
-		 WHEN 1 THEN
-			RIGHT(CONCAT('00000',
-				CASE WHEN LEN(EnrollmentNumber) = 11 THEN --To match values like 13939-26222
-					(SUBSTRING(EnrollmentNumber,CHARINDEX('-', EnrollmentNumber)+1, LEN(EnrollmentNumber)))  
-				ELSE 
-					CASE WHEN CHARINDEX('-', EnrollmentNumber) = 3 THEN --To match values like 14-26222
-						(SUBSTRING(EnrollmentNumber,(CHARINDEX('-', EnrollmentNumber) + 1), (LEN(EnrollmentNumber)))) 
-					ELSE			
-						(SUBSTRING(EnrollmentNumber,1, (LEN(EnrollmentNumber) - CHARINDEX('-', REVERSE(EnrollmentNumber))))) 
-					END
-				END 
-			), 5)
-		 ELSE
-			EnrollmentNumber
-		 END 
+		CASE WHEN LEN(EnrollmentNumber) = 11 THEN --To match values like 13939-26222
+			(SUBSTRING(EnrollmentNumber,CHARINDEX('-', EnrollmentNumber)+1, LEN(EnrollmentNumber)))  
+		ELSE 
+			CASE WHEN LEN(EnrollmentNumber) = 10 AND ISNUMERIC(EnrollmentNumber) = 1 THEN --To match values like 1393926222
+				RIGHT(EnrollmentNumber, 5)
+			ELSE			
+				CASE WHEN CHARINDEX('-', EnrollmentNumber) = 3 THEN --To match values like 14-26222
+					(SUBSTRING(EnrollmentNumber,(CHARINDEX('-', EnrollmentNumber) + 1), (LEN(EnrollmentNumber)))) 
+				ELSE			
+					(SUBSTRING(EnrollmentNumber,1, (LEN(EnrollmentNumber) - CHARINDEX('-', REVERSE(EnrollmentNumber))))) 
+				END
+			END
+		END 
 			as MatchingEnrollmentNo
 	INTO #rawDataCTE
 	FROM (
