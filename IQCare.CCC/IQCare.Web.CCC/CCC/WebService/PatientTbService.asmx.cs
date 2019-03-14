@@ -232,7 +232,7 @@ namespace IQCare.Web.CCC.WebService
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
-                IPTOutComeDate=IPTDate
+                IPTOutComeDate=IPTDate,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
                 IptDiscontinuationReason = iptDiscontinuationReason
             };
@@ -276,7 +276,7 @@ namespace IQCare.Web.CCC.WebService
                         PatientMasterVisitId = x.PatientMasterVisitId,
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
-                        IPTOutComeDate=x.IPTOutComeDate
+                        IPTOutComeDate=x.IPTOutComeDate,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
                         Id = x.Id
                     };
