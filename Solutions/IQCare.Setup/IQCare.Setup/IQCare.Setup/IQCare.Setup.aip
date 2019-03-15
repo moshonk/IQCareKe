@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <DOCUMENT Type="Advanced Installer" CreateVersion="14.5.2" version="14.5.2" Modules="enterprise" RootPath="..\..\..\..\Release*" Language="en" Id="{1800045D-F422-4A86-B3A6-A71F6AD68C61}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="AppXAppDetailsComponent;AppXCapabilitiesComponent;AppXDependenciesComponent;AppXProductDetailsComponent;AppXVisualAssetsComponent;AppXAppDeclarationsComponent;AppXUriRulesComponent"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_ThemeStyle" Value="aero" MultiBuildValue="DefaultBuild:style8" MsiKey="AI_ThemeStyle"/>
-    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:2"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="favicon.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="Palladium"/>
-    <ROW Property="ProductCode" Value="1033:{BA16C8B3-94BF-4D07-B914-CDCA252A9DC6} " Type="16"/>
+    <ROW Property="MsiLogging" MultiBuildValue="DefaultBuild:vp"/>
+    <ROW Property="ProductCode" Value="1033:{C65051D4-BA70-4A33-A285-58D31A0A4BA4} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="IQCare"/>
-    <ROW Property="ProductVersion" Value="2.0.0" Type="32"/>
-    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="ProductVersion" Value="2.0.2" Type="32"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{714877AF-EC60-4623-8357-9EB270A9F4B4}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
     <ROW Property="WindowsType9XDisplay" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -38,8 +43,10 @@
     <ROW Directory="ClinicalService_Dir" Directory_Parent="IQCare_Dir" DefaultDir="CLINIC~2|ClinicalService" DirectoryOptions="3"/>
     <ROW Directory="Content_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Content" DirectoryOptions="3"/>
     <ROW Directory="Data_Dir" Directory_Parent="CCC_Dir" DefaultDir="Data" DirectoryOptions="3"/>
+    <ROW Directory="DbMigration_Dir" Directory_Parent="APPDIR" DefaultDir="DBMIGR~1|DbMigration"/>
     <ROW Directory="Depression_1_Dir" Directory_Parent="UC_Dir" DefaultDir="DEPRES~1|Depression" DirectoryOptions="3"/>
     <ROW Directory="Depression_Dir" Directory_Parent="CCC_Dir" DefaultDir="DEPRES~1|Depression" DirectoryOptions="3"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="Encounter_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENCOUN~1|Encounter" DirectoryOptions="3"/>
     <ROW Directory="EnhanceAdherenceCounselling_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENHANC~1|EnhanceAdherenceCounselling" DirectoryOptions="3"/>
     <ROW Directory="Enrollment_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENROLL~1|Enrollment" DirectoryOptions="3"/>
@@ -67,6 +74,7 @@
     <ROW Directory="Patient_1_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Patient" DirectoryOptions="3"/>
     <ROW Directory="Patient_Dir" Directory_Parent="CCC_Dir" DefaultDir="Patient" DirectoryOptions="3"/>
     <ROW Directory="Pharmacy_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Pharmacy" DirectoryOptions="3"/>
+    <ROW Directory="ProgramFilesFolder" Directory_Parent="TARGETDIR" DefaultDir="PROGRA~1|ProgramFilesFolder" IsPseudoRoot="1"/>
     <ROW Directory="Queue_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Queue" DirectoryOptions="3"/>
     <ROW Directory="Reports_1_Dir" Directory_Parent="Laboratory_Dir" DefaultDir="Reports" DirectoryOptions="3"/>
     <ROW Directory="Reports_2_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Reports" DirectoryOptions="3"/>
@@ -280,8 +288,10 @@
     <ROW Directory="winarm_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-arm" DirectoryOptions="3"/>
     <ROW Directory="winarm_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-arm" DirectoryOptions="3"/>
     <ROW Directory="winx64_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-x64" DirectoryOptions="3"/>
+    <ROW Directory="winx64_2_Dir" Directory_Parent="DbMigration_Dir" DefaultDir="win-x64"/>
     <ROW Directory="winx64_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-x64" DirectoryOptions="3"/>
     <ROW Directory="winx86_1_Dir" Directory_Parent="runtimes_1_Dir" DefaultDir="win-x86" DirectoryOptions="3"/>
+    <ROW Directory="winx86_2_Dir" Directory_Parent="DbMigration_Dir" DefaultDir="win-x86"/>
     <ROW Directory="winx86_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-x86" DirectoryOptions="3"/>
     <ROW Directory="wizard_Dir" Directory_Parent="fuelux_4_Dir" DefaultDir="wizard" DirectoryOptions="3"/>
     <ROW Directory="wysiwyg_Dir" Directory_Parent="editors_Dir" DefaultDir="wysiwyg" DirectoryOptions="3"/>
@@ -4906,19 +4916,15 @@
     <ROW AppPoolId="2" Name="IQCarePMTCT" Condition="1" Flags="65653"/>
     <ROW AppPoolId="3" Name="IQCareLab" Condition="1" Flags="65653"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.AppXCfgComponent">
-    <ROW ID="Configuration" Order="1" ManifestFile="AppxManifest.xml" TargetOs="4"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="BuildUwpAppX" BuildName="BuildUwpAppX" BuildOrder="2" BuildType="7" PackageFolder="C:\source\Repos\IQCare.KeHMIS\Solutions\IQCare.Setup\IQCare.Setup\IQCare.Setup\BuildUwpAppXSetupFiles" Languages="en" UwpTargetDesktop="TargetDeviceFamily"/>
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="." PackageFileName="IQCare.Web.Setup" Languages="en" InstallationType="4" ExtUI="true" UseLargeSchema="true" UACExecutionLevel="2"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="1" PackageFolder="." PackageFileName="IQCare.Web.Setup" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true" UACExecutionLevel="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
     <ROW Path="&lt;AI_DICTS&gt;ui_en.ail"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DigCertStoreComponent">
-    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="0" SignTool="0" UseSha256="1"/>
+    <ROW TimeStampUrl="http://timestamp.digicert.com" SignerDescription="[|ProductName]" SignOptions="0" SignTool="0" EnableLUAPatching="1" UseSha256="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
     <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
@@ -4934,67 +4940,37 @@
     <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
     <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.GenericXmlAttributeComponent">
-    <ROW XmlAttribute="AppListEntry" XmlElement="VisualElements" Name="AppListEntry" Flags="0" Order="0" Value="none"/>
-    <ROW XmlAttribute="BackgroundColor" XmlElement="VisualElements" Name="BackgroundColor" Flags="0" Order="0" Value="transparent"/>
-    <ROW XmlAttribute="Description" XmlElement="VisualElements" Name="Description" Flags="0" Order="0" Value="IQCare"/>
-    <ROW XmlAttribute="DisplayName" XmlElement="VisualElements" Name="DisplayName" Flags="0" Order="0" Value="IQCare"/>
-    <ROW XmlAttribute="Id" XmlElement="Application" Name="Id" Flags="0" Order="0" Value="IQCare"/>
-    <ROW XmlAttribute="IgnorableNamespaces" XmlElement="Package" Name="IgnorableNamespaces" Flags="0" Order="0" Value="uap"/>
-    <ROW XmlAttribute="Language" XmlElement="Resource" Name="Language" Flags="0" Order="0" Value="en-US"/>
-    <ROW XmlAttribute="MaxVersionTested" XmlElement="TargetDeviceFamily" Name="MaxVersionTested" Flags="0" Order="0" Value="10.0.15063.0"/>
-    <ROW XmlAttribute="MigrationUninstallCode" XmlElement="Package" Name="MigrationUninstallCode" Flags="0" Order="0" Value="{714877AF-EC60-4623-8357-9EB270A9F4B4}"/>
-    <ROW XmlAttribute="MinVersion" XmlElement="TargetDeviceFamily" Name="MinVersion" Flags="0" Order="0" Value="10.0.14393.0"/>
-    <ROW XmlAttribute="Name" XmlElement="Identity" Name="Name" Flags="0" Order="0" Value="Palladium.KeHMIS.IQCare"/>
-    <ROW XmlAttribute="Name_2" XmlElement="TargetDeviceFamily" Name="Name" Flags="0" Order="0" Value="Windows.Desktop"/>
-    <ROW XmlAttribute="Preference" XmlElement="Rotation" Name="Preference" Flags="0" Order="0" Value="portrait"/>
-    <ROW XmlAttribute="Preference_1" XmlElement="Rotation_1" Name="Preference" Flags="0" Order="0" Value="landscape"/>
-    <ROW XmlAttribute="ProcessorArchitecture" XmlElement="Identity" Name="ProcessorArchitecture" Flags="0" Order="0" Value="neutral"/>
-    <ROW XmlAttribute="Publisher" XmlElement="Identity" Name="Publisher" Flags="0" Order="0" Value="CN=Palladium"/>
-    <ROW XmlAttribute="Square150x150Logo" XmlElement="VisualElements" Name="Square150x150Logo" Flags="0" Order="0" FileId="IQCareSquare150x150Logo.scale100.png"/>
-    <ROW XmlAttribute="Square44x44Logo" XmlElement="VisualElements" Name="Square44x44Logo" Flags="0" Order="0" FileId="IQCareSquare44x44Logo.scale100.png"/>
-    <ROW XmlAttribute="StartPage" XmlElement="Application" Name="StartPage" Flags="0" Order="0" Value="http://localhost/IQCare/"/>
-    <ROW XmlAttribute="Version" XmlElement="Identity" Name="Version" Flags="0" Order="0" Value="2.0.0.0"/>
-    <ROW XmlAttribute="xmlns" XmlElement="Package" Name="xmlns" Flags="14" Order="1" Value="http://schemas.microsoft.com/appx/manifest/foundation/windows10"/>
-    <ROW XmlAttribute="xmlnsuap" XmlElement="Package" Name="xmlns:uap" Flags="14" Order="2" Value="http://schemas.microsoft.com/appx/manifest/uap/windows10"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.GenericXmlElementComponent">
-    <ROW XmlElement="Application" ParentElement="Applications" Name="Application" Order="0" Flags="0" Type="4"/>
-    <ROW XmlElement="Applications" ParentElement="Package" Name="Applications" Order="1" Flags="0" Type="3"/>
-    <ROW XmlElement="Capabilities" ParentElement="Package" Name="Capabilities" Order="3" Flags="0" Type="0"/>
-    <ROW XmlElement="Dependencies" ParentElement="Package" Name="Dependencies" Order="5" Flags="0" Type="0"/>
-    <ROW XmlElement="DisplayName" ParentElement="Properties" Name="DisplayName" Order="1" Flags="0" Text="IQCare" Type="0"/>
-    <ROW XmlElement="Identity" ParentElement="Package" Name="Identity" Order="0" Flags="0" Type="0"/>
-    <ROW XmlElement="InitialRotationPreference" ParentElement="VisualElements" Name="InitialRotationPreference" Order="0" Flags="0" Type="0"/>
-    <ROW XmlElement="Logo" ParentElement="Properties" Name="Logo" Order="2" Flags="0" FileId="Store50x50Logo.scale100.png" Type="0"/>
-    <ROW XmlElement="Package" Name="Package" Order="0" Flags="0" Type="6"/>
-    <ROW XmlElement="Properties" ParentElement="Package" Name="Properties" Order="4" Flags="0" Type="0"/>
-    <ROW XmlElement="PublisherDisplayName" ParentElement="Properties" Name="PublisherDisplayName" Order="0" Flags="0" Text="Palladium" Type="0"/>
-    <ROW XmlElement="Resource" ParentElement="Resources" Name="Resource" Order="0" Flags="0" Type="0"/>
-    <ROW XmlElement="Resources" ParentElement="Package" Name="Resources" Order="2" Flags="0" Type="0"/>
-    <ROW XmlElement="Rotation" ParentElement="InitialRotationPreference" Name="Rotation" Order="0" Flags="0" Type="0"/>
-    <ROW XmlElement="Rotation_1" ParentElement="InitialRotationPreference" Name="Rotation" Order="1" Flags="0" Type="0"/>
-    <ROW XmlElement="TargetDeviceFamily" ParentElement="Dependencies" Name="TargetDeviceFamily" Order="0" Flags="0" Type="28"/>
-    <ROW XmlElement="VisualElements" ParentElement="Application" Name="VisualElements" Order="0" Flags="0" Type="0"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.GenericXmlFileComponent">
-    <ROW XmlFile="AppxManifest.xml" FileName="AppxManifest.xml" RootElement="Package" Flags="89" Version="1.0" Encoding="UTF-8" IndentUnits="2"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.IIsBrowseComponent">
     <ROW BrowseName="App Pool Browse" Flags="16" DataBindings="SELECTED_APPPOOL#1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiActionTextComponent">
+    <ROW Action="AI_DeleteLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_DeleteRLzma" Description="Deleting files extracted from archive" DescriptionLocId="ActionText.Description.AI_DeleteLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractFiles" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
+    <ROW Action="AI_ExtractLzma" Description="Extracting files from archive" DescriptionLocId="ActionText.Description.AI_ExtractLzma" TemplateLocId="-"/>
     <ROW Action="AI_IIsConfig" Description="Configuring Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsConfig" Template="Installing &quot;[1]&quot;" TemplateLocId="ActionText.Template.AI_IIsConfig"/>
     <ROW Action="AI_IIsInstall" Description="Generating actions to configure Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsInstall"/>
     <ROW Action="AI_IIsRemove" Description="Configuring Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsRemove" Template="Removing &quot;[1]&quot;" TemplateLocId="ActionText.Template.AI_IIsRemove"/>
     <ROW Action="AI_IIsRollback" Description="Rolling back IIS configuration" DescriptionLocId="ActionText.Description.AI_IIsRollback" Template="Restoring metabase configuration." TemplateLocId="ActionText.Template.AI_IIsRollback"/>
     <ROW Action="AI_IIsUninstall" Description="Generating actions to configure Internet Information Services" DescriptionLocId="ActionText.Description.AI_IIsUninstall"/>
+    <ROW Action="AI_WinOptFeaturesConfig" Description="Configuring Windows features." DescriptionLocId="ActionText.Description.AI_WinOptFeaturesConfig" Template="Configuring Windows features." TemplateLocId="ActionText.Template.AI_WinOptFeaturesConfig"/>
+    <ROW Action="AI_WinOptFeaturesInstall" Description="Generating actions to configure Windows features." DescriptionLocId="ActionText.Description.AI_WinOptFeaturesInstall" Template="Configuring Windows features." TemplateLocId="ActionText.Template.AI_WinOptFeaturesInstall"/>
+    <ROW Action="AI_WinOptFeaturesRemove" Description="Removing configured Windows features." DescriptionLocId="ActionText.Description.AI_WinOptFeaturesRemove" Template="Removing configured Windows features." TemplateLocId="ActionText.Template.AI_WinOptFeaturesRemove"/>
+    <ROW Action="AI_WinOptFeaturesRollback" Description="Rolling back configured Windows features." DescriptionLocId="ActionText.Description.AI_WinOptFeaturesRollback" Template="Rolling back configured Windows features." TemplateLocId="ActionText.Template.AI_WinOptFeaturesRollback"/>
+    <ROW Action="AI_WinOptFeaturesUninstall" Description="Generating actions to configure Windows features." DescriptionLocId="ActionText.Description.AI_WinOptFeaturesUninstall" Template="Removing configured Windows features." TemplateLocId="ActionText.Template.AI_WinOptFeaturesUninstall"/>
     <ROW Action="BrowseIISAppPools" Description="ActionText.Description.BrowseIISAppPools" DescriptionLocId="ActionText.Description.BrowseIISAppPools"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="PowerShellScriptLauncher.dll" SourcePath="&lt;AI_CUSTACTS&gt;PowerShellScriptLauncher.dll"/>
+    <ROW Name="Prereq.dll" SourcePath="&lt;AI_CUSTACTS&gt;Prereq.dll"/>
+    <ROW Name="WinOptionalFeatures.dll" SourcePath="&lt;AI_CUSTACTS&gt;WinOptionalFeatures.dll"/>
     <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
     <ROW Name="iis.dll" SourcePath="&lt;AI_CUSTACTS&gt;iis.dll"/>
+    <ROW Name="lzmaextractor.dll" SourcePath="&lt;AI_CUSTACTS&gt;lzmaextractor.dll"/>
     <ROW Name="viewer.exe" SourcePath="&lt;AI_CUSTACTS&gt;viewer.exe"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
@@ -5025,14 +5001,26 @@
     <ROW Directory_="IQCare_Dir" Component_="IQCare" ManualDelete="true"/>
     <ROW Directory_="IQCareAPI_Dir" Component_="IQCareAPI" ManualDelete="true"/>
     <ROW Directory_="IQCareFrontend_Dir" Component_="frontend" ManualDelete="true"/>
+    <ROW Directory_="DbMigration_Dir" Component_="DbMigration" ManualDelete="true"/>
+    <ROW Directory_="Assets" Component_="Assets" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DATA_SETTER" Type="51" Source="CustomActionData" Target="App Pool Browse"/>
     <ROW Action="AI_DATA_SETTER_1" Type="51" Source="CustomActionData" Target="AEkAcwA2ADQAQgBpAHQAAgABAFAAYQByAGEAbQBzAAIAAQBTAGMAcgBpAHAAdAACACMAIABCAGwAbwBjAGsAIABmAG8AcgAgAGQAZQBjAGwAYQByAGkAbgBnACAAdABoAGUAIABzAGMAcgBpAHAAdAAgAHAAYQByAGEAbQBlAHQAZQByAHMALgANAAoAUABhAHIAYQBtACgAKQANAAoADQAKACMAIABZAG8AdQByACAAYwBvAGQAZQAgAGcAbwBlAHMAIABoAGUAcgBlAC4ADQAKAG4AZQB0ACAAcwB0AG8AcAAgAHcAYQBzACAALwB5AA0ACgBuAGUAdAAgAHMAdABhAHIAdAAgAHcAMwBzAHYAYw=="/>
+    <ROW Action="AI_DATA_SETTER_2" Type="51" Source="AI_ExtractFiles" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteLzma" Type="1025" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
+    <ROW Action="AI_DeleteRCadLzma" Type="51" Source="AI_DeleteRLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_DeleteRLzma" Type="1281" Source="lzmaextractor.dll" Target="DeleteLZMAFiles"/>
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
+    <ROW Action="AI_EstimateExtractFiles" Type="1" Source="Prereq.dll" Target="EstimateExtractFiles"/>
+    <ROW Action="AI_ExtractCadLzma" Type="51" Source="AI_ExtractLzma" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_ExtractFiles" Type="1025" Source="Prereq.dll" Target="ExtractSourceFiles" AdditionalSeq="AI_DATA_SETTER_2"/>
+    <ROW Action="AI_ExtractLzma" Type="1025" Source="lzmaextractor.dll" Target="ExtractLZMAFiles"/>
+    <ROW Action="AI_FindExeLzma" Type="1" Source="lzmaextractor.dll" Target="FindEXE"/>
     <ROW Action="AI_IIsConfig" Type="11265" Source="iis.dll" Target="OnIIsConfig" WithoutSeq="true"/>
     <ROW Action="AI_IIsInstall" Type="1" Source="iis.dll" Target="OnIIsInstall"/>
     <ROW Action="AI_IIsRemove" Type="11265" Source="iis.dll" Target="OnIIsRemove" WithoutSeq="true"/>
@@ -5043,8 +5031,16 @@
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH" Target="[AI_SETUPEXEPATH_ORIGINAL]"/>
     <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
     <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Type="1" Source="aicustact.dll" Target="MixedAllUsersInstallLocation"/>
     <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
     <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="AI_UPDATER_UNINSTALL" Type="82" Source="updater.exe" Target="/clean silent"/>
+    <ROW Action="AI_WinOptFeaturesCheckReboot" Type="1" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesCheckReboot"/>
+    <ROW Action="AI_WinOptFeaturesConfig" Type="11265" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesConfig" WithoutSeq="true"/>
+    <ROW Action="AI_WinOptFeaturesInstall" Type="1" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesInstall"/>
+    <ROW Action="AI_WinOptFeaturesRemove" Type="11265" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesRemove" WithoutSeq="true"/>
+    <ROW Action="AI_WinOptFeaturesRollback" Type="11521" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesRollback" WithoutSeq="true"/>
+    <ROW Action="AI_WinOptFeaturesUninstall" Type="1" Source="WinOptionalFeatures.dll" Target="OnWinOptFeaturesUninstall"/>
     <ROW Action="BrowseIISAppPools" Type="1" Source="iis.dll" Target="IIsBrowseAppPools" AdditionalSeq="AI_DATA_SETTER"/>
     <ROW Action="OpenUrl" Type="2" Source="viewer.exe" Target="http://localhost/IQCare" Options="1"/>
     <ROW Action="PowerShellScriptInline" Type="1" Source="PowerShellScriptLauncher.dll" Target="RunPowerShellScript" Options="1" AdditionalSeq="AI_DATA_SETTER_1"/>
@@ -5055,18 +5051,47 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="favicon.exe" SourcePath="E:\dev-Palladium\IQCareKeHMIS\Presentation\IQCare.Web\favicon.ico" Index="0"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIniFileComponent">
+    <ROW IniFile="AppDir" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="AppDir" Value="[APPDIR]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ApplicationName" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ApplicationName" Value="[ProductName]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ApplicationVersion" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ApplicationVersion" Value="[ProductVersion]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="CheckFrequency" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="CheckFrequency" Value="2" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="CompanyName" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="CompanyName" Value="[Manufacturer]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="DefaultCommandLine" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="DefaultCommandLine" Value="/checknow" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="DownloadsFolder" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="DownloadsFolder" Value="[CommonAppDataFolder][Manufacturer]\[ProductName]\updates\" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="Flags" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="Flags" Value="PerMachine|ShowConfigOptionsButton" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ID" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ID" Value="[UpgradeCode]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="URL" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="URL" Value="https://www.dropbox.com/s/856ku62dqwmvd02/updatefile.txt?dl=1" Action="0" Component_="updater.exe"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
-    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1502"/>
     <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
-    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="53"/>
     <ROW Action="AI_EnableDebugLog" Sequence="51"/>
     <ROW Action="AI_IIsInstall" Condition="(NOT PATCH AND NOT MSIPATCHREMOVE ) AND (NOT Reinstall AND AI_INSTALL_MODE &lt;&gt; &quot;Repair&quot;) AND ((VersionNT &gt;= 500 AND NOT Installed) OR (Installed AND REMOVE &lt;&gt; &quot;ALL&quot; AND AI_INSTALL_MODE &lt;&gt; &quot;Remove&quot;))" Sequence="6509"/>
     <ROW Action="AI_IIsUninstall" Condition="(VersionNT &gt;= 500) AND (REMOVE = &quot;ALL&quot;)" Sequence="1698"/>
     <ROW Action="OpenUrl" Condition="( NOT Installed )" Sequence="6603"/>
     <ROW Action="PowerShellScriptInline" Condition="(VersionNT &gt; 501) OR (VersionNT = 501 AND ServicePackLevel &gt;= 2)" Sequence="6602"/>
     <ROW Action="AI_DATA_SETTER_1" Condition="(VersionNT &gt; 501) OR (VersionNT = 501 AND ServicePackLevel &gt;= 2)" Sequence="6601"/>
+    <ROW Action="AI_UPDATER_UNINSTALL" Condition="($updater.exe = 2) AND (?updater.exe = 3) AND NOT (UPGRADINGPRODUCTCODE)" Sequence="1551"/>
+    <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99" Builds="DefaultBuild"/>
+    <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="101" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="199" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="198" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractCadLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="197" Builds="DefaultBuild"/>
+    <ROW Action="AI_FindExeLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="196" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1549" Builds="DefaultBuild"/>
+    <ROW Action="AI_DeleteRLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="1548" Builds="DefaultBuild"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
+    <ROW Action="AI_WinOptFeaturesInstall" Condition="(VersionNT &gt;= 600) AND (REMOVE &lt;&gt; &quot;ALL&quot;)" Sequence="1501"/>
+    <ROW Action="AI_WinOptFeaturesUninstall" Condition="(VersionNT &gt;= 600) AND (REMOVE=&quot;ALL&quot;)" Sequence="1699"/>
+    <ROW Action="AI_WinOptFeaturesCheckReboot" Condition="(VersionNT &gt;= 600)" Sequence="6501"/>
+    <ROW Action="AI_DeleteLzma" Condition="SETUPEXEDIR=&quot;&quot; AND Installed AND (REMOVE&lt;&gt;&quot;ALL&quot;) AND (AI_INSTALL_MODE&lt;&gt;&quot;Remove&quot;) AND (NOT PATCH)" Sequence="6599" Builds="DefaultBuild"/>
+    <ROW Action="AI_ExtractFiles" Sequence="3998" Builds="DefaultBuild"/>
+    <ROW Action="AI_DATA_SETTER_2" Sequence="3997"/>
+    <ROW Action="AI_EstimateExtractFiles" Sequence="3999" Builds="DefaultBuild"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -5077,16 +5102,26 @@
     <ROW Action="AI_DATA_SETTER" Condition="1" Sequence="1226"/>
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="101"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT &lt;&gt; 500)" Description="[ProductName] cannot be installed on [WindowsTypeNT50Display]." DescriptionLocId="AI.LaunchCondition.NoNT50" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="(VersionNT64 OR ((VersionNT &lt;&gt; 501) OR (ServicePackLevel = 3))) AND ((VersionNT &lt;&gt; 502) OR (ServicePackLevel = 2))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
+    <ROW Condition="SETUPEXEDIR OR (REMOVE=&quot;ALL&quot;)" Description="This package can only be run from a bootstrapper." DescriptionLocId="AI.LaunchCondition.RequireBootstrapper" IsPredefined="true" Builds="DefaultBuild"/>
     <ROW Condition="VersionNT" Description="[ProductName] cannot be installed on [WindowsType9XDisplay]." DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="DefaultBuild"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegLocatorComponent">
+    <ROW Signature_="AI_EXE_PATH_CU" Root="1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+    <ROW Signature_="AI_EXE_PATH_LM" Root="2" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Type="2"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="UpdateIQCare" Directory_="DesktopFolder" Name="UPDATE~1|Update IQCare" Component_="updater.exe" Target="[#updater.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
@@ -5111,5 +5146,8 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.WebApplicationsComponent">
     <ROW WebSiteId="0" Root="APPDIR" Condition="1" AccessFlags="49761" AccessPerm="513" DocumentList="index.html, index.htm, default.htm" WebApplication="Default Web Site" ServerBindings=":80:" AccessSSLFlags="0" ConnectionTimeout="-1" MaxConcurrentRequests="-1" MaxRequests="-1" TimeLimit="-1"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.WinOptionalFeatureBundleComponent">
+    <ROW Name="IIS" FeatureList="IIS-ISAPIExtensions,IIS-URLAuthorization,IIS-Metabase,IIS-FTPServer,IIS-ManagementScriptingTools,IIS-HttpRedirect,IIS-ISAPIFilter,IIS-ASP,IIS-ServerSideIncludes,IIS-RequestFiltering,IIS-CGI,IIS-DefaultDocument,IIS-DirectoryBrowsing,IIS-HttpErrors,IIS-ODBCLogging,IIS-StaticContent,IIS-CustomLogging,IIS-HttpLogging,IIS-HttpTracing,IIS-BasicAuthentication,IIS-LoggingLibraries,IIS-RequestMonitor,IIS-HttpCompressionDynamic,IIS-HttpCompressionStatic,IIS-ClientCertificateMappingAuthentication,IIS-DigestAuthentication,IIS-IISCertificateMappingAuthentication,IIS-IPSecurity,IIS-WindowsAuthentication" OSTargets="1022" Condition="1" Flags="0"/>
   </COMPONENT>
 </DOCUMENT>
