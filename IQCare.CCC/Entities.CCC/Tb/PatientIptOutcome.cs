@@ -18,6 +18,6 @@ namespace Entities.CCC.Tb
 
 
         public DateTime? IPTOutComeDate { get; set; }
-        public int IptDiscontinuationReason { get; set; }
+        public int? IptDiscontinuationReason { get; set; }
     }
 }
