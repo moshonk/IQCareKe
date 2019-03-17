@@ -2,7 +2,7 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Me
 DROP PROCEDURE [dbo].[sp_MergePatientData]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_MergePatientData]    Script Date: 10/18/2018 4:14:03 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_MergePatientData]    Script Date: 9/10/2018 11:19:42 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -14,7 +14,7 @@ GO
 -- Merges 2 patient records. 
 -- All records from one patient are transferred to the preferred patient and the abandoned patient record deleted softly
 -- =============================================
-ALTER PROCEDURE [dbo].[sp_MergePatientData] 
+CREATE PROCEDURE [dbo].[sp_MergePatientData] 
 	-- Add the parameters for the stored procedure here
 	@preferredPatientId int = 0, 
 	@unpreferredPatientId int = 0,
@@ -60,10 +60,12 @@ BEGIN TRY
 		SELECT @tableName = min(TableName) FROM #tmpTables
 		WHILE @tableName IS NOT NULL
 		BEGIN
-
-			INSERT INTO #tmpPatientTables (TableName,PatientFk) (
-				SELECT  @tableName, [name] FROM sys.columns WHERE object_id = OBJECT_ID(@tableName) AND [name] in ('PatientId','Ptn_pk','PatientPk','PtnPk','Patient_Pk', 'PersonId')  AND user_type_id = 56
-			) 
+			SELECT top 1 @PatientFk = [name] FROM sys.columns WHERE object_id = OBJECT_ID(@tableName) AND [name] in ('PatientId','Ptn_pk','PatientPk','PtnPk','Patient_Pk') AND user_type_id = 56
+	
+			IF @@ROWCOUNT > 0 
+			BEGIN
+				INSERT INTO #tmpPatientTables (TableName,PatientFk) VALUES (@tableName,@patientFk) 
+			END
 	
 			DELETE FROM #tmpTables WHERE TableName = @TableName
 			SELECT @tableName = min(TableName) FROM #tmpTables
@@ -76,30 +78,31 @@ BEGIN TRY
 		SELECT @tableName = min(TableName) FROM #tmpPatientTables
 		WHILE @tableName IS NOT NULL
 		BEGIN
-			SET @patientFk = (SELECT top 1 PatientFk FROM #tmpPatientTables WHERE TableName = @tableName)
+			SET @patientFk = (SELECT PatientFk FROM #tmpPatientTables WHERE TableName = @tableName)
 
 			IF @patientFk = 'PatientId'
 				BEGIN
 					SET @sqlStr = CONCAT('UPDATE [', @tableName, '] SET [PatientId] =', @preferredPatientId,' WHERE [', @patientFk,'] = ', @unpreferredPatientId)
 				END
-
-			IF @patientFk =  'PersonId'
+			ELSE
+			BEGIN
+				IF @patientFk =  'PersonId'
 				BEGIN
 					SET @preferredPersonId = (SELECT PersonId FROM Patient WHERE Id = @preferredPatientId)
 					SET @unpreferredPersonId = (SELECT PersonId FROM Patient WHERE Id = @unpreferredPatientId)
 					SET @sqlStr = CONCAT('UPDATE [', @tableName, '] SET [', @patientFk , '] = ', @preferredPersonId,' WHERE [', @patientFk,'] = ', @unpreferredPersonId)
 				END
-
-			IF @patientFk = 'Ptn_pk'
+				ELSE
 				BEGIN
 					SET @preferredPtnPk = (SELECT Ptn_Pk FROM Patient WHERE Id = @preferredPatientId)
 					SET @unpreferredPtnPk = (SELECT Ptn_Pk FROM Patient WHERE Id = @unpreferredPatientId)
 					SET @sqlStr = CONCAT('UPDATE [', @tableName, '] SET [', @patientFk , '] = ', @preferredPtnPk,' WHERE [', @patientFk,'] = ', @unpreferredPtnPk)
 				END
+			END
 
 			EXECUTE sp_executesql @sqlStr
 
-			DELETE FROM #tmpPatientTables WHERE TableName = @TableName AND PatientFk = @PatientFk
+			DELETE FROM #tmpPatientTables WHERE TableName = @TableName
 			SELECT @tableName = min(TableName) FROM #tmpPatientTables
 		END
 		-- End Replace the FK column value for the preferred Patient Record with the abandonded patient record for all tables 
@@ -121,9 +124,6 @@ BEGIN CATCH
         DECLARE @ErrorSeverity INT = ERROR_SEVERITY()
         DECLARE @ErrorState INT = ERROR_STATE()
 
-    -- Use RAISERROR inside the CATCH block to return error  
-    -- information about the original error that caused  
-    -- execution to jump to the CATCH block.  
     RAISERROR (@ErrorMessage, -- Message text.  
                @ErrorSeverity, -- Severity.  
                @ErrorState -- State.  
