@@ -1,7 +1,9 @@
-﻿using Entities.Common;
+﻿using Entities.CCC.Lookup;
+using Entities.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BusinessProcess.CCC;
 
 namespace Entities.CCC.Tb
 {
@@ -13,6 +15,7 @@ namespace Entities.CCC.Tb
         public int Id { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int PatientId { get; set; }
+
         public int IptEvent { get; set; }
         public string ReasonForDiscontinuation { get; set; }
 

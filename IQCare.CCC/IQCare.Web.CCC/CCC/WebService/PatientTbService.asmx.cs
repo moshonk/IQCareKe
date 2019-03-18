@@ -292,6 +292,36 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientIptHistory(int patientId, DateTime visitDate)
+        {
+            try
+            {
+                var patientIcfManager = new PatientIcfManager();
+                var x = patientIcfManager.GetByPatientId(patientId).Find(icf=> icf.EverBeenOnIpt.Equals(true) && icf.CreateDate < visitDate);
+                if (x != null)
+                {
+                    PatientIcf icf = new PatientIcf()
+                    {
+                        PatientMasterVisitId = x.PatientMasterVisitId,
+                        EverBeenOnIpt = x.EverBeenOnIpt,
+                        CreateDate = x.CreateDate,
+                        Id = x.Id
+                    };
+                    JavaScriptSerializer parser = new JavaScriptSerializer();
+
+                    Msg = parser.Serialize(icf);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
         [WebMethod(EnableSession = true)]
         public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime TBRxStartDate, DateTime TBRxEndDate, int TBRxRegimen)
         {
