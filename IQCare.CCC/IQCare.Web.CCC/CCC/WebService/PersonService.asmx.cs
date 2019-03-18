@@ -16,6 +16,8 @@ using Convert = System.Convert;
 using Interface.CCC.Patient;
 using Application.Presentation;
 using Entities.CCC.Appointment;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
 {
