@@ -3,7 +3,6 @@ using Entities.Common;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BusinessProcess.CCC;
 
 namespace Entities.CCC.Tb
 {
