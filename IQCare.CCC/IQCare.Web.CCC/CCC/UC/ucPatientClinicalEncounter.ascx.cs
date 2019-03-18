@@ -203,6 +203,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlICFRegimen, "TBRegimen");
                 lookUp.populateDDL(ddlICFCurrentlyOnIPT, "GeneralYesNo");
                 lookUp.populateDDL(ddlICFStartIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFEverBeenOnIPT, "GeneralYesNo");
                 lookUp.populateDDL(ddlICFTBScreeningOutcome, "TBFindings");
 
                 lookUp.populateDDL(ddlSputumSmear, "SputumSmear");
@@ -359,8 +360,6 @@ namespace IQCare.Web.CCC.UC
             //else
             //    visitdateval = "";
 
-            PatientHasPreviousARTPrescriptions = loadLastPrescriptionBeforeVisitDate().Rows.Count > 0;
-
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;
@@ -389,8 +388,9 @@ namespace IQCare.Web.CCC.UC
             //On IPT
             ddlICFCurrentlyOnIPT.SelectedValue = getSelectedValue(pce.OnIPT);
             //start IPT
-            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
-
+            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.startIPT);
+            //Ever been on IPT
+            ddlICFEverBeenOnIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
             //Cough
             ddlICFCough.SelectedValue = getSelectedValue(pce.Cough);
             //fever
@@ -577,13 +577,5 @@ namespace IQCare.Web.CCC.UC
             Session["patientNotesData"] = patientNotesData;
         }
 
-        private DataTable loadLastPrescriptionBeforeVisitDate() {
-            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-            var visitDate = visitdateval == "" ? DateTime.Now.ToString("yyyyMMdd") : visitdateval;
-
-            DataTable theDT = patientEncounter.loadPatientLastPharmacyPrescriptionAfterDate(Session["PatientPK"].ToString(), Convert.ToDateTime(visitDate));
-
-            return theDT;
-        }
     }
 }
