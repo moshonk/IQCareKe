@@ -3965,6 +3965,12 @@
                                 valid = false;
 							}
 
+                            var visitDate = moment($('#DateOfVisit').datepicker('getDate')).format('YYYY-MM-DD');
+                            if (moment(appDate).isSameOrBefore(visitDate)) {
+                                toastr.error("Appointment date has to be after the visit date");
+                                valid = false;
+                            }
+
                             if (valid == false) {
                                 return false;
                             }
