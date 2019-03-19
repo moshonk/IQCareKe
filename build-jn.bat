@@ -15,7 +15,7 @@ FOR /F %%I IN ("%0") DO SET BATDIR=%%~dpI
 CD /D %BATDIR%
 @echo %BATDIR%
 
-Set config=debug
+Set config=Release
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe
 @Echo Cleaning references folder
@@ -68,7 +68,7 @@ echo "********** Building IQCare.CCC **********" >> %log%
 if /I %config%== release (
 echo "********** Building IQCare Service **********" >> %log%
 @echo ********** Building IQCare Service **********
-"%msbuildpath%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
+"%msbuildpatha%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
 echo "********** Building IQCare Management **********" >> %log%
 @echo ********** Building IQCare Management **********
 "%msbuildpath%" "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" /t:rebuild /p:Configuration=%config%  >> %log%
