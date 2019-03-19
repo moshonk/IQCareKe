@@ -106,6 +106,8 @@ namespace IQCare.Web.CCC.UC
                     vsNo.Checked = true;
             }
 
+            //NextAppointmentDate = DateTime.Today.AddDays(14);
+
             // Get Gender
             PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientPK"]));
             if (genderId != null)
@@ -479,7 +481,7 @@ namespace IQCare.Web.CCC.UC
             AppointmentId = pce.appointmentId;
             AppointmentDate.Text = pce.nextAppointmentDate;
 
-            NextAppointmentDate = Convert.ToDateTime(pce.nextAppointmentDate);
+            NextAppointmentDate = pce.nextAppointmentDate == null ? DateTime.Today : Convert.ToDateTime(pce.nextAppointmentDate);
             //if (pce.nextAppointmentDate != "")
             //{
             //    if (pce.nextAppointmentDate != null)
