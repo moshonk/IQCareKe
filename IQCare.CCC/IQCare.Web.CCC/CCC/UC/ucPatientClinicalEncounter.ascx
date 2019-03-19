@@ -2791,6 +2791,7 @@
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
+        LoadIPTHistory();
         loadAdverseEvents();
         loadAllergies();
         loadAllergyReactions();
@@ -6109,6 +6110,7 @@
             }
         });
     }
+    
     function addSexualHistory() {
         var arrHRB = [];
 
@@ -6346,6 +6348,29 @@
         if (error == 0) {
             toastr.success("Nutrition Assessment Saved");
         }
+    }
+    function LoadIPTHistory()
+    {
+   varIPTHistoryTable = $('#dtlIPTHistory').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/GetPatientIPTHistory",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                }
+            ]
+        });
     }
 
     function GetGBVScreeningStatus() {
