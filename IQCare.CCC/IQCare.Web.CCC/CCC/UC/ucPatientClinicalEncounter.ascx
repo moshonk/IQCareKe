@@ -595,6 +595,28 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12">
+                                                                    <label class="control-label pull-left input-sm" for="ddlICFEverBeenOnIPT">Ever Been on IPT?</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFEverBeenOnIPT" ClientIDMode="Static" />
+                                                                </div>
+                                                            </div>
+<%--                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Date started Ipt</label></div>
+                                                                <div class="col-md-12" id="IptStart"></div>
+                                                            </div>--%>
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Ipt outcome</label></div>
+                                                                <div class="col-md-12" id="IptOutcome"></div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Outcome date</label></div>
+                                                                <div class="col-md-12" id="IptOutcomeDate"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
                                                             <div class="col-md-6 text-center">
                                                                 <div class="col-md-12">
                                                                     <label class="control-label pull-left input-sm" for="ddlICFCurrentlyOnIPT">Currrently on IPT?</label>
@@ -3804,7 +3826,7 @@
             $('#IptOutcomeModal').modal('hide');
         });
 
-		//Save patient IPT Outcome
+        //Save patient IPT Outcome
         $("#btnSaveIptOutcome").click(function () {
             var IPTDate = $('#IPTDate').val();
             if (IPTDate == "" || IPTDate == undefined) {
@@ -4734,25 +4756,25 @@
 
         }
 
-		function addPatientIcf() {
-			var cough = $("#<%=ddlICFCough.ClientID%>").val();
-			var weightLoss = $("#<%=ddlICFWeight.ClientID%>").val();
-			var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").val();
-			var fever = $("#<%=ddlICFFever.ClientID%>").val();
-			var onIpt = $("#<%=ddlICFCurrentlyOnIPT.ClientID%>").val();
-			var onAntiTbDrugs = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
-			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
-			var everBeenOnIpt = $("#<%=ddlICFStartIPT.ClientID%>").val();
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientTbService.asmx/AddPatientIcf",
-				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "','everBeenOnIpt': '" + everBeenOnIpt + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "Patient ICF saved successfully");
-				},
+        function addPatientIcf() {
+            var cough = $("#<%=ddlICFCough.ClientID%>").val();
+            var weightLoss = $("#<%=ddlICFWeight.ClientID%>").val();
+            var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").val();
+            var fever = $("#<%=ddlICFFever.ClientID%>").val();
+            var onIpt = $("#<%=ddlICFCurrentlyOnIPT.ClientID%>").val();
+            var onAntiTbDrugs = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var everBeenOnIpt = $("#<%=ddlICFEverBeenOnIPT.ClientID%>").val();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/AddPatientIcf",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','cough': '" + cough + "','fever': '" + fever + "','nightSweats': '" + nightSweats + "','weightLoss': '" + weightLoss + "','onAntiTbDrugs': '" + onAntiTbDrugs + "','onIpt': '" + onIpt + "','everBeenOnIpt': '" + everBeenOnIpt + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    toastr.success(response.d, "Patient ICF saved successfully");
+                },
                 error: function (response) {
                     alert(JSON.stringify(response));
                     toastr.error(response.d, "Patient ICF not saved");
@@ -4843,6 +4865,9 @@
 
 		function addPatientIptOutcome() {
            
+            var iptOutComeDate = $("#IPTDate").val();
+            var iptEvent = $("#iptEvent").val();
+
             var iptOutComeDate = $("#IPTDate").val();
             var iptEvent = $("#iptEvent").val();
             var iptDiscontinuationReason = $("#iptDiscontinuationReason").val();
@@ -5502,6 +5527,21 @@
                 cache: false,
                 success: function (response) {
                     if (response.d != null) {
+                        if (isEditAppointment == 'True') {
+
+                        } else {
+                            toastr.error("Appointment already exists");
+                            return false;
+                        }
+
+                    }
+                    if (isEditAppointment == 'True') {
+                        EditPatientAppointment();
+                    } else {
+                        addPatientAppointment();
+                    }
+
+                    if (response.d != null) {
                         if (appointmentId = JSON.stringify(response.d.AppointmentId)) {
                             updateAppointment(appointmentId);
                         }
@@ -5565,7 +5605,7 @@
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':" + appointmentid + "}",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {

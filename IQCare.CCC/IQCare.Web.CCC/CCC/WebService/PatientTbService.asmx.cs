@@ -355,7 +355,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                var x = iptOutcome.GetByPatientId(patientId).FirstOrDefault();
+                var x = iptOutcome.GetByPatientId(patientId).Find(ipt=> ipt.IPTOutComeDate != null);
                 if (x != null)
                 {
                     PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
@@ -366,6 +366,7 @@ namespace IQCare.Web.CCC.WebService
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
                         IPTOutComeDate=x.IPTOutComeDate,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
+                        IptOutcome = new LookupLogic().GetLookupItemNameById(x.IptEvent),
                         Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
