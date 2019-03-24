@@ -3954,6 +3954,14 @@
                                 valid = false;
                             }
 
+                           // TODO Check for valid dc model
+                            var dcModel = $('#DifferentiatedCare').find('option:selected').text().toLowerCase();
+                            var stabilityStatus = $('#stabilityStatus').find('option[selected=selected]').text().toLowerCase();
+                            if (stabilityStatus == 'stable' && dcModel == 'standard care') {
+                                toastr.error("This patient has been categorized as stable. Please select a valid DC model");
+                                valid = false;
+                            }
+
                             if (valid == false) {
                                 return false;
                             }
