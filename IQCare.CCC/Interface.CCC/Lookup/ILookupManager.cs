@@ -51,7 +51,6 @@ namespace Interface.CCC.Lookup
         string GetLookUpMasterNameFromId(int masterId);
         string GetLookupItemId(string lookupItemName);
         LookupCounty GetCountyDetailsByWardName(string wardName);
-        LookupItemView GetLookupItemByMasterNameItemId(int itemId, string masterName);
     }
 
 
