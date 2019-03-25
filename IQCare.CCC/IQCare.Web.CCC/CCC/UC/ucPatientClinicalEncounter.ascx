@@ -5432,21 +5432,6 @@
                 cache: false,
                 success: function (response) {
                     if (response.d != null) {
-                        if (isEditAppointment == 'True') {
-
-                        } else {
-                            toastr.error("Appointment already exists");
-                            return false;
-                        }
-
-                    }
-                    if (isEditAppointment == 'True') {
-                        EditPatientAppointment();
-                    } else {
-                        addPatientAppointment();
-                    }
-
-                    if (response.d != null) {
                         if (appointmentId = JSON.stringify(response.d.AppointmentId)) {
                             updateAppointment(appointmentId);
                         }
@@ -5456,11 +5441,7 @@
                         }
                         //alert(JSON.stringify(response.d.AppointmentId));
                         //updateAppointment(response.d.AppointmentId);
-                    }
-                    if (appointmentId > 0) {
-                        updateAppointment(appointmentId);
-                    }
-                    else {
+                    } else {
                         addPatientAppointment();
                     }
                 },
@@ -5514,7 +5495,7 @@
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid + "'}",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':" + appointmentid + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
