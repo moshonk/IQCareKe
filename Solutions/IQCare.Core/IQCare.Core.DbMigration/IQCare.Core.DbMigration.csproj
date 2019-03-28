@@ -182,6 +182,7 @@
     <None Remove="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
     <None Remove="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
     <None Remove="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <None Remove="Scripts\2.0.1\07_SP_GetFemaleEncounters.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -383,6 +384,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\07_SP_GetFemaleEncounters.sql" />
   </ItemGroup>
 
   <ItemGroup>

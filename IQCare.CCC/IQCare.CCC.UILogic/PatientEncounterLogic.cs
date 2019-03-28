@@ -697,6 +697,12 @@ namespace IQCare.CCC.UILogic
             return patientEncounter.getPatientPreviousTriage(PatientMasterVisitID, PatientID);
         }
 
+        public DataTable loadFemaleEncounters(string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPreviousFemaleEncounters(PatientID);
+        }
+
         public DataTable loadPatientMilestones(string PatientID)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");

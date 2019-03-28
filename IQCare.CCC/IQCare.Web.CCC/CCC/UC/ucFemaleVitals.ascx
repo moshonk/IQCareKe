@@ -345,7 +345,7 @@
             </div>
         </div>
         <!-- End PIF-->
-       
+               
        <div class="col-md-12" id="btnFemaleVitals">
            <div class="col-md-6">
                <div class="col-md-4">
@@ -371,7 +371,36 @@
           </div>
 
      </div>
-                         
+       
+       <!-- PIF History -->
+       <div class="col-md-12 form-group" style="margin-top: 30px;">
+           <div class="col-md-12 col-xs-12 col-sm-12">
+               <div id="presentingComplaintsTable" class="panel panel-primary">
+                   <div class="panel-heading">Previous Encounters</div>
+                   <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                       <table id="dtlPreviousFemaleEncounters" class="table table-bordered table-striped" style="width: 100%">
+                           <thead>
+                               <tr>
+                                   <th><span class="text-primary">Visit Date</span></th>
+                                   <th><span class="text-primary">Pregnancy Status</span></th>
+                                   <th><span class="text-primary">LMP</span></th>
+                                   <th><span class="text-primary">EDD</span></th>
+                                   <th><span class="text-primary">ON FP</span></th>
+                                   <th><span class="text-primary">Reason Not on FP</span></th>
+                                   <th><span class="text-primary">Eligible for FP</span></th>
+                                   <th><span class="text-primary">FP Methods</span></th>
+                                   <th><span class="text-primary">Planning to conceive in 3 Months</span></th>
+                                   <th><span class="text-primary">Linked to ANC?</span></th>
+                               </tr>
+                           </thead>
+                           <tbody></tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- END PIF History -->
     </div><!-- .col-md-12-->
         
 </div><!-- .col-md-12 col-xs-12 col-sm-12-->
@@ -674,8 +703,7 @@
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
                      success: function (response) {
-                         alert(response.d);
-                         toastr.success(response.d);
+                         //toastr.success(response.d);
                      },
                      error: function (xhr, errorType, exception) {
                          var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -806,9 +834,6 @@
                      var response = JSON.parse(response.d);
                      $.when(addPregnancySymptoms(patientId, response.id, JSON.stringify(pregnancySymptoms))).then(function () {
                          toastr.success(response.message);
-                         setTimeout(function () {
-                             $("#FemaleVitals").hide("fast");
-                         }, 2000);
                      });
 
                  },
@@ -990,9 +1015,7 @@
                                          setTimeout(function () {
                                              /*Save pregnancy intention assessment form*/
                                              $.when(addPregnancyIntentionAsessment()).then(function () {
-                                                 setTimeout(function () {
-                                                     $("#FemaleVitals").hide("fast");
-                                                 }, 2000);
+                                                 previousFemaleEncounters.ajax.reload();
                                              });
 
                                          }, 2000);
@@ -1044,6 +1067,28 @@
                  }
              });
          });
+
+         var previousFemaleEncounters = $('#dtlPreviousFemaleEncounters').DataTable({
+             ajax: {
+                 type: "POST",
+                 url: "../WebService/PatientEncounterService.asmx/LoadFemaleEncounters",
+                 dataSrc: 'd',
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json"
+             },
+             paging: false,
+             searching: false,
+             info: false,
+             ordering: false,
+             columnDefs: [
+                 {
+                     "targets": [0],
+                     "visible": true,
+                     "searchable": false
+                 }
+             ]
+         });
+
 
      });
  </script>
