@@ -1986,6 +1986,24 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList LoadFemaleEncounters()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            DataTable theDT = patientEncounter.loadFemaleEncounters(Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[10] { row["VisitDate"].ToString(), row["PregnancyStatus"].ToString(), row["LMP"].ToString(), row["EDD"].ToString(), row["CurrentlyOnFp"].ToString(),
+                row["ReasonNotOnFP"].ToString(), row["ClientEligibleForFP"].ToString(),row["FpMethods"].ToString(),row["PlanningToConceive3M"].ToString(),row["LinkedToANC"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
         [WebMethod(EnableSession = true)]
         public ArrayList LoadPatientWHOStageList()
         {
