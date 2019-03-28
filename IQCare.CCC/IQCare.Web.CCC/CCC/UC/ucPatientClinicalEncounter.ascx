@@ -5377,7 +5377,7 @@
                 patientICF = JSON.parse(response);
                 if (patientICF != undefined) {
                     $("#ddlICFEverBeenOnIPT option:contains('yes')").attr('selected', 'selected');
-                    $('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
+                    //$('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
 
                     getPatientIptOutcome().then(function (response) {
                         patientIptOutcome = JSON.parse(response);
