@@ -215,8 +215,8 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlInvitationofContacts, "GeneralYesNo");
                 lookUp.populateDDL(ddlEvaluatedforIPT, "GeneralYesNo");
                 getPatientNotesandScreening();
-                populatePNS();
-                getPNSData();
+                //populatePNS();
+                //getPNSData();
 
                 //List<LookupItemView> highriskorientation = mgr.GetLookItemByGroup("HighRisk");
                 //if (highriskorientation != null && highriskorientation.Count > 0)
