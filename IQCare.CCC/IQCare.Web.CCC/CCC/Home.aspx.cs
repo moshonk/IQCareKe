@@ -23,6 +23,7 @@ namespace IQCare.Web.CCC
             
             if (!IsPostBack)
             {
+                /*
                 try
                 {
                     TestingSummaryStatisticsManager statistics = new TestingSummaryStatisticsManager();
@@ -137,6 +138,7 @@ namespace IQCare.Web.CCC
                     }
                 }
                 catch{ }
+                */
             }
             
         }
