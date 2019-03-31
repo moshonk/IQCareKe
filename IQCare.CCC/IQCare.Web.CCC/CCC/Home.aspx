@@ -112,19 +112,19 @@
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
                                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Scheduled:</asp:Label></h5></div>
                                 <div class="col-md-3">
-                                    <h6> <asp:Label runat="server" ID="lblbooked" CssClass="text-info pull-left"><span class="badge">0</span></asp:Label></h6>
+                                    <h6> <asp:Label runat="server" ID="lblbooked" CssClass="text-info pull-left"><span class="badge"></span></asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
                                 <div class="col-md-6"><h5 class="pull-left"><asp:Label runat="server">Seen:</asp:Label></h5></div>
                                 <div class="col-md-3">
-                                     <h6><asp:Label runat="server" ID="lblvisited" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
+                                     <h6><asp:Label runat="server" ID="lblvisited" CssClass="text-info pull-left"><span class="badge"> </span> </asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
                                 <div class="col-md-8" ><h5 class="pull-left"><asp:Label runat="server">Missed:</asp:Label></h5></div>
                                 <div class="col-md-3">
-                                    <h6> <asp:Label runat="server" ID="lblpending" CssClass="text-info pull-left"><span class="badge"> 0 </span> </asp:Label></h6>
+                                    <h6> <asp:Label runat="server" ID="lblpending" CssClass="text-info pull-left"><span class="badge"> </span> </asp:Label></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-12 col-sm-12" style="padding:3px">
@@ -137,7 +137,7 @@
                  
                         </div> <!-- .col-md-12 -->
                         <div class="col-md-12">
-                           <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server" ID="lblcame"> 0</asp:Label></h4></div> 
+                           <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server" ID="lblcame"> </asp:Label></h4></div> 
                         </div>
            
                     </div> <!-- .panel-body -->
@@ -168,14 +168,14 @@
             <div class="col-md-12">
                 <div class="col-md-7"><label class="control-label pull-left text-danger">Total Suppressed </label></div>
                 <div class="col-md-5 pull-right">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="lblsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right"></span></asp:Label>
                 </div>
             </div>
               <div class="col-md-12">
                    <div class="col-md-12"><hr /></div>
                 <div class="col-md-7"><label class="control-label pull-left text-danger">Total Unsuppressed </label></div>
                 <div class="col-md-5 pull-right">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="lblunsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblunsuppressed" CssClass="control-label text-success pull-right"><span class="badge pull-right"></span></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr></div>
@@ -239,7 +239,7 @@
 
          </div> -->
          
-             <div class="col-md-4 col-xs-3 col-sm-3">
+             <div class="col-md-4 col-xs-3 col-sm-3" style="display:none">
                 <div class="col-md-12 label label-info">
                   <label class="label label-info fa fa-pie-chart fa-2x"> Care Ending Summary </label>
                 </div>
@@ -247,7 +247,7 @@
                 <div class="col-md-12">
                     <div class="col-md-10"><label class="control-label pull-left">Total Dead:</label></div>
                     <div class="col-md-2 pull-right">
-                        <asp:Label runat="server" ClientIDMode="Static" ID="lbldead" CssClass="control-label text-success pull-right"><span class="badge pull-right">0</span></asp:Label>
+                        <asp:Label runat="server" ClientIDMode="Static" ID="lbldead" CssClass="control-label text-success pull-right"><span class="badge pull-right"></span></asp:Label>
                     </div>
                 </div>           
                 <div class="col-md-12"><hr></div>
@@ -255,7 +255,7 @@
                 <div class="col-md-12">
                     <div class="col-md-10"><label class="control-label pull-left">Total Transfer Out :</label></div>
                     <div class="col-md-2 pull-right">
-                        <asp:Label runat="server" ClientIDMode="Static" ID="lbltransferout" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                        <asp:Label runat="server" ClientIDMode="Static" ID="lbltransferout" CssClass="control-label text-success pull-right"><span class="badge"></span></asp:Label>
                     </div>
                 </div>
                 <div class="col-md-12"><hr></div>
@@ -263,13 +263,13 @@
                 <div class="col-md-12">
                     <div class="col-md-10"><label class="control-label pull-left">Total Documented LTFU :</label></div>
                     <div class="col-md-2 pull-right">
-                        <asp:Label runat="server" ClientIDMode="Static" ID="totalDocumetedLTFU" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                        <asp:Label runat="server" ClientIDMode="Static" ID="totalDocumetedLTFU" CssClass="control-label text-success pull-right"><span class="badge"></span></asp:Label>
                     </div>
                 </div>
                 <div class="col-md-12"><hr></div>
          </div>
 
-        <div class="col-md-4 col-xs-3 col-sm-3">
+        <div class="col-md-4 col-xs-3 col-sm-3" style="display:none">
             <div class="col-md-12 label label-info">
                 <label class="label label-info fa fa-line-chart fa-2x"> Family/Partner Testing </label>
             </div>
@@ -278,7 +278,7 @@
         </div>
       
 
-         <div class="col-md-4 col-xs-3 col-sm-3">
+         <div class="col-md-4 col-xs-3 col-sm-3" style="display:none">
               <div class="col-md-12 label label-warning">
                 <label class="label label-warning fa fa-bar-chart fa-2x pull-left"> Differentiated Care model Statistics</label>
               </div>
@@ -295,14 +295,14 @@
             <div class="col-md-12">
                 <div class="col-md-10"><label class="control-label pull-left">Total Outgoing Messages :</label></div>
                 <div class="col-md-2 pull-right">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="lblOutgoing" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblOutgoing" CssClass="control-label text-success pull-right"><span class="badge"></span></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr></div>
             <div class="col-md-12">
                 <div class="col-md-10"><label class="control-label pull-left">Total Incoming Messages :</label></div>
                 <div class="col-md-2 pull-right">
-                    <asp:Label runat="server" ClientIDMode="Static" ID="lblIncoming" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblIncoming" CssClass="control-label text-success pull-right"><span class="badge"></span></asp:Label>
                 </div>
             </div>
             <div class="col-md-12"><hr></div>
