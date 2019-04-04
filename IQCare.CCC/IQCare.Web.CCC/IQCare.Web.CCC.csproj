@@ -61,6 +61,7 @@
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\CaseSummary\CaseSummary.aspx" />
+    <Content Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
@@ -167,6 +168,7 @@
     <Content Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx" />
     <Content Include="CCC\UC\ucCaseSummary.ascx" />
     <Content Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx" />
+    <Content Include="CCC\UC\ucPatientClinicalReviewSumary.ascx" />
     <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFamilyFinder.ascx" />
@@ -206,6 +208,7 @@
     <Content Include="CCC\WebService\PatientAdverseEventOutcome.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
     <Content Include="CCC\WebService\PatientClinicalNotesService.asmx" />
+    <Content Include="CCC\WebService\PatientClinicalSummaryService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
@@ -522,6 +525,13 @@
     </Compile>
     <Compile Include="CCC\CaseSummary\CaseSummary.aspx.designer.cs">
       <DependentUpon>CaseSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx.cs">
+      <DependentUpon>PatientClinicalReviewSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx.designer.cs">
+      <DependentUpon>PatientClinicalReviewSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>
@@ -901,6 +911,13 @@
     <Compile Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx.designer.cs">
       <DependentUpon>ucCervicalCancerScreeningAssessment.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalReviewSumary.ascx.cs">
+      <DependentUpon>ucPatientClinicalReviewSumary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalReviewSumary.ascx.designer.cs">
+      <DependentUpon>ucPatientClinicalReviewSumary.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
       <DependentUpon>ucEvaluation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1134,6 +1151,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientClinicalNotesService.asmx.cs">
       <DependentUpon>PatientClinicalNotesService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientClinicalSummaryService.asmx.cs">
+      <DependentUpon>PatientClinicalSummaryService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
