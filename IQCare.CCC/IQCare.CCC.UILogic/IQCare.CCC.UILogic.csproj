@@ -119,6 +119,7 @@
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
+    <Compile Include="ClinicalSummary\ClinicalSummaryManager.cs" />
     <Compile Include="Encounter\ImmunizationLogic.cs" />
     <Compile Include="Encounter\NeonatalHistoryLogic.cs" />
     <Compile Include="Encounter\PatientClinicalNotesLogic.cs" />

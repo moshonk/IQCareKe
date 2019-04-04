@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Interface.CCC.ClinicalSummary
 {
-   public interface IClinicalSummaryForm
+    public interface IClinicalSummaryForm
     {
         IClinicalSummaryForm GetClinicalSummaryData(int ptn_pk, int Visit_Id, int LocationID);
         int SaveUpdateClinicalSummaryData(IClinicalSummaryForm obj, int userID);
+        int SavePatientClinicalSummary(Dictionary<string, string> paramValues);
+        DataSet GetPatientClinicalSummary(string patientId);
     }
 }
