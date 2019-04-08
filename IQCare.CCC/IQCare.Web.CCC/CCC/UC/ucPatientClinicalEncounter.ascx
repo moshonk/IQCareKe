@@ -571,9 +571,29 @@
                                     <%--//Tuberclosis Screening Outcome--%>
                                     <%--IPT--%>
                                     <div class="col-md-12 form-group" id="IPTPanel">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-info">
-                                                <div class="panel-body">
+	                                    <div class="col-md-12">
+		                                    <div class="panel panel-info">
+			                                    <div class="panel-body">
+                                                <div class="row">
+                                                <div class="col-md-12">
+                                                <div id="IPTHistoryTable" class="panel panel-primary">
+												<div class="panel-heading">IPT History</div>
+												<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+													<table id="dtlIPTHistory" class="table table-bordered table-striped" style="width: 100%">
+														<thead>
+															<tr>
+                                                                <th><span class="text-primary">IPTStartDate</span></th>
+																<th><span class="text-primary">IPTOutCome</span></th>
+																<th><span class="text-primary">IPTOutcomeDate</span></th>
+																
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+                                                </div>
+                                                </div>
+                                                </div>
                                                     <div class="row" id="IPTSection">
                                                         <div class="col-md-12 form-group">
                                                             <label class="control-label pull-left input-sm text-primary">IPT</label>
@@ -2788,6 +2808,7 @@
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
+        LoadIPTHistory();
         loadAdverseEvents();
         loadAllergies();
         loadAllergyReactions();
@@ -3982,17 +4003,37 @@
                             if (valid == false) {
                                 return false;
                             }
-
-                            $.when(checkPrescription()).then(function (response) {
-                                //save patient management
-                                $.when(savePatientPatientManagement()).then(function () {
+                             $.when(checkPrescription()).then(function (response) {
+                            //save patient management
+                            $.when(savePatientPatientManagement()).then(function () {
+                                if (Age >= 10 && Age <= 19) {
+                                    bootbox.alert({
+                                        title: '<h3 class="text-danger">Adolescent!!</h3>',
+                                        message: "You will be redirected to complete the Adolescent clinical review form",
+                                        buttons: {
+                                            ok: {
+                                                label: '<i class="fa fa-check"></i> OK'
+                                            }
+                                        },
+                                        callback: function (result) {
+                                            setTimeout(function () {
+                                                window.location
+                                                    .href =
+                                                    '<%=ResolveClientUrl( "~/CCC/CaseSummary/PatientClinicalReviewSummary.aspx")%>';
+                                            },
+                                                1000);
+                                        }
+                                    });
+                                } else {
                                     setTimeout(function () {
                                         window.location
                                             .href =
                                             '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
                                     },
                                         2000);
-                                });
+                                }
+
+                            });
 
                                 //save appointment
                                 checkExistingAppointment();
@@ -6125,6 +6166,7 @@
             }
         });
     }
+    
     function addSexualHistory() {
         var arrHRB = [];
 
@@ -6362,6 +6404,29 @@
         if (error == 0) {
             toastr.success("Nutrition Assessment Saved");
         }
+    }
+    function LoadIPTHistory()
+    {
+   varIPTHistoryTable = $('#dtlIPTHistory').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/GetPatientIPTHistory",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                }
+            ]
+        });
     }
 
     function GetGBVScreeningStatus() {
