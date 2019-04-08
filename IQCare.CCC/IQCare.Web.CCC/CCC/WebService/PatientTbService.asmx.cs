@@ -268,7 +268,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession =true)]
-        public ArrayList GetPatientIPTHistory()
+        public ArrayList GetAllPatientIPTHistory()
         {
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             var iptWorkup = new PatientIptWorkupManager();

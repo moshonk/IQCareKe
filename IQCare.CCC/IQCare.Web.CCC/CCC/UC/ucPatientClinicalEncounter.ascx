@@ -6410,7 +6410,7 @@
    varIPTHistoryTable = $('#dtlIPTHistory').DataTable({
             ajax: {
                 type: "POST",
-                url: "../WebService/PatientTbService.asmx/GetPatientIPTHistory",
+                url: "../WebService/PatientTbService.asmx/GetAllPatientIPTHistory",
                 dataSrc: 'd',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
