@@ -554,7 +554,7 @@
             var patientMasterVisitId = "<%=PatientMasterVisitId%>";
             var reviewDate = $("#review-date").val();
             var drtDate = $("#drt-date").val();
-            var drtResult = $("input[name=drt-result]:checked").val();
+            var drtResult = $("input[name=drt-result]:checked").val() == undefined ? '' : $("input[name=drt-result]:checked").val();
             var hbDate = $("#hb-date").val();
             var hb = $("input[name=hb]:checked").val();
             var hbResult = $("input#hb-result").val();
