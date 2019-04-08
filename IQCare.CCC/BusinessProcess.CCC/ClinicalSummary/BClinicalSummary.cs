@@ -35,7 +35,8 @@ namespace BusinessProcess.CCC.ClinicalSummary
             }
         }
 
-        public int SavePatientClinicalSummary(Dictionary<string, string> paramValues) {
+        public Dictionary<String, String> SavePatientClinicalSummary(Dictionary<string, string> paramValues)
+        {
 
             try
             {
@@ -43,8 +44,9 @@ namespace BusinessProcess.CCC.ClinicalSummary
                 {
                     ClsObject PatientEncounter = new ClsObject();
                     ClsUtility.Init_Hashtable();
-                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, paramValues["PatientMasterVisitID"]);
-                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, paramValues["PatientID"]);
+
+                    ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, paramValues["PatientMasterVisitId"]);
+                    ClsUtility.AddParameters("@PatientID", SqlDbType.Int, paramValues["PatientId"]);
                     ClsUtility.AddParameters("@ReviewDate", SqlDbType.Date, paramValues["ReviewDate"]);
                     ClsUtility.AddParameters("@DrtDate", SqlDbType.Date, paramValues["DrtDate"]);
                     ClsUtility.AddParameters("@DrtResult", SqlDbType.Int, paramValues["DrtResult"]);
@@ -67,12 +69,12 @@ namespace BusinessProcess.CCC.ClinicalSummary
                     ClsUtility.AddParameters("@CragDate", SqlDbType.Date, paramValues["CragDate"]);
                     ClsUtility.AddParameters("@CragResult", SqlDbType.Int, paramValues["CragResult"]);
                     ClsUtility.AddParameters("@TbLamDone", SqlDbType.Int, paramValues["TbLamDone"]);
-                    ClsUtility.AddParameters("@TbLamdate", SqlDbType.Date, paramValues["TbLamdate"]);
+                    ClsUtility.AddParameters("@TbLamdate", SqlDbType.Date, paramValues["TbLamDate"]);
                     ClsUtility.AddParameters("@DewormingDone", SqlDbType.Int, paramValues["DewormingDone"]);
                     ClsUtility.AddParameters("@DewormingDate", SqlDbType.Date, paramValues["DewormingDate"]);
                     ClsUtility.AddParameters("@DentalReviewDone", SqlDbType.Int, paramValues["DentalReviewDone"]);
                     ClsUtility.AddParameters("@DentalReviewDate", SqlDbType.Date, paramValues["DentalReviewDate"]);
-                    ClsUtility.AddParameters("@DepressionScreening", SqlDbType.Int, paramValues["DepressionScreening"]);
+                    ClsUtility.AddParameters("@DepressionScreening", SqlDbType.Int, paramValues["DepressionScreeningDone"]);
                     ClsUtility.AddParameters("@DepressionScreeningDate", SqlDbType.Date, paramValues["DepressionScreeningDate"]);
                     ClsUtility.AddParameters("@DepressionScreeningResult", SqlDbType.Int, paramValues["DepressionScreeningResult"]);
                     ClsUtility.AddParameters("@CacxScreeningDone", SqlDbType.Int, paramValues["CacxScreeningDone"]);
@@ -83,18 +85,36 @@ namespace BusinessProcess.CCC.ClinicalSummary
                     ClsUtility.AddParameters("@CreatedBy", SqlDbType.Int, paramValues["CreatedBy"]);
 
                     DataRow dr = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_saveClincalReview", ClsUtility.ObjectEnum.DataRow);
-                    int id = Int32.Parse(dr[0].ToString());
-                    
-                    return id;
+                    string id = dr[0].ToString();
+
+                    return new Dictionary<string, string>
+                    {
+                        { "id", id },
+                        { "mdg", "Patient clinical summary added/Updated succesfully" }
+                    };
                 }
             }
-            catch //Exception ex)
+            catch (Exception ex)
             {
-
-                return 0;
+                return new Dictionary<string, string>
+                {
+                    { "id", "0" },
+                    {"msg", ex.Message }
+                };
             }
 
         }
 
+        public DataSet GetPatientClinicalReviewHistory(string patientId)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientId);
+
+                return (DataSet)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPatientClinicalReviewHistory", ClsUtility.ObjectEnum.DataSet);
+            }
+        }
     }
 }

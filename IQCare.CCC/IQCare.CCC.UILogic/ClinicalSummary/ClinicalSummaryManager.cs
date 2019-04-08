@@ -127,7 +127,26 @@ namespace IQCare.CCC.UILogic.ClinicalSummary
 
         }
 
-        public int SavePatientClinicalSummary(Dictionary<string, string> paramValues)
+        public object GetClinicalReviewHistory(string patientId)
+        {
+            DataSet ds = cs.GetPatientClinicalReviewHistory(patientId);
+            
+            //Clinical review history
+            DataTable dtCRHistory = ds.Tables[0];
+            Object[] crHistory = new Object[dtCRHistory.Rows.Count];
+            for (int i = 0; i < dtCRHistory.Rows.Count; i++)
+            {
+                crHistory[i] = new
+                {
+                    reviewDate = dtCRHistory.Rows[i]["ReviewDate"].ToString(),
+                    provider = dtCRHistory.Rows[i]["ProviderName"].ToString(),
+                };
+            }
+
+            return new { crHistory };
+        }
+
+        public Dictionary<string, string> SavePatientClinicalSummary(Dictionary<string, string> paramValues)
         {
             IClinicalSummaryForm cs = (IClinicalSummaryForm)ObjectFactory.CreateInstance("BusinessProcess.CCC.ClinicalSummary.BClinicalSummary, BusinessProcess.CCC");
 
