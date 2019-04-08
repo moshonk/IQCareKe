@@ -154,13 +154,7 @@
             <h3>Drug Resistance Testing</h3>
         </div>
         <div class="col-md-12">
-            <table class="table" id="drt">
-                <thead>
-                    <tr>
-                        <th>Sample Date  </th>
-                        <th>Results</th>
-                    </tr>
-                </thead>
+            <table class="table">
                 <tbody>
                     <tr>
                         <td>
@@ -171,6 +165,22 @@
                             <label class="inline-radio">
                                 <input type="radio" name="drt-result" value="0" class="result" id="drt-result-nd">Resistance Mutation not detected</label>
                         </td>
+                    </tr>
+                </tbody>            
+            </table>
+        </div>
+        <div class="col-md-12">
+            <table class="table" id="drt">
+                <thead>
+                    <tr>
+                        <th>Sample Date  </th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -537,6 +547,7 @@
         }
 
         function fillTableWithArrayValues(array, table) {
+            table.children("tr").remove();
             $.each(array, function (i, o) {
 
                 var tr = $("<tr/>");
@@ -554,7 +565,7 @@
             var patientMasterVisitId = "<%=PatientMasterVisitId%>";
             var reviewDate = $("#review-date").val();
             var drtDate = $("#drt-date").val();
-            var drtResult = $("input[name=drt-result]:checked").val();
+            var drtResult = $("input[name=drt-result]:checked").val() == undefined ? '' : $("input[name=drt-result]:checked").val();
             var hbDate = $("#hb-date").val();
             var hb = $("input[name=hb]:checked").val();
             var hbResult = $("input#hb-result").val();
