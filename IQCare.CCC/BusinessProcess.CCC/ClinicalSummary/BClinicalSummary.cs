@@ -90,7 +90,7 @@ namespace BusinessProcess.CCC.ClinicalSummary
                     return new Dictionary<string, string>
                     {
                         { "id", id },
-                        { "mdg", "Patient clinical summary added/Updated succesfully" }
+                        { "msg", "Patient clinical summary added/Updated succesfully" }
                     };
                 }
             }
