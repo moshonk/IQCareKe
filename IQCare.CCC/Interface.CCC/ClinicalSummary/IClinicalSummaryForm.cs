@@ -7,7 +7,8 @@ namespace Interface.CCC.ClinicalSummary
     {
         IClinicalSummaryForm GetClinicalSummaryData(int ptn_pk, int Visit_Id, int LocationID);
         int SaveUpdateClinicalSummaryData(IClinicalSummaryForm obj, int userID);
-        int SavePatientClinicalSummary(Dictionary<string, string> paramValues);
+        Dictionary<string,string> SavePatientClinicalSummary(Dictionary<string, string> paramValues);
         DataSet GetPatientClinicalSummary(string patientId);
+        DataSet GetPatientClinicalReviewHistory(string patientId);
     }
 }

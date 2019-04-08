@@ -230,8 +230,8 @@
 									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
 								</a>
 							  
-                             <a href='<%=ResolveClientUrl("~/CCC/CaseSummary/PatientClinicalSummary.aspx") %>' class="list-group-item" id="menuPatientClinicalSummary">
-									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Patient Clinical Summary </strong>
+                             <a href='<%=ResolveClientUrl("~/CCC/CaseSummary/PatientClinicalReviewSummary.aspx") %>' class="list-group-item" id="menuPatientClinicalSummary">
+									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Patient Clinical Review Summary </strong>
 								</a>
                                
                                <asp:LinkButton ID="menuScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_Depression_Click">
@@ -546,7 +546,8 @@
                 $("#menuEnhanceAdherence").hide();
                 $("#menuBarriersAdherence").hide();
 			   // $("#menuPatientHome").hide();
-				$("#menuPatientAppointments").hide();
+                $("#menuPatientAppointments").hide();
+                $("#menuPatientClinicalSummary").hide();
 				$("#menuPatientCareEnded").hide();
 				$("#menuScheduleAppointments").hide();
 				$("#menuCaptureVitals").hide();
@@ -579,7 +580,8 @@
                 $("#menuBarriersAdherence").show();
 				//$("#menuNewEncounter").hide();
 				$("#menuPatientHome").show();
-				$("#menuPatientAppointments").show();
+                $("#menuPatientAppointments").show();
+                $("#menuPatientClinicalSummary").show();
 				$("#menuPatientCareEnded").show();
 				$("#menuScheduleAppointments").show();
 				$("#menuCaptureVitals").show();

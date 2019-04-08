@@ -3927,12 +3927,33 @@
                             }
                             //save patient management
                             $.when(savePatientPatientManagement()).then(function () {
-                                setTimeout(function () {
-                                    window.location
-                                        .href =
-                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                },
-                                    2000);
+                                if (Age >= 10 && Age <= 19) {
+                                    bootbox.alert({
+                                        title: '<h3 class="text-danger">Adolescent!!</h3>',
+                                        message: "You will be redirected to complete the Adolescent clinical review form",
+                                        buttons: {
+                                            ok: {
+                                                label: '<i class="fa fa-check"></i> OK'
+                                            }
+                                        },
+                                        callback: function (result) {
+                                            setTimeout(function () {
+                                                window.location
+                                                    .href =
+                                                    '<%=ResolveClientUrl( "~/CCC/CaseSummary/PatientClinicalReviewSummary.aspx")%>';
+                                            },
+                                                1000);
+                                        }
+                                    });
+                                } else {
+                                    setTimeout(function () {
+                                        window.location
+                                            .href =
+                                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                    },
+                                        2000);
+                                }
+
                             });
 
                             //save appointment

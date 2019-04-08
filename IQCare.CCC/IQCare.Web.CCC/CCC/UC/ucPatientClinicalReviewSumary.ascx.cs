@@ -19,6 +19,15 @@ namespace IQCare.Web.CCC.UC
             get { return Convert.ToInt32(Session["patientMasterVisitId"]); }
         }
 
+        protected string Today
+        {
+            get { return DateTime.Now.ToString("yyyy-MM-dd"); }
+        }
+
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

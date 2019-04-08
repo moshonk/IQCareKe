@@ -21,6 +21,8 @@ namespace IQCare.Web.CCC.WebService
     {
         private string msg;
 
+        private object msgObject;
+
         [WebMethod(EnableSession = true)]
         public String GetPatientClinicalSummary(String patientId)
         {
@@ -28,6 +30,15 @@ namespace IQCare.Web.CCC.WebService
             var clinicalSummary = csm.GetClinicalSummary(patientId);
 
             return new JavaScriptSerializer().Serialize(clinicalSummary);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientClinicalReviewHistory(String patientId) {
+            ClinicalSummaryManager csm = new ClinicalSummaryManager();
+            var clinicalReviewHistory = csm.GetClinicalReviewHistory(patientId);
+
+            return new JavaScriptSerializer().Serialize(clinicalReviewHistory);
+
         }
 
         [WebMethod(EnableSession = true)]
@@ -40,22 +51,18 @@ namespace IQCare.Web.CCC.WebService
                 JavaScriptSerializer ser = new JavaScriptSerializer();
                 var paramValuesArray = ser.Deserialize<Dictionary<string, string>>(json);
 
-                var id = csm.SavePatientClinicalSummary(paramValuesArray);
+                paramValuesArray.Add("CreateDate", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                if (id > 0)
-                {
-                    msg = "Clinical summary Saved succeessfully";
-                }
-                else
-                {
-                    msg = "clinical summary not saved";
-                }
+                var retMsg = csm.SavePatientClinicalSummary(paramValuesArray);
+
+                msgObject = new { id = retMsg["id"], msg = retMsg["msg"] };
+                msg = new JavaScriptSerializer().Serialize(msgObject);
 
             }
             catch (Exception e)
             {
-
-                msg = e.Message;
+                msgObject = new { id = 0, msg = e.Message };
+                msg = new JavaScriptSerializer().Serialize(msgObject);
             }
             return msg;
         }
