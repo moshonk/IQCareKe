@@ -949,6 +949,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label mmas8Adherence;
         
         /// <summary>
+        /// ArtYes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtYes;
+        
+        /// <summary>
+        /// ArtNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtNo;
+        
+        /// <summary>
         /// ArtRegimenYes control.
         /// </summary>
         /// <remarks>
