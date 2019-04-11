@@ -28,7 +28,7 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var categorization = unitOfWork.PatientCategorizationRepository.FindBy(x => x.PatientId == id)
-                    .OrderBy(x => x.Id)
+                    .OrderByDescending(x => x.Id)
                     .FirstOrDefault();
                 unitOfWork.Dispose();
                 return categorization;

@@ -1025,12 +1025,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
+        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artPeriod, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
         {
             PatientCategorizationStatus categorizationStatus;
             string[] arr1 = new string[]{};
 
-            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
+            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artPeriod) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
                 categorizationStatus = PatientCategorizationStatus.Stable;
             else
                 categorizationStatus = PatientCategorizationStatus.UnStable;

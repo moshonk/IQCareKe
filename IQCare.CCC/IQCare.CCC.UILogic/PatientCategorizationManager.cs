@@ -18,6 +18,12 @@ namespace IQCare.CCC.UILogic
                 Categorization = p.Categorization,
                 DateAssessed = p.DateAssessed
             };
+            var categorizationSearch = this.GetByPatientId(p.PatientId).Find(pc => pc.PatientMasterVisitId == p.PatientMasterVisitId);
+            if (categorizationSearch != null )
+            {
+                categorization.Id = categorizationSearch.Id;
+                return _categorization.UpdatePatientCategorization(categorization);
+            }
             return _categorization.AddPatientCategorization(categorization);
         }
 

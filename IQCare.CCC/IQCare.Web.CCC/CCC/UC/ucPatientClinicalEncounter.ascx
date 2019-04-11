@@ -2257,9 +2257,30 @@
 													<div class="col-md-12">
 														<hr style="margin-top: 1%" class="bg-info" />
 													</div>
+
 													<div class="col-md-12">
 														<div class="col-md-8">
-															<label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label>
+															<label class="control-lable pull-left">On ART for ≥ 12 months</label>
+														</div>
+														<div class="col-md-4">
+															<div class="col-md-12">
+																<label class="pull-left" style="padding-right: 10px">
+																	<input id="ArtYes" type="radio" name="ArtPeriod" value="true" clientidmode="Static" runat="server" />Yes
+																</label>
+																<label class="pull-left" style="padding-right: 10px">
+																	<input id="ArtNo" type="radio" name="ArtPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+																</label>
+															</div>
+														</div>
+													</div>
+
+													<div class="col-md-12">
+														<hr>
+													</div>
+
+													<div class="col-md-12">
+														<div class="col-md-8">
+															<label class="control-lable pull-left">On their current ART regimen for ≥ 3 months</label>
 														</div>
 														<div class="col-md-4">
 															<div class="col-md-12">
@@ -2878,6 +2899,9 @@
                 dataType: "json",
                 success: function (data) {
                     var serverData = data.d;
+                    var radioArtYes = document.getElementById("ArtYes");
+                    var radioArtNo = document.getElementById("ArtNo");
+
                     var radioArtRegimenYes = document.getElementById("ArtRegimenYes");
                     var radioArtRegimenNo = document.getElementById("ArtRegimenNo");
 
@@ -2931,8 +2955,12 @@
                         radioAgeYes.checked = true;
                     else
                         radioAgeNo.checked = true;
-
-
+                    
+                    if (serverData[0][6] == 1)
+                        radioArtYes.checked = true;
+                    else
+                        radioArtNo.checked = true;
+                    
                 },
                 error: function (response) {
                     toastr
@@ -5031,29 +5059,29 @@
 				}
 				$("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
 			}
-        }
-    
+		}
 
         function AddPatientCategorization() {
-            var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
-            var activeOis = $("input[name$=ActiveOis]:checked").val();
-            var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
-            var vlCopies = $("input[name$=VlCopies]:checked").val();
-            var ipt = $("input[name$=Ipt]:checked").val();
-            var bmi = $("input[name$=Bmi]:checked").val();
-            var age = $("input[name$=Age]:checked").val();
-            var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
-            var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PatientService.asmx/AddPatientCategorization",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    console.log(response.d);
-                    var returnValue = JSON.parse(response.d);
+            var artPeriod = $("input[name$=ArtPeriod]:checked").val();
+			var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
+			var activeOis = $("input[name$=ActiveOis]:checked").val();
+			var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
+			var vlCopies = $("input[name$=VlCopies]:checked").val();
+			var ipt = $("input[name$=Ipt]:checked").val();
+			var bmi = $("input[name$=Bmi]:checked").val();
+			var age = $("input[name$=Age]:checked").val();
+			var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+			var patientId = <%=PatientId%>;
+			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+			$.ajax({
+				type: "POST",
+				url: "../WebService/PatientService.asmx/AddPatientCategorization",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artPeriod': '" + artPeriod + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (response) {
+					console.log(response.d);
+					var returnValue = JSON.parse(response.d);
 
                     toastr.success(returnValue[0], "Patient Categorization");
 
