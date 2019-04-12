@@ -188,6 +188,7 @@
     <None Remove="Scripts\2.0.1\09_sp_getPatientCLinicalReviewHistory.sql" />
     <None Remove="Scripts\2.0.1\10_sp_saveClinicalReview.sql" />
     <None Remove="Scripts\2.0.1\11_sp_getPatientClinicalSummary.sql" />
+    <None Remove="Scripts\2.0.1\08_sp_DifferentiatedCareParameters.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -394,6 +395,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\09_sp_getPatientCLinicalReviewHistory.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\10_sp_saveClinicalReview.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\11_sp_getPatientClinicalSummary.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\08_sp_DifferentiatedCareParameters.sql" />
   </ItemGroup>
 
   <ItemGroup>
