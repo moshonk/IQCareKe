@@ -359,6 +359,7 @@ namespace IQCare.Web.CCC.UC
             //else
             //    visitdateval = "";
 
+
             LMPval = pce.lmp;
             EDDval = pce.edd;
             nxtAppDateval = pce.nextAppointmentDate;

@@ -284,12 +284,15 @@ namespace IQCare.CCC.UILogic
 
 
             if (theDS.Tables[3].Rows.Count > 0)
-                categorizationParameters.SameRegimen12Months = Convert.ToInt32(theDS.Tables[3].Rows[0][0].ToString());
+                categorizationParameters.SameRegimen3Months = Convert.ToInt32(theDS.Tables[3].Rows[0][0].ToString());
 
             if (theDS.Tables[4].Rows.Count > 0 && theDS.Tables[4].Rows[0][0].ToString() != "")
                 categorizationParameters.Completed6MonthsIPT = Convert.ToDouble(theDS.Tables[4].Rows[0][0].ToString());
 
             categorizationParameters.ActiveOIs = theDS.Tables[5].Rows.Count;
+
+            if (theDS.Tables[6].Rows.Count > 0)
+                categorizationParameters.OnART12Months = Convert.ToInt32(theDS.Tables[6].Rows[0][0].ToString());
 
             return categorizationParameters;
         }

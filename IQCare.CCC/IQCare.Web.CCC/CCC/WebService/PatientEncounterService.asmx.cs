@@ -1475,7 +1475,7 @@ namespace IQCare.Web.CCC.WebService
 
             ArrayList rows = new ArrayList();
 
-            double[] i = new double[6] { categorizationParameters.SameRegimen12Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age };
+            double[] i = new double[7] { categorizationParameters.SameRegimen3Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age, categorizationParameters.OnART12Months };
             rows.Add(i);
 
 

@@ -189,6 +189,7 @@
     <None Remove="Scripts\2.0.1\09_sp_getPatientCLinicalReviewHistory.sql" />
     <None Remove="Scripts\2.0.1\10_sp_saveClinicalReview.sql" />
     <None Remove="Scripts\2.0.1\11_sp_getPatientClinicalSummary.sql" />
+    <None Remove="Scripts\2.0.1\08_sp_DifferentiatedCareParameters.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -392,6 +393,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\08_sp_DifferentiatedCareParameters.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\08_tbl_PatientClinicalReviewChecklist.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\09_sp_getPatientCLinicalReviewHistory.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\10_sp_saveClinicalReview.sql" />
