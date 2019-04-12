@@ -2337,7 +2337,7 @@
 													</div>
 													<div class="col-md-12">
 														<div class="col-md-8">
-															<label class="control-lable pull-left">Most recent < 400</label>
+															<label class="control-lable pull-left">Most recent VL after current regimen start < 400</label>
 														</div>
 														<div class="col-md-4">
 															<div class="col-md-12">
