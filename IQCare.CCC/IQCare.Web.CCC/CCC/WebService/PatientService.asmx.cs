@@ -1090,6 +1090,10 @@ namespace IQCare.Web.CCC.WebService
                     arr1 = new string[] { Msg, status.ToString() };
 
                 }
+                else
+                {
+                    arr1 = new string[] { Msg, "Unstable" };
+                }
             }
             catch (Exception e)
             {
