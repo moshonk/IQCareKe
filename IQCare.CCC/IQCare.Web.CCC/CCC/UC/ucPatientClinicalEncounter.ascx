@@ -3927,10 +3927,10 @@
                             }
                             //save patient management
                             $.when(savePatientPatientManagement()).then(function () {
-                                if (Age >= 10 && Age <= 19) {
+                                if (Age >= 10 && Age <= 24) {
                                     bootbox.alert({
                                         title: '<h3 class="text-danger">Adolescent!!</h3>',
-                                        message: "You will be redirected to complete the Adolescent clinical review form",
+                                        message: "You will be redirected to complete the Adolescent clinical review Checklist",
                                         buttons: {
                                             ok: {
                                                 label: '<i class="fa fa-check"></i> OK'
