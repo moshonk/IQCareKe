@@ -599,7 +599,7 @@
                                                             <label class="control-label pull-left input-sm text-primary">IPT</label>
                                                         </div>
                                                         <div class="col-md-12">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <div class="col-md-12">
                                                                     <label class="control-label pull-left input-sm" for="ddlICFEverBeenOnIPT">Ever Been on IPT?</label>
                                                                 </div>
@@ -607,11 +607,17 @@
                                                                     <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFEverBeenOnIPT" ClientIDMode="Static" />
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <div id="IptOutcome"></div>
+<%--                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Date started Ipt</label></div>
+                                                                <div class="col-md-12" id="IptStart"></div>
+                                                            </div>--%>
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Ipt outcome</label></div>
+                                                                <div class="col-md-12" id="IptOutcome"></div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <div id="IptOutcomeDate"></div>
+                                                            <div class="col-md-3">
+                                                                <div class="col-md-12"><label class="control-label pull-left input-sm">Outcome date</label></div>
+                                                                <div class="col-md-12" id="IptOutcomeDate"></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12">
@@ -3840,9 +3846,17 @@
                 return;
             }
 
-            addPatientIptOutcome();
-            $('#IptOutcomeModal').modal('hide');
-        });
+          var IPTDate = $('#IPTDate').val();
+            var IPTDate = $('#IPTDate').val();
+            if (IPTDate == "" || IPTDate == undefined) {
+                toastr.error("Kindly note IPT Outcome Date is required");
+                $('#IptOutcomeModal').modal('show');
+                return;
+            }
+
+			addPatientIptOutcome();
+			$('#IptOutcomeModal').modal('hide');
+		});
 
 
 
@@ -4754,6 +4768,31 @@
 
         }
 
+        function checkPrescription() {
+            var deferred = $.Deferred();
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var hasPrescription = response.d.length > 0;
+                    if (hasPrescription == true) {
+                        deferred.resolve(hasPrescription);
+                    } else {
+                        deferred.reject(hasPrescription);
+                    }
+                },
+                error: function (response) {
+                    $.Deferred().reject();
+                }
+            });
+
+            return deferred.promise();
+
+        }
+
         function addPatientIcf() {
             var cough = $("#<%=ddlICFCough.ClientID%>").val();
             var weightLoss = $("#<%=ddlICFWeight.ClientID%>").val();
@@ -4890,7 +4929,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientTbService.asmx/GetPatientIptHistory",
+                url: "../WebService/PatientTbService.asmx/GetPatientIptHistoryByPatientIdAndVisitDate",
                 data: "{'patientId': '" + patientId + "', 'visitDate': '" + visitDate + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -5215,16 +5254,17 @@
             if (!isNaN(question1) && !isNaN(question2) && !isNaN(question3) && !isNaN(question4)) {
                 var MMAS8Score = "";
 
-				if (mmas8Score === 0) {
-					MMAS8Score = "Good";
-				} else if (mmas8Score >= 1 && mmas8Score <= 2) {
-					MMAS8Score = "Inadequate";
-				} else if (mmas8Score >= 3 && mmas8Score <= 8) {
-					MMAS8Score = "Poor";
-				}
-				$("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);        
-			}
-		}
+                if (mmas8Score === 0) {
+                    MMAS8Score = "Good";
+                } else if (mmas8Score >= 1 && mmas8Score <= 2) {
+                    MMAS8Score = "Inadequate";
+                } else if (mmas8Score >= 3 && mmas8Score <= 8) {
+                    MMAS8Score = "Poor";
+                }
+                $("#<%=mmas8Adherence.ClientID%>").text(MMAS8Score);
+            }
+        }
+
 
         function AddPatientCategorization() {
             var artPeriod = $("input[name$=ArtPeriod]:checked").val();
@@ -5455,13 +5495,13 @@
                 patientICF = JSON.parse(response);
                 if (patientICF != undefined) {
                     $("#ddlICFEverBeenOnIPT option:contains('yes')").attr('selected', 'selected');
-                    //$('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
+                   // $('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
 
                     getPatientIptOutcome().then(function (response) {
                         patientIptOutcome = JSON.parse(response);
                         if (patientIptOutcome != undefined) {
                             $("#IptOutcomeDate").html('<span class="label label-info">' + patientIptOutcome.IPTOutComeDate + '</span>');
-                            $("#IptOutcome").html('<span class="label label-info">' + patientIptOutcome.IptOutcome.DisplayName + '</span>');
+                            $("#IptOutcome").html('<span class="label label-info">' + patientIptOutcome.IptOutcome + '</span>');
 
                             $("#ddlICFCurrentlyOnIPT option:contains('No')").attr('selected', 'selected');
                             $("#ddlICFCurrentlyOnIPT").change();
@@ -5521,6 +5561,21 @@
                 async: false,
                 cache: false,
                 success: function (response) {
+                    if (response.d != null) {
+                        if (isEditAppointment == 'True') {
+
+                        } else {
+                            toastr.error("Appointment already exists");
+                            return false;
+                        }
+
+                    }
+                    if (isEditAppointment == 'True') {
+                        EditPatientAppointment();
+                    } else {
+                        addPatientAppointment();
+                    }
+
                     if (response.d != null) {
                         if (appointmentId = JSON.stringify(response.d.AppointmentId)) {
                             updateAppointment(appointmentId);
@@ -5585,7 +5640,7 @@
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
-            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':" + appointmentid + "}",
+            data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -6726,6 +6781,7 @@
         }
         disableEnableCtrls(objectsToDisable, objectsToEnable);
         showHideCtrls(objectsToHide, objectsToShow);
+        $("#ddlICFStartIPT").change();
     });
 
     $("#ddlICFStartIPT").change(function (evt, data) {
@@ -6740,16 +6796,21 @@
             objectsToEnable = ['btnAddIptWorkUp2'];
         }
         else if (selectedIndex == 2) {
-            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' && $('#iptEvent').val() == '0') {
-                objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
-                objectsToEnable = ['btnAddIptOutcome2'];
+            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && ($("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' || $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'select' ) && $('#iptEvent').val() == '0') {
+                objectsToDisable = ['btnAddIptWorkUp2'];
+                objectsToEnable = ['btnAddIptOutcome2', 'btnAddIpt2'];
             } else {
                 objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
             }
 
         }
         else {
-            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && ($("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' || $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'select') && $('#iptEvent').val() == '0') {
+                objectsToDisable = ['btnAddIptWorkUp2'];
+                objectsToEnable = ['btnAddIptOutcome2', 'btnAddIpt2'];
+            } else {
+                objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            }
         }
         disableEnableCtrls(objectsToDisable, objectsToEnable);
         showHideCtrls(objectsToHide, objectsToShow);
@@ -6758,6 +6819,7 @@
     $("#ddlICFEverBeenOnIPT").change(function (evt, data) {
         if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'no') {
             $("#ddlICFCurrentlyOnIPT option:contains('No')").prop('selected', 'selected');
+            $("#ddlICFCurrentlyOnIPT").change();
         } 
     });
 

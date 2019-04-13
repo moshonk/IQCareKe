@@ -21,10 +21,8 @@ namespace Entities.CCC.Tb
 
 
         public DateTime? IPTOutComeDate { get; set; }
-        public LookupItemView IptOutcome
-        {
-            get { return new LookupItemView(); }
-        }
+        [NotMapped]
+        public string IptOutcome { get; set; }
 
     }
 }

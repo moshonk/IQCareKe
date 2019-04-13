@@ -229,7 +229,7 @@ namespace IQCare.Web.CCC.WebService
         }
        
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptOutcome(int patientId,DateTime? IPTDate,int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation, int iptDiscontinuationReason)
+        public string AddPatientIptOutcome(int patientId, DateTime? IPTDate, int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation, int iptDiscontinuationReason)
         {
            
      
@@ -240,7 +240,8 @@ namespace IQCare.Web.CCC.WebService
                 IptEvent = iptEvent,
                 IPTOutComeDate=IPTDate,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
-                IptDiscontinuationReason = iptDiscontinuationReason
+                IptDiscontinuationReason = iptDiscontinuationReason,
+                IPTOutComeDate=IPTDate
             };
             try
             {
@@ -355,7 +356,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                var x = iptOutcome.GetByPatientId(patientId).FirstOrDefault();
+                var x = iptOutcome.GetByPatientId(patientId).FindAll(ipt=> ipt.IptEvent > 0).FirstOrDefault();
                 if (x != null)
                 {
                     PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
@@ -364,8 +365,9 @@ namespace IQCare.Web.CCC.WebService
                         PatientMasterVisitId = x.PatientMasterVisitId,
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
-                        IPTOutComeDate=x.IPTOutComeDate,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
+                        IptOutcome = new LookupLogic().GetLookupItemNameById(x.IptEvent),
+                        IPTOutComeDate = x.IPTOutComeDate,
                         Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -382,7 +384,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetPatientIptHistory(int patientId, DateTime visitDate)
+        public string GetPatientIptHistoryByPatientIdAndVisitDate(int patientId, DateTime visitDate)
         {
             try
             {

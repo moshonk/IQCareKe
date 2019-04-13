@@ -18,6 +18,8 @@ using Application.Presentation;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
 using Entities.CCC.Appointment;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
 {
