@@ -85,7 +85,7 @@ namespace IQCare.Web.CCC.Appointment
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            UserId = SessionManager.UserId;
+            UserId = Convert.ToInt32(Session["AppUserId"]);
         }
 
         private void AutoFillAppointments(int AppointmentId)
