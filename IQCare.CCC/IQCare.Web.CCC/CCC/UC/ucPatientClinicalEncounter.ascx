@@ -3982,11 +3982,13 @@
 
                            // TODO Check for valid dc model
 
-                            if (!validDCModel()) {
+                            var dcModelCheck = validDCModel();
+
+                            if (!dcModelCheck.valid) {
                                 toastr.error("This patient has been categorized as stable. Please select a valid DC model");
                                 bootbox.alert({
                                     title: '<h3 class="text-danger">Invalid DC Model</h3>',
-                                    message: "This patient has been categorized as stable. Please select a valid Differentiared Care (DC) model",
+                                    message: dcModelCheck.msg,
                                     buttons: {
                                         ok: {
                                             label: '<i class="fa fa-check"></i> Ok'
@@ -5449,10 +5451,12 @@
         var dcModel = $('#DifferentiatedCare').find('option:selected').text().toLowerCase();
         var stabilityStatus = $('#stabilityStatus').find('option[selected=selected]').text().toLowerCase();
         if (stabilityStatus == 'stable' && dcModel == 'standard care') {
-            return false;
+            return { valid: false, msg: 'This patient has been categorized as stable. Please select a valid Differentiared Care (DC) model'};
+        } else if (stabilityStatus == 'unstable' && dcModel != 'standard care') {
+            return { valid: false, msg: 'This patient has been categorized as unstable. Please select the Standard Care model' };;
         }
 
-        return true
+        return { valid: true, msg: '' };
     }
 
     function checkExistingAppointment() {

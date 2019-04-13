@@ -511,6 +511,8 @@
 
                     if (stabilityStatus == 'stable' && dcModel == 'standard care') {
                         deferred.reject('This patient has been categorized as stable. Please select a valid Differentiated Care (DC) model');
+                    } else if (stabilityStatus == 'unstable' && dcModel != 'standard care') {
+                        deferred.reject('This patient has been categorized as unstable. Please select the Standard Care model');
                     } else {
                         deferred.resolve();
                     }
