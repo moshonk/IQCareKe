@@ -355,7 +355,7 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                var x = iptOutcome.GetByPatientId(patientId).Find(ipt=> ipt.IPTOutComeDate != null);
+                var x = iptOutcome.GetByPatientId(patientId).FindAll(ipt=> ipt.IptEvent > 0).FirstOrDefault();
                 if (x != null)
                 {
                     PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
@@ -366,6 +366,7 @@ namespace IQCare.Web.CCC.WebService
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
                         IptOutcome = new LookupLogic().GetLookupItemNameById(x.IptEvent),
+                        IPTOutComeDate = x.IPTOutComeDate,
                         Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -382,7 +383,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetPatientIptHistory(int patientId, DateTime visitDate)
+        public string GetPatientIptHistoryByPatientIdAndVisitDate(int patientId, DateTime visitDate)
         {
             try
             {

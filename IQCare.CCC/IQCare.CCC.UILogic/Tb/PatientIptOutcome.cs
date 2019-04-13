@@ -44,7 +44,7 @@ namespace IQCare.CCC.UILogic.Tb
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 IptEvent = p.IptEvent,
                 ReasonForDiscontinuation = p.ReasonForDiscontinuation,
-                IPTOutComeDate=p.IPTOutComeDate
+                IPTOutComeDate=p.IPTOutComeDate,
                 IptDiscontinuationReason = p.IptDiscontinuationReason,
                 CreatedBy = SessionManager.UserId
             };

@@ -4797,7 +4797,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientTbService.asmx/GetPatientIptHistory",
+                url: "../WebService/PatientTbService.asmx/GetPatientIptHistoryByPatientIdAndVisitDate",
                 data: "{'patientId': '" + patientId + "', 'visitDate': '" + visitDate + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -5362,7 +5362,7 @@
                 patientICF = JSON.parse(response);
                 if (patientICF != undefined) {
                     $("#ddlICFEverBeenOnIPT option:contains('yes')").attr('selected', 'selected');
-                    $('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
+                   // $('#ddlICFEverBeenOnIPT').prop("disabled", "disabled");
 
                     getPatientIptOutcome().then(function (response) {
                         patientIptOutcome = JSON.parse(response);
@@ -6640,6 +6640,7 @@
         }
         disableEnableCtrls(objectsToDisable, objectsToEnable);
         showHideCtrls(objectsToHide, objectsToShow);
+        $("#ddlICFStartIPT").change();
     });
 
     $("#ddlICFStartIPT").change(function (evt, data) {
@@ -6654,16 +6655,21 @@
             objectsToEnable = ['btnAddIptWorkUp2'];
         }
         else if (selectedIndex == 2) {
-            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' && $('#iptEvent').val() == '0') {
-                objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2'];
-                objectsToEnable = ['btnAddIptOutcome2'];
+            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && ($("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' || $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'select' ) && $('#iptEvent').val() == '0') {
+                objectsToDisable = ['btnAddIptWorkUp2'];
+                objectsToEnable = ['btnAddIptOutcome2', 'btnAddIpt2'];
             } else {
                 objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
             }
 
         }
         else {
-            objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'yes' && ($("#ddlICFStartIPT option:selected").text().toLowerCase() == 'no' || $("#ddlICFStartIPT option:selected").text().toLowerCase() == 'select') && $('#iptEvent').val() == '0') {
+                objectsToDisable = ['btnAddIptWorkUp2'];
+                objectsToEnable = ['btnAddIptOutcome2', 'btnAddIpt2'];
+            } else {
+                objectsToDisable = ['btnAddIptWorkUp2', 'btnAddIpt2', 'btnAddIptOutcome2'];
+            }
         }
         disableEnableCtrls(objectsToDisable, objectsToEnable);
         showHideCtrls(objectsToHide, objectsToShow);
@@ -6672,6 +6678,7 @@
     $("#ddlICFEverBeenOnIPT").change(function (evt, data) {
         if ($("#ddlICFEverBeenOnIPT option:selected").text().toLowerCase() == 'no') {
             $("#ddlICFCurrentlyOnIPT option:contains('No')").prop('selected', 'selected');
+            $("#ddlICFCurrentlyOnIPT").change();
         } 
     });
 
