@@ -1071,6 +1071,36 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public string GetPatientCategorization(int patientId)
+        {
+            string[] arr1 = new string[] { };
+
+            try
+            {
+                var cm = new PatientCategorizationManager();
+                var categorization = cm.GetByPatientId(patientId).OrderByDescending(p=>p.DateAssessed).FirstOrDefault();
+                if (categorization != null)
+                {
+                    Msg = "Patient Categorization Fetched Successfully!";
+
+                    var lookUpLogic = new LookupLogic();
+                    var status = categorization.Categorization;
+                   
+
+                    arr1 = new string[] { Msg, status.ToString() };
+
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+                arr1 = new string[] { Msg };
+            }
+
+            return new JavaScriptSerializer().Serialize(arr1);
+        }
+
+        [WebMethod]
         public bool CccNumberExists(string cccNumber)
         {
             PatientLinkageManager linkageManager = new PatientLinkageManager();
