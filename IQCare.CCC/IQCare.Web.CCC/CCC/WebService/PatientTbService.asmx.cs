@@ -238,7 +238,6 @@ namespace IQCare.Web.CCC.WebService
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
-                IPTOutComeDate=IPTDate,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
                 IptDiscontinuationReason = iptDiscontinuationReason,
                 IPTOutComeDate=IPTDate
