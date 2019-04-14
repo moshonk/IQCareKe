@@ -5475,7 +5475,7 @@
         var dcModel = $('#DifferentiatedCare').find('option:selected').text().toLowerCase();
         var stabilityStatus = $('#stabilityStatus').find('option:selected').text().toLowerCase();
         if (stabilityStatus == 'stable' && dcModel == 'standard care') {
-            return { valid: false, msg: 'This patient has been categorized as stable. Please select a valid Differentiared Care (DC) model'};
+            return { valid: false, msg: 'This patient has been categorized as stable. Please select a valid Differentiared Care (DC) model' };
         } else if (stabilityStatus == 'unstable' && dcModel != 'standard care') {
             return { valid: false, msg: 'This patient has been categorized as unstable. Please select the Standard Care model' };;
         }
