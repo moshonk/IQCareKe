@@ -3247,20 +3247,6 @@
             minDate: minDate
         });
 
-
-
-        $("#AppointmentDate").change(function () {
-            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-            if (moment('' + appDate + '').isAfter(futureDate)) {
-                toastr.error("Appointment date cannot be set to over 7 months");
-                $("#<%=AppointmentDate.ClientID%>").val("");
-                return false;
-            }
-            appointmentCount();
-        });
-
-
         /* limit future dates viralload baseline date*/
         $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             var dlDate = $('#DateOfVisit').datepicker('getDate');
@@ -3284,18 +3270,6 @@
             //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
             //        return false;
             //    }
-        });
-
-
-        $('#PersonAppointmentDateD').datetimepicker().on('dp.change', function (e) {
-            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-            if (moment('' + appDate + '').isAfter(futureDate)) {
-                toastr.error("Appointment date cannot be set to over 7 months");
-                $("#<%=AppointmentDate.ClientID%>").val("");
-                return false;
-            }
-            appointmentCount();
         });
 
 
@@ -5260,29 +5234,11 @@
 
                     }
                     if (isEditAppointment == 'True') {
-                        EditPatientAppointment();
+                        updateAppointment(appointmentId);
                     } else {
                         addPatientAppointment();
                     }
 					
-                    if (response.d != null) {
-                        if (appointmentId = JSON.stringify(response.d.AppointmentId))
-                        {
-                            updateAppointment(appointmentId);
-                        }
-                        else {
-                            toastr.error("Appointment already exists");
-                            return false;
-                        }
-                        //alert(JSON.stringify(response.d.AppointmentId));
-                        //updateAppointment(response.d.AppointmentId);
-                    }
-                    if (appointmentId > 0) {
-                        updateAppointment(appointmentId);
-                    }
-                    else {
-                        addPatientAppointment();
-                    }
 				},
 				error: function (msg) {
 				    toastr.error(""+msg+"");
@@ -5388,8 +5344,17 @@
 				cache: false,
 				success: function (response) {
 					var count = response.d;
-					var message = count + " appointment(s) scheduled on the chosen date.";
-					alert(message);
+                    var message = count + " appointment(s) scheduled on the chosen date.";
+
+                    bootbox.alert({
+                        title: `<h3 class="text-danger">Appointments for ${date}</h3>`,
+                        message: message,
+                        buttons: {
+                            ok: {
+                                label: '<i class="fa fa-check"></i> Confirm'
+                            }
+                        }
+                    });
 				},
 
 				error: function (msg) {
