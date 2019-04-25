@@ -50,12 +50,8 @@ namespace BusinessProcess.CCC
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var categorization = new PatientCategorization()
-                {
-                    Categorization = p.Categorization,
-                    DateAssessed = p.DateAssessed
-                };
-                unitOfWork.PatientCategorizationRepository.Update(categorization);
+
+                unitOfWork.PatientCategorizationRepository.Update(p);
                 _result = unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return _result;
