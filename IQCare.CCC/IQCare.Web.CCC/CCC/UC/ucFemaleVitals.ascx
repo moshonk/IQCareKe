@@ -101,6 +101,35 @@
                        </div>
                    </div>
 
+                    <div class="col-md-12 form-group" id="w-ClientEligibleForFP">
+                        <!-- Multiple Radios (inline) -->
+                             <div class="col-md-12">
+                                <label class="control-label pull-left" for="radios">Client Eligible for Family Planning?</label>
+                            </div>
+                             <div class="col-md-12 pull-left">
+                                <label class="pull-left checked" for="clientEligibleForFP-1" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-1" value="Y" data-parsley-multiple="radios">
+                                    Yes
+           
+                                </label>
+                                <label class="pull-left" for="clientEligibleForFP-2" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-2" value="N" data-parsley-multiple="radios">
+                                    No
+           
+                                </label>
+                            </div>
+                    </div>
+
+                    <div class="col-md-12 form-group" id="w-FpServiceOffered">
+                        <!-- Select Basic -->
+                          <div class="col-md-12">
+                            <label class="control-label pull-left" for="FpServiceOffered">Service for eligible clients</label>
+                          </div>
+                          <div class="col-md-12">
+                                <asp:DropDownList runat="server" ID="FpServiceOffered" ClientIDMode="Static" CssClass="form-control input-sm" />
+                          </div>
+                    </div>
+
                    <div class="col-md-12 form-group" id="divOnFP">
                        <div class="col-md-12">
                            <label class="control-label  pull-left">FP Method</label>
@@ -230,44 +259,6 @@
                         <label class="control-label pull-left" for="PartnerHivStatus">Partner HIV Status</label>
                         <div class="controls">
                             <asp:DropDownList runat="server" ID="PartnerHivStatus" ClientIDMode="Static" CssClass="form-control input-sm" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-group" id="w-ClientEligibleForFP">
-                    <!-- Multiple Radios (inline) -->
-                    <div class="control-group">
-                        <div class="clearfix">
-                            <label class="control-label pull-left" for="radios">Client Eligible for Family Planning?</label>
-                        </div>
-                        <div class="controls">
-                            <label class="pull-left checked" for="radios-0">
-                                <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-1" value="Y" data-parsley-multiple="radios">
-                                Yes
-           
-                            </label>
-                            <label class="pull-left" for="radios-1">
-                                <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-2" value="N" data-parsley-multiple="radios">
-                                No
-           
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-group" id="w-FpServiceOffered">
-                    <!-- Select Basic -->
-                    <div class="control-group">
-                        <label class="control-label pull-left" for="FpServiceOffered">Service for eligible clients</label>
-                        <div class="controls">
-                            <asp:DropDownList runat="server" ID="FpServiceOffered" ClientIDMode="Static" CssClass="form-control input-sm" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-group" id="w-FpIneligibilityReason">
-                    <!-- Select Basic -->
-                    <div class="control-group">
-                        <label class="control-label pull-left" for="FpIneligibilityReason">Reason for ineligibility of Family planning</label>
-                        <div class="controls">
-                            <asp:DropDownList runat="server" ID="FpIneligibilityReason" ClientIDMode="Static" CssClass="form-control input-sm" />
                         </div>
                     </div>
                 </div>
@@ -504,9 +495,10 @@
              var fp = $(this).find(":selected").text();
 
              if (fp === 'No Family Planning(NOFP)') {
-                 $("#divOnFP").hide("fast", function () { $("#divNoFP").show("fast"); });
+                 $("#divOnFP").hide("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast"); });
+                 $("#w-FpServiceOffered")
              } else {
-                 $("#divOnFP").show("fast", function () { $("#divNoFP").hide("fast"); });
+                 $("#divOnFP").show("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast"); });
              }
 
          });
@@ -527,10 +519,8 @@
 
              if ($(this).val() == 'Y') {
                  $('#w-FpServiceOffered').show('fast');
-                 $('#w-FpIneligibilityReason').hide('fast');
              } else {
                  $('#w-FpServiceOffered').hide('fast');
-                 $('#w-FpIneligibilityReason').show('fast');
              }
 
              validatePIAFields();
@@ -568,7 +558,7 @@
                  //$("#ancNo").prop("checked", false);
                  $("#divEDD").show("fast");
                  //$("#divFemaleLMP").show("fast");
-                 $("#divOnFP").hide("fast", function () { $("#FP").hide("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast", function () { $("#FP").hide("fast"); });
 
                  $('#FemaleVitals').parsley().destroy();
 
@@ -583,7 +573,7 @@
 
              } else {
                  $("#ancNo").prop("checked", true);
-                 $("#divOnFP").show("fast", function () { $("#FP").show("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast", function () { $("#FP").show("fast"); });
                  //$("#divFemaleLMP").hide("fast");
                  $("#lmp_Female").val("");
                  $("#divEDD").hide("fast");
@@ -814,7 +804,7 @@
              var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
             var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
             var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
-            var reasonForFPIneligibility = $("#<%=FpIneligibilityReason.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
             var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
             var regularMenses = $("input[name='regularMenses']:checked").val();
             var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
@@ -858,7 +848,6 @@
                          $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
                         $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
                         $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
-                        $("#<%=FpIneligibilityReason.ClientID%>").val(response.ReasonForFPIneligibility);
                         $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
                         $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
                         $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
@@ -1183,11 +1172,28 @@
                  var fpMethod = $("#fpMethod").val();
                  var fName = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").text();
                  var fpOption = $("#<%=onFP.ClientID%>").find(":selected").text();
+                 var eligibleForFp = $("#w-ClientEligibleForFP").find(":checked").val();
+                 var fpService = $("#w-FpServiceOffered").find(":selected").text();
+                 var reasonNotOnFP = $("#divNoFP").find(":selected").text();
+
+
+
+                 if (fpOption == "No Family Planning(NOFP)" && eligibleForFp == undefined) {
+                     toastr.error("Please select if eligible for Family planning", "Family Planning Eligibility");
+                     return false;
+                 }
+
+                 if (eligibleForFp == "Y" && fpService == "select") {
+                     toastr.error("Please select Family Planning service offered", "Family Planning Service");
+                     return false;
+                 }
+
 
                  if (fpOption == "Family Planning(FP)" && fpMethod == null) {
                      toastr.error("Please select a family planning method", "Family Planning");
                      return false;
                  }
+
 
                  $.ajax({
                      type: "POST",
