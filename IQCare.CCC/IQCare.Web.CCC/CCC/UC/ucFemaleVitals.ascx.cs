@@ -125,15 +125,6 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
-            List<LookupItemView> fpIneligibilityReason = lookupManager.GetLookItemByGroup("FpIneligibilityReason");
-            if (fpIneligibilityReason != null && fpIneligibilityReason.Count > 0)
-            {
-                FpIneligibilityReason.Items.Add(new ListItem("select", "0"));
-                foreach (var item in fpIneligibilityReason)
-                {
-                    FpIneligibilityReason.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
-                }
-            }
 
             List<LookupItemView> fpServiceOffered = lookupManager.GetLookItemByGroup("FpServiceOffered");
             if (fpServiceOffered != null && fpServiceOffered.Count > 0)
