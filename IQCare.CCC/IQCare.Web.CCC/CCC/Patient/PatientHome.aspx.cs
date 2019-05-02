@@ -383,8 +383,7 @@ namespace IQCare.Web.CCC.Patient
                                 }
                                 break;
 
-                            case "complete":
-                            case "completed":
+                            case string vlResultStatus when (vlResultStatus.Equals("completed") || vlResultStatus.Equals("partially completed") || vlResultStatus.Equals("complete")):
                                 if (personAge >= 25)
                                 {
                                     if (lastVL.ResultValues >= 1000)
