@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" runat="server" id="dvHeadCircum">
             <div class="col-md-12">
                 <div class="col-md-5">
                     <label class="control-label pull-left">Head Circumference (cm)</label></div>
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" runat="server" id="dvMuac"> 
             <div class="col-md-12">
                 <div class="col-md-5">
                     <label class="control-label pull-left">MUAC (cm)</label></div>

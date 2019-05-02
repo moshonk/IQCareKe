@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 using Entities.CCC.Appointment;
+using Interface.CCC;
 using IQCare.CCC.UILogic;
+using System.Data;
 
 namespace IQCare.Web.CCC.Appointment
 {
@@ -17,9 +19,13 @@ namespace IQCare.Web.CCC.Appointment
     {
         public int PatientId;
         public int PatientMasterVisitId;
-        public int UserId;
         public int AppointmentId;
         public string UpdateAppointmentDate;
+
+        protected int UserId
+        {
+            get { return Convert.ToInt32(Session["AppUserId"]); }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -83,7 +89,7 @@ namespace IQCare.Web.CCC.Appointment
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
-            UserId = SessionManager.UserId;
+            //UserId = SessionManager.UserId;
         }
 
         private void AutoFillAppointments(int AppointmentId)

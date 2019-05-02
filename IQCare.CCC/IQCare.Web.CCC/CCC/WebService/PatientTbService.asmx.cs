@@ -4,6 +4,14 @@ using System;
 using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using IQCare.CCC.UILogic;
+using Entities.CCC.Lookup;
+using System.Collections.Generic;
+using Interface.CCC.Lookup;
+using Application.Presentation;
+using IQCare.CCC.UILogic.Visit;
+using Entities.CCC.Visit;
+using System.Collections;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -21,18 +29,38 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcf(int patientId, int patientMasterVisitId, string cough, string fever, string nightSweats, string weightLoss, bool onAntiTbDrugs, bool onIpt, bool everBeenOnIpt)
+        public string AddPatientIcf(int patientId, int patientMasterVisitId, int cough, int fever, int nightSweats, int weightLoss, int onAntiTbDrugs, int onIpt, int everBeenOnIpt)
         {
+            LookupLogic lookUp = new LookupLogic();
+            //cough
             bool? _cough = null;
-            if (cough.Trim().ToLower() == "true") { _cough = true; } else if(cough.Trim().ToLower() == "false") { _cough = false; }
+            if (lookUp.GetLookupItemNameById(cough) == "Yes") { _cough = true; } else if(lookUp.GetLookupItemNameById(cough) == "No") { _cough = false; }
+            //fever
             bool? _fever = null;
-            if (fever.Trim().ToLower() == "true") { _fever = true; } else if (fever.Trim().ToLower() == "false") { _fever = false; }
-
+            if (lookUp.GetLookupItemNameById(fever) == "Yes") { _fever = true; } else if (lookUp.GetLookupItemNameById(fever) == "No") { _fever = false; }
+            //night sweat
             bool? _nightSweat = null;
-            if (nightSweats.Trim().ToLower() == "true") { _nightSweat = true; } else if (nightSweats.Trim().ToLower() == "false") { _nightSweat = false; }
-
+            if (lookUp.GetLookupItemNameById(nightSweats) == "Yes") { _nightSweat = true; } else if (lookUp.GetLookupItemNameById(nightSweats) == "No") { _nightSweat = false; }
+            //weight loss
             bool? _WeightLoss = null;
-            if (weightLoss.Trim().ToLower() == "true") { _WeightLoss = true; } else if (weightLoss.Trim().ToLower() == "false") { _WeightLoss = false; }
+            if (lookUp.GetLookupItemNameById(weightLoss) == "Yes") { _WeightLoss = true; } else if (lookUp.GetLookupItemNameById(weightLoss) == "No") { _WeightLoss = false; }
+            //onAntiTBdrugs
+            bool _onAntiTbDrugs = false;
+            string passedValue = lookUp.GetLookupItemNameById(onAntiTbDrugs);
+            if (passedValue == "Yes")
+            {
+                _onAntiTbDrugs = true;
+            }
+            else if (lookUp.GetLookupItemNameById(onAntiTbDrugs) == "No")
+            {
+                _onAntiTbDrugs = false;
+            }
+            //onIPT
+            bool _onIpt = false;
+            if (lookUp.GetLookupItemNameById(onIpt) == "Yes") { _onIpt = true; } else if (lookUp.GetLookupItemNameById(onIpt) == "No") { _onIpt = false; }
+            //everBeenOnIpt
+            bool? _everBeenOnIpt = null;
+            if (lookUp.GetLookupItemNameById(everBeenOnIpt) == "Yes") { _everBeenOnIpt = true; } else if (lookUp.GetLookupItemNameById(everBeenOnIpt) == "No") { _everBeenOnIpt = false; }
             PatientIcf patientIcf = new PatientIcf()
             {
                 PatientId = patientId,
@@ -41,9 +69,9 @@ namespace IQCare.Web.CCC.WebService
                 Fever = _fever,
                 NightSweats = _nightSweat,
                 WeightLoss = _WeightLoss,
-                OnIpt = onIpt,
-                OnAntiTbDrugs = onAntiTbDrugs,
-                EverBeenOnIpt = everBeenOnIpt
+                OnIpt = _onIpt,
+                OnAntiTbDrugs = _onAntiTbDrugs,
+                EverBeenOnIpt = _everBeenOnIpt
             };
             try
             {
@@ -115,17 +143,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, bool evaluatedForIpt, bool invitationOfContacts, string sputumSmear, bool startAntiTb, string geneXpert)
+        public string AddPatientIcfAction(int patientId, int patientMasterVisitId, string chestXray, int evaluatedForIpt, int invitationOfContacts, string sputumSmear, int startAntiTb, string geneXpert)
         {
+            LookupLogic lookUp = new LookupLogic();
+            bool _evaluatedForIpt = false;
+            if (lookUp.GetLookupItemNameById(evaluatedForIpt) == "yes") { _evaluatedForIpt = true; } else if (lookUp.GetLookupItemNameById(evaluatedForIpt) == "No") { _evaluatedForIpt = false; }
+            bool _invitationOfContacts = false;
+            if (lookUp.GetLookupItemNameById(invitationOfContacts) == "yes") { _invitationOfContacts = true; } else if (lookUp.GetLookupItemNameById(invitationOfContacts) == "No") { _invitationOfContacts = false; }
+            bool _startAntiTb = false;
+            if (lookUp.GetLookupItemNameById(startAntiTb) == "yes") { _startAntiTb = true; } else if (lookUp.GetLookupItemNameById(startAntiTb) == "No") { _startAntiTb = false; }
             PatientIcfAction patientIcfAction = new PatientIcfAction()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 ChestXray = (IcfRadiologyOptions)Convert.ToInt32(chestXray),
-                EvaluatedForIpt = evaluatedForIpt,
-                InvitationOfContacts = invitationOfContacts,
+                EvaluatedForIpt = _evaluatedForIpt,
+                InvitationOfContacts = _invitationOfContacts,
                 SputumSmear = (IcfTestOptions)Convert.ToInt32(sputumSmear),
-                StartAntiTb = startAntiTb,
+                StartAntiTb = _startAntiTb,
                 GeneXpert = (IcfTestOptions)Convert.ToInt32(geneXpert)
             };
             try
@@ -192,17 +227,20 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-
+       
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptOutcome(int patientId, int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation, int iptDiscontinuationReason)
+        public string AddPatientIptOutcome(int patientId, DateTime? IPTDate, int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation, int iptDiscontinuationReason)
         {
+           
+     
             PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
                 ReasonForDiscontinuation = reasonForDiscontinuation,
-                IptDiscontinuationReason = iptDiscontinuationReason
+                IptDiscontinuationReason = iptDiscontinuationReason,
+                IPTOutComeDate=IPTDate
             };
             try
             {
@@ -229,13 +267,95 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
+        [WebMethod(EnableSession =true)]
+        public ArrayList GetAllPatientIPTHistory()
+        {
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            var iptWorkup = new PatientIptWorkupManager();
+            var iptworkup = iptWorkup.GetByPatientId(patientId).GroupBy(x => x.IptStartDate).Select(x => x.OrderByDescending(t => t.Id).First()).ToList();
+            ArrayList rows = new ArrayList();
+            DateTime? IPTDate;
+            if (iptworkup.Count > 0)
+            {
+                foreach(var l in iptworkup)
+                {
+                    
+                 
+                   var startdateipt = l.IptStartDate;
+                    
+                        List<IPTOutcome> loutcome = new List<IPTOutcome>();
+                        var iptOutcome = new PatientIptOutcomeManager();
+                        var x = iptOutcome.GetByPatientId(patientId);
+                        IPTDate = l.IptStartDate;
+                        if (x.Count > 0)
+                        {
+                            foreach (var patient in x)
+                            {
+                                IPTOutcome ip = new IPTOutcome();
+                                if (patient.IptEvent.ToString() == "1")
+                                {
+                                    ip.IPT = "Currently on IPT:Yes";
+
+                                }
+                                else if (patient.IptEvent.ToString() == "0")
+                                {
+                                    ip.IPT = "Currently on IPT:No";
+                                }
+                                else
+                                {
+                                    ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                                    string outcome = "IptOutcome";
+                                    var lm = mgr.GetLookupItemNameByMasterNameItemId(patient.IptEvent, outcome);
+                                    ip.IPT = lm.ToString();
+                                }
+                                if (patient.IPTOutComeDate != null)
+                                {
+                                    ip.IPTOutComeDate = patient.IPTOutComeDate;
+                                }
+                                else
+                                {
+                                    ip.IPTOutComeDate = null;
+
+
+                                }
+                                if (ip.IPTOutComeDate >= startdateipt)
+                                {
+                                    string[] i = new string[3] { startdateipt.ToString(), ip.IPT, ip.IPTOutComeDate.ToString() };
+                                    rows.Add(i);
+                                }
+                                else
+                                {
+                                    string[] i = new string[3] { startdateipt.ToString(), ip.IPT, "" };
+                                    rows.Add(i);
+                                }
+
+                                loutcome.Add(ip);
+
+                            }
+
+
+                        }
+
+                        else
+                        {
+                            string[] i = new string[3] { startdateipt.ToString(), "", "" };
+                            rows.Add(i);
+                        }
+                    }
+                }
+            
+         
+            
+            return rows;
+        }
+
         [WebMethod(EnableSession = true)]
         public string GetPatientIptOutcome(int patientId)
         {
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                var x = iptOutcome.GetByPatientId(patientId).FirstOrDefault();
+                var x = iptOutcome.GetByPatientId(patientId).FindAll(ipt=> ipt.IptEvent > 0).FirstOrDefault();
                 if (x != null)
                 {
                     PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
@@ -245,6 +365,8 @@ namespace IQCare.Web.CCC.WebService
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
+                        IptOutcome = new LookupLogic().GetLookupItemNameById(x.IptEvent),
+                        IPTOutComeDate = x.IPTOutComeDate,
                         Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
@@ -259,5 +381,77 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientIptHistoryByPatientIdAndVisitDate(int patientId, DateTime visitDate)
+        {
+            try
+            {
+                var patientIcfManager = new PatientIcfManager();
+                var x = patientIcfManager.GetByPatientId(patientId).Find(icf=> icf.EverBeenOnIpt.Equals(true) && icf.CreateDate < visitDate);
+                if (x != null)
+                {
+                    PatientIcf icf = new PatientIcf()
+                    {
+                        PatientMasterVisitId = x.PatientMasterVisitId,
+                        EverBeenOnIpt = x.EverBeenOnIpt,
+                        CreateDate = x.CreateDate,
+                        Id = x.Id
+                    };
+                    JavaScriptSerializer parser = new JavaScriptSerializer();
+
+                    Msg = parser.Serialize(icf);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime TBRxStartDate, DateTime TBRxEndDate, int TBRxRegimen)
+        {
+            PatientTBRx patientTBRX = new PatientTBRx()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId,
+                TBRxStartDate = TBRxStartDate,
+                TBRxEndDate = TBRxEndDate,
+                RegimenId = TBRxRegimen
+            };
+            try
+            {
+                var TBRx = new PatientTBRxManager();
+                var x = TBRx.GetByPatientId(patientId).FirstOrDefault(n => n.PatientMasterVisitId == patientMasterVisitId);
+                if (x == null)
+                {
+                    Result = TBRx.AddPatientTBRx(patientTBRX);
+                }
+                else
+                {
+                    patientTBRX.Id = x.Id;
+                    Result = TBRx.UpdatePatientTBRx(patientTBRX);
+                }
+                if (Result > 0)
+                {
+                    Msg = "Patient TBRx saved successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+    }
+
+   public class IPTOutcome
+    {
+        public string IPT { get; set; }
+       
+        public DateTime? IPTOutComeDate { get; set; }
     }
 }

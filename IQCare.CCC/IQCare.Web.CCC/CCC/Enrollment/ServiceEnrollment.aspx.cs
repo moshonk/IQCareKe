@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using IQCare.CCC.UILogic;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.Enrollment
 {
@@ -15,7 +15,7 @@ namespace IQCare.Web.CCC.Enrollment
         public int PatientExists { get; set; }
         public string AppLocation
         {
-            get { return Session["AppLocation"].ToString(); }
+            get { return Session["AppLocation"].ToString().Replace("'", "\'"); }
         }
         protected void Page_Load(object sender, EventArgs e)
         {

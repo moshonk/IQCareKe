@@ -1,14 +1,12 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
+using IQCare.Common.BusinessProcess.Commands.Enrollment;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
+using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.Enrollment;
-using IQCare.Common.BusinessProcess.Commands.Partners;
-using IQCare.Common.BusinessProcess.Commands.PersonCommand;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
 
 namespace IQCare.Controllers.Registration
 {
@@ -47,6 +45,36 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Post([FromBody] AddPatientCommand addPatientCommand)
         {
             var response = await _mediator.Send(addPatientCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postServiceEntryPoint")]
+        public async Task<IActionResult> PostServiceEntryPoint([FromBody]AddServiceEntryPointCommand serviceEntryPointCommand)
+        {
+            var response = await _mediator.Send(serviceEntryPointCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postConfirmatoryTests")]
+        public async Task<IActionResult> PostConfirmatoryTests([FromBody]AddHivReConfirmatoryTestsCommand addHivReConfirmatoryTestsCommand)
+        {
+            var response = await _mediator.Send(addHivReConfirmatoryTestsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientById/{patientId}")]
+        public async Task<IActionResult> GetPatientById(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientByIdCommand()
+            {
+                Id = patientId
+            }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -125,7 +153,7 @@ namespace IQCare.Controllers.Registration
         [HttpGet("getPerson/{personId}")]
         public async Task<IActionResult> Get(int personId)
         {
-            var response = await _mediator.Send(new GetPartnerCommand() {PersonId = personId});
+            var response = await _mediator.Send(new GetPersonDetailsCommand	() {PersonId = personId});
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -173,6 +201,19 @@ namespace IQCare.Controllers.Registration
             [FromBody] AddPersonPopulationCommand addPersonPopulationCommand)
         {
             var response = await _mediator.Send(addPersonPopulationCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientIdentifiers/{patientId}")]
+        public async Task<IActionResult> GetPatientIdentifiers(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientIdentifiersCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

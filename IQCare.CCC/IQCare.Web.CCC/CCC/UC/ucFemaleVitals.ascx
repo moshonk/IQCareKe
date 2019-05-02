@@ -101,6 +101,35 @@
                        </div>
                    </div>
 
+                    <div class="col-md-12 form-group" id="w-ClientEligibleForFP">
+                        <!-- Multiple Radios (inline) -->
+                             <div class="col-md-12">
+                                <label class="control-label pull-left" for="radios">Client Eligible for Family Planning?</label>
+                            </div>
+                             <div class="col-md-12 pull-left">
+                                <label class="pull-left checked" for="clientEligibleForFP-1" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-1" value="Y" data-parsley-multiple="radios">
+                                    Yes
+           
+                                </label>
+                                <label class="pull-left" for="clientEligibleForFP-2" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-2" value="N" data-parsley-multiple="radios">
+                                    No
+           
+                                </label>
+                            </div>
+                    </div>
+
+                    <div class="col-md-12 form-group" id="w-FpServiceOffered">
+                        <!-- Select Basic -->
+                          <div class="col-md-12">
+                            <label class="control-label pull-left" for="FpServiceOffered">Service for eligible clients</label>
+                          </div>
+                          <div class="col-md-12">
+                                <asp:DropDownList runat="server" ID="FpServiceOffered" ClientIDMode="Static" CssClass="form-control input-sm" />
+                          </div>
+                    </div>
+
                    <div class="col-md-12 form-group" id="divOnFP">
                        <div class="col-md-12">
                            <label class="control-label  pull-left">FP Method</label>
@@ -144,7 +173,7 @@
                        <div class="col-md-12">
                            <label class="control-label  pull-left">STI Partner Notification</label>
                        </div>
-                       <div class="col-md-12">
+                       <div class="col-md-12" id="divPartnerNotification">
                            <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
                        </div>
                    </div>
@@ -233,44 +262,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 form-group" id="w-ClientEligibleForFP">
-                    <!-- Multiple Radios (inline) -->
-                    <div class="control-group">
-                        <div class="clearfix">
-                            <label class="control-label pull-left" for="radios">Client Eligible for Family Planning?</label>
-                        </div>
-                        <div class="controls">
-                            <label class="pull-left checked" for="radios-0">
-                                <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-1" value="Y" data-parsley-multiple="radios">
-                                Yes
-           
-                            </label>
-                            <label class="pull-left" for="radios-1">
-                                <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-2" value="N" data-parsley-multiple="radios">
-                                No
-           
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-group" id="w-FpServiceOffered">
-                    <!-- Select Basic -->
-                    <div class="control-group">
-                        <label class="control-label pull-left" for="FpServiceOffered">Service for eligible clients</label>
-                        <div class="controls">
-                            <asp:DropDownList runat="server" ID="FpServiceOffered" ClientIDMode="Static" CssClass="form-control input-sm" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 form-group" id="w-FpIneligibilityReason">
-                    <!-- Select Basic -->
-                    <div class="control-group">
-                        <label class="control-label pull-left" for="FpIneligibilityReason">Reason for ineligibility of Family planning</label>
-                        <div class="controls">
-                            <asp:DropDownList runat="server" ID="FpIneligibilityReason" ClientIDMode="Static" CssClass="form-control input-sm" />
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-md-4 npg">
                 <div class="col-md-12 form-group npg" id="w-PlanningToConceive3M">
@@ -345,7 +336,7 @@
             </div>
         </div>
         <!-- End PIF-->
-       
+               
        <div class="col-md-12" id="btnFemaleVitals">
            <div class="col-md-6">
                <div class="col-md-4">
@@ -371,7 +362,36 @@
           </div>
 
      </div>
-                         
+       
+       <!-- PIF History -->
+       <div class="col-md-12 form-group" style="margin-top: 30px;">
+           <div class="col-md-12 col-xs-12 col-sm-12">
+               <div id="presentingComplaintsTable" class="panel panel-primary">
+                   <div class="panel-heading">Previous Encounters</div>
+                   <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                       <table id="dtlPreviousFemaleEncounters" class="table table-bordered table-striped" style="width: 100%">
+                           <thead>
+                               <tr>
+                                   <th><span class="text-primary">Visit Date</span></th>
+                                   <th><span class="text-primary">Pregnancy Status</span></th>
+                                   <th><span class="text-primary">LMP</span></th>
+                                   <th><span class="text-primary">EDD</span></th>
+                                   <th><span class="text-primary">ON FP</span></th>
+                                   <th><span class="text-primary">Reason Not on FP</span></th>
+                                   <th><span class="text-primary">Eligible for FP</span></th>
+                                   <th><span class="text-primary">FP Methods</span></th>
+                                   <th><span class="text-primary">Planning to conceive in 3 Months</span></th>
+                                   <th><span class="text-primary">Linked to ANC?</span></th>
+                               </tr>
+                           </thead>
+                           <tbody></tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- END PIF History -->
     </div><!-- .col-md-12-->
         
 </div><!-- .col-md-12 col-xs-12 col-sm-12-->
@@ -392,6 +412,9 @@
          var patientAge = "<%=PatientAge%>";
          var today = new Date();
          var visitDate;
+         var CaCxScreeningId = "<%=CaCxScreeningId%>";
+         var STIScreeningId = "<%=STIScreeningId%>";
+         var STIPartnerNotificationId = "<%=STIPartnerNotificationId%>";
 
          var userId = "<%=Convert.ToInt32(HttpContext.Current.Session["AppUserId"])%>";
 
@@ -438,7 +461,7 @@
                  return false;
              }
              lmpDate = moment(lmp).format('DD-MMM-YYYY');
-             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(280, 'days')).format('DD-MMM-YYYY'));
+             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(7, 'days').add(9, 'months')).format('DD-MMM-YYYY'));
          });
 
          $('#FemaleVisitDate').on('dp.change', function (e) {
@@ -472,21 +495,32 @@
              var fp = $(this).find(":selected").text();
 
              if (fp === 'No Family Planning(NOFP)') {
-                 $("#divOnFP").hide("fast", function () { $("#divNoFP").show("fast"); });
+                 $("#divOnFP").hide("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast"); });
+                 $("#w-FpServiceOffered")
              } else {
-                 $("#divOnFP").show("fast", function () { $("#divNoFP").hide("fast"); });
+                 $("#divOnFP").show("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast"); });
              }
 
+         });
+         $("#<%=stiScreening.ClientID%>").on('change', function () {
+             var sti = $(this).find(":selected").text();
+
+             if (sti === "No") {
+           
+                 $("#stiPartnerNotification").attr("disabled", true);
+                 $("#<%=stiPartnerNotification.ClientID%>").val('0');
+             }
+             else {
+                 $("#stiPartnerNotification").attr("disabled", false);
+             }
          });
 
          $('input[name=clientEligibleForFP]').on('change', function () {
 
              if ($(this).val() == 'Y') {
                  $('#w-FpServiceOffered').show('fast');
-                 $('#w-FpIneligibilityReason').hide('fast');
              } else {
                  $('#w-FpServiceOffered').hide('fast');
-                 $('#w-FpIneligibilityReason').show('fast');
              }
 
              validatePIAFields();
@@ -523,7 +557,7 @@
                  //$("#ancNo").prop("checked", false);
                  $("#divEDD").show("fast");
                  //$("#divFemaleLMP").show("fast");
-                 $("#divOnFP").hide("fast", function () { $("#FP").hide("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast", function () { $("#FP").hide("fast"); });
 
                  $('#FemaleVitals').parsley().destroy();
 
@@ -538,7 +572,7 @@
 
              } else {
                  $("#ancNo").prop("checked", true);
-                 $("#divOnFP").show("fast", function () { $("#FP").show("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast", function () { $("#FP").show("fast"); });
                  //$("#divFemaleLMP").hide("fast");
                  $("#lmp_Female").val("");
                  $("#divEDD").hide("fast");
@@ -588,7 +622,7 @@
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancy",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'null','parity':'null','outcome':'0','dateOfOutcome':'" + dateOfOutcome + "','userId':'0'}",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'','parity':'','outcome':'','dateOfOutcome':'" + dateOfOutcome + "','userId':'0'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  success: function (response) {
@@ -659,8 +693,7 @@
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
                      success: function (response) {
-                         alert(response.d);
-                         toastr.success(response.d);
+                         //toastr.success(response.d);
                      },
                      error: function (xhr, errorType, exception) {
                          var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -678,7 +711,7 @@
 
              var cacxId = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
 
-             var screeningTypeId = 44;
+             var screeningTypeId = CaCxScreeningId;
              var screeningDone = true;
              $.ajax({
                  type: "POST",
@@ -699,7 +732,7 @@
          function addPatientScreeningSti() {
 
              var stiId = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-             var screeningTypeId = 45;
+             var screeningTypeId = STIScreeningId;
              var screeningDone = true;
              $.ajax({
                  type: "POST",
@@ -720,22 +753,25 @@
          function addPatientScreeningStiNotification() {
 
              var stiNotificationId = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
-             var screeningTypeId = 87;
+             var screeningTypeId = STIPartnerNotificationId;
              var screeningDone = true;
-             $.ajax({
-                 type: "POST",
-                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
-                 contentType: "application/json; charset=utf-8",
-                 dataType: "json",
-                 success: function (response) {
-                     toastr.success(response.d);
-                 },
-                 error: function (xhr, errorType, exception) {
-                     var jsonError = jQuery.parseJSON(xhr.responseText);
-                     toastr.error("" + xhr.status + "" + jsonError.Message);
-                 }
-             });
+          
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+                     data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+
+             
          }
 
          function doesPregnancyExists() {
@@ -767,7 +803,7 @@
              var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
             var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
             var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
-            var reasonForFPIneligibility = $("#<%=FpIneligibilityReason.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
             var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
             var regularMenses = $("input[name='regularMenses']:checked").val();
             var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
@@ -788,9 +824,6 @@
                      var response = JSON.parse(response.d);
                      $.when(addPregnancySymptoms(patientId, response.id, JSON.stringify(pregnancySymptoms))).then(function () {
                          toastr.success(response.message);
-                         setTimeout(function () {
-                             $("#FemaleVitals").hide("fast");
-                         }, 2000);
                      });
 
                  },
@@ -814,7 +847,6 @@
                          $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
                         $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
                         $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
-                        $("#<%=FpIneligibilityReason.ClientID%>").val(response.ReasonForFPIneligibility);
                         $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
                         $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
                         $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
@@ -909,11 +941,28 @@
                  var fpMethod = $("#fpMethod").val();
                  var fName = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").text();
                  var fpOption = $("#<%=onFP.ClientID%>").find(":selected").text();
+                 var eligibleForFp = $("#w-ClientEligibleForFP").find(":checked").val();
+                 var fpService = $("#w-FpServiceOffered").find(":selected").text();
+                 var reasonNotOnFP = $("#divNoFP").find(":selected").text();
+
+
+
+                 if (fpOption == "No Family Planning(NOFP)" && eligibleForFp == undefined) {
+                     toastr.error("Please select if eligible for Family planning", "Family Planning Eligibility");
+                     return false;
+                 }
+
+                 if (eligibleForFp == "Y" && fpService == "select") {
+                     toastr.error("Please select Family Planning service offered", "Family Planning Service");
+                     return false;
+                 }
+
 
                  if (fpOption == "Family Planning(FP)" && fpMethod == null) {
                      toastr.error("Please select a family planning method", "Family Planning");
                      return false;
                  }
+
 
                  $.ajax({
                      type: "POST",
@@ -972,9 +1021,7 @@
                                          setTimeout(function () {
                                              /*Save pregnancy intention assessment form*/
                                              $.when(addPregnancyIntentionAsessment()).then(function () {
-                                                 setTimeout(function () {
-                                                     $("#FemaleVitals").hide("fast");
-                                                 }, 2000);
+                                                 previousFemaleEncounters.ajax.reload();
                                              });
 
                                          }, 2000);
@@ -1026,6 +1073,28 @@
                  }
              });
          });
+
+         var previousFemaleEncounters = $('#dtlPreviousFemaleEncounters').DataTable({
+             ajax: {
+                 type: "POST",
+                 url: "../WebService/PatientEncounterService.asmx/LoadFemaleEncounters",
+                 dataSrc: 'd',
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json"
+             },
+             paging: false,
+             searching: false,
+             info: false,
+             ordering: false,
+             columnDefs: [
+                 {
+                     "targets": [0],
+                     "visible": true,
+                     "searchable": false
+                 }
+             ]
+         });
+
 
      });
  </script>

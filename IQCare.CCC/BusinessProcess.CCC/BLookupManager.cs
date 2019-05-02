@@ -504,5 +504,9 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public LookupItemView GetLookupItemByMasterNameItemId(int itemId, string masterName)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
