@@ -484,7 +484,7 @@
                 var reason = $("#<%=Reason.ClientID%>").val();
                 var careEndingNotes = escape($("#<%=txtCareEndingNotes.ClientID%>").val());
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
-                var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
+                var dateOfDeath = $('#DateOfDeath').datepicker('getDate').toString();
                 debugger;
                 if (careEndedDate == "Invalid Date") {
                     careEndedDate = "";
