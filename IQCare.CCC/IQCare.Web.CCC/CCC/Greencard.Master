@@ -435,7 +435,14 @@
 						//        notes = obj.CareEndingNotes;
 
 						//    });
-						if (response.d === 0 || response.d==='[]') /*patient not careended-checkin*/
+                        var res = JSON.parse(response.d);
+                        var activeRecords = 0;
+                        if (res.length > 0) {
+                            activeRecords = res.filter(function (o) {
+                                return o.DeleteFlag == false
+                            }).length;
+                        }
+						if (response.d === 0 || response.d==='[]' || activeRecords === 0) /*patient not careended-checkin*/
 						{
 							$.ajax({
 								type: "POST",
