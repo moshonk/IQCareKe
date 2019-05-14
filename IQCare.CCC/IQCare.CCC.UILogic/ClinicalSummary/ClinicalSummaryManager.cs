@@ -20,10 +20,10 @@ namespace IQCare.CCC.UILogic.ClinicalSummary
             DataTable dtPatient = ds.Tables[0];
             var patient = new
             {
-                cccNumber = dtPatient.Rows[0]["CCCNumber"].ToString(),
-                patientName = dtPatient.Rows[0]["PatientName"].ToString(),
-                sex = dtPatient.Rows[0]["Sex"].ToString(),
-                dob = dtPatient.Rows[0]["DOB"].ToString()
+                cccNumber = dtPatient.Rows.Count > 0 ? dtPatient.Rows[0]["CCCNumber"].ToString() : "",
+                patientName = dtPatient.Rows.Count > 0 ? dtPatient.Rows[0]["PatientName"].ToString() : "",
+                sex = dtPatient.Rows.Count > 0 ? dtPatient.Rows[0]["Sex"].ToString() : "",
+                dob = dtPatient.Rows.Count > 0 ? dtPatient.Rows[0]["DOB"].ToString() : ""
             };
 
             //Vitals
@@ -42,10 +42,11 @@ namespace IQCare.CCC.UILogic.ClinicalSummary
 
             //Current ART
             DataTable dtRegimen = ds.Tables[2];
+
             var currRegimen = new
             {
-                regimen = dtRegimen.Rows[0]["Regimen"].ToString(),
-                regimenDate = dtRegimen.Rows[0]["RegimenDate"].ToString()
+                regimen = dtRegimen.Rows.Count > 0 ? dtRegimen.Rows[0]["Regimen"].ToString() : "",
+                regimenDate = dtRegimen.Rows.Count > 0 ? dtRegimen.Rows[0]["RegimenDate"].ToString() : ""
             };
 
             //Previous ART
