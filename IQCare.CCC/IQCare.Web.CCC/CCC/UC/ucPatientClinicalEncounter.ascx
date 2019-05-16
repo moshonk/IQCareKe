@@ -2435,7 +2435,7 @@
 													</div>
 													<div class="col-md-12">
 														<div class="col-md-8">
-															<label class="control-lable pull-left">Healthcare team does not have concerns about providing longer follow-up intervals for the patient</label>
+															<label class="control-lable pull-left">Healthcare team is OK (does not have any concerns) about providing longer follow-up intervals for the patient</label>
 														</div>
 														<div class="col-md-4">
 															<div class="col-md-12">
