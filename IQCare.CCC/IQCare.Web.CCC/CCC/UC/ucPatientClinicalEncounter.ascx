@@ -2277,7 +2277,14 @@
 								<!-- Modal content-->
 								<div class="modal-content">
 									<div class="modal-body">
-										<div class="row">
+                                        <ul class="nav nav-tabs">
+                                          <li class="active"><a data-toggle="tab" href="#psc">General clients</a></li>
+                                          <li><a data-toggle="tab" href="#anc">ANC clients</a></li>
+                                          <li><a data-toggle="tab"href="#pnc">PNC clients</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                          <div id="psc" class="tab-pane fade in active">
+    										<div class="row">
 											<div id="Categorization" data-parsley-validate="true" data-show-errors="true">
 												<div class="col-md-12 col-xs-12 col-sm-12">
 													<div class="col-md-12">
@@ -2462,6 +2469,504 @@
 												</div>
 											</div>
 										</div>
+                                          </div>
+                                          <div id="anc" class="tab-pane fade">
+                                            <%--BEGIN ANC CATEGORIZATION--%>
+                                            <div class="row">
+                                                <div id="AncCategorization" data-parsley-validate="true" data-show-errors="true">
+                                                    <div class="col-md-12 col-xs-12 col-sm-12">
+                                                        <div class="col-md-12">
+                                                            <hr style="margin-top: 1%" class="bg-info" />
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">On ART for ≥ 12 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncArtYes" type="radio" name="AncArtPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncArtNo" type="radio" name="AncArtPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncArtRegimenYes" type="radio" name="AncArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncArtRegimenNo" type="radio" name="AncArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">No active OIs (e.g malnutrition, mental health condition or TB) in the previous 6 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncOiYes" type="radio" name="AncActiveOis" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncOiNo" type="radio" name="AncActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncVisitsAdherantYes" type="radio" name="AncVisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncVisitsAdherantNo" type="radio" name="AncVisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Has completed 6 months of IPT</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncIptYes" type="radio" name="AncIpt" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncIptNo" type="radio" name="AncIpt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Age ≥ 25 years</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncAgeYes" type="radio" name="AncAge" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncAgeNo" type="radio" name="AncAge" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">MUAC ≥ 23</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncMuacYes" type="radio" name="AncMuac" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncMuscNo" type="radio" name="AncMuac" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">LDL Viral Load within the past 3months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncVlCopiesYes" type="radio" name="AncVlCopies" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncVlCopiesNo" type="radio" name="AncVlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Good understanding of lifelong adherence</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncAdherenceUnderstandingYes" type="radio" name="AncAdherenceUnderstanding" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncAdherenceUnderstandingNo" type="radio" name="AncAdherenceUnderstanding" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">No adverse drug reaction</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncNoAdrYes" type="radio" name="AncNoAdr" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncNoAdrNo" type="radio" name="AncNoAdr" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Started ANC</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="StartedAncYes" type="radio" name="StartedAnc" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="StartedAncNo" type="radio" name="StartedAnc" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Healthcare team is OK (does not have any concerns) about providing longer follow-up intervals for the patient</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncHealthcareConcernsYes" type="radio" name="AncHealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="AncHealthcareConcernsNo" type="radio" name="AncHealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12">
+                                                                <asp:LinkButton runat="server" ID="btnSaveAncCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%--END ANC CATEGORIZATION--%>
+                                          </div>  
+                                          <div id="pnc" class="tab-pane fade">
+                                            <%--BEGIN PNC CATEGORIZATION--%>
+                                            <div class="row">
+                                                <div id="PncCategorization" data-parsley-validate="true" data-show-errors="true">
+                                                    <div class="col-md-12 col-xs-12 col-sm-12">
+                                                        <div class="col-md-12">
+                                                            <hr style="margin-top: 1%" class="bg-info" />
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">On ART for ≥ 12 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncArtYes" type="radio" name="PncArtPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncArtNo" type="radio" name="PncArtPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">On their current ART regimen for ≥ 12 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncArtRegimenYes" type="radio" name="PncArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncArtRegimenNo" type="radio" name="PncArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">No active OIs (e.g malnutrition, mental health condition or TB) in the previous 6 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncOiYes" type="radio" name="PncActiveOis" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncOiNo" type="radio" name="PncActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Negative PCR at 6/52 and 6/12</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncNegativePcrYes" type="radio" name="PncNegativePcr" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncNegativePcrNo" type="radio" name="PncNegativePcr" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Adherent to scheduled clinic visits for the previous 6 months</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncVisitsAdherantYes" type="radio" name="PncVisitsAdherant" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncVisitsAdherantNo" type="radio" name="PncVisitsAdherant" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Has completed 6 months of IPT</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncIptYes" type="radio" name="PncIpt" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncIptNo" type="radio" name="PncIpt" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Age ≥ 25 years</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncAgeYes" type="radio" name="PncAge" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncAgeNo" type="radio" name="PncAge" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">BMI ≥ 18.5</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncBmiYes" type="radio" name="PncBmi" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncBmiNo" type="radio" name="PncBmi" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">2 consecutive most recent VL of LDL</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncVlCopiesYes" type="radio" name="PncVlCopies" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncVlCopiesNo" type="radio" name="PncVlCopies" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Good understanding of lifelong adherence</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncAdherenceUnderstandingYes" type="radio" name="PncAdherenceUnderstanding" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncAdherenceUnderstandingNo" type="radio" name="PncAdherenceUnderstanding" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">No adverse drug reaction</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncNoAdrYes" type="radio" name="PncNoAdr" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncNoAdrNo" type="radio" name="PncNoAdr" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-8">
+                                                                <label class="control-lable pull-left">Healthcare team is OK (does not have any concerns) about providing longer follow-up intervals for the patient</label>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncHealthcareConcernsYes" type="radio" name="PncHealthcareConcerns" value="true" clientidmode="Static" runat="server" />Yes
+                                                                    </label>
+                                                                    <label class="pull-left" style="padding-right: 10px">
+                                                                        <input id="PncHealthcareConcernsNo" type="radio" name="PncHealthcareConcerns" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12">
+                                                                <asp:LinkButton runat="server" ID="btnSavePncCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <hr>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%--END PNC CATEGORIZATION--%>                                              
+                                          </div>  
+                                        </div>
 									</div>
 								</div>
 							</div>
@@ -2925,6 +3430,13 @@
 	    });*/
 
         $('#differentiatedModal').on('show.bs.modal', function (e) {
+            $('#differentiatedModal a[data-toggle="tab"]:first').trigger("shown.bs.tab");
+        });
+
+        $('#differentiatedModal a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+            var target = $(e.target).attr("href") // activated tab
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/DifferentiatedCareParameters",
@@ -2933,32 +3445,147 @@
                 dataType: "json",
                 success: function (data) {
                     var serverData = data.d;
-                    var radioArtYes = document.getElementById("ArtYes");
-                    var radioArtNo = document.getElementById("ArtNo");
 
-                    var radioArtRegimenYes = document.getElementById("ArtRegimenYes");
-                    var radioArtRegimenNo = document.getElementById("ArtRegimenNo");
+                    var radioArtYes;
+                    var radioArtNo;
 
-                    var radioOIYes = document.getElementById("OiYes");
-                    var radioOINo = document.getElementById("OiNo");
+                    var radioArtRegimenYes;
+                    var radioArtRegimenNo;
 
-                    var radioVisitsAdherantYes = document.getElementById("VisitsAdherantYes");
-                    var radioVisitsAdherantNo = document.getElementById("VisitsAdherantNo");
+                    var radioOIYes;
+                    var radioOINo;
 
-                    var radioVlCopiesYes = document.getElementById("VlCopiesYes");
-                    var radioVlCopiesNo = document.getElementById("VlCopiesNo");
+                    var radioVlCopiesYes;
+                    var radioVlCopiesNo;
 
-                    var radioIptYes = document.getElementById("IptYes");
-                    var radioIptNo = document.getElementById("IptNo");
+                    var radioIptYes;
+                    var radioIptNo;
 
-                    var radioBmiYes = document.getElementById("BmiYes");
-                    var radioBmiNo = document.getElementById("BmiNo");
+                    var radioBmiYes;
+                    var radioBmiNo;
 
-                    var radioAgeYes = document.getElementById("AgeYes");
-                    var radioAgeNo = document.getElementById("AgeNo");
+                    var radioAgeYes;
+                    var radioAgeNo;
 
-                    var radioHealthcareConcernsYes = document.getElementById("HealthcareConcernsYes");
-                    var radioHealthcareConcernsNo = document.getElementById("HealthcareConcernsNo");
+                    var radioNegativePcrYes;
+                    var radioNegativePcrNo;
+
+                    var radioVisitsAdherantYes;
+                    var radioVisitsAdherantNo;
+                    
+                    var radioAdherenceUnderstandingYes;
+                    var radioAdherenceUnderstandingNo;
+
+                    var radioHealthcareConcernsYes;
+                    var radioHealthcareConcernsNo;
+
+                    var radioNoAdrYes;
+                    var radioNoAdrNo;
+
+
+
+                    switch (target) {
+                        case '#anc':
+                            radioArtYes = document.getElementById("AncArtYes");
+                            radioArtNo = document.getElementById("AncArtNo");
+
+                            radioArtRegimenYes = document.getElementById("AncArtRegimenYes");
+                            radioArtRegimenNo = document.getElementById("AncArtRegimenNo");
+
+                            radioOIYes = document.getElementById("AncOiYes");
+                            radioOINo = document.getElementById("AncOiNo");
+
+                            radioVisitsAdherantYes = document.getElementById("AncVisitsAdherantYes");
+                            radioVisitsAdherantNo = document.getElementById("AncVisitsAdherantNo");
+
+                            radioVlCopiesYes = document.getElementById("AncVlCopiesYes");
+                            radioVlCopiesNo = document.getElementById("AncVlCopiesNo");
+
+                            radioIptYes = document.getElementById("AncIptYes");
+                            radioIptNo = document.getElementById("AncIptNo");
+
+                            radioBmiYes = document.getElementById("AncMuacYes");
+                            radioBmiNo = document.getElementById("AncMuacYes");
+
+                            radioAgeYes = document.getElementById("AncAgeYes");
+                            radioAgeNo = document.getElementById("AncAgeNo");
+
+                            radioNoAdrYes = document.getElementById("AncNoAdrYes");
+                            radioNoAdrNo = document.getElementById("AncNoAdrNo");
+
+                            radioHealthcareConcernsYes = document.getElementById("AncHealthcareConcernsYes");
+                            radioHealthcareConcernsNo = document.getElementById("AncHealthcareConcernsNo");
+
+                            break;
+                        case '#pnc':
+                            radioArtYes = document.getElementById("PncArtYes");
+                            radioArtNo = document.getElementById("PncArtNo");
+
+                            radioArtRegimenYes = document.getElementById("PncArtRegimenYes");
+                            radioArtRegimenNo = document.getElementById("PncArtRegimenNo");
+
+                            radioOIYes = document.getElementById("PncOiYes");
+                            radioOINo = document.getElementById("PncOiNo");
+
+                            radioNegativePcrYes = document.getElementById("PncNegativePcrYes");
+                            radioNegativePcrNo = document.getElementById("PncNegativePcrNo");
+
+                            radioVisitsAdherantYes = document.getElementById("PncVisitsAdherantYes");
+                            radioVisitsAdherantNo = document.getElementById("PncVisitsAdherantNo");
+
+                            radioAdherenceUnderstandingYes = document.getElementById("PncAdherenceUnderstandingYes");
+                            radioAdherenceUnderstandingNo = document.getElementById("PncAdherenceUnderstandingNo");
+
+                            radioNoAdrYes = document.getElementById("PncNoAdrYes");
+                            radioNoAdrNo = document.getElementById("PncNoAdrNo");
+
+                            radioVlCopiesYes = document.getElementById("PncVlCopiesYes");
+                            radioVlCopiesNo = document.getElementById("PncVlCopiesNo");
+
+                            radioIptYes = document.getElementById("PncIptYes");
+                            radioIptNo = document.getElementById("PncIptNo");
+
+                            radioBmiYes = document.getElementById("PncBmiYes");
+                            radioBmiNo = document.getElementById("PncBmiNo");
+
+                            radioAgeYes = document.getElementById("PncAgeYes");
+                            radioAgeNo = document.getElementById("PncAgeNo");
+
+                            radioHealthcareConcernsYes = document.getElementById("PncHealthcareConcernsYes");
+                            radioHealthcareConcernsNo = document.getElementById("PncHealthcareConcernsNo");
+
+                            break;
+                        default:
+                            radioArtYes = document.getElementById("ArtYes");
+                            radioArtNo = document.getElementById("ArtNo");
+
+                            radioArtRegimenYes = document.getElementById("ArtRegimenYes");
+                            radioArtRegimenNo = document.getElementById("ArtRegimenNo");
+
+                            radioOIYes = document.getElementById("OiYes");
+                            radioOINo = document.getElementById("OiNo");
+
+                            radioVisitsAdherantYes = document.getElementById("VisitsAdherantYes");
+                            radioVisitsAdherantNo = document.getElementById("VisitsAdherantNo");
+
+                            radioVlCopiesYes = document.getElementById("VlCopiesYes");
+                            radioVlCopiesNo = document.getElementById("VlCopiesNo");
+
+                            radioIptYes = document.getElementById("IptYes");
+                            radioIptNo = document.getElementById("IptNo");
+
+                            radioBmiYes = document.getElementById("BmiYes");
+                            radioBmiNo = document.getElementById("BmiNo");
+
+                            radioAgeYes = document.getElementById("AgeYes");
+                            radioAgeNo = document.getElementById("AgeNo");
+
+                            radioHealthcareConcernsYes = document.getElementById("HealthcareConcernsYes");
+                            radioHealthcareConcernsNo = document.getElementById("HealthcareConcernsNo");
+
+                    }
+
+
 
                     if (serverData[0][0] == 1)
                         radioArtRegimenYes.checked = true;
@@ -2989,19 +3616,69 @@
                         radioAgeYes.checked = true;
                     else
                         radioAgeNo.checked = true;
-                    
+
                     if (serverData[0][6] == 1)
                         radioArtYes.checked = true;
                     else
                         radioArtNo.checked = true;
-                    
+
+                    if (target == '#anc') {
+                        if (serverData[0][7] == 1)
+                            radioBmiYes.checked = true;
+                        else
+                            radioBmiNo.checked = true;
+
+                        if (serverData[0][5] >= 25)
+                            radioAgeYes.checked = true;
+                        else
+                            radioAgeNo.checked = true;                        
+
+                        if (serverData[0][8] == 1)
+                            radioArtRegimenYes.checked = true;
+                        else
+                            radioArtRegimenNo.checked = true;
+
+                        if (serverData[0][9] >=1 )
+                            radioVlCopiesYes.checked = true;
+                        else
+                            radioVlCopiesNo.checked = true;
+
+                        if (serverData[0][11] >=1 )
+                            radioNoAdrYes.checked = true;
+                        else
+                            radioNoAdrNo.checked = true;
+                    }
+
+                    if (target == '#pnc') {
+                        if (serverData[0][8] == 1)
+                            radioArtRegimenYes.checked = true;
+                        else
+                            radioArtRegimenNo.checked = true;
+
+                        if (serverData[0][5] >= 25)
+                            radioAgeYes.checked = true;
+                        else
+                            radioAgeNo.checked = true;                        
+
+                        if (serverData[0][10] >=2 )
+                            radioVlCopiesYes.checked = true;
+                        else
+                            radioVlCopiesNo.checked = true;
+
+                        if (serverData[0][11] >= 1)
+                            radioNoAdrYes.checked = true;
+                        else
+                            radioNoAdrNo.checked = true;
+                    }
+
                 },
                 error: function (response) {
                     toastr
                         .error("Error in Fetching Categorization Parameters Data " + response.d);
                 }
             });
-        })
+
+        });
 
         //populate options for ADverEvents;
         var mastrName = 'AdverseEventOutcome';
@@ -5077,8 +5754,24 @@
         });
 
 
-        $("#btnSaveCategorization").click(function () {
-            if ($('#Categorization').parsley().validate()) {
+        $("#btnSaveCategorization, #btnSaveAncCategorization, #btnSavePncCategorization").click(function () {
+            var target = $("#differentiatedModal ul li.active a").attr("href") // activated tab
+
+            var activeTab = "";
+
+            switch (target) {
+                case "#anc":
+                    activeTab = $("#AncCategorization");
+                    break;
+                case "#pnc":
+                    activeTab = $("#PncCategorization")
+                    break;
+                default:
+                    activeTab = $("#Categorization")
+                    break;
+            }
+
+            if (activeTab.parsley().validate()) {
                 AddPatientCategorization();
             } else {
                 return false;
@@ -5206,21 +5899,72 @@
 
 
         function AddPatientCategorization() {
-            var artPeriod = $("input[name$=ArtPeriod]:checked").val();
-			var artRegimenPeriod = $("input[name$=ArtRegimenPeriod]:checked").val();
-			var activeOis = $("input[name$=ActiveOis]:checked").val();
-			var visitsAdherant = $("input[name$=VisitsAdherant]:checked").val();
-			var vlCopies = $("input[name$=VlCopies]:checked").val();
-			var ipt = $("input[name$=Ipt]:checked").val();
-			var bmi = $("input[name$=Bmi]:checked").val();
-			var age = $("input[name$=Age]:checked").val();
-			var healthcareConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+            var artPeriod;
+			var artRegimenPeriod;
+			var activeOis;
+			var visitsAdherant;
+			var vlCopies;
+			var ipt;
+			var bmi;
+			var age;
+			var healthcareConcerns;
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+
+            var categorizationCriteria = [];
+
+            var target = $("#differentiatedModal ul li.active a").attr("href") // activated tab
+
+            switch (target) {
+                case "#anc":
+                    //ANC Clients
+                    categorizationCriteria.push($("input[name$=AncArtPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncArtRegimenPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncActiveOis]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncVisitsAdherant]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncIpt]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncAge]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncMuac]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncVlCopies]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncAdherenceUnderstanding]:checked").val());
+                    categorizationCriteria.push($("input[name$=AncNoAdr]:checked").val());
+                    categorizationCriteria.push($("input[name$=StartedAnc]:checked").val());                    
+                    categorizationCriteria.push($("input[name$=AncHealthcareConcerns]:checked").val());
+
+                    break;
+                case "#pnc":
+                    //PNC Clients
+                    categorizationCriteria.push($("input[name$=PncArtPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncArtRegimenPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncActiveOis]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncNegativePcr]:checked").val());                    
+                    categorizationCriteria.push($("input[name$=PncVisitsAdherant]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncIpt]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncAge]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncBmi]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncVlCopies]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncAdherenceUnderstanding]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncNoAdr]:checked").val());
+                    categorizationCriteria.push($("input[name$=PncHealthcareConcerns]:checked").val());
+
+                    break;
+                default:
+                    categorizationCriteria.push($("input[name$=ArtPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=ArtRegimenPeriod]:checked").val());
+                    categorizationCriteria.push($("input[name$=ActiveOis]:checked").val());
+                    categorizationCriteria.push($("input[name$=VisitsAdherant]:checked").val());
+                    categorizationCriteria.push($("input[name$=VlCopies]:checked").val());
+                    categorizationCriteria.push($("input[name$=Ipt]:checked").val());
+                    categorizationCriteria.push($("input[name$=Bmi]:checked").val());
+                    categorizationCriteria.push($("input[name$=Age]:checked").val());
+                    categorizationCriteria.push($("input[name$=HealthcareConcerns]:checked").val());
+                    break;
+            }                       
+
 			$.ajax({
 				type: "POST",
-				url: "../WebService/PatientService.asmx/AddPatientCategorization",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','artPeriod': '" + artPeriod + "','artRegimenPeriod': '" + artRegimenPeriod + "','activeOis': '" + activeOis + "','visitsAdherant': '" + visitsAdherant + "','vlCopies': '" + vlCopies + "','ipt': '" + ipt + "','bmi': '" + bmi + "','age': '" + age + "','healthcareConcerns': '" + healthcareConcerns + "'}",
+				url: "../WebService/PatientService.asmx/AddPatientCategorizationWithDynamicParams",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','categorizationParameters': '" + JSON.stringify(categorizationCriteria) + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (response) {

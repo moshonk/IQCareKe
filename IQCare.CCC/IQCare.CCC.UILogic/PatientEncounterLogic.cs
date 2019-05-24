@@ -287,6 +287,21 @@ namespace IQCare.CCC.UILogic
             if (theDS.Tables[6].Rows.Count > 0)
                 categorizationParameters.OnART12Months = Convert.ToInt32(theDS.Tables[6].Rows[0][0].ToString());
 
+            if (theDS.Tables[7].Rows.Count > 0)
+                categorizationParameters.Muac = Convert.ToInt32(theDS.Tables[7].Rows[0][0].ToString());
+
+            if (theDS.Tables[8].Rows.Count > 0)
+                categorizationParameters.SameRegimen12Months = Convert.ToInt32(theDS.Tables[8].Rows[0][0].ToString());
+
+            if (theDS.Tables[9].Rows.Count > 0)
+                categorizationParameters.LdlVLInPast3Months = Convert.ToInt32(theDS.Tables[9].Rows[0][0].ToString());
+
+            if (theDS.Tables[10].Rows.Count > 0)
+                categorizationParameters.TwoConsecutiveLdlVl = Convert.ToInt32(theDS.Tables[10].Rows[0][0].ToString());
+
+            if (theDS.Tables[11].Rows.Count > 0)
+                categorizationParameters.NoAdr = Convert.ToInt32(theDS.Tables[11].Rows[0][0].ToString());
+
             return categorizationParameters;
         }
 
