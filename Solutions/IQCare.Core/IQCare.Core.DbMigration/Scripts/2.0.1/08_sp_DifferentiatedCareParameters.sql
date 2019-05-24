@@ -14,13 +14,13 @@ BEGIN
 
 	declare @ptn_pk int = (select ptn_pk from patient where id = @PatientId)
 
-    -- Age
+    -- Age (0)
 	Select datediff(year, DateOfBirth, getdate()) Age from Patient where Id = @PatientId
 
-	-- BMI
+	-- BMI (1)
 	select top 1 BMI from patientvitals where PatientId = @PatientId order by VisitDate desc
 
-	-- Viral Load
+	-- Viral Load after switch(2)
 	DECLARE @CurrentRegimenStart AS DATE;
 	WITH all_treatmenttracker_cte AS (
 		SELECT t.id, t.PatientMasterVisitId,  t.PatientId, t.Regimen, t.RegimenId, t.RegimenDate, t.Line AS regimenLine, t.TLE400
@@ -73,12 +73,14 @@ BEGIN
 	AND a.OrderDate >= @CurrentRegimenStart
 	order by a.orderdate desc
 
-	-- Current Regimen for >= 3 months
+	-- Current Regimen for >= 3 months (3)
 	DECLARE @CurrentRegimen varchar(20) = (select top 1 RegimenType from ord_PatientPharmacyOrder a inner join dtl_regimenmap b on a.ptn_pharmacy_pk = b.orderID where a.ptn_pk = @ptn_pk and a.deleteflag = 0 order by a.DispensedByDate desc);
 	DECLARE @Regimen3MAgo varchar(20) = (select top 1 RegimenType from ord_PatientPharmacyOrder a inner join dtl_regimenmap b on a.ptn_pharmacy_pk = b.orderID where a.ptn_pk = @ptn_pk and a.deleteflag = 0 and a.DispensedByDate <= dateadd(month, -3, getdate()) order by a.DispensedByDate desc);
+	DECLARE @Regimen12MAgo varchar(20) = (select top 1 RegimenType from ord_PatientPharmacyOrder a inner join dtl_regimenmap b on a.ptn_pharmacy_pk = b.orderID where a.ptn_pk = @ptn_pk and a.deleteflag = 0 and a.DispensedByDate <= dateadd(month, -12, getdate()) order by a.DispensedByDate desc);
 	DECLARE @counter int = 1;
 	DECLARE @SumCurrentRegimen int = 0;
 	DECLARE @SumRegimen3MAgo int = 0;
+	DECLARE @SumRegimen12MAgo int = 0;
 
 	WHILE @counter <= DATALENGTH(@CurrentRegimen)
 	   BEGIN
@@ -91,6 +93,13 @@ BEGIN
 	WHILE @counter <= DATALENGTH(@Regimen3MAgo)
 	   BEGIN
 	   SET @SumRegimen3MAgo = @SumRegimen3MAgo + ASCII(SUBSTRING(@Regimen3MAgo, @counter, 1))
+	   SET @counter = @counter + 1
+	   END
+
+	SET @counter = 1
+	WHILE @counter <= DATALENGTH(@Regimen12MAgo)
+	   BEGIN
+	   SET @SumRegimen12MAgo = @SumRegimen12MAgo + ASCII(SUBSTRING(@Regimen12MAgo, @counter, 1))
 	   SET @counter = @counter + 1
 	   END
 	   
@@ -110,7 +119,7 @@ BEGIN
 		SELECT 0 SameRegimenFor3Months
 	END
 
-	--- Completed 6 months of IPT
+	--- Completed 6 months of IPT (4)
 	/*	
 	select sum(duration) TotalIPTDuration
 	from ord_patientpharmacyorder a inner join dtl_patientpharmacyorder b on a.ptn_pharmacy_pk = b.ptn_pharmacy_pk
@@ -120,7 +129,7 @@ BEGIN
 	*/
 	SELECT TOP 1 180 as TotalIPTDuration FROM PatientIptOutcome i WHERE i.IptEvent = 525 /*Completed*/ AND PatientId = @PatientId -- Assign 180 if Patient has IPT outcome
 
-	-- No Active OIs
+	-- No Active OIs (5)
 	select top 1 cast(a.AnyComplaint as varchar) AnyComplaint from ComplaintsHistory a inner join patientmastervisit b on a.patientmastervisitid = b.id
 	where a.PatientId = @PatientId and a.deleteflag = 0 and a.AnyComplaint = 1 and PatientMasterVisitId in (select Id from patientmastervisit where PatientId = @PatientId and deleteflag = 0 and VisitDate >= dateadd(month, -6, getdate()))
 	UNION
@@ -130,8 +139,43 @@ BEGIN
 	select top 1 cast(a.OnAntiTbDrugs as varchar) OnAntiTbDrugs from PatientICF a inner join patientmastervisit b on a.patientmastervisitid = b.id
 	where a.PatientId = @PatientId and a.deleteflag = 0 and a.OnAntiTbDrugs = 1 and PatientMasterVisitId in (select Id from patientmastervisit where PatientId = @PatientId and deleteflag = 0 and VisitDate >= dateadd(month, -6, getdate()))
 
-	-- ON ART >= 12 months
+	-- ON ART >= 12 months (6)
 	SELECT TOP 1 CASE WHEN DATEDIFF(MONTH, RegimenStartDate, GETDATE()) >= 12 THEN 1 ELSE 0 END as OnARTFor12M  FROM PatientTreatmentTrackerView WHERE PatientId = @PatientId AND RegimenStartDate IS NOT NULL ORDER BY RegimenStartDate
 
+	-- MUAC (7)
+	select top 1 Muac from patientvitals where PatientId = @PatientId order by VisitDate desc
 
+	-- ON Current regimen >= 12 months (8)
+	If(@SumCurrentRegimen > 0)
+	BEGIN
+		If(@SumCurrentRegimen = @SumRegimen12MAgo)
+		BEGIN
+			SELECT 1 SameRegimenFor12Months
+		END
+		ELSE
+		BEGIN
+			SELECT 0 SameRegimenFor12Months
+		END
+	END
+	ELSE
+	BEGIN
+		SELECT 0 SameRegimenFor12Months
+	END
+
+	-- LDL VL within the past 3 months  (9)
+	SELECT COUNT(*)
+	FROM dbo.PatientLabTracker t
+	INNER JOIN dtl_LabOrderTestResult tr ON t.LabOrderId = tr.LabOrderId
+	WHERE PatientId = @PatientId AND (Results = 'Complete') AND (t.LabTestId = 3) AND (tr.Undetectable = 1  OR ResultTexts LIKE '%< LDL%') AND DATEDIFF(MONTH, SampleDate, getdate()) <= 3
+
+	--2 consecutive most recent VL of LDL (10)
+	SELECT COUNT(*) FROM (
+		SELECT t.patientId, CASE WHEN tr.Undetectable = 1 OR ResultTexts LIKE '%< LDL%' THEN 'LDL' ELSE CAST(ResultTexts AS NVARCHAR) END AS Results, ROW_NUMBER() OVER(PARTITION BY t.Patientid ORDER BY SampleDate DESC)  AS rown
+		FROM dbo.PatientLabTracker t
+		INNER JOIN dtl_LabOrderTestResult tr ON t.LabOrderId = tr.LabOrderId
+		WHERE PatientId = @PatientId AND (Results = 'Complete') AND (t.LabTestId = 3) 
+	) vl WHERE vl.rown <= 2 AND vl.Results = 'LDL'
+
+	-- No Adverse Drug Reaction (ADR) (11)
+	SELECT CASE WHEN count(*) > 0 THEN 0 ELSE 1 END AS Adrs  FROM AdverseEvent WHERE PatientId = @PatientId AND CreateDate >= @CurrentRegimenStart
 END

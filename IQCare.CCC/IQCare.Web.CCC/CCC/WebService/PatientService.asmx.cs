@@ -1071,6 +1071,67 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters)
+        {
+            PatientCategorizationStatus categorizationStatus;
+            string[] arr1 = new string[] { };
+            //Dictionary<string, string> categorizationResponses = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(categorizationParameters);
+            string[] categorizationResponses = new JavaScriptSerializer().Deserialize<string[]>(categorizationParameters);
+            //Object categorizationResponses = new JavaScriptSerializer().DeserializeObject(categorizationParameters);
+
+            int i = 0;
+            
+            while (i < categorizationResponses.Length && Convert.ToBoolean(categorizationResponses[i]) == true)
+            {
+                i++;
+            }
+
+            if (i == categorizationResponses.Length)
+            {
+                categorizationStatus = PatientCategorizationStatus.Stable;
+            }
+            else
+            {
+                categorizationStatus = PatientCategorizationStatus.UnStable;
+            }
+
+            var patientCategorization = new PatientCategorization()
+            {
+                PatientId = patientId,
+                Categorization = categorizationStatus,
+                DateAssessed = DateTime.Now,
+                PatientMasterVisitId = patientMasterVisitId
+            };
+            try
+            {
+                var categorization = new PatientCategorizationManager();
+                Result = categorization.AddPatientCategorization(patientCategorization);
+                if (Result > 0)
+                {
+                    Msg = "Patient Categorization Added Successfully!";
+
+                    var lookUpLogic = new LookupLogic();
+                    var status = lookUpLogic.GetItemIdByGroupAndItemName("StabilityAssessment", categorizationStatus.ToString());
+                    var itemId = 0;
+                    if (status.Count > 0)
+                    {
+                        itemId = status[0].ItemId;
+                    }
+
+                    arr1 = new string[] { Msg, itemId.ToString() };
+
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+
+            return new JavaScriptSerializer().Serialize(arr1);
+        }
+
+
+        [WebMethod]
         public string GetPatientCategorization(int patientId)
         {
             string[] arr1 = new string[] { };
