@@ -242,7 +242,7 @@ namespace Entities.CCC.Encounter
             public int NoAdr { get; set; }
             public int LdlVLInPast3Months { get; set; }
             public int TwoConsecutiveLdlVl { get; set; }
-            public int Muac { get; set; }
+            public double Muac { get; set; }
 
 
 
