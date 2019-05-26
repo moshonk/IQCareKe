@@ -295,7 +295,7 @@ namespace IQCare.CCC.UILogic
                 categorizationParameters.OnART12Months = Convert.ToInt32(theDS.Tables[6].Rows[0][0].ToString());
 
             if (theDS.Tables[7].Rows.Count > 0)
-                categorizationParameters.Muac = Convert.ToInt32(theDS.Tables[7].Rows[0][0].ToString());
+                categorizationParameters.Muac = Convert.ToDouble(theDS.Tables[7].Rows[0][0].ToString());
 
             if (theDS.Tables[8].Rows.Count > 0)
                 categorizationParameters.SameRegimen12Months = Convert.ToInt32(theDS.Tables[8].Rows[0][0].ToString());
