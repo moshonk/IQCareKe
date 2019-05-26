@@ -238,7 +238,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="hb" value="0" class="status" id="hb-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="hb" value="-1" class="status" id="hb-na">Not appllicable</label>
+                                <input type="radio" name="hb" value="2" class="status" id="hb-na">Not appllicable</label>
                         </td>
                         <td width="149">
                             <input type="number" class="form-control result" id="hb-result">
@@ -258,7 +258,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="creatinine" value="0" class="status" id="creatinine-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="creatinine" value="-1" class="status" id="creatinine-na">Not applicable</label>
+                                <input type="radio" name="creatinine" value="2" class="status" id="creatinine-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <input type="number" class="form-control result" id="creatinine-result">umol/L
@@ -277,7 +277,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="alt" value="0" class="status" id="alt-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="alt" value="-1" class="status" id="alt-na">Not applicable</label>
+                                <input type="radio" name="alt" value="2" class="status" id="alt-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <input type="number" class="form-control result" id="alt-result">IU
@@ -296,7 +296,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="hbsag" value="0" class="status" id="hbsag-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="hbsag" value="-1" class="status" id="hbsag-na">Not applicable</label>
+                                <input type="radio" name="hbsag" value="2" class="status" id="hbsag-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <label class="inline-radio">
@@ -318,7 +318,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="vdrl" value="0" class="status" id="vdrl-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="vdrl" value="-1" class="status" id="vdrl-na">Not applicable</label>
+                                <input type="radio" name="vdrl" value="2" class="status" id="vdrl-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <label class="inline-radio">
@@ -340,7 +340,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="crag" class="status" value="0" id="crag-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="crag" class="status" value="-1" id="crag-na">Not applicable</label>
+                                <input type="radio" name="crag" class="status" value="2" id="crag-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <label class="inline-radio">
@@ -362,7 +362,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="tblam" value="0" class="status" id="tblam-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="tblam" value="-1" class="status" id="tblam-na">Not applicable</label>
+                                <input type="radio" name="tblam" value="2" class="status" id="tblam-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <p></p>
@@ -381,7 +381,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="deworming" value="0" class="status" id="deworming-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="deworming" value="-1" class="status" id="deworming-na">Not applicable</label>
+                                <input type="radio" name="deworming" value="2" class="status" id="deworming-na">Not applicable</label>
                         </td>
                         <td width="149"></td>
                         <td width="161">
@@ -398,7 +398,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="depression-screening" class="status" value="0" id="depression-screening-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="depression-screening" class="status" value="-1" id="depression-screening-na">Not applicable</label>
+                                <input type="radio" name="depression-screening" class="status" value="2" id="depression-screening-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <label class="inline-radio">
@@ -420,7 +420,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="cacx-screening" value="0" class="status" id="cacx-screening-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="cacx-screening" value="-1" class="status" id="cacx-screening-na">Not applicable</label>
+                                <input type="radio" name="cacx-screening" value="2" class="status" id="cacx-screening-na">Not applicable</label>
                         </td>
                         <td width="149">
                             <label class="inline-radio">
@@ -442,7 +442,7 @@
                             <label class="inline-radio">
                                 <input type="radio" name="dental-review" value="0" class="status" id="dental-review-nd">Not done</label>
                             <label class="inline-radio">
-                                <input type="radio" name="dental-review" value="-1" class="status" id="dental-review-na">Not applicable</label>
+                                <input type="radio" name="dental-review" value="2" class="status" id="dental-review-na">Not applicable</label>
                         </td>
                         <td width="149"></td>
                         <td width="161">
