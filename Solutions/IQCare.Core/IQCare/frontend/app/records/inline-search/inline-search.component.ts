@@ -80,6 +80,10 @@ export class InlineSearchComponent implements OnInit, AfterViewInit {
             clientSearch.middleName = this.form.value.middleName;
         }
 
+        if (this.form.value.identifierValue && this.form.value.identifierValue != '') {
+            clientSearch.identifierValue = this.form.value.identifierValue;
+        }
+
         if (this.gender == 'female') {
             clientSearch.sex = 52;
         }
