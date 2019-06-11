@@ -1095,13 +1095,15 @@ namespace IQCare.Web.CCC.WebService
                 categorizationStatus = PatientCategorizationStatus.UnStable;
             }
 
+            var userId = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
             var patientCategorization = new PatientCategorization()
             {
                 PatientId = patientId,
                 Categorization = categorizationStatus,
                 DateAssessed = DateTime.Now,
                 PatientMasterVisitId = patientMasterVisitId,
-                HealthcareWorkerConcerns = healthcareWorkerConcerns
+                HealthcareWorkerConcerns = healthcareWorkerConcerns,
+                CreatedBy = userId
             };
             try
             {
