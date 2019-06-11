@@ -21,6 +21,7 @@ namespace Entities.CCC.Encounter
         public int PatientMasterVisitId { get; set; }
         public PatientCategorizationStatus Categorization { get; set; }
         public DateTime DateAssessed { get; set; }
+        public string HealthcareWorkerConcerns { get; set;}
     }
 
     public enum PatientCategorizationStatus

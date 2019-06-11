@@ -1071,7 +1071,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters)
+        public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters, string healthcareWorkerConcerns)
         {
             PatientCategorizationStatus categorizationStatus;
             string[] arr1 = new string[] { };
@@ -1100,7 +1100,8 @@ namespace IQCare.Web.CCC.WebService
                 PatientId = patientId,
                 Categorization = categorizationStatus,
                 DateAssessed = DateTime.Now,
-                PatientMasterVisitId = patientMasterVisitId
+                PatientMasterVisitId = patientMasterVisitId,
+                HealthcareWorkerConcerns = healthcareWorkerConcerns
             };
             try
             {
