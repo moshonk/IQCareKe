@@ -2458,6 +2458,17 @@
 													<div class="col-md-12">
 														<hr>
 													</div>
+                                                    <div class="col-md-12">
+														<div class="col-md-4">
+															<label class="control-lable pull-left">Specify the concerns</label>
+														</div>
+                                                        <div class="col-md-8">
+                                                            <input id="SpecifyHealthcareWorkerConcerns" type="text" name="SpecifyHealthcareWorkerConcerns" style="width:100%" />
+                                                        </div>
+                                                    </div>
+													<div class="col-md-12">
+														<hr>
+													</div>
 													<div class="col-md-12">
 														<div class="col-md-12">
 															<asp:LinkButton runat="server" ID="btnSaveCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
@@ -2704,6 +2715,17 @@
                                                         <div class="col-md-12">
                                                             <hr>
                                                         </div>
+                                                    <div class="col-md-12">
+														<div class="col-md-4">
+															<label class="control-lable pull-left">Specify the concerns</label>
+														</div>
+                                                        <div class="col-md-8">
+                                                            <input id="AncSpecifyHealthcareWorkerConcerns" type="text" name="AncSpecifyHealthcareWorkerConcerns"  style="width:100%"  />
+                                                        </div>
+                                                    </div>
+													<div class="col-md-12">
+														<hr>
+													</div>
                                                         <div class="col-md-12">
                                                             <div class="col-md-12">
                                                                 <asp:LinkButton runat="server" ID="btnSaveAncCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
@@ -2953,6 +2975,17 @@
                                                         <div class="col-md-12">
                                                             <hr>
                                                         </div>
+                                                        <div class="col-md-12">
+														    <div class="col-md-4">
+															    <label class="control-lable pull-left">Specify the concerns</label>
+														    </div>
+                                                            <div class="col-md-8">
+                                                                <input id="PncSpecifyHealthcareWorkerConcerns" type="text" name="PncSpecifyHealthcareWorkerConcerns" style="width:100%" />
+                                                            </div>
+                                                        </div>
+													    <div class="col-md-12">
+														    <hr>
+													    </div>
                                                         <div class="col-md-12">
                                                             <div class="col-md-12">
                                                                 <asp:LinkButton runat="server" ID="btnSavePncCategorization" CssClass="btn btn-info" ClientIDMode="Static" OnClientClick="return false;">Update Categorization</asp:LinkButton>
@@ -5758,20 +5791,30 @@
             var target = $("#differentiatedModal ul li.active a").attr("href") // activated tab
 
             var activeTab = "";
+            var healthcareWorkerConcerns = "";
 
             switch (target) {
                 case "#anc":
                     activeTab = $("#AncCategorization");
+                    healthcareWorkerConcerns = $('#AncSpecifyHealthcareWorkerConcerns').val();
                     break;
                 case "#pnc":
                     activeTab = $("#PncCategorization")
+                    healthcareWorkerConcerns = $('#PncSpecifyHealthcareWorkerConcerns').val();
                     break;
                 default:
                     activeTab = $("#Categorization")
+                    healthcareWorkerConcerns = $('#SpecifyHealthcareWorkerConcerns').val();
                     break;
             }
 
             if (activeTab.parsley().validate()) {
+                var healthcareworkerHasNoConcerns = $("input[name$=HealthcareConcerns]:checked").val();
+
+                if (healthcareworkerHasNoConcerns == "false" && healthcareWorkerConcerns == '') {
+                    toastr.error("Specify your concerns");
+                    return false;
+                }
                 AddPatientCategorization();
             } else {
                 return false;
@@ -5897,6 +5940,13 @@
             }
         }
 
+        $("input[name$=HealthcareConcerns]").change(function () {
+            if ($(this).is(":checked") && $(this).val() == "false") {
+                $("input[name$=SpecifyHealthcareWorkerConcerns]").removeProp("disabled");
+            } else {
+                $("input[name$=SpecifyHealthcareWorkerConcerns]").prop("disabled", "disabled");
+            }
+        });
 
         function AddPatientCategorization() {
             var artPeriod;
@@ -5910,6 +5960,7 @@
 			var healthcareConcerns;
 			var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var healthcareWorkerConcerns = "";
 
             var categorizationCriteria = [];
 
@@ -5930,6 +5981,8 @@
                     categorizationCriteria.push($("input[name$=AncNoAdr]:checked").val());
                     categorizationCriteria.push($("input[name$=StartedAnc]:checked").val());                    
                     categorizationCriteria.push($("input[name$=AncHealthcareConcerns]:checked").val());
+                    healthcareWorkerConcerns = $('#AncSpecifyHealthcareWorkerConcerns').val();
+
 
                     break;
                 case "#pnc":
@@ -5946,6 +5999,7 @@
                     categorizationCriteria.push($("input[name$=PncAdherenceUnderstanding]:checked").val());
                     categorizationCriteria.push($("input[name$=PncNoAdr]:checked").val());
                     categorizationCriteria.push($("input[name$=PncHealthcareConcerns]:checked").val());
+                    healthcareWorkerConcerns = $('#PncSpecifyHealthcareWorkerConcerns').val();
 
                     break;
                 default:
@@ -5958,13 +6012,14 @@
                     categorizationCriteria.push($("input[name$=Bmi]:checked").val());
                     categorizationCriteria.push($("input[name$=Age]:checked").val());
                     categorizationCriteria.push($("input[name$=HealthcareConcerns]:checked").val());
+                    healthcareWorkerConcerns = $('#SpecifyHealthcareWorkerConcerns').val();
                     break;
             }                       
 
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientService.asmx/AddPatientCategorizationWithDynamicParams",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','categorizationParameters': '" + JSON.stringify(categorizationCriteria) + "'}",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','categorizationParameters': '" + JSON.stringify(categorizationCriteria) + "','healthcareWorkerConcerns': '" + healthcareWorkerConcerns + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (response) {
