@@ -16,7 +16,8 @@ namespace IQCare.CCC.UILogic
                 PatientId = p.PatientId,
                 PatientMasterVisitId = p.PatientMasterVisitId,
                 Categorization = p.Categorization,
-                DateAssessed = p.DateAssessed
+                DateAssessed = p.DateAssessed,
+                HealthcareWorkerConcerns = p.HealthcareWorkerConcerns
             };
             var categorizationSearch = this.GetByPatientId(p.PatientId).Find(pc => pc.PatientMasterVisitId == p.PatientMasterVisitId);
             if (categorizationSearch != null )
