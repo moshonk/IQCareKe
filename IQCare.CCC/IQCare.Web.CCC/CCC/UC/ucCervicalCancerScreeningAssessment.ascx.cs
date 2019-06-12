@@ -52,6 +52,11 @@ namespace IQCare.Web.CCC.UC
             }
         }
 
+        protected string Gender
+        {
+            get { return Convert.ToString(HttpContext.Current.Session["Gender"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
