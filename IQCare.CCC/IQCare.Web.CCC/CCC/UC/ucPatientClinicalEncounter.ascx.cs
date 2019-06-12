@@ -256,6 +256,9 @@ namespace IQCare.Web.CCC.UC
 
             Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
             SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
+
+            Control CervicalCancerScreeningAssessmentCtrl = Page.LoadControl("~/CCC/UC/ucCervicalCancerScreeningAssessment.ascx");
+            CervicalCancerScreeningAssessmentPH.Controls.Add(CervicalCancerScreeningAssessmentCtrl);
         }
         private void populatePNS()
         {

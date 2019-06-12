@@ -123,6 +123,7 @@ namespace DataAccess.CCC.Repository
         private IPatientPregnancyIndicatorRepository _PatientPregnancyIndicatorRepository;
         private IPatientPregnancyRepository _PatientPregnancyRepository;
         private IPatientScreeningRepository _PatientScreeningRepository;
+        private IPatientCervicalCancerScreeningRepository _PatientCervicalCancerScreeningRepository;
         private IPatientAdverseEventOutcomeRepository _patientAdverseEventOutcomeRepository;
         private IPatientPIAPregnancySymptomRepository _PatientPIAPregnancySymptomRepository;
         private IPatientPregnancyIntentionAssessmentRepository _PatientPregnancyIntentionAssessmentRepository;
@@ -803,6 +804,14 @@ namespace DataAccess.CCC.Repository
             get
             {
                 return _PatientScreeningRepository ?? (_PatientScreeningRepository = new PatientScreeningRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientCervicalCancerScreeningRepository PatientCervicalCancerScreeningRepository
+        {
+            get
+            {
+                return _PatientCervicalCancerScreeningRepository ?? (_PatientCervicalCancerScreeningRepository = new PatientCervicalCancerScreeningRepository((GreencardContext)_context));
             }
         }
 

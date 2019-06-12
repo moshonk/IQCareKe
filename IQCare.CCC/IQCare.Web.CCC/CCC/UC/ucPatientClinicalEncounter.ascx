@@ -1676,8 +1676,11 @@
                             <div class="SocialHistoryPH">
                                 <asp:PlaceHolder ID="SocialHistoryPH" runat="server"></asp:PlaceHolder>
                             </div>
-                            <%--.panel--%>
-                        </div>
+                            <div class="CervicalCancerScreeningAssessmentPH">
+                                <asp:PlaceHolder ID="CervicalCancerScreeningAssessmentPH" runat="server"></asp:PlaceHolder>
+                            </div>
+							<%--.panel--%>
+						</div>
 
                     </div>
 

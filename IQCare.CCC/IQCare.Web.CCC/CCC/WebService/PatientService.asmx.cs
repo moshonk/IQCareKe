@@ -1070,7 +1070,7 @@ namespace IQCare.Web.CCC.WebService
             return new JavaScriptSerializer().Serialize(arr1);
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters, string healthcareWorkerConcerns)
         {
             PatientCategorizationStatus categorizationStatus;

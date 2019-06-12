@@ -12,6 +12,7 @@ namespace Interface.CCC.Screening
         PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid);
         List<PatientScreening> GetPatientScreening(int patientId);
         List<PatientScreening> GetPatientScreening(int patientId, DateTime visitdate, int screeningCategoryId);
+        List<PatientScreening> GetPatientScreening(int patientId, int patientMasterVisitId, int screeningTypeId);
         int CheckIfPatientScreeningExists(int patientId);
         int CheckIfPatientScreeningExists(int patientId, DateTime visitDate, int screeningCategoryId, int screeningTypeId);
         int checkScreeningByScreeningCategoryId(int patientId, int screenTypeId, int screeningCategoryId);
@@ -19,5 +20,6 @@ namespace Interface.CCC.Screening
         int updatePatientScreeningById(PatientScreening p);
         List<PatientScreening> GetPatientScreeningByVisitId(int patientId, int patientMasterVisitId);
         List<PatientScreening> GetPatientScreeningStatus(int patientId, int statusId);
+        List<PatientScreening> GetPatientScreening(int patientId, int screeningTypeId);
     }
 }

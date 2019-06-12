@@ -233,6 +233,8 @@
                              <a href='<%=ResolveClientUrl("~/CCC/CaseSummary/PatientClinicalReviewSummary.aspx") %>' class="list-group-item" id="menuPatientClinicalSummary">
 									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Patient Clinical Review Summary </strong>
 								</a>
+                               <asp:LinkButton ID="menuCervialCancerScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_CxCaScreening_Click">
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Cervical cancer screening</strong></asp:LinkButton>
                                
                                <asp:LinkButton ID="menuScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_Depression_Click">
 								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">DepressionScreening</strong></asp:LinkButton>
@@ -548,6 +550,7 @@
 				$("#MenuOneTimeEventsTracker").hide();
 				$("#menuStopEncounter").hide();
                 $("#menuScreening").hide();
+                $("#menuCervialCancerScreening").hide();
                 $("#menuGenderBasedScreening").hide();
                 $("#menuAlcoholScreening").hide();
                 $("#menuEnhanceAdherence").hide();
@@ -581,6 +584,7 @@
 				$("#MenuOneTimeEventsTracker").show();
                 $("#menuStopEncounter").show();
                 $("#menuScreening").show();
+                $("#menuCervialCancerScreening").show();
                 $("#menuGenderBasedScreening").show();
                 $("#menuAlcoholScreening").show();
                 $("#menuEnhanceAdherence").show();

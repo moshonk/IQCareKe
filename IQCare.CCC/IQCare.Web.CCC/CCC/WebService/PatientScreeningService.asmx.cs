@@ -129,6 +129,26 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string DeleteScreeningData(int patientId, int patientMasterVisitId, int screeningTypeId)
+        {
+            try
+            {
+                var PSM = new PatientScreeningManager();
+                foreach (PatientScreening item in PSM.GetPatientScreening(patientId, patientMasterVisitId, screeningTypeId))
+                {
+                    PSM.DeletePatientScreening(item.Id);
+                }
+
+                Msg = "Screening removed";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
         [WebMethod(EnableSession = true)]
         public string AddUpdateScreeningDataByVisitId(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
         {
@@ -163,6 +183,15 @@ namespace IQCare.Web.CCC.WebService
         {
             var PSM = new PatientScreeningManager();
             PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(PatientId,PatientMasterVisitId).ToArray();
+            string jsonScreeningObject = "[]";
+            jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
+            return jsonScreeningObject;
+        }
+        [WebMethod(EnableSession = true)]
+        public string GetScreeningByScreeningType(int patientId, int screeningTypeId)
+        {
+            var psm = new PatientScreeningManager();
+            PatientScreening[] patientScreeningData = psm.GetPatientScreening(patientId, screeningTypeId).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
             return jsonScreeningObject;
@@ -343,5 +372,31 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetCervicalCancerScreeningByVisitId(int PatientId, int PatientMasterVisitId)
+        {
+            var psm = new PatientScreeningManager();
+            PatientCervicalCancerScreening patientScreeningData = psm.GetPatientCervicalCancerScreening(PatientId, PatientMasterVisitId);
+            string jsonScreeningObject = "{}";
+            jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
+            return jsonScreeningObject;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveUpdatePatientCervicalCancerScreening(int patientId, int patientMasterVisitId, DateTime visitDate, DateTime appointmentDate, string referredTo, int userId) {
+            try
+            {
+                var psm = new PatientScreeningManager();
+                psm.AddUpdatePatientCervicalCancerScreening(patientId, patientMasterVisitId, visitDate, appointmentDate, referredTo, userId);
+
+                Msg = "Screening data updated successfully";
+            }
+            catch(Exception e) { 
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
     }
 }

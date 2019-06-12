@@ -10,6 +10,7 @@ using IQCare.CCC.UILogic.Baseline;
 using IQCare.CCC.UILogic.Enrollment;
 using Interface.CCC.Visit;
 using Entities.CCC.Visit;
+using IQCare.CCC.UILogic.Screening;
 
 namespace IQCare.Web.CCC.Patient
 {
@@ -21,6 +22,7 @@ namespace IQCare.Web.CCC.Patient
         protected int labTestId = 0;
         protected Decimal vlValue = 0;
         protected IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
+        protected ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected int PatientId
         {
@@ -44,7 +46,10 @@ namespace IQCare.Web.CCC.Patient
 
         protected string PatientGender
         {
-            get { return Convert.ToString(Session["Gender"]); }
+            get {
+                var patientLookupManager = new PatientLookupManager();
+                return LookupLogic.GetLookupNameById(patientLookupManager.GetPatientSexId(PatientId));
+            }
         }
 
         protected string PatientStatus
@@ -587,7 +592,45 @@ namespace IQCare.Web.CCC.Patient
                     }
                 }
             }
+
+            GetCervicalCancerScreeningStatus(PatientId);
         }
+
+        private void GetCervicalCancerScreeningStatus(int patientId)
+        {
+            if (PatientGender.Equals("Female"))
+            {
+                var psm = new PatientScreeningManager();
+                var cxCaAssessmentId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreeningAssessment"));
+                var psa = psm.GetPatientScreening(patientId, cxCaAssessmentId);
+
+                if (psa.Count > 0)
+                {
+                    lblCervicalCancerScreeningAsessment.Text = "<span class='label label-success'>" + Convert.ToDateTime(psa[0].ScreeningDate).ToString("dd-MMM-yyyy") + "</span>";
+                }
+                else
+                {
+                    lblCervicalCancerScreeningAsessment.Text = "<span class='label label-warning'>Not done</span>";
+                }
+
+                var cxCaScreeningId = Convert.ToInt32(lookupManager.GetLookUpMasterId("CervicalCancerScreening"));
+                var ps = psm.GetPatientScreening(patientId, cxCaScreeningId);
+                if (ps.Count > 0)
+                {
+                    lblCervicalCancerScreening.Text = "<span class='label label-success'>" + Convert.ToDateTime(ps[0].ScreeningDate).ToString("dd-MMM-yyyy") + "</span";
+                }
+                else
+                {
+                    lblCervicalCancerScreening.Text = "<span class='label label-warning'>Not done</span>";
+                }
+                phCervicalCancerScreening.Visible = true;
+            }
+            else
+            {
+                phCervicalCancerScreening.Visible = false;
+            }
+        }
+
     }
 }
 
