@@ -379,6 +379,20 @@ namespace IQCare.CCC.UILogic.Screening
             {
                 throw;
             }
+
+        }
+
+        public List<PatientCervicalCancerScreening> GetPatientCervicalCancerScreeningHistory(int patientId)
+        {
+            try
+            {
+                return _patientCervicalCancerScreening.GetPatientCervicalCancerScreening(patientId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }

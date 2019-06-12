@@ -11,6 +11,8 @@ using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Visit;
 using System.Collections;
+using System.Web.Script.Services;
+using System.Data;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -396,6 +398,24 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPatientCervicalCancerScreeningHistory(int patientId)
+        {
+
+            var psm = new PatientScreeningManager();
+            List<PatientCervicalCancerScreening> ccsHistory = psm.GetPatientCervicalCancerScreeningHistory(patientId);
+
+            ArrayList rows = new ArrayList();
+
+            foreach (PatientCervicalCancerScreening ccs in ccsHistory)
+            {
+                string[] i = new string[4] { ccs.VisitDate.ToString(), ccs.AppointmentDate.ToString(), ccs.ReferredTo.ToString(), ccs.PatientMasterVisitId.ToString()};
+                rows.Add(i);
+            }
+            return rows;
         }
 
     }

@@ -103,9 +103,28 @@ TODO:   Load saved screening data.
             </div>
         </div>
     </div>
-
     <button type="button" id="submitData" class="btn btn-primary btn-next" data-last="Complete" onclientclick="return false;" />
 </div>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <h2>Screening History</h2>
+    </div>
+    <div class="col-md-12">
+        <table id="dtlScreeningHistory" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th><span class="text-primary">Screening Date</span></th>
+                    <th><span class="text-primary">Next Appointment Date</span></th>
+                    <th><span class="text-primary">Referral</span></th>
+                    <th><span class="text-primary">id</span></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+</div>
+
 <script type="text/javascript">
 
     var contain = "";
@@ -419,6 +438,43 @@ TODO:   Load saved screening data.
             }
         }
 
+        function getScreeningHistory() {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/GetPatientCervicalCancerScreeningHistory",
+                data: "{patientId: '" + patientId + "'}",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function (res) {
+                $('#dtlScreeningHistory').DataTable({
+                    data: res.d,
+                    paging: false,
+                    searching: false,
+                    info: false,
+                    ordering: false,
+                    columnDefs: [
+                        {
+                            "targets": [0],
+                            "visible": true,
+                            "searchable": false
+                        }
+                    ]
+                });
+
+            });
+
+        }
+
+        $('#dtlScreeningHistory').on('click', 'tbody tr', function () {
+            // window.location.href = $(this).attr('href');
+            var patientId = <%=patientId%>;
+            var patientMasterVisitId = $(this).find('td').eq(3).text();
+
+            getPatientScreening(patientId, patientMasterVisitId);
+
+        });
+
         function init() {
             if (gender != 'Female') {
                 $("#CxCaScreening").html("This form can ONLY be filled for FEMALE clients");
@@ -426,13 +482,16 @@ TODO:   Load saved screening data.
                 $("#CxCaScreening .children").hide();
                 $(".question").find('input[type=radio]').attr('data-parsley-required', 'true');
             }
+
+            getScreeningHistory();
+
         }
 
         function showHideChildControls() {
             $("#CxCaScreeningVisitType, #CxCaScreeningMethod, #CxCaTreatment #CxCaReferralReasons #Referred #CxCaReferralReasons").find(".question input[type=radio]").each(function () {
                 if ($(this).is(":checked")) {
                     $(this).parent().siblings().show();
-                    $(this).parent().siblings().find('input[type=radio]').attr('data-parsley-required','true')
+                    $(this).parent().siblings().find('input[type=radio]').attr('data-parsley-required', 'true')
                 } else {
                     $(this).parent().siblings().find('input[type=radio]').attr("checked", false);
                     $(this).parent().siblings().find('input[type=radio]').removeAttr('data-parsley-required')
@@ -452,7 +511,7 @@ TODO:   Load saved screening data.
         init();
 
         getPatientScreening(patientId, patientMasterVisitId);
-        
+
     });
 
 </script>
