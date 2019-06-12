@@ -18,6 +18,7 @@
 <script type="text/javascript">
     var contain = "";
     var visitDate = "<%=VisitDate%>";
+    var gender = "<%=Gender%>";
 
     ('focus', function (ev) { ev.preventDefault(); });
 
@@ -27,18 +28,17 @@
         $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
             var currentStep = data.step;
             if (currentStep == 2) {
-                if ($('#datastep2').parsley().validate()) {
+                if ($('#datastep2').parsley().validate() && gender == 'Female') {
                     var visitDate = "<%=VisitDate%>";
-
                     var screenedInLastOneYear = $("#ScreenedInLastOneYear").find("input[type=radio]:checked").siblings("label").text();
                     var referForScreening = $("#ReferForScreening").find("input[type=radio]:checked").siblings("label").text();
 
                     if (screenedInLastOneYear == "") {
-                         toastr.error("Cervival cancer screening assessment is missing");
+                        toastr.error("Cervival cancer screening assessment is missing");
                         return false;
                     }
 
-                    if ( screenedInLastOneYear == "No" && referForScreening == "") {
+                    if (screenedInLastOneYear == "No" && referForScreening == "") {
                         toastr.error("Cervival cancer screening referral is missing");
                         return false;
                     }
@@ -173,9 +173,9 @@
                                 }).siblings("input").prop("checked", true);
                             }
                         } else {
-                                $("#ScreenedInLastOneYear").find("label").filter(function () {
-                                    return $(this).text() == "No"
-                                }).siblings("input").prop("checked", true);
+                            $("#ScreenedInLastOneYear").find("label").filter(function () {
+                                return $(this).text() == "No"
+                            }).siblings("input").prop("checked", true);
                         }
 
                         showHideReferForScreening();
