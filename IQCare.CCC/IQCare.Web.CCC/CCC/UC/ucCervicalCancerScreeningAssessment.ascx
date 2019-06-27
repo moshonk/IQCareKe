@@ -18,12 +18,12 @@
 <script type="text/javascript">
     var contain = "";
     var visitDate = "<%=VisitDate%>";
-    var gender = "<%=Gender%>";
 
     ('focus', function (ev) { ev.preventDefault(); });
 
     $(document).ready(function () {
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var gender = "<%=Gender%>";
 
         $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
             var currentStep = data.step;
