@@ -192,6 +192,7 @@
     <Content Include="CCC\UC\ucPatientVitalsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientWorkPlan.ascx" />
     <Content Include="CCC\UC\ucPharmacyPrescription.ascx" />
+    <Content Include="CCC\UC\ucSexualPartners.ascx" />
     <Content Include="CCC\UC\ucSocialHistory.ascx" />
     <Content Include="CCC\UC\ucTannerStaging.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
@@ -1076,6 +1077,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPharmacyPrescription.ascx.designer.cs">
       <DependentUpon>ucPharmacyPrescription.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucSexualPartners.ascx.cs">
+      <DependentUpon>ucSexualPartners.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucSexualPartners.ascx.designer.cs">
+      <DependentUpon>ucSexualPartners.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucSocialHistory.ascx.cs">
       <DependentUpon>ucSocialHistory.ascx</DependentUpon>
