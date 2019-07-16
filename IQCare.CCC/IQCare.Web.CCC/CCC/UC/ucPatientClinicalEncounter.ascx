@@ -3845,7 +3845,9 @@
             appointmentCount();
         });
 
-
+        $("#ServiceArea").change(function () {
+            appointmentCount();
+        });
 
         $('#PersonAppointmentDateD').datetimepicker().on('dp.change', function (e) {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -6446,11 +6448,14 @@
 
 	function appointmentCount() {
 		jQuery.support.cors = true;
-		var date = $("#<%=AppointmentDate.ClientID%>").val();
+        var date = $("#<%=AppointmentDate.ClientID%>").val();
+        if (date == '') {
+            return;
+        }
 		$.ajax(
 			{
 				type: "POST",
-				url: "../WebService/PatientService.asmx/GetPatientAppointmentCount",
+				url: "../WebService/PatientService.asmx/GetPatientAppointmentCountForServiceArea",
 				data: "{'date':'" + date + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",

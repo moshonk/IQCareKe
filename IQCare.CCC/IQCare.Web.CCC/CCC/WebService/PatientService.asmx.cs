@@ -989,6 +989,25 @@ namespace IQCare.Web.CCC.WebService
             }
             return count;
         }
+
+        [WebMethod]
+        public int GetPatientAppointmentCountForServiceArea(DateTime date, int serviceAreaId)
+        {
+            int count = 0;
+            List<PatientAppointment> appointments = new List<PatientAppointment>();
+            try
+            {
+                var appointment = new PatientAppointmentManager();
+                appointments = appointment.GetByDate(date).FindAll(a => a.ServiceAreaId == serviceAreaId);
+                count = appointments.Count;
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return count;
+        }
+
         [WebMethod(EnableSession = true)]
         public string getAppointmentId(int PatientMasterVisitId, DateTime date)
         {
