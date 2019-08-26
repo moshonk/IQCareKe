@@ -4803,19 +4803,19 @@
             try {
                 for (var i = 0; i < rowCount; i++) {
                     adverseEventsArray[i] = {
-                        "adverseSeverityID": advEventsTable.row(i).data()[0],
-                        //"adverseEvetId":adverseEvent,
-                        "adverseEvent": advEventsTable.row(i).data()[1],
-                        "medicineCausingAE": advEventsTable.row(i).data()[2],
-                        "adverseSeverity": advEventsTable.row(i).data()[3],
-                        "adverseAction": advEventsTable.row(i).data()[4]
-
                         //"adverseSeverityID": advEventsTable.row(i).data()[0],
-                        //"adverseEventId": advEventsTable.row(i).data()[1],
-                        //"adverseEvent": advEventsTable.row(i).data()[2],
-                        //"medicineCausingAE": advEventsTable.row(i).data()[3],
-                        //"adverseSeverity": advEventsTable.row(i).data()[4],
-                        //"adverseAction": advEventsTable.row(i).data()[5]
+                        //"adverseEvetId":adverseEvent,
+                        //"adverseEvent": advEventsTable.row(i).data()[1],
+                        //"medicineCausingAE": advEventsTable.row(i).data()[2],
+                        //"adverseSeverity": advEventsTable.row(i).data()[3],
+                        //"adverseAction": advEventsTable.row(i).data()[4]
+
+                        "adverseSeverityID": advEventsTable.row(i).data()[0],
+                        "adverseEventId": advEventsTable.row(i).data()[1],
+                        "adverseEvent": advEventsTable.row(i).data()[2],
+                        "medicineCausingAE": advEventsTable.row(i).data()[3],
+                        "adverseSeverity": advEventsTable.row(i).data()[4],
+                        "adverseAction": advEventsTable.row(i).data()[5]
                     }
                 }
             }
