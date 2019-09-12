@@ -29,7 +29,7 @@ namespace IQCare.Web.CCC.Encounter
             PatientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientMasterVisitId"]);
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
 
-            CheckPatientBaselineData();
+            //CheckPatientBaselineData();
 
         }
     }

@@ -367,7 +367,7 @@ namespace IQCare.Web.CCC.WebService
                         IPTOutComeDate=x.IPTOutComeDate,
                         IptDiscontinuationReason = x.IptDiscontinuationReason,
                         IptOutcome = new LookupLogic().GetLookupItemNameById(x.IptEvent),
-                        IPTOutComeDate = x.IPTOutComeDate,
+                        //IPTOutComeDate = x.IPTOutComeDate,
                         Id = x.Id
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
