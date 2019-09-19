@@ -915,7 +915,7 @@
              var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
             var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
             var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
-            var reasonForFPIneligibility = $("#<%=FpIneligibilityReason.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
             var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
             var regularMenses = $("input[name='regularMenses']:checked").val();
             var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
@@ -962,7 +962,6 @@
                          $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
                         $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
                         $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
-                        $("#<%=FpIneligibilityReason.ClientID%>").val(response.ReasonForFPIneligibility);
                         $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
                         $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
                         $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
@@ -1030,7 +1029,7 @@
              var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
             var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
             var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
-            var reasonForFPIneligibility = $("#<%=FpIneligibilityReason.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
             var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
             var regularMenses = $("input[name='regularMenses']:checked").val();
             var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
@@ -1077,7 +1076,6 @@
                          $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
                         $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
                         $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
-                        $("#<%=FpIneligibilityReason.ClientID%>").val(response.ReasonForFPIneligibility);
                         $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
                         $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
                         $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);

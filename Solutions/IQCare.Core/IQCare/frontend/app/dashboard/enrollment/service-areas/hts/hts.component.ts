@@ -32,6 +32,9 @@ export class HtsComponent implements OnInit {
     maxDate: Date;
     minDate: Date;
     serviceCode: string;
+    isEdit: boolean = false;
+    ageNumber: number;
+    ageInMonths: number;
 
     priorityPops: LookupItemView[] = [];
     keyPops: LookupItemView[] = [];
@@ -59,14 +62,19 @@ export class HtsComponent implements OnInit {
 
         this.route.params.subscribe(
             (params) => {
-                const { serviceId, id, serviceCode } = params;
+                const { serviceId, id, serviceCode, edit } = params;
                 this.serviceId = serviceId;
                 this.personId = id;
                 this.serviceCode = serviceCode;
+
+                if (edit == 1) {
+                    this.isEdit = true;
+                }
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
+        this.ageNumber = parseInt(JSON.parse(localStorage.getItem('ageNumber')), 10);
 
         this.form = this._formBuilder.group({
             EnrollmentDate: new FormControl('', [Validators.required]),
@@ -77,6 +85,10 @@ export class HtsComponent implements OnInit {
             priorityPopulation: new FormControl('', [Validators.required]),
         });
 
+        if (this.ageNumber < 15) {
+            this.form.controls.populationType.disable({ onlySelf: true });
+            this.form.controls.priorityPop.disable({ onlySelf: true });
+        }
         this.form.controls.KeyPopulation.disable({ onlySelf: true });
         this.form.controls.priorityPopulation.disable({ onlySelf: true });
 
@@ -101,14 +113,12 @@ export class HtsComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                // console.log(res);
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
                 } else {
                     this.minDate = new Date();
                 }
-
             }
         );
 
@@ -118,24 +128,126 @@ export class HtsComponent implements OnInit {
                 this.serviceAreaIdentifiers = serviceAreaIdentifiers;
             }
         );
+
+        this.personHomeService.getPatientByPersonId(this.personId).subscribe(
+            (res) => {
+                this.ageInMonths = parseInt(res.ageInMonths, 10);
+            }
+        );
+
+        if (this.isEdit) {
+            this.loadPatient();
+        }
+    }
+
+    loadPatient(): void {
+        this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
+            (result) => {
+                // load enrollment Date
+                this.loadHtsEnrollmentDate(result.id);
+
+                // load population types
+                this.loadPopulationTypes(this.personId);
+
+                // load hts identifiers
+                this.loadIdentifiers(result.id);
+
+                // load priority population
+                this.loadPriorityPopulation(this.personId);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPriorityPopulation(personId: number): void {
+        this.personHomeService.getPersonPriorityTypes(personId).subscribe(
+            (result) => {
+                // console.log(result);
+                if (result.length > 0) {
+                    this.form.controls.priorityPop.setValue(1);
+                    this.form.controls.priorityPopulation.enable({ onlySelf: false });
+                    const arrayValue = [];
+                    result.forEach(element => {
+                        arrayValue.push(element.priorityId);
+                    });
+                    this.form.controls.priorityPopulation.setValue(arrayValue);
+                } else {
+                    this.form.controls.priorityPop.setValue(2);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadIdentifiers(patientId: number): void {
+        this.recordsService.getPatientIdentifiersList(patientId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    this.form.get('EnrollmentNumber').setValue(result[0].identifierValue);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPopulationTypes(personId: number) {
+        this.personHomeService.getPersonPopulationType(personId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    if (result[0].populationType == 'General Population') {
+                        this.form.controls.populationType.setValue(1);
+                    } else {
+                        if (this.ageNumber >= 15) {
+                            this.form.controls.populationType.setValue(2);
+                            this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                            const arrayValue = [];
+                            result.forEach(element => {
+                                arrayValue.push(element.populationCategory);
+                            });
+                            this.form.controls.KeyPopulation.setValue(arrayValue);
+                        }
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadHtsEnrollmentDate(patientId: number): void {
+        this.personHomeService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceId).subscribe(
+            (result) => {
+                this.form.controls.EnrollmentDate.setValue(result.enrollmentDate);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     public onPopulationTypeChange() {
         const popType = this.form.controls.populationType.value;
-        if (popType == 1) {
+        if (popType == 1 && this.ageNumber >= 15) {
             this.form.controls.KeyPopulation.disable({ onlySelf: true });
             this.form.controls.KeyPopulation.setValue([]);
-        } else if (popType == 2) {
+        } else if (popType == 2 && this.ageNumber >= 15) {
             this.form.controls.KeyPopulation.enable({ onlySelf: false });
         }
     }
 
     public onPriorityChange() {
         const priorityPop = this.form.controls.priorityPop.value;
-        if (priorityPop == 2) {
+        if (priorityPop == 2 && this.ageNumber >= 15) {
             this.form.controls.priorityPopulation.disable({ onlySelf: true });
             this.form.controls.priorityPopulation.setValue([]);
-        } else if (priorityPop == 1) {
+        } else if (priorityPop == 1 && this.ageNumber >= 15) {
             this.form.controls.priorityPopulation.enable({ onlySelf: false });
         }
     }
@@ -192,6 +304,7 @@ export class HtsComponent implements OnInit {
                             this.patientId).subscribe();
 
 
+                        localStorage.setItem('ageInMonths', this.ageInMonths.toString());
                         this.zone.run(() => {
                             localStorage.setItem('personId', this.personId.toString());
                             localStorage.setItem('patientId', this.patientId.toString());

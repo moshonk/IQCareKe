@@ -95,7 +95,9 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
-                    CreatedBy = createdBy
+                    CreatedBy = createdBy,
+                    AgeforZ = ageforZ,
+                    NursesComments = nursesComments
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital, facilityId);
@@ -1070,7 +1072,7 @@ namespace IQCare.Web.CCC.WebService
             return new JavaScriptSerializer().Serialize(arr1);
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters, string healthcareWorkerConcerns)
         {
             PatientCategorizationStatus categorizationStatus;

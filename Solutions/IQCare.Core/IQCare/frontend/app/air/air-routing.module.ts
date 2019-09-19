@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReportSectionSettingComponent } from './report-section-setting/report-section-setting.component';
 import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/indicator-reporting-period.component';
 import { ReportIndicatorResultComponent } from './report-indicator-result/report-indicator-result.component';
-
+import { ActiveFormReportComponent } from './active-form-report/active-form-report.component'
+import { FormDetailResolver } from './_services/customformdetails.resolver';
+import { ReportsComponent } from './reports/reports.component';
 const routes: Routes = [
     {
         path: 'report/:reportingFormId',
@@ -42,6 +44,8 @@ const routes: Routes = [
         component: ReportsComponent
     }
 ];
+
+
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

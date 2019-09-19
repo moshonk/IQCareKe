@@ -122,6 +122,19 @@ export class AncService {
             );
     }
 
+    public deletePatientCounselling(id: number): Observable<any> {
+
+        const Indata = {
+            'Id': id
+        };
+        return this.http.post<any>(this.API_URL + '/api/PatientEducationExamination/DeletePatientCounselling', JSON.stringify(Indata),
+            httpOptions).pipe(
+                tap(deletePatientCounselling => this.errorHandler.log('Successfully deleted patient education')),
+                catchError(this.errorHandler.handleError<any>('Error in delete Patient Education'))
+            );
+
+    }
+
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
@@ -145,8 +158,19 @@ export class AncService {
         );
     }
 
+    public deletePatientChronicIllness(id: number): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientChronicIllness/Delete', JSON.stringify(Indata), httpOptions).pipe(
+            tap(deletePatientChronicIllness => this.errorHandler.log('Successfully deleted chronic illness')),
+            catchError(this.errorHandler.handleError<any>('Error in deleting Patient Chronic Illness'))
+        );
+
+    }
+
     public savePatientChronicIllness(chronicIllnessCommand: any[]): Observable<any> {
-         console.log(chronicIllnessCommand);
         if (chronicIllnessCommand.length == 0) {
             return of([]);
         }
@@ -183,7 +207,7 @@ export class AncService {
 
     public EditReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
 
-        return this.http.put<any>(this.API_URL + '' + this._url_ref_edit, JSON.stringify(referralCommand), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + this._url_ref_edit, JSON.stringify(referralCommand), httpOptions).pipe(
             tap(saveReferralAppointment => this.errorHandler.log('Successfully Edit Patient Referral')),
             catchError(this.errorHandler.handleError<any>('Error in Editing Patient Referral'))
         );
@@ -219,8 +243,22 @@ export class AncService {
         );
     }
 
+
+
+    public deletePreventiveServices(id: number): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientService/DeletePatientPreventiveService'
+            , JSON.stringify(Indata), httpOptions).pipe(
+                tap(deletePreventiveServices => this.errorHandler.log('Successfully delete Preventive Services')),
+                catchError(this.errorHandler.handleError<any>('Error in deleting Preventive Services'))
+            );
+    }
+
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
-        if (anyTests.length == 0) {
+        if (!hivStatusCommand.EncounterType || hivStatusCommand.EncounterType <= 0 || anyTests.length == 0 || anyTests[0].length == 0) {
             return of([]);
         }
 
@@ -235,7 +273,10 @@ export class AncService {
     }
 
     public saveHivResults(hivTestsCommand: HivTestsCommand): Observable<any> {
-        if (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0) {
+        if (!hivTestsCommand.HtsEncounterId 
+            || hivTestsCommand.HtsEncounterId == null 
+            || hivTestsCommand.HtsEncounterId == 0
+            || hivTestsCommand.Testing.length == 0) {
             return of([]);
         }
 
@@ -260,6 +301,8 @@ export class AncService {
                 catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfoAll'))
             );
     }
+
+
 
     public getPatientPhysicalExaminationInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PhysicalExamination/GetPhysicalExam/' +
@@ -352,9 +395,9 @@ export class AncService {
     public getPatientAppointmentAnc(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointmentAnc/' +
             patientId + '/' + patientMasterVisitId).pipe(
-            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
-        );
+                tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+            );
     }
 
 

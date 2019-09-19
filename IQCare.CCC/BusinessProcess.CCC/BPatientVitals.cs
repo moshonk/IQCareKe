@@ -14,7 +14,7 @@ namespace BusinessProcess.CCC
 {
     public class BPatientVitals : ProcessBase, IPatientVitals
     {
-       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
         public int AddPatientVitals(PatientVital p)
         {
@@ -26,7 +26,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.Dispose();
                 return p.Id;
             }
-     
+
         }
 
         public PatientVital GetPatientVitals(int patientId)
@@ -52,7 +52,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.Complete();
                 unitOfWork.Dispose();
             }
-    
+
         }
 
         public int UpdatePatientVitals(PatientVital p)
@@ -143,7 +143,7 @@ namespace BusinessProcess.CCC
                     pv.Weight = Convert.ToDecimal(theDT.Rows[i]["weight"]);
                     pv.BMI = Convert.ToDecimal(theDT.Rows[i]["bmi"]);
                     pv.CreateDate = Convert.ToDateTime(theDT.Rows[i]["createdate"]);
-                    
+
                     list.Add(pv);
                 }
 

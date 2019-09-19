@@ -14,6 +14,8 @@ namespace IQCare.CCC.UILogic
 
         public int AddPatientAppointments(PatientAppointment p, bool sendEvent = true)
         {
+            int returnVal = 0;
+
             try
             {
                 if (p.CreatedBy == 0) { p.CreatedBy = SessionManager.UserId; }
@@ -33,7 +35,22 @@ namespace IQCare.CCC.UILogic
                 CreatedBy = p.CreatedBy
             };
 
-            int returnVal = _appointment.AddPatientAppointments(appointment);
+            var sameDayAppointmentExists = _appointment.GetAppointmentByType(p.PatientId, p.PatientMasterVisitId, p.AppointmentDate,
+                p.ReasonId);
+            if (sameDayAppointmentExists.Count > 0)
+            {
+                sameDayAppointmentExists[0].Description = p.Description;
+                sameDayAppointmentExists[0].DifferentiatedCareId = p.DifferentiatedCareId;
+                sameDayAppointmentExists[0].ServiceAreaId = p.ServiceAreaId;
+                sameDayAppointmentExists[0].StatusId = p.StatusId;
+
+                _appointment.UpdatePatientAppointments(sameDayAppointmentExists[0]);
+            }
+            else
+            {
+                returnVal = _appointment.AddPatientAppointments(appointment);
+            }
+            
             if (returnVal > 0 && sendEvent)
             {
                 PatientLookupManager patientLookup = new PatientLookupManager();
@@ -71,19 +88,16 @@ namespace IQCare.CCC.UILogic
 
         public int UpdatePatientAppointments(PatientAppointment p)
         {
-            PatientAppointment appointment = new PatientAppointment()
-            {
-                PatientId = p.PatientId,
-                PatientMasterVisitId = p.PatientMasterVisitId,
-                AppointmentDate = p.AppointmentDate,
-                Description = p.Description,
-                DifferentiatedCareId = p.DifferentiatedCareId,
-                ReasonId = p.ReasonId,
-                ServiceAreaId = p.ServiceAreaId,
-                StatusId = p.StatusId,
-                //StatusDate = DateTime.Now,
-                Id = p.Id
-            };
+            var appointments = _appointment.GetByPatientId(p.PatientId);
+            var appointment = appointments.Find(pa => pa.Id == p.Id);
+
+            appointment.AppointmentDate = p.AppointmentDate;
+            appointment.Description = p.Description;
+            appointment.DifferentiatedCareId = p.DifferentiatedCareId;
+            appointment.ReasonId = p.ReasonId;
+            appointment.ServiceAreaId = p.ServiceAreaId;
+            appointment.CreatedBy = p.CreatedBy == 0 ? p.CreatedBy : appointment.CreatedBy;
+
             return _appointment.UpdatePatientAppointments(appointment);
         }
 
@@ -106,6 +120,7 @@ namespace IQCare.CCC.UILogic
             var appointment = _appointment.GetByDate(date);
             return appointment;
         }
+
         public List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date)
         {
             var appointment = _appointment.GetAppointmentId(PatientId, PatientMasterVisitId, date);

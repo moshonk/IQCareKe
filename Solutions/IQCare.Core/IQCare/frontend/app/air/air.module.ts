@@ -10,7 +10,12 @@ import { SubSectionFilterPipe, IndicatorFilterPipe } from './_model/pipe/subsect
 import { NativeDateAdapter, DateAdapter, MatDatepicker } from '@angular/material';
 import { CustomDateAdapter } from './_model/CustomDateAdapter';
 import { NotificationService } from '../shared/_services/notification.service';
-
+import { ReportIndicatorResultComponent } from './report-indicator-result/report-indicator-result.component';
+import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/indicator-reporting-period.component';
+import { IndicatorService } from './_services/indicator.service';
+import { IndicatorResultsGridComponent } from './indicator-results-grid/indicator-results-grid.component';
+import { RouterModule } from '@angular/router';
+import { ReportSectionSettingComponent } from './report-section-setting/report-section-setting.component';
 import {
 
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
@@ -40,19 +45,28 @@ import { ReportDashboardComponent } from './report-dashboard/report-dashboard.co
         MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule],
     exports: [
         ReportDashboardComponent
-      ],
-  declarations: [
-    ActiveFormReportComponent,
-    ReportIndicatorResultComponent,
-    IndicatorReportingPeriodComponent,
-    IndicatorResultsGridComponent
-  ],
- 
-  providers:[
-    FormDetailResolver,
-    FormDetailsService,
-    NotificationService,
-  { provide: DateAdapter, useClass: CustomDateAdapter },
-  ]
+    ],
+    declarations: [
+        ActiveFormReportComponent,
+        ReportIndicatorResultComponent,
+        IndicatorReportingPeriodComponent,
+        IndicatorResultsGridComponent,
+        SubSectionFilterPipe,
+        IndicatorFilterPipe,
+        ReportSectionSettingComponent,
+        ReportDashboardComponent,
+        ReportsComponent
+    ],
+
+    providers: [
+        FormDetailResolver,
+        FormDetailsService,
+        NotificationService,
+        { provide: DateAdapter, useClass: CustomDateAdapter },
+        AirRoutingModule,
+        IndicatorService
+
+    ]
+
 })
 export class AirModule { }

@@ -1,5 +1,4 @@
 import { RecordsService } from './../records/_services/records.service';
-///<reference path="maternity/maternity.component.ts"/>
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
@@ -118,12 +117,17 @@ import { DataService } from '../shared/_services/data.service';
 import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status.component';
 import { RegistrationService } from '../registration/_services/registration.service';
 import { FamilyPartnerControlsService } from '../hts/_services/family-partner-controls.service';
+import { HeiCompletelaborderComponent } from './hei/hei-hivtesting/hei-completelaborder/hei-completelaborder.component';
+import { HeiMessagesComponent } from './hei/hei-messages/hei-messages.component';
+import { PatientCounsellingComponent } from './anc/patient-counselling/patient-counselling.component';
+import { PatientChronicillnessComponent } from './anc/patient-chronicillness/patient-chronicillness.component';
+import { PatientPreventiveServiceComponent } from './anc/patient-preventive-service/patient-preventive-service.component';
 
 @NgModule({
     imports: [
         CommonModule,
         PmtctRoutingModule,
-        CommonModule, HttpClientModule, MatDatepickerModule, MatFormFieldModule,
+        CommonModule, HttpClientModule, MatDatepickerModule,
         MatNativeDateModule, MatInputModule, MatFormFieldModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
         MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatExpansionModule,
@@ -190,7 +194,12 @@ import { FamilyPartnerControlsService } from '../hts/_services/family-partner-co
         AddBirthInfoComponent,
         AddBabyDialogComponent,
         MilestonesFormComponent,
-        PriorHivStatusComponent
+        PriorHivStatusComponent,
+        HeiCompletelaborderComponent,
+        HeiMessagesComponent,
+        PatientCounsellingComponent,
+        PatientChronicillnessComponent,
+        PatientPreventiveServiceComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -249,7 +258,11 @@ import { FamilyPartnerControlsService } from '../hts/_services/family-partner-co
         CheckinComponent,
         ImmunizationComponent,
         AddBabyDialogComponent,
-        MilestonesFormComponent
+        MilestonesFormComponent,
+        HeiCompletelaborderComponent,
+        PatientCounsellingComponent,
+        PatientChronicillnessComponent,
+        PatientPreventiveServiceComponent
     ],
     exports: [
         IptClientWorkupComponent,

@@ -13,6 +13,7 @@ using Entities.CCC.Visit;
 using System.Collections;
 using System.Web.Script.Services;
 using System.Data;
+using System.Web;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -183,8 +184,9 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession =true)]
         public string getScreeningByIdandMasterVisit(int PatientId, int PatientMasterVisitId)
         {
+            PatientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
             var PSM = new PatientScreeningManager();
-            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(PatientId,PatientMasterVisitId).ToArray();
+            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(Convert.ToInt32(Session["PatientPK"]), PatientMasterVisitId).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
             return jsonScreeningObject;
@@ -296,6 +298,7 @@ namespace IQCare.Web.CCC.WebService
 
 
         }
+
         [WebMethod(EnableSession = true)]
         public string GetPatientMasterVisitId(int PatientId, DateTime visitDate, string EncounterType, int ServiceAreaId, int UserId)
         {
@@ -325,6 +328,13 @@ namespace IQCare.Web.CCC.WebService
             }
             else
             {
+                var lookupLogic = new LookupLogic();
+                var facility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                if (facility == null)
+                {
+                    facility = lookupLogic.GetFacility();
+                }
+
                 PatientMasterVisit pm = new PatientMasterVisit();
                 pm.ServiceId = 1;
                 pm.VisitDate = visitDate;
@@ -335,6 +345,7 @@ namespace IQCare.Web.CCC.WebService
                 pm.CreatedBy = UserId;
                 pm.Active = true;
                 pm.Status = 2;
+                pm.FacilityId = facility.FacilityID;
                 
                 int  PatientMasterVisitId= pmvManager.AddPatientMasterVisit(pm);
 

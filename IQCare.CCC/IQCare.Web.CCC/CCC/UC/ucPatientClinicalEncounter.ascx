@@ -10,9 +10,7 @@
 <%@ Register Src="~/CCC/UC/ucICF.ascx" TagPrefix="uc" TagName="ucICF" %>
 
 <style>
-    #ICFScreeningSection, #TuberclosisTreatmentPanel, #IPTPanel, #tbScreeningOutcomePanel, #ICFActionTakenPanel {
-        display: none;
-    }
+    #ICFScreeningSection, #TuberclosisTreatmentPanel, #IPTPanel, #ICFActionTakenPanel{display: none;}
 </style>
 
 <div class="col-md-12" style="padding-top: 20px">
@@ -571,28 +569,32 @@
                                     <%--//Tuberclosis Screening Outcome--%>
                                     <%--IPT--%>
                                     <div class="col-md-12 form-group" id="IPTPanel">
-                                        <div class="col-md-12">
-                                            <div class="panel panel-info">
-                                                <div class="panel-body">
+	                                    <div class="col-md-12">
+		                                    <div class="panel panel-info">
+			                                    <div class="panel-body">
+                                                <div class="row">
+                                                <div class="col-md-12">
+                                                <div id="IPTHistoryTable" class="panel panel-primary">
+												<div class="panel-heading">IPT History</div>
+												<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+													<table id="dtlIPTHistory" class="table table-bordered table-striped" style="width: 100%">
+														<thead>
+															<tr>
+                                                                <th><span class="text-primary">IPTStartDate</span></th>
+																<th><span class="text-primary">IPTOutCome</span></th>
+																<th><span class="text-primary">IPTOutcomeDate</span></th>
+																
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+                                                </div>
+                                                </div>
+                                                </div>
                                                     <div class="row" id="IPTSection">
                                                         <div class="col-md-12 form-group">
                                                             <label class="control-label pull-left input-sm text-primary">IPT</label>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="col-md-4">
-                                                                <div class="col-md-12">
-                                                                    <label class="control-label pull-left input-sm" for="ddlICFEverBeenOnIPT">Ever Been on IPT?</label>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlICFEverBeenOnIPT" ClientIDMode="Static" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div id="IptOutcome"></div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div id="IptOutcomeDate"></div>
-                                                            </div>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="col-md-3">
@@ -4021,6 +4023,19 @@
             minDate: minDate
         });
 
+
+
+        $("#AppointmentDate").change(function () {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            appointmentCount();
+        });
+
         /* limit future dates viralload baseline date*/
         $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             var dlDate = $('#DateOfVisit').datepicker('getDate');
@@ -4672,6 +4687,7 @@
                         return;
                     } else {
                         //savePatientPatientManagement();
+                        var valid = true;
                         if ($('#AppointmentForm').parsley().validate()) {
                             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
                             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
@@ -4771,7 +4787,7 @@
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
             var adverseEvents = $("input[name$=adverseEvents]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
-            var tbscreening = $("#<%=ddlICFTBScreeningOutcome.ClientID%>").find(":selected").val();
+            var tbscreening = $("#<%=ddlICFTBScreeningOutcome.ClientID%>").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
 
 
@@ -5663,6 +5679,13 @@
             return checkedValues;
         }
 
+        function ToJavaScriptDate(value) {
+            var pattern = /Date\(([^)]+)\)/;
+            var results = pattern.exec(value);
+            var dt = new Date(parseFloat(results[1]));
+            return moment(dt).format('DD-MMM-YYYY');
+        }
+
         $("#btnAdherenceAssessment").click(function () {
 
             var question1 = parseInt($("input[name='ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$Question1']:checked").val());
@@ -6086,16 +6109,15 @@
                 objectsToShow = ["tbScreeningOutcomePanel"];
                 objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
-                tbScreenScore = 3;
+                //tbScreenScore = 3;
             }
             else if (selectedIndex == 2) {
                 objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-                objectsToHide = ['tbScreeningOutcomePanel'];
-                sectionsToReset = ['tbScreeningOutcomePanel'];
+                // sectionsToReset = ['tbScreeningOutcomePanel'];
             }
             else {
-                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
-                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 objectsToShow = [];
             }
             showHideCtrls(objectsToHide, objectsToShow);
@@ -6219,9 +6241,7 @@
                     tbScreenScore = 2;
                 }
             }
-            else {
-                tbScreenScore = 2;
-            }
+            
             getTBOutcome(tbScreenScore);
         }
 
@@ -6238,7 +6258,7 @@
                     getPatientIptOutcome().then(function (response) {
                         patientIptOutcome = JSON.parse(response);
                         if (patientIptOutcome != undefined) {
-                            $("#IptOutcomeDate").html('<span class="label label-info">' + patientIptOutcome.IPTOutComeDate + '</span>');
+                            $("#IptOutcomeDate").html('<span class="label label-info">' + ToJavaScriptDate(patientIptOutcome.IPTOutComeDate) + '</span>');
                             $("#IptOutcome").html('<span class="label label-info">' + patientIptOutcome.IptOutcome.DisplayName + '</span>');
 
                             $("#ddlICFCurrentlyOnIPT option:contains('No')").attr('selected', 'selected');
@@ -6284,36 +6304,21 @@
 
     function checkExistingAppointment() {
         var appointmentId = "<%=AppointmentId%>";
-        var patientId = "<%=PatientId%>";
-        var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
-        var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
-        var reason = $("#<%=Reason.ClientID%>").val();
-        jQuery.support.cors = true;
-        $.ajax(
-            {
-                type: "POST",
-                url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
-                data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                cache: false,
+		var patientId = "<%=PatientId%>";
+		var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+		var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+		var reason = $("#<%=Reason.ClientID%>").val();
+		jQuery.support.cors = true;
+		$.ajax(
+			{
+				type: "POST",
+				url: "../WebService/PatientService.asmx/GetExistingPatientAppointment",
+				data: "{'patientId':'" + patientId + "','appointmentDate': '" + appointmentDate + "','serviceAreaId': '" + serviceArea + "','reasonId': '" + reason + "'}",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				async: false,
+				cache: false,
                 success: function (response) {
-                    if (response.d != null) {
-                        if (isEditAppointment == 'True') {
-
-                        } else {
-                            toastr.error("Appointment already exists");
-                            return false;
-                        }
-
-                    }
-                    if (isEditAppointment == 'True') {
-                        updateAppointment(appointmentId);
-                    } else {
-                        addPatientAppointment();
-                    }
-
                     if (response.d != null) {
                         if (appointmentId = JSON.stringify(response.d.AppointmentId)) {
                             updateAppointment(appointmentId);
@@ -6322,8 +6327,6 @@
                             toastr.error("Appointment already exists");
                             return false;
                         }
-                        //alert(JSON.stringify(response.d.AppointmentId));
-                        //updateAppointment(response.d.AppointmentId);
                     } else {
                         addPatientAppointment();
                     }
@@ -6813,8 +6816,6 @@
 
     }
     function LoadDiagnosisList(Array) {
-
-        console.log(DiagnosisList);
         $("#Diagnosis").select2({
             placeholder: {
                 id: '0',
@@ -7362,18 +7363,41 @@
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-            objectsToHide = ['tbScreeningOutcomePanel'];
-            sectionsToReset = ['tbScreeningOutcomePanel'];
+            // sectionsToReset = ['tbScreeningOutcomePanel'];
         }
         else {
-            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
-            objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
+            objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
             objectsToShow = [];
         }
+
         showHideCtrls(objectsToHide, objectsToShow);
         sectionReset(sectionsToReset);
         getTBOutcome(tbScreenScore);
     });
+
+    $("#ddlICFCough, #ddlICFFever, #ddlICFWeight, #ddlICFNightSweats").change(function () { 
+        var cough = $("#<%=ddlICFCough.ClientID%>").find(":selected").text();
+        var fever = $("#<%=ddlICFFever.ClientID%>").find(":selected").text();
+        var weightLoss = $("#<%=ddlICFWeight.ClientID%>").find(":selected").text();
+        var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").find(":selected").text();
+
+        cough = cough == "Select" ? "" : cough;
+        fever = fever == "Select" ? "" : fever;
+        weightLoss = weightLoss == "Select" ? "" : weightLoss;
+        nightSweats = nightSweats == "Select" ? "" : nightSweats;
+
+        tbScreeningOutcome(cough, fever, weightLoss, nightSweats);
+	});
+
+    function tbScreeningOutcome(cough, fever, weightLoss, nightSweats) {
+        getTBOutcome(0);
+        if (cough == "yes" || fever == "yes" || weightLoss == "yes" || nightSweats == "yes") {
+            getTBOutcome(2);
+        } else if(cough == "No" && fever == "No" && weightLoss == "No" && nightSweats == "No") {
+            getTBOutcome(1);
+        } 
+    }
 
     //ICF Screening selection change
     $("#ICFScreeningSection select").change(function (evt, data) {
@@ -7736,11 +7760,10 @@
 
         }
     }
-
     function AssignTableData(dataTableName, obj) {
-        var dtData = obj;
-        var rows = $("#" + dataTableName).dataTable().fnGetNodes();
-        for (var i = 0; i < rows.length; i++) {
+            var dtData = obj;
+            var rows = $("#" + dataTableName).dataTable().fnGetNodes();
+            for (var i = 0; i < rows.length; i++) {
 
             // Get HTML of 3rd column (for example)
             var col0 = $(rows[i]).find("td:eq(0)").html();
@@ -7763,18 +7786,18 @@
     }
 
     function CheckDatenAssign(dtVal, ctrl, IsDisableCheck) {
-        var parsedDate;
-        var jsDate;
-        if (IsDisableCheck) {
-            if (dtVal != null) {
-                parsedDate = new Date(parseInt(dtVal.substr(6)));
-                jsDate = new Date(parsedDate); //Date object
-                //console.log(jsDate);
-                // $("#" + ctrl).datepicker('setDate', jsDate);
-                $("#" + ctrl).datetimepicker({
-                    format: 'YYYY-MM-DD',
-                    date: jsDate,
-                    calendarWeeks: true,
+            var parsedDate;
+            var jsDate;
+            if (IsDisableCheck) {
+                if (dtVal != null) {
+                    parsedDate = new Date(parseInt(dtVal.substr(6)));
+                    jsDate = new Date(parsedDate); //Date object
+                    //console.log(jsDate);
+                    // $("#" + ctrl).datepicker('setDate', jsDate);
+                    $("#" + ctrl).datetimepicker({
+                        format: 'YYYY-MM-DD',
+                        date: jsDate,
+                        calendarWeeks: true,
 
 
                     showClose: true,

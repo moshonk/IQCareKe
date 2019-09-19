@@ -161,7 +161,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 //Add Person to mst_patient
                                 var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                                    middleName, dateEnrollment," ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                                 if (mstResult.Count > 0)
                                 {
                                     patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
@@ -342,10 +342,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                             int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
                                             int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
-
+                                            int? ReasonNotContacted = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                            string ReasonNotContactedOther = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                             //add Client Tracing
                                             var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                                providerId, tracingRemarks, null, null, null);
+                                                providerId, tracingRemarks, null, null, null,ReasonNotContacted,ReasonNotContactedOther);
                                         }
 
                                         //check for linkage
@@ -521,10 +522,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                 int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
                                 int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
-
+                                int? ReasonNotContacted = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                string ReasonNotContactedOther = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                 //add Client Tracing
                                 var clientTracing = await encounterTestingService.addTracing(identifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                    userId, tracingRemarks, null, null, null);
+                                    userId, tracingRemarks, null, null, null,ReasonNotContacted,ReasonNotContactedOther);
                             }
 
                             //check for linkage
@@ -648,7 +650,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                                middleName, dateEnrollment, " ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers
@@ -811,10 +813,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     DateTime tracingDate = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
                                     int mode = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_MODE;
                                     int outcome = request.CLIENTS[i].ENCOUNTER.TRACING[j].TRACING_OUTCOME;
-
+                                    int? ReasonNotContacted = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                    string ReasonNotContactedOther = request.CLIENTS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                     //add Client Tracing
                                     var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
-                                        userId, tracingRemarks, null, null, null);
+                                        userId, tracingRemarks, null, null, null,ReasonNotContacted,ReasonNotContactedOther);
                                 }
 
                                 //check for linkage

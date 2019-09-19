@@ -267,8 +267,84 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
 
-        [WebMethod(EnableSession =true)]
+        [WebMethod(EnableSession = true)]
         public ArrayList GetAllPatientIPTHistory()
+        {
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            var iptWorkup = new PatientIptWorkupManager();
+            var iptworkup = iptWorkup.GetByPatientId(patientId).GroupBy(x => x.IptStartDate).Select(x => x.OrderByDescending(t => t.Id).First()).ToList();
+            ArrayList rows = new ArrayList();
+            DateTime? IPTDate;
+            if (iptworkup.Count > 0)
+            {
+                foreach (var l in iptworkup)
+                {
+
+
+                    var startdateipt = l.IptStartDate;
+
+                    List<IPTOutcome> loutcome = new List<IPTOutcome>();
+                    var iptOutcome = new PatientIptOutcomeManager();
+                    var x = iptOutcome.GetByPatientId(patientId);
+                    IPTDate = l.IptStartDate;
+                    if (x.Count > 0)
+                    {
+                        foreach (var patient in x)
+                        {
+                            IPTOutcome ip = new IPTOutcome();
+                            if (patient.IptEvent.ToString() == "1")
+                            {
+                                ip.IPT = "Currently on IPT:Yes";
+
+                            }
+                            else if (patient.IptEvent.ToString() == "0")
+                            {
+                                ip.IPT = "Currently on IPT:No";
+                            }
+                            else
+                            {
+                                ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                                string outcome = "IptOutcome";
+                                var lm = mgr.GetLookupItemNameByMasterNameItemId(patient.IptEvent, outcome);
+                                ip.IPT = lm.ToString();
+                            }
+                            if (patient.IPTOutComeDate != null)
+                            {
+                                ip.IPTOutComeDate = patient.IPTOutComeDate;
+                            }
+                            else
+                            {
+                                ip.IPTOutComeDate = null;
+                            }
+
+                            if (ip.IPTOutComeDate >= startdateipt)
+                            {
+                                string[] i = new string[3] { startdateipt.ToString(), ip.IPT, ip.IPTOutComeDate.ToString() };
+                                rows.Add(i);
+                            }
+                            else
+                            {
+                                string[] i = new string[3] { startdateipt.ToString(), ip.IPT, "" };
+                                rows.Add(i);
+                            }
+
+                            loutcome.Add(ip);
+
+                        }
+                    } else
+                    {
+                        string[] i = new string[3] { startdateipt.ToString(), "", "" };
+                        rows.Add(i);
+                    }
+
+                }
+            }
+
+            return rows;
+        }
+
+        [WebMethod(EnableSession =true)]
+        public ArrayList GetPatientIPTHistory()
         {
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             var iptWorkup = new PatientIptWorkupManager();

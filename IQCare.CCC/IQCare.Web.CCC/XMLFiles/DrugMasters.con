@@ -12075,6 +12075,42 @@
     <DrugName>Efavirenz-EFV400 400g</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1706</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Raltegravir-400mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1707</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Tenofovir Disoproxil Fumarate/Lamivudine/Dolutegravir-300mg/300mg/50mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1708</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Abacavir/Lamivudine-120mg/60mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1709</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Abacavir/Lamivudine-600mg/300mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1710</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Tenofovir Disoproxil Fumarate/Lamivudine/Efavirenz-300mg/300mg/400mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>1711</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Darunavir/Ritonavir-800mg/100mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
   <Mst_Generic>
     <GenericId>1</GenericId>
     <GenericName>Abacavir</GenericName>
@@ -15075,6 +15111,36 @@
   </Mst_Generic>
   <Mst_Generic>
     <GenericId>760</GenericId>
+    <GenericName>Darunavir/Ritonavir-800mg/100mg</GenericName>
+    <GenericAbbrevation>DRV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>761</GenericId>
+    <GenericName>Raltegravir-400mg</GenericName>
+    <GenericAbbrevation>RAL</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>762</GenericId>
+    <GenericName>Tenofovir Disoproxil Fumarate/Lamivudine/Dolutegravir-300mg/300mg/50mg</GenericName>
+    <GenericAbbrevation>TDF/3TC/DTG</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>763</GenericId>
+    <GenericName>Abacavir/Lamivudine-120mg/60mg</GenericName>
+    <GenericAbbrevation>ABC/3TC</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>764</GenericId>
+    <GenericName>Abacavir/Lamivudine-600mg/300mg</GenericName>
+    <GenericAbbrevation>ABC/3TC</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>765</GenericId>
+    <GenericName>Tenofovir Disoproxil Fumarate/Lamivudine/Efavirenz-300mg/300mg/400mg</GenericName>
+    <GenericAbbrevation>TDF/3TC/EFV</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>766</GenericId>
     <GenericName>Darunavir/Ritonavir-800mg/100mg</GenericName>
     <GenericAbbrevation>DRV/r</GenericAbbrevation>
   </Mst_Generic>

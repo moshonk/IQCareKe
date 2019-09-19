@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 <!-- <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" /> !-->
 
 
@@ -37,9 +37,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="AutoMapper">
-		  <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
-		</Reference>
 		<Reference Include="Entity.WebApi">
 		  <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
 		</Reference>
@@ -53,10 +50,7 @@
 			<HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
 		</Reference>
 		<Reference Include="IQCare.Events">
-			<HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
-		</Reference>
-		<Reference Include="IQCare.Web.UILogic">
-		  <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
+		  <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
 		</Reference>
 		<Reference Include="IQCare.WebApi.Logic">
 		  <HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
@@ -77,6 +71,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Convention\" />
 		<Folder Include="DependancyResolution\" />
 		<Folder Include="App_Start\" />
 	</ItemGroup>

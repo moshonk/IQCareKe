@@ -40,6 +40,8 @@ export class PncContraceptivehistoryComponent implements OnInit {
         const { yesnoOptions, familyPlanningMethodOptions } = this.contraceptiveHistoryExercise[0];
         this.yesnoOptions = yesnoOptions;
         this.familyPlanningMethodOptions = familyPlanningMethodOptions;
+        
+        this.familyPlanningMethodOptions = this.familyPlanningMethodOptions.filter(obj => obj.itemName != 'UND');
 
         this.notify.emit(this.ContraceptiveHistoryForm);
 
@@ -66,7 +68,7 @@ export class PncContraceptivehistoryComponent implements OnInit {
     }
 
     loadPncContraceptiviveHistory(): void {
-        this.pncservice.getFamilyPlanning(this.patientId).subscribe(
+        this.pncservice.getFamilyPlanning(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].patientMasterVisitId == this.patientMasterVisitId) {

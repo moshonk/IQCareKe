@@ -64,15 +64,25 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         //check for client tracing
                         for (int j = 0; (request.TRACING != null && j < request.TRACING.Count); j++)
                         {
-                            DateTime tracingDate =
-                                DateTime.ParseExact(request.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                            DateTime tracingDate = DateTime.Now;
+                            try
+                            {
+                                tracingDate = DateTime.ParseExact(request.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.Error($"Could not parse tracing TRACING_DATE: {request.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                throw new Exception($"Could not parse tracing TRACING_DATE: {request.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            }
                             int mode = request.TRACING[j].TRACING_MODE;
                             int outcome = request.TRACING[j].TRACING_OUTCOME;
+                            int? reasonnotcontacted = request.TRACING[j].REASONNOTCONTACTED;
+                            string reasonnotcontactedother = request.TRACING[j].REASONNOTCONTACTEDOTHER;
 
                             //add Client Tracing
                             var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType,
                                 tracingDate, mode, outcome,
-                                providerId, tracingRemarks, null, null, null);
+                                providerId, tracingRemarks, null, null, null,reasonnotcontacted,reasonnotcontactedother);
                         }
                     }
                     else
@@ -90,8 +100,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize Hts Tracing for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize Hts Tracing for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }

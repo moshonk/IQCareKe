@@ -25,6 +25,7 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -81,7 +82,8 @@ export class RegisterComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private searchService: SearchService,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private spinner: NgxSpinnerService) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
     }
@@ -274,6 +276,22 @@ export class RegisterComponent implements OnInit {
         if (setDobPrecision) {
             this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
         }
+
+        this.validateRegistrationDate();
+    }
+
+    validateRegistrationDate(): void {
+        const regDate = this.formArray['controls'][0]['controls']['registrationDate'].value;
+        const dob = this.formArray['controls'][0]['controls']['DateOfBirth'].value;
+        if (regDate && dob) {
+            const isBefore = moment(regDate).isBefore(dob);
+            if (isBefore) {
+                this.formArray['controls'][0]['controls']['registrationDate'].setValue('');
+                this.snotifyService.error('Registration Date should not be before the date of Birth',
+                    'Registration', this.notificationService.getConfig());
+                return;
+            }
+        }
     }
 
     estimateDob() {
@@ -332,6 +350,8 @@ export class RegisterComponent implements OnInit {
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
         this.formArray['controls'][0]['controls']['DobPrecision'].setValue(0);
+
+        this.validateRegistrationDate();
     }
 
     onCountyChange() {
@@ -351,6 +371,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmitForm(tabIndex: number) {
         if (this.formGroup.valid) {
+            this.spinner.show();
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
@@ -368,9 +389,7 @@ export class RegisterComponent implements OnInit {
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {
-                    console.log(response);
                     const { personId } = response;
-                    console.log(personId);
 
                     // Add Contact
                     const personContact = this.personRegistration.addPersonContact(personId, this.person.createdBy, this.clientContact);
@@ -396,7 +415,7 @@ export class RegisterComponent implements OnInit {
                         personEducationLevel, personOccupation, personEmergencyContact,
                         personIdentifiersAdd]).subscribe(
                             (forkRes) => {
-                                console.log(forkRes);
+                                // console.log(forkRes);
                             },
                             (forkError) => {
                                 this.snotifyService.error('Error creating person ' + forkError, 'Person Registration',
@@ -437,6 +456,8 @@ export class RegisterComponent implements OnInit {
                                 }
                             }
                         );
+
+                    this.spinner.hide();
                 },
                 (error) => {
                     this.snotifyService.error('Error creating person ' + error, 'Person Registration',
@@ -564,9 +585,12 @@ export class RegisterComponent implements OnInit {
         const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
         if (ageInYears < 10) {
             this.formArray['controls'][0]['controls']['MaritalStatus'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['MaritalStatus'].setValidators('');
+            this.formArray['controls'][0]['controls']['MaritalStatus'].updateValueAndValidity();
             this.formArray['controls'][0]['controls']['EducationLevel'].disable({ onlySelf: true });
             this.formArray['controls'][0]['controls']['Occupation'].disable({ onlySelf: true });
         } else {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].setValidators([Validators.required]);
             this.formArray['controls'][0]['controls']['MaritalStatus'].enable();
             this.formArray['controls'][0]['controls']['EducationLevel'].enable();
             this.formArray['controls'][0]['controls']['Occupation'].enable();
@@ -611,7 +635,6 @@ export class RegisterComponent implements OnInit {
                                     return;
                                 }
 
-                                console.log(data);
                                 this.zone.run(() => {
                                     this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
                                 });

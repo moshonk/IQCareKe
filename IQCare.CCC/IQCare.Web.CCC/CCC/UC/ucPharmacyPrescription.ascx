@@ -647,45 +647,78 @@
         });
     });
 
-    $(function () {
-        var regExp = /[a-z]/i;
-        $('#txtDuration').on('keydown keyup', function (e) {
-            var value = String.fromCharCode(e.which) || e.key;
+    //$(function () {
+    //    //var regExp = /[a-z]/i;
+    //    alert();
+    //    $('#txtDuration').on('keydown keyup', function (e) {
+    //        var value = String.fromCharCode(e.which) || e.key;
+    //        alert(value);
 
-            // No letters
-            if (regExp.test(value)) {
-                e.preventDefault();
-                return false;
-            }
-        });
+    //        // No letters
+    //        if (regExp.test(value)) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+    //});
+
+    //$(function () {
+    //    var regExp = /[a-z]/i;
+    //    $('#txtQuantityPres').on('keydown keyup', function (e) {
+    //        var value = String.fromCharCode(e.which) || e.key;
+
+    //        // No letters
+    //        if (regExp.test(value)) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+    //});
+
+    //$(function () {
+    //    var regExp = /[a-z]/i;
+    //    $('#txtQuantityDisp').on('keydown keyup', function (e) {
+    //        var value = String.fromCharCode(e.which) || e.key;
+
+    //        // No letters
+    //        if (regExp.test(value)) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+    //});
+
+    $('#txtQuantityDisp').on('keydown keyup', function (e) {
+        var code = e.keyCode || e.which;
+        if (code >= 65 && code <= 90) {
+            e.preventDefault();
+            return false;
+        }
     });
 
-    $(function () {
-        var regExp = /[a-z]/i;
-        $('#txtQuantityPres').on('keydown keyup', function (e) {
-            var value = String.fromCharCode(e.which) || e.key;
-
-            // No letters
-            if (regExp.test(value)) {
-                e.preventDefault();
-                return false;
-            }
-        });
+    $('#txtQuantityPres').on('keydown keyup', function (e) {
+        var code = e.keyCode || e.which;
+        if (code >= 65 && code <= 90) {
+            e.preventDefault();
+            return false;
+        }
     });
 
-    $(function () {
-        var regExp = /[a-z]/i;
-        $('#txtQuantityDisp').on('keydown keyup', function (e) {
-            var value = String.fromCharCode(e.which) || e.key;
-
-            // No letters
-            if (regExp.test(value)) {
-                e.preventDefault();
-                return false;
-            }
-        });
+    $('#txtDuration').on('keydown keyup', function (e) {
+        var code = e.keyCode || e.which;
+        if (code >= 65 && code <= 90) {
+            e.preventDefault();
+            return false;
+        }
     });
 
+    $('#txtDose').on('keydown keyup', function (e) {
+        var code = e.keyCode || e.which;
+        if (code >= 65 && code <= 90) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
     if (DosageFrequency.toString() == "1") {
        DrugPrescriptionTable = $('#dtlDrugPrescriptionFrequency').DataTable({

@@ -67,7 +67,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     .Get(x => x.MasterName == "TracingType" && x.ItemName == "Family").ToListAsync();
                                 int tracingType = lookupitem[0].ItemId;
 
-                                DateTime tracingDate = DateTime.ParseExact(request.TRACING_ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                DateTime tracingDate = DateTime.Now;
+                                try
+                                {
+                                    tracingDate = DateTime.ParseExact(request.TRACING_ENCOUNTER.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                }
+                                catch (Exception e)
+                                {
+                                    Log.Error($"Could not parse family tracing TRACING_DATE: {request.TRACING_ENCOUNTER.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                    throw new Exception($"Could not parse family tracing TRACING_DATE: {request.TRACING_ENCOUNTER.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                }
                                 int mode = request.TRACING_ENCOUNTER.TRACING[j].TRACING_MODE;
                                 int outcome = request.TRACING_ENCOUNTER.TRACING[j].TRACING_OUTCOME;
 
@@ -79,8 +88,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     tracingBookingDate = DateTime.ParseExact(request.TRACING_ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
                                 int consent = request.TRACING_ENCOUNTER.TRACING[j].CONSENT;
 
+                                int? reasonnotcontacted = request.TRACING_ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                string reasonnotcontactedother = request.TRACING_ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                 var trace = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                    1, null, consent, tracingBookingDate, reminderDate);
+                                    1, null, consent, tracingBookingDate, reminderDate,reasonnotcontacted,reasonnotcontactedother);
                             }
                         }
                         else
