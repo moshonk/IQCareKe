@@ -593,7 +593,7 @@
                 tracingOutome = tracingOutome == '' ? 0 : tracingOutome;
                 reasonLostToFollowup = reasonLostToFollowup == '' ? 0 : reasonLostToFollowup;
                 reasonsForDeath = reasonsForDeath == '' ? 0 : reasonsForDeath;
-                specificCausesOfDeath = specificCausesOfDeath == '' || specificCausesOfDeath == null ? 0 : specificCausesOfDeath;
+                specificCausesOfDeath = specificCausesOfDeath == ('' || null) ? 0 : specificCausesOfDeath;
 
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
                 if (careEndedDate == "Invalid Date") {
@@ -606,8 +606,10 @@
                     return false;
                 }
 
-                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {    
-                    dateOfDeath = moment(moment(dateOfDeath, 'DD-MMM-YYYY')).format('DD-MMM-YYYY');
+                dateOfDeath = moment(dateOfDeath, 'DD-MMM-YYYY');
+
+                if (dateOfDeath.isValid()) {    
+                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
                 } else {
                     dateOfDeath = '';
                 }
