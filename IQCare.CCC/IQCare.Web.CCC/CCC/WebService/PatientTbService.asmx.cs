@@ -355,7 +355,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 foreach(var l in iptworkup)
                 {
-                    
+                    //startdateipt
                  
                    var startdateipt = l.IptStartDate;
                     
