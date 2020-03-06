@@ -2309,26 +2309,6 @@
 														</div>
 													</div>
 
-													<div class="col-md-12">
-														<hr>
-													</div>
-
-													<div class="col-md-12">
-														<div class="col-md-8">
-															<label class="control-lable pull-left">On their current ART regimen for ≥ 3 months</label>
-														</div>
-														<div class="col-md-4">
-															<div class="col-md-12">
-																<label class="pull-left" style="padding-right: 10px">
-																	<input id="ArtRegimenYes" type="radio" name="ArtRegimenPeriod" value="true" clientidmode="Static" runat="server" />Yes
-																</label>
-																<label class="pull-left" style="padding-right: 10px">
-																	<input id="ArtRegimenNo" type="radio" name="ArtRegimenPeriod" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
-																</label>
-															</div>
-														</div>
-													</div>
-
                                                     <div class="col-md-12">
                                                         <hr>
                                                     </div>
@@ -6027,7 +6007,6 @@
                     break;
                 default:
                     categorizationCriteria.push($("input[name$=ArtPeriod]:checked").val());
-                    categorizationCriteria.push($("input[name$=ArtRegimenPeriod]:checked").val());
                     categorizationCriteria.push($("input[name$=ActiveOis]:checked").val());
                     categorizationCriteria.push($("input[name$=VisitsAdherant]:checked").val());
                     categorizationCriteria.push($("input[name$=VlCopies]:checked").val());

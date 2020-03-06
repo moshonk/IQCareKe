@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.UC {
-    
-    
-    public partial class ucPatientClinicalEncounter {
-        
+namespace IQCare.Web.CCC.UC
+{
+
+
+    public partial class ucPatientClinicalEncounter
+    {
+
         /// <summary>
         /// VisitDate control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox VisitDate;
-        
+
         /// <summary>
         /// vsYes control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton vsYes;
-        
+
         /// <summary>
         /// vsNo control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton vsNo;
-        
+
         /// <summary>
         /// ddlVisitBy control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVisitBy;
-        
+
         /// <summary>
         /// txtHeight control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHeight;
-        
+
         /// <summary>
         /// txtWeight control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWeight;
-        
+
         /// <summary>
         /// lblBMI control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBMI;
-        
+
         /// <summary>
         /// lblBMIz control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBMIz;
-        
+
         /// <summary>
         /// txtBMI control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBMI;
-        
+
         /// <summary>
         /// txtBMIZ control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBMIZ;
-        
+
         /// <summary>
         /// nutritionscreeningstatus control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList nutritionscreeningstatus;
-        
+
         /// <summary>
         /// PHNutritionScreeningNotes control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder PHNutritionScreeningNotes;
-        
+
         /// <summary>
         /// rdAnyComplaintsYes control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyComplaintsYes;
-        
+
         /// <summary>
         /// rdAnyComplaintsNo control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyComplaintsNo;
-        
+
         /// <summary>
         /// txtPresentingComplaintsID control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPresentingComplaintsID;
-        
+
         /// <summary>
         /// txtPresentingComplaints control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPresentingComplaints;
-        
+
         /// <summary>
         /// numberOfDays control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox numberOfDays;
-        
+
         /// <summary>
         /// complaints control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea complaints;
-        
+
         /// <summary>
         /// ddlOnAntiTBDrugs control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOnAntiTBDrugs;
-        
+
         /// <summary>
         /// ddlICFCough control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFCough;
-        
+
         /// <summary>
         /// ddlICFFever control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFFever;
-        
+
         /// <summary>
         /// ddlICFWeight control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFWeight;
-        
+
         /// <summary>
         /// ddlICFNightSweats control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFNightSweats;
-        
+
         /// <summary>
         /// ddlSputumSmear control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSputumSmear;
-        
+
         /// <summary>
         /// ddlGeneXpert control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGeneXpert;
-        
+
         /// <summary>
         /// ddlChestXray control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlChestXray;
-        
+
         /// <summary>
         /// ddlStartAntiTB control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStartAntiTB;
-        
+
         /// <summary>
         /// ddlInvitationofContacts control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlInvitationofContacts;
-        
+
         /// <summary>
         /// ddlEvaluatedforIPT control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlEvaluatedforIPT;
-        
+
         /// <summary>
         /// tbTBRXStartDate control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbTBRXStartDate;
-        
+
         /// <summary>
         /// tbTBRXEndDate control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbTBRXEndDate;
-        
+
         /// <summary>
         /// ddlICFRegimen control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFRegimen;
-        
+
         /// <summary>
         /// ddlICFTBScreeningOutcome control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFTBScreeningOutcome;
-        
+
         /// <summary>
         /// ddlICFEverBeenOnIPT control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFEverBeenOnIPT;
-        
+
         /// <summary>
         /// ddlICFCurrentlyOnIPT control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFCurrentlyOnIPT;
-        
+
         /// <summary>
         /// ddlICFStartIPT control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlICFStartIPT;
-        
+
         /// <summary>
         /// IptCw control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucIptClientWorkup IptCw;
-        
+
         /// <summary>
         /// IptDetails control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucIpt IptDetails;
-        
+
         /// <summary>
         /// IptOutcomeForm control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucIptOutcome IptOutcomeForm;
-        
+
         /// <summary>
         /// rdAnyAdverseEventsYes control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyAdverseEventsYes;
-        
+
         /// <summary>
         /// rdAnyAdverseEventsNo control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdAnyAdverseEventsNo;
-        
+
         /// <summary>
         /// adverseEventId control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox adverseEventId;
-        
+
         /// <summary>
         /// adverseEvent control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox adverseEvent;
-        
+
         /// <summary>
         /// ddlAdverseEventSeverity control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAdverseEventSeverity;
-        
+
         /// <summary>
         /// AdverseEventCause control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AdverseEventCause;
-        
+
         /// <summary>
         /// AdverseEventAction control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList AdverseEventAction;
-        
+
         /// <summary>
         /// txtAdverseEventOther control.
         /// </summary>
@@ -434,7 +436,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAdverseEventOther;
-        
+
         /// <summary>
         /// NeonatalHistoryPH control.
         /// </summary>
@@ -443,7 +445,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder NeonatalHistoryPH;
-        
+
         /// <summary>
         /// TannersStagingPH control.
         /// </summary>
@@ -452,7 +454,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder TannersStagingPH;
-        
+
         /// <summary>
         /// ChronicIllnessName control.
         /// </summary>
@@ -461,7 +463,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ChronicIllnessName;
-        
+
         /// <summary>
         /// txtOnsetDate control.
         /// </summary>
@@ -470,7 +472,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOnsetDate;
-        
+
         /// <summary>
         /// illnessTreatment control.
         /// </summary>
@@ -479,7 +481,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox illnessTreatment;
-        
+
         /// <summary>
         /// treatmentDose control.
         /// </summary>
@@ -488,7 +490,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox treatmentDose;
-        
+
         /// <summary>
         /// txtAllergyId control.
         /// </summary>
@@ -497,7 +499,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAllergyId;
-        
+
         /// <summary>
         /// txtAllergy control.
         /// </summary>
@@ -506,7 +508,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAllergy;
-        
+
         /// <summary>
         /// txtReactionTypeID control.
         /// </summary>
@@ -515,7 +517,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReactionTypeID;
-        
+
         /// <summary>
         /// txtReactionType control.
         /// </summary>
@@ -524,7 +526,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReactionType;
-        
+
         /// <summary>
         /// ddlAllergySeverity control.
         /// </summary>
@@ -533,7 +535,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAllergySeverity;
-        
+
         /// <summary>
         /// txtAllergyDate control.
         /// </summary>
@@ -542,7 +544,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtAllergyDate;
-        
+
         /// <summary>
         /// txtSexualHistoryVisitDate control.
         /// </summary>
@@ -551,7 +553,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtSexualHistoryVisitDate;
-        
+
         /// <summary>
         /// ddlSexualOrientation control.
         /// </summary>
@@ -560,7 +562,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSexualOrientation;
-        
+
         /// <summary>
         /// txtPartners control.
         /// </summary>
@@ -569,7 +571,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtPartners;
-        
+
         /// <summary>
         /// ddlPartnerStatus control.
         /// </summary>
@@ -578,7 +580,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPartnerStatus;
-        
+
         /// <summary>
         /// ddlPartnerGender control.
         /// </summary>
@@ -587,7 +589,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPartnerGender;
-        
+
         /// <summary>
         /// ddlVaccine control.
         /// </summary>
@@ -596,7 +598,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVaccine;
-        
+
         /// <summary>
         /// ddlVaccineStage control.
         /// </summary>
@@ -605,7 +607,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlVaccineStage;
-        
+
         /// <summary>
         /// txtVaccinationDate control.
         /// </summary>
@@ -614,7 +616,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtVaccinationDate;
-        
+
         /// <summary>
         /// SocialHistoryPH control.
         /// </summary>
@@ -623,7 +625,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder SocialHistoryPH;
-        
+
         /// <summary>
         /// CervicalCancerScreeningAssessmentPH control.
         /// </summary>
@@ -632,7 +634,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder CervicalCancerScreeningAssessmentPH;
-        
+
         /// <summary>
         /// cblGeneralExamination control.
         /// </summary>
@@ -641,7 +643,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblGeneralExamination;
-        
+
         /// <summary>
         /// systemsOkYes control.
         /// </summary>
@@ -650,7 +652,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton systemsOkYes;
-        
+
         /// <summary>
         /// systemsOkNo control.
         /// </summary>
@@ -659,7 +661,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton systemsOkNo;
-        
+
         /// <summary>
         /// hfExaminationReviewSystems control.
         /// </summary>
@@ -668,7 +670,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfExaminationReviewSystems;
-        
+
         /// <summary>
         /// ddlExaminationType control.
         /// </summary>
@@ -677,7 +679,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlExaminationType;
-        
+
         /// <summary>
         /// ddlExamination control.
         /// </summary>
@@ -686,7 +688,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlExamination;
-        
+
         /// <summary>
         /// txtExamFindings control.
         /// </summary>
@@ -695,7 +697,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExamFindings;
-        
+
         /// <summary>
         /// WHOStage control.
         /// </summary>
@@ -704,7 +706,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList WHOStage;
-        
+
         /// <summary>
         /// arvAdherance control.
         /// </summary>
@@ -713,7 +715,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList arvAdherance;
-        
+
         /// <summary>
         /// ctxAdherance control.
         /// </summary>
@@ -722,7 +724,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ctxAdherance;
-        
+
         /// <summary>
         /// stabilityStatus control.
         /// </summary>
@@ -731,7 +733,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList stabilityStatus;
-        
+
         /// <summary>
         /// txtWorkPlan control.
         /// </summary>
@@ -740,7 +742,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtWorkPlan;
-        
+
         /// <summary>
         /// cblPHDP control.
         /// </summary>
@@ -749,7 +751,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblPHDP;
-        
+
         /// <summary>
         /// txtDiagnosisID control.
         /// </summary>
@@ -758,7 +760,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDiagnosisID;
-        
+
         /// <summary>
         /// Diagnosis control.
         /// </summary>
@@ -767,7 +769,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText Diagnosis;
-        
+
         /// <summary>
         /// DiagnosisTreatment control.
         /// </summary>
@@ -776,7 +778,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText DiagnosisTreatment;
-        
+
         /// <summary>
         /// Question1_Yes control.
         /// </summary>
@@ -785,7 +787,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question1_Yes;
-        
+
         /// <summary>
         /// Question1_No control.
         /// </summary>
@@ -794,7 +796,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question1_No;
-        
+
         /// <summary>
         /// Question2_Yes control.
         /// </summary>
@@ -803,7 +805,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question2_Yes;
-        
+
         /// <summary>
         /// Question2_No control.
         /// </summary>
@@ -812,7 +814,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question2_No;
-        
+
         /// <summary>
         /// Question3_Yes control.
         /// </summary>
@@ -821,7 +823,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question3_Yes;
-        
+
         /// <summary>
         /// Question3_No control.
         /// </summary>
@@ -830,7 +832,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question3_No;
-        
+
         /// <summary>
         /// Question4_Yes control.
         /// </summary>
@@ -839,7 +841,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question4_Yes;
-        
+
         /// <summary>
         /// Question4_No control.
         /// </summary>
@@ -848,7 +850,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question4_No;
-        
+
         /// <summary>
         /// adherenceScore control.
         /// </summary>
@@ -857,7 +859,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label adherenceScore;
-        
+
         /// <summary>
         /// adherenceRating control.
         /// </summary>
@@ -866,7 +868,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label adherenceRating;
-        
+
         /// <summary>
         /// Question5_Yes control.
         /// </summary>
@@ -875,7 +877,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question5_Yes;
-        
+
         /// <summary>
         /// Question5_No control.
         /// </summary>
@@ -884,7 +886,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question5_No;
-        
+
         /// <summary>
         /// Question6_Yes control.
         /// </summary>
@@ -893,7 +895,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question6_Yes;
-        
+
         /// <summary>
         /// Question6_No control.
         /// </summary>
@@ -902,7 +904,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question6_No;
-        
+
         /// <summary>
         /// Question7_Yes control.
         /// </summary>
@@ -911,7 +913,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question7_Yes;
-        
+
         /// <summary>
         /// Question7_No control.
         /// </summary>
@@ -920,7 +922,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton Question7_No;
-        
+
         /// <summary>
         /// Question8 control.
         /// </summary>
@@ -929,7 +931,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Question8;
-        
+
         /// <summary>
         /// mmas8Score control.
         /// </summary>
@@ -938,7 +940,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label mmas8Score;
-        
+
         /// <summary>
         /// mmas8Adherence control.
         /// </summary>
@@ -947,7 +949,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label mmas8Adherence;
-        
+
         /// <summary>
         /// ArtYes control.
         /// </summary>
@@ -956,7 +958,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtYes;
-        
+
         /// <summary>
         /// ArtNo control.
         /// </summary>
@@ -965,25 +967,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtNo;
-        
-        /// <summary>
-        /// ArtRegimenYes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtRegimenYes;
-        
-        /// <summary>
-        /// ArtRegimenNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton ArtRegimenNo;
-        
+
         /// <summary>
         /// OiYes control.
         /// </summary>
@@ -992,7 +976,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton OiYes;
-        
+
         /// <summary>
         /// OiNo control.
         /// </summary>
@@ -1001,7 +985,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton OiNo;
-        
+
         /// <summary>
         /// VisitsAdherantYes control.
         /// </summary>
@@ -1010,7 +994,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton VisitsAdherantYes;
-        
+
         /// <summary>
         /// VisitsAdherantNo control.
         /// </summary>
@@ -1019,7 +1003,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton VisitsAdherantNo;
-        
+
         /// <summary>
         /// VlCopiesYes control.
         /// </summary>
@@ -1028,7 +1012,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton VlCopiesYes;
-        
+
         /// <summary>
         /// VlCopiesNo control.
         /// </summary>
@@ -1037,7 +1021,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton VlCopiesNo;
-        
+
         /// <summary>
         /// IptYes control.
         /// </summary>
@@ -1046,7 +1030,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton IptYes;
-        
+
         /// <summary>
         /// IptNo control.
         /// </summary>
@@ -1055,7 +1039,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton IptNo;
-        
+
         /// <summary>
         /// BmiYes control.
         /// </summary>
@@ -1064,7 +1048,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton BmiYes;
-        
+
         /// <summary>
         /// BmiNo control.
         /// </summary>
@@ -1073,7 +1057,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton BmiNo;
-        
+
         /// <summary>
         /// AgeYes control.
         /// </summary>
@@ -1082,7 +1066,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AgeYes;
-        
+
         /// <summary>
         /// AgeNo control.
         /// </summary>
@@ -1091,7 +1075,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AgeNo;
-        
+
         /// <summary>
         /// HealthcareConcernsYes control.
         /// </summary>
@@ -1100,7 +1084,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton HealthcareConcernsYes;
-        
+
         /// <summary>
         /// HealthcareConcernsNo control.
         /// </summary>
@@ -1109,7 +1093,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton HealthcareConcernsNo;
-        
+
         /// <summary>
         /// btnSaveCategorization control.
         /// </summary>
@@ -1118,7 +1102,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSaveCategorization;
-        
+
         /// <summary>
         /// AncArtYes control.
         /// </summary>
@@ -1127,7 +1111,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncArtYes;
-        
+
         /// <summary>
         /// AncArtNo control.
         /// </summary>
@@ -1136,7 +1120,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncArtNo;
-        
+
         /// <summary>
         /// AncArtRegimenYes control.
         /// </summary>
@@ -1145,7 +1129,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncArtRegimenYes;
-        
+
         /// <summary>
         /// AncArtRegimenNo control.
         /// </summary>
@@ -1154,7 +1138,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncArtRegimenNo;
-        
+
         /// <summary>
         /// AncOiYes control.
         /// </summary>
@@ -1163,7 +1147,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncOiYes;
-        
+
         /// <summary>
         /// AncOiNo control.
         /// </summary>
@@ -1172,7 +1156,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncOiNo;
-        
+
         /// <summary>
         /// AncVisitsAdherantYes control.
         /// </summary>
@@ -1181,7 +1165,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncVisitsAdherantYes;
-        
+
         /// <summary>
         /// AncVisitsAdherantNo control.
         /// </summary>
@@ -1190,7 +1174,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncVisitsAdherantNo;
-        
+
         /// <summary>
         /// AncIptYes control.
         /// </summary>
@@ -1199,7 +1183,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncIptYes;
-        
+
         /// <summary>
         /// AncIptNo control.
         /// </summary>
@@ -1208,7 +1192,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncIptNo;
-        
+
         /// <summary>
         /// AncAgeYes control.
         /// </summary>
@@ -1217,7 +1201,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncAgeYes;
-        
+
         /// <summary>
         /// AncAgeNo control.
         /// </summary>
@@ -1226,7 +1210,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncAgeNo;
-        
+
         /// <summary>
         /// AncMuacYes control.
         /// </summary>
@@ -1235,7 +1219,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncMuacYes;
-        
+
         /// <summary>
         /// AncMuscNo control.
         /// </summary>
@@ -1244,7 +1228,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncMuscNo;
-        
+
         /// <summary>
         /// AncVlCopiesYes control.
         /// </summary>
@@ -1253,7 +1237,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncVlCopiesYes;
-        
+
         /// <summary>
         /// AncVlCopiesNo control.
         /// </summary>
@@ -1262,7 +1246,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncVlCopiesNo;
-        
+
         /// <summary>
         /// AncAdherenceUnderstandingYes control.
         /// </summary>
@@ -1271,7 +1255,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncAdherenceUnderstandingYes;
-        
+
         /// <summary>
         /// AncAdherenceUnderstandingNo control.
         /// </summary>
@@ -1280,7 +1264,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncAdherenceUnderstandingNo;
-        
+
         /// <summary>
         /// AncNoAdrYes control.
         /// </summary>
@@ -1289,7 +1273,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncNoAdrYes;
-        
+
         /// <summary>
         /// AncNoAdrNo control.
         /// </summary>
@@ -1298,7 +1282,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncNoAdrNo;
-        
+
         /// <summary>
         /// StartedAncYes control.
         /// </summary>
@@ -1307,7 +1291,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton StartedAncYes;
-        
+
         /// <summary>
         /// StartedAncNo control.
         /// </summary>
@@ -1316,7 +1300,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton StartedAncNo;
-        
+
         /// <summary>
         /// AncHealthcareConcernsYes control.
         /// </summary>
@@ -1325,7 +1309,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncHealthcareConcernsYes;
-        
+
         /// <summary>
         /// AncHealthcareConcernsNo control.
         /// </summary>
@@ -1334,7 +1318,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton AncHealthcareConcernsNo;
-        
+
         /// <summary>
         /// btnSaveAncCategorization control.
         /// </summary>
@@ -1343,7 +1327,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSaveAncCategorization;
-        
+
         /// <summary>
         /// PncArtYes control.
         /// </summary>
@@ -1352,7 +1336,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncArtYes;
-        
+
         /// <summary>
         /// PncArtNo control.
         /// </summary>
@@ -1361,7 +1345,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncArtNo;
-        
+
         /// <summary>
         /// PncArtRegimenYes control.
         /// </summary>
@@ -1370,7 +1354,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncArtRegimenYes;
-        
+
         /// <summary>
         /// PncArtRegimenNo control.
         /// </summary>
@@ -1379,7 +1363,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncArtRegimenNo;
-        
+
         /// <summary>
         /// PncOiYes control.
         /// </summary>
@@ -1388,7 +1372,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncOiYes;
-        
+
         /// <summary>
         /// PncOiNo control.
         /// </summary>
@@ -1397,7 +1381,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncOiNo;
-        
+
         /// <summary>
         /// PncNegativePcrYes control.
         /// </summary>
@@ -1406,7 +1390,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncNegativePcrYes;
-        
+
         /// <summary>
         /// PncNegativePcrNo control.
         /// </summary>
@@ -1415,7 +1399,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncNegativePcrNo;
-        
+
         /// <summary>
         /// PncVisitsAdherantYes control.
         /// </summary>
@@ -1424,7 +1408,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncVisitsAdherantYes;
-        
+
         /// <summary>
         /// PncVisitsAdherantNo control.
         /// </summary>
@@ -1433,7 +1417,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncVisitsAdherantNo;
-        
+
         /// <summary>
         /// PncIptYes control.
         /// </summary>
@@ -1442,7 +1426,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncIptYes;
-        
+
         /// <summary>
         /// PncIptNo control.
         /// </summary>
@@ -1451,7 +1435,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncIptNo;
-        
+
         /// <summary>
         /// PncAgeYes control.
         /// </summary>
@@ -1460,7 +1444,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncAgeYes;
-        
+
         /// <summary>
         /// PncAgeNo control.
         /// </summary>
@@ -1469,7 +1453,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncAgeNo;
-        
+
         /// <summary>
         /// PncBmiYes control.
         /// </summary>
@@ -1478,7 +1462,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncBmiYes;
-        
+
         /// <summary>
         /// PncBmiNo control.
         /// </summary>
@@ -1487,7 +1471,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncBmiNo;
-        
+
         /// <summary>
         /// PncVlCopiesYes control.
         /// </summary>
@@ -1496,7 +1480,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncVlCopiesYes;
-        
+
         /// <summary>
         /// PncVlCopiesNo control.
         /// </summary>
@@ -1505,7 +1489,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncVlCopiesNo;
-        
+
         /// <summary>
         /// PncAdherenceUnderstandingYes control.
         /// </summary>
@@ -1514,7 +1498,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncAdherenceUnderstandingYes;
-        
+
         /// <summary>
         /// PncAdherenceUnderstandingNo control.
         /// </summary>
@@ -1523,7 +1507,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncAdherenceUnderstandingNo;
-        
+
         /// <summary>
         /// PncNoAdrYes control.
         /// </summary>
@@ -1532,7 +1516,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncNoAdrYes;
-        
+
         /// <summary>
         /// PncNoAdrNo control.
         /// </summary>
@@ -1541,7 +1525,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncNoAdrNo;
-        
+
         /// <summary>
         /// PncHealthcareConcernsYes control.
         /// </summary>
@@ -1550,7 +1534,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncHealthcareConcernsYes;
-        
+
         /// <summary>
         /// PncHealthcareConcernsNo control.
         /// </summary>
@@ -1559,7 +1543,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton PncHealthcareConcernsNo;
-        
+
         /// <summary>
         /// btnSavePncCategorization control.
         /// </summary>
@@ -1568,7 +1552,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSavePncCategorization;
-        
+
         /// <summary>
         /// ucPharmacyPrescription control.
         /// </summary>
@@ -1577,7 +1561,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPharmacyPrescription ucPharmacyPrescription;
-        
+
         /// <summary>
         /// ucPatientLabs control.
         /// </summary>
@@ -1586,7 +1570,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientLabs ucPatientLabs;
-        
+
         /// <summary>
         /// ucGenderBasedViolenceAssessment control.
         /// </summary>
@@ -1595,7 +1579,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucGenderBasedViolenceAssessment ucGenderBasedViolenceAssessment;
-        
+
         /// <summary>
         /// AppointmentDate control.
         /// </summary>
@@ -1604,7 +1588,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox AppointmentDate;
-        
+
         /// <summary>
         /// ServiceArea control.
         /// </summary>
@@ -1613,7 +1597,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ServiceArea;
-        
+
         /// <summary>
         /// Reason control.
         /// </summary>
@@ -1622,7 +1606,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Reason;
-        
+
         /// <summary>
         /// DifferentiatedCare control.
         /// </summary>
@@ -1631,7 +1615,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DifferentiatedCare;
-        
+
         /// <summary>
         /// description control.
         /// </summary>
@@ -1640,7 +1624,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox description;
-        
+
         /// <summary>
         /// status control.
         /// </summary>
@@ -1649,7 +1633,7 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList status;
-        
+
         /// <summary>
         /// AdverseOutomeDate control.
         /// </summary>
