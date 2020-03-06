@@ -17,7 +17,7 @@ CD /D %BATDIR%
 
 Set config=Release
 set log=builder.log
-set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MSBuild.exe
+set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe
 @Echo Cleaning references folder
 rmdir %BATDIR%\References /S /Q
 mkdir References
