@@ -453,6 +453,7 @@
     <None Remove="Scripts\2.0.1\18_UpdateFacility.sql" />
     <None Remove="Scripts\2.2.2\01_HeiMilestone.sql" />
     <None Remove="Scripts\2.2.2\03_AlterPharmacyDrugVisitDetailView.sql" />
+    <None Remove="Scripts\2.2.2\04_AddMissingRegimenLineList.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -911,6 +912,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\85_OTZServiceAreaIdentifier.sql" />
     <EmbeddedResource Include="Scripts\2.2.2\01_HeiMilestone.sql" />
     <EmbeddedResource Include="Scripts\2.2.2\03_AlterPharmacyDrugVisitDetailView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.2\04_AddMissingRegimenLineList.sql" />
   </ItemGroup>
 
   <ItemGroup>
