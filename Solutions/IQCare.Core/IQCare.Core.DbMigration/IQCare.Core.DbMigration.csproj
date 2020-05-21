@@ -456,6 +456,7 @@
     <None Remove="Scripts\2.2.2\04_AddMissingRegimenLineList.sql" />
     <None Remove="Scripts\2.2.2\05_NewRegimenLine.sql" />
     <None Remove="Scripts\2.2.2\06_NewRegimenLineRank.sql" />
+    <None Remove="Scripts\2.2.2\07_D4TCorrectRegimenCode.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -917,6 +918,7 @@
     <EmbeddedResource Include="Scripts\2.2.2\04_AddMissingRegimenLineList.sql" />
     <EmbeddedResource Include="Scripts\2.2.2\05_NewRegimenLine.sql" />
     <EmbeddedResource Include="Scripts\2.2.2\06_NewRegimenLineRank.sql" />
+    <EmbeddedResource Include="Scripts\2.2.2\07_D4TCorrectRegimenCode.sql" />
   </ItemGroup>
 
   <ItemGroup>
