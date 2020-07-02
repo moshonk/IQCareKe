@@ -221,7 +221,7 @@
                 },
                 error: function (response) {
                     toastr.error(JSON.stringify(response));
-                    break;
+                
                 }
             });
         });
