@@ -151,6 +151,7 @@
     <Compile Include="Interface\Pharmacy\IPharmacyOrderRepository.cs" />
     <Compile Include="Interface\Screening\IPatientCervicalCancerScreeningRepository.cs" />
     <Compile Include="Interface\Reporting\IReportingRepository.cs" />
+    <Compile Include="Interface\Screening\ICovid19ScreeningRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
     <Compile Include="Repository\Screening\PatientCervicalCancerScreeningRepository.cs" />
     <Compile Include="Repository\Reporting\ReportingRepository.cs" />
+    <Compile Include="Repository\Screening\Covid19ScreeningRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
     <Compile Include="Repository\Tb\PatientTBRxRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />

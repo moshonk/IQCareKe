@@ -98,6 +98,7 @@
     <Compile Include="Baseline\BPatientHivTestingManager.cs" />
     <Compile Include="Baseline\BPatientHivEnrollmentBaselineManager.cs" />
     <Compile Include="Baseline\BPatientTransferInManager.cs" />
+    <Compile Include="BCovid19Screening.cs" />
     <Compile Include="BLookupManager.cs" />
     <Compile Include="BMstPatientInsert.cs" />
     <Compile Include="BPatientAdherenceAssessment.cs" />

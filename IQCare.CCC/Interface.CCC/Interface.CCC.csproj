@@ -94,6 +94,7 @@
     <Compile Include="Enrollment\IPersonIdentifierManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
     <Compile Include="HIVEducation\IHIVEducation.cs" />
+    <Compile Include="ICovid19Screening.cs" />
     <Compile Include="Lookup\ILookupICDCodesManager.cs" />
     <Compile Include="Lookup\IPatientLookupLabManager.cs" />
     <Compile Include="Screening\IPatientCervicalCancerScreeningManager.cs" />

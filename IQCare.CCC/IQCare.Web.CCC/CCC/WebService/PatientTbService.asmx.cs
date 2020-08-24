@@ -431,7 +431,9 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var iptOutcome = new PatientIptOutcomeManager();
-                var x = iptOutcome.GetByPatientId(patientId).FindAll(ipt=> ipt.IptEvent > 0).FirstOrDefault();
+                var patientIptOutcomes = iptOutcome.GetByPatientId(patientId).FindAll(ipt=> ipt.IptEvent > 0);
+                patientIptOutcomes.Sort((a, b) => { return b.CreateDate.CompareTo(a.CreateDate); }); // Sort by Create date Desc
+                var x = patientIptOutcomes.FirstOrDefault();
                 if (x != null)
                 {
                     PatientIptOutcome patientIptOutcome = new PatientIptOutcome()

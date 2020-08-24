@@ -33,52 +33,52 @@ mkdir Release
 
 @echo "********** Building Entities **********" >> %log%
 @echo ********** Building Entities **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Entities\Entities.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Entities\Entities.sln" >> %log%
 @echo "********** Building Interface **********" >> %log%
 @echo ********** Building Interface **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Interfaces\Interfaces.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Interfaces\Interfaces.sln" >> %log%
 @echo "********** Building Application **********" >> %log%
 @echo ********** Building Application **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Application\Application.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\Application\Application.sln" >> %log%
 @echo "********** Building DataAccess **********" >> %log%
 @echo ********** Building DataAccess **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\DataAccess\DataAccess.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\DataAccess\DataAccess.sln" >> %log%
 @echo "********** Building Businessprocess **********" >> %log%
 @echo ********** Building Businessprocess **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\BusinessProcess\BusinessProcess.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\BusinessProcess\BusinessProcess.sln" >> %log%
 echo "********** Building IQCare.Library **********" >> %log%
 @echo ********** Building IQCare.Library  **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQCare.Library\IQCare.Library.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQCare.Library\IQCare.Library.sln" >> %log%
 echo "********** Building IQCare.Lookup **********" >> %log%
 @echo ********** Building IQCare.Lookup **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQLookup\IQCare.Lookup.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /rebuild %config% "%BATDIR%\Solutions\IQLookup\IQCare.Lookup.sln" >> %log%
 echo "********** Building Presentation **********" >> %log%
 @echo ********** Building Presentation **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Presentation\Presentation.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Presentation\Presentation.sln" >> %log%
 echo "********** Building Billing **********" >> %log%
 @echo ********** Building Billing **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Billing\IQCare.Billing.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\Billing\IQCare.Billing.sln" >> %log%
 echo "********** Building IQCare.CCC **********" >> %log%
 @echo ********** Building IQCare.CCC **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.CCC\IQCare.CCC.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.CCC\IQCare.CCC.sln" >> %log%
 echo "********** Building IQCare.PSmart **********" >> %log%
 @echo ********** Building IQCare.PSmart **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.PSmart\IQCare.PSmart.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.PSmart\IQCare.PSmart.sln" >> %log%
 echo "********** Building IQCare.Web.Api **********" >> %log%
 @echo ********** Building IQCare.Web.Api **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.Web.API\IQCare.Web.API.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" "%BATDIR%\Solutions\IQCare.Web.API\IQCare.Web.API.sln" >> %log%
 if /I %config%== release (
 echo "********** Building IQCare Service **********" >> %log%
 @echo ********** Building IQCare Service **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCareService\IQCareService.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCareService\IQCareService.sln" >> %log%
 echo "********** Building IQCare Management **********" >> %log%
 @echo ********** Building IQCare Management **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" >> %log%
 echo "********** Building IQCare.Release **********" >> %log%
 @echo ********** Building IQCare.Release **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.Release.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.Release.sln" >> %log%
 @echo ********** Building IQCare.CCC.UILogic **********
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.CCC.UILogic.sln" >> %log%
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.com" /build %config% "%BATDIR%\Solutions\IQCare.Release\IQCare.CCC.UILogic.sln" >> %log%
 
 )
 @echo "********** Completed building  devenv**********" >> %log%

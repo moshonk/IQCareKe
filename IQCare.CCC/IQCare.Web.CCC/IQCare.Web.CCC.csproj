@@ -200,7 +200,9 @@
     <Content Include="CCC\UC\ucTannerStaging.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\AdherenceService.asmx" />
+    <Content Include="CCC\WebService\Covid19UpdateService.asmx" />
     <Content Include="CCC\WebService\DepressionScreeningService.asmx" />
+    <Content Include="CCC\WebService\EncryptionService.asmx" />
     <Content Include="CCC\WebService\EnhanceAdherenceService.asmx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\FacilityService.asmx" />
@@ -291,6 +293,7 @@
     <Content Include="Content\pace\js\pace.js" />
     <Content Include="Content\toast\css\toastr.css" />
     <Content Include="Content\toast\js\toastr.js" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1137,8 +1140,16 @@
       <DependentUpon>AdherenceService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\Covid19UpdateService.asmx.cs">
+      <DependentUpon>Covid19UpdateService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\DepressionScreeningService.asmx.cs">
       <DependentUpon>DepressionScreeningService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\EncryptionService.asmx.cs">
+      <DependentUpon>EncryptionService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\EnhanceAdherenceService.asmx.cs">
@@ -1245,6 +1256,9 @@
     <Compile Include="CCC\WebService\TannersStagingService.asmx.cs">
       <DependentUpon>TannersStagingService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1382,6 +1396,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
+      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
+      <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8cc162fb-01fb-42ae-b63f-47e007e469e6}</Project>
+      <Name>DataAccess.CCC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IQCare.CCC.UILogic\IQCare.CCC.UILogic.csproj">
       <Project>{8eee6ba8-b2c9-4643-bd59-3deb13567695}</Project>
       <Name>IQCare.CCC.UILogic</Name>
