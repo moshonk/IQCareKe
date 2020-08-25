@@ -1144,7 +1144,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE mst_Patient SET PatientEnrollmentID = {patientEnrollmentID} WHERE Ptn_Pk = {ptn_pk};");
-                sql.Append($"UPDATE Lnk_PatientProgramStart SET ModuleId = {moduleId} WHERE Ptn_Pk = {ptn_pk};");
+                sql.Append($"UPDATE Lnk_PatientProgramStart SET ModuleId = {moduleId} WHERE ModuleId={moduleId} and Ptn_Pk = {ptn_pk};");
 
                 sql.Append($"SELECT Ptn_Pk, CAST(DECRYPTBYKEY([FirstName]) AS VARCHAR(50)) AS FirstName, CAST(DECRYPTBYKEY([LastName]) AS VARCHAR(50)) AS LastName, LocationID FROM [dbo].[mst_Patient] WHERE [Ptn_Pk] = {ptn_pk};");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");

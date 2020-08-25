@@ -27,8 +27,7 @@ VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='AdultFirstLineRegimen'),
 ---PaedsFirstLine
 
 
-If Not Exists(Select 1 From LookupItem where Name='CF3A
-') 
+If Not Exists(Select 1 From LookupItem where Name='CF3A') 
 Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('CF3A',
 'd4T + 3TC + NVP',0); End
 
