@@ -360,7 +360,7 @@
                 },
                 error: function (response) {
                     toastr.error(JSON.stringify(response));
-                    break;
+                    
                 }
             });
         });
@@ -388,7 +388,7 @@
             },
             error: function (response) {
                 toastr.error(JSON.stringify(response));
-                break;
+                
             }
         });
         if (error == 0) {
