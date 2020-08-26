@@ -126,6 +126,12 @@ namespace IQCare.CCC.UILogic.Interoperability
                                     isUndetectable = true;
                                     resultText = result.VlResult;
                                 }
+                                else if (result.VlResult.Contains("Target Not detected"))
+                                {
+                                    isUndetectable = true;
+                                    resultText = result.VlResult;
+                                    resultValue = 0;
+                                }
                                 else
                                 {
                                     var resultString = result.VlResult.Replace("copies/ml", "");

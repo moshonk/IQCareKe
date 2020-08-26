@@ -10,6 +10,7 @@ namespace IQCare.CCC.UILogic.Screening
     {
         private IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
 
+        private readonly IPatientCervicalCancerScreeningManager _patientCervicalCancerScreening = (IPatientCervicalCancerScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientCervicalCancerScreeningManager, BusinessProcess.CCC");
 
         public int AddPatientScreening(int patientId,int patientMasterVisitid,DateTime visitDate,int screeningTypeId,bool? screeningDone,DateTime screeningDate,int screeningCategoryId,int screeningValueId,string comment,int userId)
         {
@@ -188,6 +189,20 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+
+        public List<PatientScreening> GetPatientScreening(int patientId, int patientMasterVisitId, int screeningTypeId)
+        {
+            try
+            {
+                return _patientScreening.GetPatientScreening(patientId,patientMasterVisitId, screeningTypeId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid)
         {
             try
@@ -197,6 +212,24 @@ namespace IQCare.CCC.UILogic.Screening
                 
                 return psc;
              
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public PatientScreening GetCurrentPatientScreening(int patientId, int patientmastervisitid, int screeningTypeId)
+        {
+            try
+            {
+
+                var psc = _patientScreening.GetPatientScreening(patientId, patientmastervisitid, screeningTypeId);
+
+                return psc[0];
+
             }
             catch (Exception)
             {
@@ -220,8 +253,6 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
-       
-
         public List<PatientScreening> GetPatientScreening(int patientId, DateTime visitDate, int screeningCategoryId)
         {
             try
@@ -234,8 +265,19 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+        public List<PatientScreening> GetPatientScreening(int patientId, int screeningTypeId)
+        {
+            try
+            {
+                return _patientScreening.GetPatientScreening(patientId, screeningTypeId);
+            }
+            catch (Exception)
+            {
 
-       
+                throw;
+            }
+        }
+
         public int UpdatePatientScreening(int id,DateTime visitDate,int patientId,int patientMasterVisitId,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
@@ -286,5 +328,72 @@ namespace IQCare.CCC.UILogic.Screening
                 throw;
             }
         }
+
+        public PatientCervicalCancerScreening GetPatientCervicalCancerScreening(int patientId, int patientMasterVisitId)
+        {
+            try
+            {
+                return _patientCervicalCancerScreening.GetPatientCervicalCancerScreeningByVisitId(patientId, patientMasterVisitId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public int AddUpdatePatientCervicalCancerScreening(int patientId, int patientMasterVisitId, DateTime visitDate, DateTime appointmentDate, string referredTo, int userId)
+        {
+            try
+            {
+                int screeningId;
+                screeningId = _patientCervicalCancerScreening.CheckIfPatientCervicalCancerScreeningExists(patientId, patientMasterVisitId);
+                if (screeningId > 0)
+                {
+                    var ps = new PatientCervicalCancerScreening()
+                    {
+                        Id = screeningId,
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ReferredTo = referredTo,
+                        AppointmentDate = appointmentDate,
+                        CreatedBy = userId,
+                    };
+                    return _patientCervicalCancerScreening.UpdatePatientCervicalCancerScreening(ps);
+                }
+                else
+                {
+                    var ps = new PatientCervicalCancerScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = visitDate,
+                        AppointmentDate = appointmentDate,
+                        ReferredTo = referredTo,
+                        CreatedBy = userId
+                    };
+                    return _patientCervicalCancerScreening.AddPatientCervicalCancerScreening(ps);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public List<PatientCervicalCancerScreening> GetPatientCervicalCancerScreeningHistory(int patientId)
+        {
+            try
+            {
+                return _patientCervicalCancerScreening.GetPatientCervicalCancerScreening(patientId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

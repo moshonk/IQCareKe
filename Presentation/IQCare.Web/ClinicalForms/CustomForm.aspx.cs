@@ -6247,10 +6247,15 @@ namespace IQCare.Web.Clinical
                 {
                     foreach (DataRow theDRC in theDVC.ToTable().Rows)
                     {
-                        if (Convert.ToString(theDRC["ConControlId"]) != "")
+                        if (Convert.ToString(theDRC["ConControlId"]) != "" && Convert.ToInt16(theDRC["ConditionalFieldSectionId"]) == 1)
                         {
                             EnableValueRadio.Append("EnableValueYes('" + theDRC["ConControlId"] + "');");
                         }
+                        if (Convert.ToString(theDRC["ConControlId"]) != "" && Convert.ToInt16(theDRC["ConditionalFieldSectionId"]) == 2)
+                        {
+                            EnableValueRadio.Append("EnableValueNo('" + theDRC["ConControlId"] + "');");
+                        }
+
                     }
                     theYesNoRadio1.Attributes.Add("onclick", "down(this); " + EnableValueRadio + "");
                 }
@@ -6293,7 +6298,11 @@ namespace IQCare.Web.Clinical
                 {
                     foreach (DataRow theDRC in theDVC.ToTable().Rows)
                     {
-                        if (Convert.ToString(theDRC["ConControlId"]) != "")
+                        if (Convert.ToString(theDRC["ConControlId"]) != "" && Convert.ToInt16(theDRC["ConditionalFieldSectionId"]) == 2)
+                        {
+                            EnableValueRadio.Append("EnableValueYes('" + theDRC["ConControlId"] + "');");
+                        }
+                        if (Convert.ToString(theDRC["ConControlId"]) != "" && Convert.ToInt16(theDRC["ConditionalFieldSectionId"]) == 1)
                         {
                             EnableValueRadio.Append("EnableValueNo('" + theDRC["ConControlId"] + "');");
                         }

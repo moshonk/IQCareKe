@@ -167,12 +167,28 @@
                         toastr.error("Appointment date cannot be set to over 7 months");
                         return false;
                     }
-                    if (appointmentid > 0) {
-                        updateAppointment();
-                    }
-                    else {
-                        checkExistingAppointment();
-                    }
+
+                    checkValidDCModel().then(function () {
+                        if (appointmentid > 0) {
+                            updateAppointment();
+                        }
+                        else {
+                            checkExistingAppointment();
+                        }
+                    }).fail(function (msg) {
+                        toastr.error(msg);
+                        bootbox.alert({
+                            title: '<h3 class="text-danger">Invalid DC Model</h3>',
+                            message: msg,
+                            buttons: {
+                                ok: {
+                                    label: '<i class="fa fa-check"></i> Ok'
+                                }
+                            }
+                        });
+
+                    });
+
                    // checkExistingAppointment();
                 }
                 //if (appointmentid > 0) {
@@ -265,7 +281,8 @@
                     cache: false,
                     success: function (response) {
                         if (response.d != null) {
-                            toastr.error("Appointment already exists");
+                            toastr.info("Appointment already exists");
+                            updateAppointment();
                             return false;
                         }
                         else
@@ -374,6 +391,40 @@
                 $("#description").val("");
                 $("#AppointmentDate").val("");
             }
+        }
+
+        function checkValidDCModel() {
+            var deferred = $.Deferred();
+            var patientId = "<%=PatientId%>";
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetPatientCategorization",
+                data: "{'patientId': '" + patientId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var returnValue = JSON.parse(response.d);
+
+                    var stabilityStatus = returnValue[1].toLowerCase();
+                    var dcModel = $('#DifferentiatedCare').find('option:selected').text().toLowerCase();
+
+                    if (stabilityStatus == 'stable' && dcModel == 'standard care') {
+                        deferred.reject('This patient has been categorized as stable. Please select a valid Differentiated Care (DC) model');
+                    } else if (stabilityStatus == 'unstable' && dcModel != 'standard care') {
+                        deferred.reject('This patient has been categorized as unstable. Please select the Standard Care model');
+                    } else {
+                        deferred.resolve();
+                    }
+
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+
+            return deferred.promise();
         }
 
         

@@ -98,6 +98,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\IQCare.Web.UILogic.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -127,6 +131,7 @@
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
+    <Compile Include="ClinicalSummary\ClinicalSummaryManager.cs" />
     <Compile Include="Encounter\ImmunizationLogic.cs" />
     <Compile Include="Encounter\NeonatalHistoryLogic.cs" />
     <Compile Include="Encounter\PatientClinicalNotesLogic.cs" />
@@ -207,6 +212,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Reporting\ReportingResultsManager.cs" />
+    <Compile Include="Screening\Covid19ScreeningManager.cs" />
     <Compile Include="Screening\PatientScreeningManager.cs" />
     <Compile Include="TannersStagingManager.cs" />
     <Compile Include="Tb\PatientTBRxManager.cs" />
@@ -214,7 +220,9 @@
     <Compile Include="Triage\PatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningMethodManager.cs" />
+    <Compile Include="Triage\PatientPIAPregnancySymptomManager.cs" />
     <Compile Include="Triage\PatientPregnancyIndicatorManager.cs" />
+    <Compile Include="Triage\PatientPregnancyIntentionAssessmentManager.cs" />
     <Compile Include="Triage\PatientPregnancyManager.cs" />
     <Compile Include="Tb\PatientIcfActionManager.cs" />
     <Compile Include="Tb\PatientIcfManager.cs" />
@@ -230,6 +238,10 @@
     <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
       <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
       <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8cc162fb-01fb-42ae-b63f-47e007e469e6}</Project>
+      <Name>DataAccess.CCC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

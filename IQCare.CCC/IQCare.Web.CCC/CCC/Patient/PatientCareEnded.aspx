@@ -615,8 +615,10 @@
                     return false;
                 }
 
-                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {    
-                    dateOfDeath = moment(moment(dateOfDeath, 'DD-MMM-YYYY')).format('DD-MMM-YYYY');
+                dateOfDeath = moment(dateOfDeath, 'DD-MMM-YYYY');
+
+                if (dateOfDeath.isValid()) {    
+                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
                 } else {
                     dateOfDeath = '';
                 }
@@ -731,7 +733,7 @@
 
             
             
-            /*function getCareEnded() {
+            function getCareEnded() {
                 $.ajax(
                 {
                     type: "POST",
@@ -760,7 +762,7 @@
                         return false;
                     }
                 });
-            }*/
+            }
 
 
             $("#reasonsForDeath").change(function () {

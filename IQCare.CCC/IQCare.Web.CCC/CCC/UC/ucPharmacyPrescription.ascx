@@ -2204,6 +2204,12 @@
                             "qtyDisp": DrugTableArray[i].qtyDisp,
                             "prophylaxis": DrugTableArray[i].prophylaxis
                         }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
+
                     }
                     console.log(drugPrescriptionArray);
                 }

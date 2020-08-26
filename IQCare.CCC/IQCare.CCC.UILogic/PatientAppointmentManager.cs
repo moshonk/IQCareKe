@@ -88,19 +88,16 @@ namespace IQCare.CCC.UILogic
 
         public int UpdatePatientAppointments(PatientAppointment p)
         {
-            PatientAppointment appointment = new PatientAppointment()
-            {
-                PatientId = p.PatientId,
-                PatientMasterVisitId = p.PatientMasterVisitId,
-                AppointmentDate = p.AppointmentDate,
-                Description = p.Description,
-                DifferentiatedCareId = p.DifferentiatedCareId,
-                ReasonId = p.ReasonId,
-                ServiceAreaId = p.ServiceAreaId,
-                StatusId = p.StatusId,
-                //StatusDate = DateTime.Now,
-                Id = p.Id
-            };
+            var appointments = _appointment.GetByPatientId(p.PatientId);
+            var appointment = appointments.Find(pa => pa.Id == p.Id);
+
+            appointment.AppointmentDate = p.AppointmentDate;
+            appointment.Description = p.Description;
+            appointment.DifferentiatedCareId = p.DifferentiatedCareId;
+            appointment.ReasonId = p.ReasonId;
+            appointment.ServiceAreaId = p.ServiceAreaId;
+            appointment.CreatedBy = p.CreatedBy == 0 ? p.CreatedBy : appointment.CreatedBy;
+
             return _appointment.UpdatePatientAppointments(appointment);
         }
 

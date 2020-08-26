@@ -11,6 +11,7 @@ namespace Interface.Security
         DataSet GetFacilitySettings();
         DataSet GetUserCredentials(string UserName, int LocationId, int SystemId);
         DataTable GetEmployeeDetails();
+        DataTable GetAllUserInformation();
         int UpdateAppointmentStatus(string Currentdat, int locationid);
     }
 }

@@ -233,7 +233,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                         {
                             switch (appointment.APPOINTMENT_REASON)
                             {
-                                case "PHARMACY_REFILL":
+                                case "REGIMEN REFILL":
                                     appointmentReason = "Pharmacy Refill";
                                     break;
                                 case "TREATMENT_PREP":
@@ -274,7 +274,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Appointment
                                 case "CLINICAL":
                                     appointmentType = "Standard Care";
                                     break;
-                                case "PHARMACY":
+                                case "PHARMACY APPOINTMENT":
                                     appointmentType = "Express Care";
                                     break;
                                 case "INVESTIGATION":

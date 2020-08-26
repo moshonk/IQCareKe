@@ -54,6 +54,8 @@ namespace DataAccess.CCC.Context
 
         //Screening
         public DbSet<PatientScreening> PatientScreenings { get; set; }
+        public DbSet<Covid19Screening> Covid19Screenings { get; set; }
+        public DbSet<PatientCervicalCancerScreening> PatientCervicalCancerScreenings { get; set; }
 
         //Triage
         public DbSet<PatientAdverseEvent> PatientAdverseEvents { get; set; }
@@ -65,6 +67,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
         public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
         public DbSet<PatientAdverseEventOutcome> PatientAdverseEventOutcome { get; set; }
+        public DbSet<PatientPregnancyIntentionAssessment> PatientPregnancyIntentionAssessment { get; set; }
+        public DbSet<Entities.CCC.Triage.PatientPIAPregnancySymptom> PatientPIAPregnancyMethod { get; set; }
 
 
         //Visit

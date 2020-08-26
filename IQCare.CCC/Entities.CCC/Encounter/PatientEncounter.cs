@@ -233,10 +233,17 @@ namespace Entities.CCC.Encounter
             public double age { get; set; }
             public double BMI { get; set; }
             public double VL { get; set; }
+            public int SameRegimen3Months { get; set; }
             public int SameRegimen12Months { get; set; }
             public double Completed6MonthsIPT { get; set; }
             public int ActiveOIs { get; set; }
             public string pregnant { get; set; }
+            public int OnART12Months { get; set; }
+            public int NoAdr { get; set; }
+            public int LdlVLInPast3Months { get; set; }
+            public int TwoConsecutiveLdlVl { get; set; }
+            public double Muac { get; set; }
+
 
 
         }

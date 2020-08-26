@@ -22,6 +22,11 @@ namespace IQCare.Web.CCC.UC
     {
         public int PatientEncounterExists { get; set; }
 
+        public bool PatientHasPreviousARTPrescriptions
+        {
+            get; set;
+        }
+
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         public string visitdateval = "";
         public string LMPval = "";
@@ -100,6 +105,8 @@ namespace IQCare.Web.CCC.UC
                 else
                     vsNo.Checked = true;
             }
+
+            //NextAppointmentDate = DateTime.Today.AddDays(14);
 
             // Get Gender
             PatientLookup genderId = _patientLookupmanager.GetGenderID(Convert.ToInt32(HttpContext.Current.Session["PatientPK"]));
@@ -198,6 +205,7 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlICFRegimen, "TBRegimen");
                 lookUp.populateDDL(ddlICFCurrentlyOnIPT, "GeneralYesNo");
                 lookUp.populateDDL(ddlICFStartIPT, "GeneralYesNo");
+                lookUp.populateDDL(ddlICFEverBeenOnIPT, "GeneralYesNo");
                 lookUp.populateDDL(ddlICFTBScreeningOutcome, "TBFindings");
 
                 lookUp.populateDDL(ddlSputumSmear, "SputumSmear");
@@ -207,8 +215,8 @@ namespace IQCare.Web.CCC.UC
                 lookUp.populateDDL(ddlInvitationofContacts, "GeneralYesNo");
                 lookUp.populateDDL(ddlEvaluatedforIPT, "GeneralYesNo");
                 getPatientNotesandScreening();
-                populatePNS();
-                getPNSData();
+                //populatePNS();
+                //getPNSData();
 
                 //List<LookupItemView> highriskorientation = mgr.GetLookItemByGroup("HighRisk");
                 //if (highriskorientation != null && highriskorientation.Count > 0)
@@ -248,6 +256,9 @@ namespace IQCare.Web.CCC.UC
 
             Control SocialHoistoryCtrl = Page.LoadControl("~/CCC/UC/ucSocialHistory.ascx");
             SocialHistoryPH.Controls.Add(SocialHoistoryCtrl);
+
+            Control CervicalCancerScreeningAssessmentCtrl = Page.LoadControl("~/CCC/UC/ucCervicalCancerScreeningAssessment.ascx");
+            CervicalCancerScreeningAssessmentPH.Controls.Add(CervicalCancerScreeningAssessmentCtrl);
         }
         private void populatePNS()
         {
@@ -379,8 +390,9 @@ namespace IQCare.Web.CCC.UC
             //On IPT
             ddlICFCurrentlyOnIPT.SelectedValue = getSelectedValue(pce.OnIPT);
             //start IPT
-            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
-
+            ddlICFStartIPT.SelectedValue = getSelectedValue(pce.startIPT);
+            //Ever been on IPT
+            ddlICFEverBeenOnIPT.SelectedValue = getSelectedValue(pce.EverBeenOnIPT);
             //Cough
             ddlICFCough.SelectedValue = getSelectedValue(pce.Cough);
             //fever
@@ -472,7 +484,7 @@ namespace IQCare.Web.CCC.UC
             AppointmentId = pce.appointmentId;
             AppointmentDate.Text = pce.nextAppointmentDate;
 
-            NextAppointmentDate = Convert.ToDateTime(pce.nextAppointmentDate);
+            NextAppointmentDate = pce.nextAppointmentDate == null ? DateTime.Today : Convert.ToDateTime(pce.nextAppointmentDate);
             //if (pce.nextAppointmentDate != "")
             //{
             //    if (pce.nextAppointmentDate != null)
@@ -569,5 +581,6 @@ namespace IQCare.Web.CCC.UC
                 //.getPatientClinicalNotes(PatientId).ToArray();
             Session["patientNotesData"] = patientNotesData;
         }
+
     }
 }

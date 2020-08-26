@@ -94,8 +94,10 @@
     <Compile Include="Enrollment\IPersonIdentifierManager.cs" />
     <Compile Include="Enrollment\IServiceAreaIdentifiers.cs" />
     <Compile Include="HIVEducation\IHIVEducation.cs" />
+    <Compile Include="ICovid19Screening.cs" />
     <Compile Include="Lookup\ILookupICDCodesManager.cs" />
     <Compile Include="Lookup\IPatientLookupLabManager.cs" />
+    <Compile Include="Screening\IPatientCervicalCancerScreeningManager.cs" />
     <Compile Include="Reporting\IReportingManager.cs" />
     <Compile Include="Tb\IPatientTBRx.cs" />
     <Compile Include="Visit\IMst_PatientInsert.cs" />
@@ -149,8 +151,10 @@
     <Compile Include="Screening\IPatientScreeningManager.cs" />
     <Compile Include="Triage\IPatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\IpatientFamilyPlanningManager.cs" />
+    <Compile Include="Triage\IPatientPIAPregnancySymptomManager.cs" />
     <Compile Include="Triage\IpatientPregnancyIndicatorManager.cs" />
     <Compile Include="Triage\IPatientFamilyPlanningMethodManager.cs" />
+    <Compile Include="Triage\IPatientPregnancyIntentionAssessmentManager.cs" />
     <Compile Include="Triage\IPatientPregnancyManager.cs" />
     <Compile Include="Tb\IPateintIptOutcome.cs" />
     <Compile Include="Tb\IPatientIcf.cs" />

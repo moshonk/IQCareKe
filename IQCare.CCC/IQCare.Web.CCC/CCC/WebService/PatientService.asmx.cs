@@ -1027,12 +1027,12 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
-        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
+        public string AddPatientCategorization(int patientId, int patientMasterVisitId, string artPeriod, string artRegimenPeriod, string activeOis, string visitsAdherant, string vlCopies, string ipt, string bmi, string age, string healthcareConcerns)
         {
             PatientCategorizationStatus categorizationStatus;
             string[] arr1 = new string[]{};
 
-            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
+            if (Convert.ToBoolean(activeOis) && Convert.ToBoolean(artPeriod) && Convert.ToBoolean(artRegimenPeriod) && Convert.ToBoolean(visitsAdherant) && Convert.ToBoolean(vlCopies) && Convert.ToBoolean(ipt) && Convert.ToBoolean(age) && Convert.ToBoolean(healthcareConcerns) && Convert.ToBoolean(bmi))
                 categorizationStatus = PatientCategorizationStatus.Stable;
             else
                 categorizationStatus = PatientCategorizationStatus.UnStable;
@@ -1067,6 +1067,104 @@ namespace IQCare.Web.CCC.WebService
             catch (Exception e)
             {
                 Msg = e.Message;
+            }
+
+            return new JavaScriptSerializer().Serialize(arr1);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string AddPatientCategorizationWithDynamicParams(int patientId, int patientMasterVisitId, string categorizationParameters, string healthcareWorkerConcerns)
+        {
+            PatientCategorizationStatus categorizationStatus;
+            string[] arr1 = new string[] { };
+            //Dictionary<string, string> categorizationResponses = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(categorizationParameters);
+            string[] categorizationResponses = new JavaScriptSerializer().Deserialize<string[]>(categorizationParameters);
+            //Object categorizationResponses = new JavaScriptSerializer().DeserializeObject(categorizationParameters);
+
+            int i = 0;
+            
+            while (i < categorizationResponses.Length && Convert.ToBoolean(categorizationResponses[i]) == true)
+            {
+                i++;
+            }
+
+            if (i == categorizationResponses.Length)
+            {
+                categorizationStatus = PatientCategorizationStatus.Stable;
+            }
+            else
+            {
+                categorizationStatus = PatientCategorizationStatus.UnStable;
+            }
+
+            var userId = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+            var patientCategorization = new PatientCategorization()
+            {
+                PatientId = patientId,
+                Categorization = categorizationStatus,
+                DateAssessed = DateTime.Now,
+                PatientMasterVisitId = patientMasterVisitId,
+                HealthcareWorkerConcerns = healthcareWorkerConcerns,
+                CreatedBy = userId
+            };
+            try
+            {
+                var categorization = new PatientCategorizationManager();
+                Result = categorization.AddPatientCategorization(patientCategorization);
+                if (Result > 0)
+                {
+                    Msg = "Patient Categorization Added Successfully!";
+
+                    var lookUpLogic = new LookupLogic();
+                    var status = lookUpLogic.GetItemIdByGroupAndItemName("StabilityAssessment", categorizationStatus.ToString());
+                    var itemId = 0;
+                    if (status.Count > 0)
+                    {
+                        itemId = status[0].ItemId;
+                    }
+
+                    arr1 = new string[] { Msg, itemId.ToString() };
+
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+
+            return new JavaScriptSerializer().Serialize(arr1);
+        }
+
+
+        [WebMethod]
+        public string GetPatientCategorization(int patientId)
+        {
+            string[] arr1 = new string[] { };
+
+            try
+            {
+                var cm = new PatientCategorizationManager();
+                var categorization = cm.GetByPatientId(patientId).OrderByDescending(p=>p.DateAssessed).FirstOrDefault();
+                if (categorization != null)
+                {
+                    Msg = "Patient Categorization Fetched Successfully!";
+
+                    var lookUpLogic = new LookupLogic();
+                    var status = categorization.Categorization;
+                   
+
+                    arr1 = new string[] { Msg, status.ToString() };
+
+                }
+                else
+                {
+                    arr1 = new string[] { Msg, "Unstable" };
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+                arr1 = new string[] { Msg };
             }
 
             return new JavaScriptSerializer().Serialize(arr1);

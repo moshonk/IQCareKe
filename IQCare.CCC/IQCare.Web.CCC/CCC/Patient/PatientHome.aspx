@@ -76,6 +76,30 @@
                             </div>
                         </div>
                 </div>
+                <div class="row">
+                        <asp:PlaceHolder runat="server" ID="phCervicalCancerScreening">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                <h5 class="pull-left">
+                                    <asp:Label runat="server">Last Cervical Cancer Screening Assesment :</asp:Label></h5>
+                            </div>
+                            <div class="col-md-12 col-md-12 col-xs-12 col-sm-12">
+                                <h6>
+                                    <asp:Label runat="server" ClientIDMode="Static" ID="lblCervicalCancerScreeningAsessment" CssClass="text-info pull-left"> </asp:Label></h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <div class="col-md-12">
+                                <h5 class="pull-left">
+                                    <asp:Label runat="server">Last Cervical Cancer Screening :</asp:Label></h5>
+                            </div>
+                            <div class="col-md-12">
+                                <h6>
+                                    <asp:Label runat="server" ClientIDMode="Static" ID="lblCervicalCancerScreening" CssClass="text-info pull-left"> </asp:Label></h6>
+                            </div>
+                        </div>
+                        </asp:PlaceHolder>
+                </div>
                 <!-- .col-md-12 -->
 
             </div>

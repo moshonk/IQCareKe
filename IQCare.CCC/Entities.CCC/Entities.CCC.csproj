@@ -88,6 +88,7 @@
     <Compile Include="Baseline\PatientTreatmentInitiation.cs" />
     <Compile Include="ClinicalSummary\ClinicalSummary.cs" />
     <Compile Include="Consent\PatientConsent.cs" />
+    <Compile Include="Covid19Screening.cs" />
     <Compile Include="Encounter\ComplaintsHistory.cs" />
     <Compile Include="Encounter\LabDetailsEntity.cs" />
     <Compile Include="Encounter\LabResultsEntity.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Reports\sp_gettxcurr.cs" />
     <Compile Include="Reports\Tracing.cs" />
     <Compile Include="Reports\TracingData.cs" />
+    <Compile Include="Screening\patientCervicalCancerScreening.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Sync\Sync.cs" />
     <Compile Include="Tanners\PatientTannersStaging.cs" />
@@ -209,8 +211,10 @@
     <Compile Include="Encounter\PatientPhdp.cs" />
     <Compile Include="Triage\PatientFamilyPlanning.cs" />
     <Compile Include="Triage\PatientFamilyPlanningMethod.cs" />
+    <Compile Include="Triage\PatientPIAPregnancySymptom.cs" />
     <Compile Include="Triage\PatientPreganancy.cs" />
     <Compile Include="Triage\PatientPregnancyIndicator.cs" />
+    <Compile Include="Triage\PatientPregnancyIntentionAssessment.cs" />
     <Compile Include="Triage\PatientVital.cs" />
     <Compile Include="Triage\PregnancyOutcomeLookup.cs" />
     <Compile Include="Visit\PatientLabTracker.cs" />

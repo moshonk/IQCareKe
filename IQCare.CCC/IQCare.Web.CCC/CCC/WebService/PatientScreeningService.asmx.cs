@@ -11,6 +11,8 @@ using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Visit;
 using System.Collections;
+using System.Web.Script.Services;
+using System.Data;
 using System.Web;
 
 namespace IQCare.Web.CCC.WebService
@@ -130,6 +132,26 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string DeleteScreeningData(int patientId, int patientMasterVisitId, int screeningTypeId)
+        {
+            try
+            {
+                var PSM = new PatientScreeningManager();
+                foreach (PatientScreening item in PSM.GetPatientScreening(patientId, patientMasterVisitId, screeningTypeId))
+                {
+                    PSM.DeletePatientScreening(item.Id);
+                }
+
+                Msg = "Screening removed";
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
         [WebMethod(EnableSession = true)]
         public string AddUpdateScreeningDataByVisitId(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
         {
@@ -165,6 +187,15 @@ namespace IQCare.Web.CCC.WebService
             PatientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
             var PSM = new PatientScreeningManager();
             PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(Convert.ToInt32(Session["PatientPK"]), PatientMasterVisitId).ToArray();
+            string jsonScreeningObject = "[]";
+            jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
+            return jsonScreeningObject;
+        }
+        [WebMethod(EnableSession = true)]
+        public string GetScreeningByScreeningType(int patientId, int screeningTypeId)
+        {
+            var psm = new PatientScreeningManager();
+            PatientScreening[] patientScreeningData = psm.GetPatientScreening(patientId, screeningTypeId).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
             return jsonScreeningObject;
@@ -354,5 +385,49 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetCervicalCancerScreeningByVisitId(int PatientId, int PatientMasterVisitId)
+        {
+            var psm = new PatientScreeningManager();
+            PatientCervicalCancerScreening patientScreeningData = psm.GetPatientCervicalCancerScreening(PatientId, PatientMasterVisitId);
+            string jsonScreeningObject = "{}";
+            jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
+            return jsonScreeningObject;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string SaveUpdatePatientCervicalCancerScreening(int patientId, int patientMasterVisitId, DateTime visitDate, DateTime appointmentDate, string referredTo, int userId) {
+            try
+            {
+                var psm = new PatientScreeningManager();
+                psm.AddUpdatePatientCervicalCancerScreening(patientId, patientMasterVisitId, visitDate, appointmentDate, referredTo, userId);
+
+                Msg = "Screening data updated successfully";
+            }
+            catch(Exception e) { 
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPatientCervicalCancerScreeningHistory(int patientId)
+        {
+
+            var psm = new PatientScreeningManager();
+            List<PatientCervicalCancerScreening> ccsHistory = psm.GetPatientCervicalCancerScreeningHistory(patientId);
+
+            ArrayList rows = new ArrayList();
+
+            foreach (PatientCervicalCancerScreening ccs in ccsHistory)
+            {
+                string[] i = new string[4] { ccs.VisitDate.ToString(), ccs.AppointmentDate.ToString(), ccs.ReferredTo.ToString(), ccs.PatientMasterVisitId.ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
     }
 }

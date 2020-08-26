@@ -7,7 +7,7 @@
 <%@ Register Src="~/CCC/UC/ucPatientClinicalEncounter.ascx" TagPrefix="uc" TagName="ucPatientClinicalEncounter" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
 <%@ Register Src="~/CCC/UC/ucPatientSychosocialCriteria.ascx" TagPrefix="uc" TagName="ucPatientPsycho" %>
-<%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>
+<%--<%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>--%>
 <%--@ Register Src="~/CCC/UC/Adherence/ucAdherenceBarriersHome.ascx" TagPrefix="uc" TagName="ucAdherenceBarriers" --%>
 <%--@ Register Src="~/CCC/UC/Depression/ucScreeningHome.ascx" TagPrefix="uc" TagName="ucHealthScreening" --%>
 <%@ Register TagPrefix="uc" TagName="tnDisclosure" Src="~/CCC/UC/Depression/ucDisclosure.ascx" %>

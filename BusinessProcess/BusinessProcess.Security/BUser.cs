@@ -41,6 +41,26 @@ namespace BusinessProcess.Security
             }
         }
 
+        public DataTable GetAllUserInformation()
+        {
+            lock (this)
+            {
+                ClsObject obj = new ClsObject();
+                ClsUtility.Init_Hashtable();
+
+                DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams,
+                   @"SELECT        LOWER(u.UserName) AS username, u.password, u.DeleteFlag AS deleted, g.GroupName AS role
+                    FROM            mst_User AS u INNER JOIN
+                                    lnk_UserGroup AS lg ON lg.UserID = u.UserID INNER JOIN
+                                    mst_Groups AS g ON g.GroupID = lg.GroupID
+                    WHERE(u.DeleteFlag = 0)",
+                   ClsUtility.ObjectEnum.DataTable);
+
+                return dt;
+
+            }
+        }
+
         #endregion
 
         #region "Login Functions"

@@ -953,7 +953,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EC2B02267B8E4D149CA67B4A487BD12D"
             {
-            "SourcePath" = "8:..\\Solutions\\IQCare.Web.API\\IQCare.Web.API\\obj\\Release\\net461\\IQCare.Web.Api.dll"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_41FCEB4414DB44CE93A41E66A69C8DC6"

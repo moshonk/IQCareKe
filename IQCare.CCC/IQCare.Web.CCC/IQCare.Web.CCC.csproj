@@ -61,6 +61,7 @@
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
     <Content Include="CCC\CaseSummary\CaseSummary.aspx" />
+    <Content Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
@@ -92,6 +93,7 @@
     <Content Include="CCC\Patient\PatientTracing.aspx" />
     <Content Include="CCC\Screening\AlcoholDrugAbuseScreening.aspx" />
     <Content Include="CCC\Screening\DepressionScreening.aspx" />
+    <Content Include="CCC\Screening\CervicalCancerScreening.aspx" />
     <Content Include="CCC\Screening\GBVScreening.aspx" />
     <Content Include="CCC\Screening\PatientDisclosure.aspx" />
     <Content Include="CCC\Scripts\css\bootstrap-datetimepicker.css" />
@@ -167,7 +169,10 @@
     <Content Include="CCC\UC\Depression\ucGBVScreening.ascx" />
     <Content Include="CCC\UC\Depression\ucScreeningHome.ascx" />
     <Content Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx" />
+    <Content Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx" />
     <Content Include="CCC\UC\ucCaseSummary.ascx" />
+    <Content Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx" />
+    <Content Include="CCC\UC\ucPatientClinicalReviewSumary.ascx" />
     <Content Include="CCC\UC\ucEvaluation.ascx" />
     <Content Include="CCC\UC\ucExtruder.ascx" />
     <Content Include="CCC\UC\ucFamilyFinder.ascx" />
@@ -195,7 +200,9 @@
     <Content Include="CCC\UC\ucTannerStaging.ascx" />
     <Content Include="CCC\UC\ucVisitDetails.ascx" />
     <Content Include="CCC\WebService\AdherenceService.asmx" />
+    <Content Include="CCC\WebService\Covid19UpdateService.asmx" />
     <Content Include="CCC\WebService\DepressionScreeningService.asmx" />
+    <Content Include="CCC\WebService\EncryptionService.asmx" />
     <Content Include="CCC\WebService\EnhanceAdherenceService.asmx" />
     <Content Include="CCC\WebService\EnrollmentService.asmx" />
     <Content Include="CCC\WebService\FacilityService.asmx" />
@@ -207,6 +214,7 @@
     <Content Include="CCC\WebService\PatientAdverseEventOutcome.asmx" />
     <Content Include="CCC\WebService\PatientBaselineService.asmx" />
     <Content Include="CCC\WebService\PatientClinicalNotesService.asmx" />
+    <Content Include="CCC\WebService\PatientClinicalSummaryService.asmx" />
     <Content Include="CCC\WebService\PatientEncounterService.asmx" />
     <Content Include="CCC\WebService\PatientLookupService.asmx" />
     <Content Include="CCC\WebService\PatientMasterVisitService.asmx" />
@@ -285,6 +293,7 @@
     <Content Include="Content\pace\js\pace.js" />
     <Content Include="Content\toast\css\toastr.css" />
     <Content Include="Content\toast\js\toastr.js" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -313,6 +322,7 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -429,6 +439,9 @@
     <Content Include="CCC\Scripts\font\robot\Roboto-Thin.woff2" />
     <Content Include="CCC\Scripts\sass\mdb.scss" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Localhost.pubxml" />
+    <None Include="Properties\PublishProfiles\Production Server.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -520,6 +533,13 @@
     </Compile>
     <Compile Include="CCC\CaseSummary\CaseSummary.aspx.designer.cs">
       <DependentUpon>CaseSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx.cs">
+      <DependentUpon>PatientClinicalReviewSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\CaseSummary\PatientClinicalReviewSummary.aspx.designer.cs">
+      <DependentUpon>PatientClinicalReviewSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>
@@ -829,6 +849,13 @@
     <Compile Include="CCC\Screening\DepressionScreening.aspx.designer.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Screening\CervicalCancerScreening.aspx.cs">
+      <DependentUpon>CervicalCancerScreening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Screening\CervicalCancerScreening.aspx.designer.cs">
+      <DependentUpon>CervicalCancerScreening.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Screening\GBVScreening.aspx.cs">
       <DependentUpon>GBVScreening.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -899,12 +926,33 @@
     <Compile Include="CCC\UC\Depression\ucUpdateDepressionScreening.ascx.designer.cs">
       <DependentUpon>ucUpdateDepressionScreening.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx.cs">
+      <DependentUpon>ucCervicalCancerScreening.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\Screening\ucCervicalCancerScreening.ascx.designer.cs">
+      <DependentUpon>ucCervicalCancerScreening.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\UC\ucCaseSummary.ascx.cs">
       <DependentUpon>ucCaseSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CCC\UC\ucCaseSummary.ascx.designer.cs">
       <DependentUpon>ucCaseSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx.cs">
+      <DependentUpon>ucCervicalCancerScreeningAssessment.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucCervicalCancerScreeningAssessment.ascx.designer.cs">
+      <DependentUpon>ucCervicalCancerScreeningAssessment.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalReviewSumary.ascx.cs">
+      <DependentUpon>ucPatientClinicalReviewSumary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientClinicalReviewSumary.ascx.designer.cs">
+      <DependentUpon>ucPatientClinicalReviewSumary.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucEvaluation.ascx.cs">
       <DependentUpon>ucEvaluation.ascx</DependentUpon>
@@ -1092,8 +1140,16 @@
       <DependentUpon>AdherenceService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CCC\WebService\Covid19UpdateService.asmx.cs">
+      <DependentUpon>Covid19UpdateService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CCC\WebService\DepressionScreeningService.asmx.cs">
       <DependentUpon>DepressionScreeningService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\EncryptionService.asmx.cs">
+      <DependentUpon>EncryptionService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\EnhanceAdherenceService.asmx.cs">
@@ -1139,6 +1195,10 @@
     </Compile>
     <Compile Include="CCC\WebService\PatientClinicalNotesService.asmx.cs">
       <DependentUpon>PatientClinicalNotesService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\PatientClinicalSummaryService.asmx.cs">
+      <DependentUpon>PatientClinicalSummaryService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\PatientEncounterService.asmx.cs">
@@ -1196,6 +1256,9 @@
     <Compile Include="CCC\WebService\TannersStagingService.asmx.cs">
       <DependentUpon>TannersStagingService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1333,6 +1396,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
+      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
+      <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess.CCC\DataAccess.CCC.csproj">
+      <Project>{8cc162fb-01fb-42ae-b63f-47e007e469e6}</Project>
+      <Name>DataAccess.CCC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IQCare.CCC.UILogic\IQCare.CCC.UILogic.csproj">
       <Project>{8eee6ba8-b2c9-4643-bd59-3deb13567695}</Project>
       <Name>IQCare.CCC.UILogic</Name>

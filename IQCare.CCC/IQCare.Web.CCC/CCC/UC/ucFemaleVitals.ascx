@@ -101,6 +101,35 @@
                        </div>
                    </div>
 
+                    <div class="col-md-12 form-group" id="w-ClientEligibleForFP">
+                        <!-- Multiple Radios (inline) -->
+                             <div class="col-md-12">
+                                <label class="control-label pull-left" for="radios">Client Eligible for Family Planning?</label>
+                            </div>
+                             <div class="col-md-12 pull-left">
+                                <label class="pull-left checked" for="clientEligibleForFP-1" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-1" value="Y" data-parsley-multiple="radios">
+                                    Yes
+           
+                                </label>
+                                <label class="pull-left" for="clientEligibleForFP-2" style="padding-right:10px">
+                                    <input type="radio" name="clientEligibleForFP" id="clientEligibleForFP-2" value="N" data-parsley-multiple="radios">
+                                    No
+           
+                                </label>
+                            </div>
+                    </div>
+
+                    <div class="col-md-12 form-group" id="w-FpServiceOffered">
+                        <!-- Select Basic -->
+                          <div class="col-md-12">
+                            <label class="control-label pull-left" for="FpServiceOffered">Service for eligible clients</label>
+                          </div>
+                          <div class="col-md-12">
+                                <asp:DropDownList runat="server" ID="FpServiceOffered" ClientIDMode="Static" CssClass="form-control input-sm" />
+                          </div>
+                    </div>
+
                    <div class="col-md-12 form-group" id="divOnFP">
                        <div class="col-md-12">
                            <label class="control-label  pull-left">FP Method</label>
@@ -214,6 +243,99 @@
        </div>
        
        <div class="col-md-12"><hr /></div>
+
+        <!-- Begin PIF-->
+        <div id="pregnancyIntentionAssessment">
+            <div class="col-md-12">
+                <h2 class="control-label pull-left">Pregnancy Intention Assessment</h2>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-4 npg">
+                <div class="col-md-12 form-group" id="w-PartnerHivStatus">
+                    <!-- Select Basic -->
+                    <div class="control-group">
+                        <label class="control-label pull-left" for="PartnerHivStatus">Partner HIV Status</label>
+                        <div class="controls">
+                            <asp:DropDownList runat="server" ID="PartnerHivStatus" ClientIDMode="Static" CssClass="form-control input-sm" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 npg">
+                <div class="col-md-12 form-group npg" id="w-PlanningToConceive3M">
+                    <!-- Multiple Radios (inline) -->
+                    <div class="control-group">
+                        <label class="control-label pull-left" for="planningToConceive3M">Planning to conceive in next 3 months?</label>
+                        <div class="controls">
+                            <label class="pull-left checked" for="planningToConceive3M-yes">
+                                <input type="radio" name="planningToConceive3M" id="planningToConceive3M-yes" value="Y" data-parsley-required="true">
+                                Yes
+           
+                            </label>
+                            <label class="pull-left" for="planningToConceive3M-no">
+                                <input type="radio" name="planningToConceive3M" id="planningToConceive3M-no" value="N" data-parsley-multiple="planningToConceive">
+                                No
+           
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group" id="w-RegularMenses">
+                    <!-- Multiple Radios (inline) -->
+                    <div class="control-group">
+                        <div class="clearfix">
+                            <label class="control-label pull-left" for="regularMenses">Experiencing regular menses?</label>
+                        </div>
+                        <div class="controls">
+                            <label class="pull-left checked" for="regularMenses-0">
+                                <input type="radio" name="regularMenses" id="regularMenses-0" value="Y" data-parsley-required="true">
+                                Yes
+           
+                            </label>
+                            <label class="pull-left" for="regularMenses-1">
+                                <input type="radio" name="regularMenses" id="regularMenses-1" value="N" data-parsley-multiple="regularMenses">
+                                No
+           
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="control-group">
+                        <label class="control-label pull-left" for="experiencedAnyOfTheFollowing" style="text-align: left;">
+                            Experienced any of the following symptoms?</label>
+                        <div class="controls" id="pregnancySymptoms" runat="server">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 pg">
+                <div class="col-md-12 form-group" id="w-InitiatedOnArt">
+                    <!-- Multiple Radios (inline) -->
+                    <div class="control-group">
+                        <label class="control-label pull-left" for="initiatedOnArt" style="text-align: left;">
+                            If Pregnant, Initiatiated on ART Regardless of CD4 Count and Linked to ANC or eMTCT as per SOP?
+                        </label>
+                        <div class="pull-left">
+                            <label class="pull-left checked" for="initiatedOnArt-0">
+                                <input type="radio" name="initiatedOnArt" id="initiatedOnArt-0" value="Y" data-parsley-required="true">
+                                Yes
+             
+                            </label>
+                            <label class="pull-left" for="initiatedOnArt-1">
+                                <input type="radio" name="initiatedOnArt" id="initiatedOnArt-1" value="N" data-parsley-multiple="initiatedOnArt">
+                                No
+             
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End PIF-->
        
        <div class="col-md-12" id="btnFemaleVitals">
            <div class="col-md-6">
@@ -240,7 +362,36 @@
           </div>
 
      </div>
-                         
+       
+       <!-- PIF History -->
+       <div class="col-md-12 form-group" style="margin-top: 30px;">
+           <div class="col-md-12 col-xs-12 col-sm-12">
+               <div id="presentingComplaintsTable" class="panel panel-primary">
+                   <div class="panel-heading">Previous Encounters</div>
+                   <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                       <table id="dtlPreviousFemaleEncounters" class="table table-bordered table-striped" style="width: 100%">
+                           <thead>
+                               <tr>
+                                   <th><span class="text-primary">Visit Date</span></th>
+                                   <th><span class="text-primary">Pregnancy Status</span></th>
+                                   <th><span class="text-primary">LMP</span></th>
+                                   <th><span class="text-primary">EDD</span></th>
+                                   <th><span class="text-primary">ON FP</span></th>
+                                   <th><span class="text-primary">Reason Not on FP</span></th>
+                                   <th><span class="text-primary">Eligible for FP</span></th>
+                                   <th><span class="text-primary">FP Methods</span></th>
+                                   <th><span class="text-primary">Planning to conceive in 3 Months</span></th>
+                                   <th><span class="text-primary">Linked to ANC?</span></th>
+                               </tr>
+                           </thead>
+                           <tbody></tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <!-- END PIF History -->
     </div><!-- .col-md-12-->
         
 </div><!-- .col-md-12 col-xs-12 col-sm-12-->
@@ -264,6 +415,13 @@
          var CaCxScreeningId = "<%=CaCxScreeningId%>";
          var STIScreeningId = "<%=STIScreeningId%>";
          var STIPartnerNotificationId = "<%=STIPartnerNotificationId%>";
+
+         var userId = "<%=Convert.ToInt32(HttpContext.Current.Session["AppUserId"])%>";
+
+         var validatePIAFields = function () {
+             $('#pregnancyIntentionAssessment').find('select:visible, input[type=radio]:hidden').attr('data-parsley-required', true);
+             $('#pregnancyIntentionAssessment').find('select:hidden, input[type=radio]:hidden').attr('data-parsley-required', false);
+         };
 
          $("#divNoFP").hide("fast");
 
@@ -317,6 +475,9 @@
              } else {
                  visitDate = moment($("#femaleDateOfVisit").val(), 'DD-MMM-YYYYY').toDate();
                  visitDate = moment(visitDate).format('DD-MMM-YYYY');
+
+                 getPregnancyIntentionForm(patientId, visitDate)
+
              }
 
          });
@@ -334,9 +495,10 @@
              var fp = $(this).find(":selected").text();
 
              if (fp === 'No Family Planning(NOFP)') {
-                 $("#divOnFP").hide("fast", function () { $("#divNoFP").show("fast"); });
+                 $("#divOnFP").hide("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast"); });
+                 $("#w-FpServiceOffered")
              } else {
-                 $("#divOnFP").show("fast", function () { $("#divNoFP").hide("fast"); });
+                 $("#divOnFP").show("fast", function () { $("#divNoFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast"); });
              }
 
          });
@@ -353,6 +515,38 @@
              }
          });
 
+         $('input[name=clientEligibleForFP]').on('change', function () {
+
+             if ($(this).val() == 'Y') {
+                 $('#w-FpServiceOffered').show('fast');
+             } else {
+                 $('#w-FpServiceOffered').hide('fast');
+             }
+
+             validatePIAFields();
+         });
+
+         $("#<%=pregnancySymptoms.ClientID%> input:checkbox").on('change', function () {
+
+             if ($(this).attr('checked', true) && $(this).val() == 'None') {
+                 $("#<%=pregnancySymptoms.ClientID%> input[type=checkbox][value!=" + $(this).val() + "]");
+             }
+
+         })
+
+         $("#<%=pregnancySymptoms.ClientID%> input:checkbox").on('change', function () {
+
+             if ($(this).is(':checked', true) && $(this).siblings('label').text() == 'None') {
+                 var noneId = $(this).parents('span').attr('data-value');
+                 $('#<%=pregnancySymptoms.ClientID%> span[data-value!=' + noneId + '] input:checkbox').attr('checked', false)
+            } else if ($(this).is(':checked', true) && $(this).siblings('label').text() != 'None') {
+                var noneCheckbox = $('#<%=pregnancySymptoms.ClientID%> label:contains(None)').siblings('input:checkbox')
+                 noneCheckbox.attr('checked', false);
+             }
+
+         })
+
+
 
          /* -- Ajax Calls -- */
          // var lmpDate = $('#FemaleLMP').datepicker('getDate');
@@ -364,7 +558,7 @@
                  //$("#ancNo").prop("checked", false);
                  $("#divEDD").show("fast");
                  //$("#divFemaleLMP").show("fast");
-                 $("#divOnFP").hide("fast", function () { $("#FP").hide("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").hide("fast", function () { $("#FP").hide("fast"); });
 
                  $('#FemaleVitals').parsley().destroy();
 
@@ -374,13 +568,17 @@
                  //reinitialize parsley
                  $('#FemaleVitals').parsley();
 
+                 $('.pg').show('fast');
+                 $('.npg').hide('fast');
+
              } else {
                  $("#ancNo").prop("checked", true);
-                 $("#divOnFP").show("fast", function () { $("#FP").show("fast"); });
+                 $("#divOnFP, #w-ClientEligibleForFP, #w-FpServiceOffered").show("fast", function () { $("#FP").show("fast"); });
                  //$("#divFemaleLMP").hide("fast");
                  $("#lmp_Female").val("");
                  $("#divEDD").hide("fast");
                  $("#ExpectedDateOfChildBirth").val("");
+                 $('#ExpectedDateOfChildBirth').attr('data-parsley-required', 'false');
 
                  if (patientAge >= 45) {
                      //destroy parsley
@@ -398,7 +596,12 @@
                      //$("#EDCD").prop("disabled", true);
                  }
 
+                 $('.pg').hide('fast');
+                 $('.npg').show('fast');
+
              }
+
+             validatePIAFields();
          });
 
 
@@ -491,8 +694,7 @@
                      contentType: "application/json; charset=utf-8",
                      dataType: "json",
                      success: function (response) {
-                         alert(response.d);
-                         toastr.success(response.d);
+                         //toastr.success(response.d);
                      },
                      error: function (xhr, errorType, exception) {
                          var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -595,6 +797,368 @@
              });
          }
 
+         function addPregnancyIntentionAsessment() {
+
+             visitDate = moment($("#femaleDateOfVisit").val(), 'DD-MMM-YYYY').toDate();
+             visitDate = moment(visitDate).format('DD-MMM-YYYY');
+             var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
+            var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
+            var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
+            var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
+            var regularMenses = $("input[name='regularMenses']:checked").val();
+            var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
+            var pregnancySymptoms = [];
+
+            $("#<%=pregnancySymptoms.ClientID%>").find("input:checked").each(function (item) {
+                 var symptomId = $(this).parents("span").attr('data-value');
+                 pregnancySymptoms.push(symptomId);
+             });
+
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','partnerHivStatus':'" + partnerHivStatus + "','clientEligibleForFP':'" + clientEligibleForFP + "','serviceForEligibleClient':'" + serviceForEligibleClient + "','reasonForFPIneligibility':'" + reasonForFPIneligibility + "','planningToConceive3M':'" + planningToConceive3M + "','regularMenses':'" + regularMenses + "','initiatedOnART':'" + initiatedOnART + "','userId':'" + userId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     var response = JSON.parse(response.d);
+                     $.when(addPregnancySymptoms(patientId, response.id, JSON.stringify(pregnancySymptoms))).then(function () {
+                         toastr.success(response.message);
+                     });
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+         }
+
+         function getPregnancyIntentionForm() {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','visitDate':'" + visitDate + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
+                        $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
+                        $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
+                        $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
+                        $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
+                        $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
+
+                        getPregnancySymptoms(response.Id);
+
+                    }
+
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message);
+                }
+            });
+
+        }
+
+         function addPregnancySymptoms(patientId, patientPIAId, pregnancySymptoms) {
+             if (patientPIAId != null) {
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancySymptom",
+                     data: "{'patientId':'" + patientId + "','patientPIAId':'" + patientPIAId + "','patientPregnancySymptoms':'" + pregnancySymptoms + "'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+             }
+         }
+
+         function getPregnancySymptoms(patientPIAId) {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPIAPregancySymptoms",
+                 data: "{'patientPIAId':'" + patientPIAId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $.each(response, function () {
+                             $("#<%=pregnancySymptoms.ClientID%>").find("span[data-value=" + this.PregnancySymptomId + "]").children("input[type=checkbox]").attr("checked", true);
+                         })
+                     }
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+
+         }
+
+         function addPregnancyIntentionAsessment() {
+
+             visitDate = moment($("#femaleDateOfVisit").val(), 'DD-MMM-YYYY').toDate();
+             visitDate = moment(visitDate).format('DD-MMM-YYYY');
+             var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
+            var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
+            var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
+            var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
+            var regularMenses = $("input[name='regularMenses']:checked").val();
+            var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
+            var pregnancySymptoms = [];
+
+            $("#<%=pregnancySymptoms.ClientID%>").find("input:checked").each(function (item) {
+                 var symptomId = $(this).parents("span").attr('data-value');
+                 pregnancySymptoms.push(symptomId);
+             });
+
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','partnerHivStatus':'" + partnerHivStatus + "','clientEligibleForFP':'" + clientEligibleForFP + "','serviceForEligibleClient':'" + serviceForEligibleClient + "','reasonForFPIneligibility':'" + reasonForFPIneligibility + "','planningToConceive3M':'" + planningToConceive3M + "','regularMenses':'" + regularMenses + "','initiatedOnART':'" + initiatedOnART + "','userId':'" + userId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     var response = JSON.parse(response.d);
+                     $.when(addPregnancySymptoms(patientId, response.id, JSON.stringify(pregnancySymptoms))).then(function () {
+                         toastr.success(response.message);
+                         setTimeout(function () {
+                             $("#FemaleVitals").hide("fast");
+                         }, 2000);
+                     });
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+         }
+
+         function getPregnancyIntentionForm() {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','visitDate':'" + visitDate + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
+                        $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
+                        $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
+                        $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
+                        $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
+                        $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
+
+                        getPregnancySymptoms(response.Id);
+
+                    }
+
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message);
+                }
+            });
+
+        }
+
+         function addPregnancySymptoms(patientId, patientPIAId, pregnancySymptoms) {
+             if (patientPIAId != null) {
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancySymptom",
+                     data: "{'patientId':'" + patientId + "','patientPIAId':'" + patientPIAId + "','patientPregnancySymptoms':'" + pregnancySymptoms + "'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+             }
+         }
+
+         function getPregnancySymptoms(patientPIAId) {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPIAPregancySymptoms",
+                 data: "{'patientPIAId':'" + patientPIAId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $.each(response, function () {
+                             $("#<%=pregnancySymptoms.ClientID%>").find("span[data-value=" + this.PregnancySymptomId + "]").children("input[type=checkbox]").attr("checked", true);
+                         })
+                     }
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+
+         }
+
+         function addPregnancyIntentionAsessment() {
+
+             visitDate = moment($("#femaleDateOfVisit").val(), 'DD-MMM-YYYY').toDate();
+             visitDate = moment(visitDate).format('DD-MMM-YYYY');
+             var partnerHivStatus = $("#<%=PartnerHivStatus.ClientID%>").val();
+            var clientEligibleForFP = $("input[name='clientEligibleForFP']:checked").val();
+            var serviceForEligibleClient = $("#<%=FpServiceOffered.ClientID%>").val();
+            var reasonForFPIneligibility = 0;
+            var planningToConceive3M = $("input[name='planningToConceive3M']:checked").val();
+            var regularMenses = $("input[name='regularMenses']:checked").val();
+            var initiatedOnART = $("input[name='initiatedOnArt']:checked").val();
+            var pregnancySymptoms = [];
+
+            $("#<%=pregnancySymptoms.ClientID%>").find("input:checked").each(function (item) {
+                 var symptomId = $(this).parents("span").attr('data-value');
+                 pregnancySymptoms.push(symptomId);
+             });
+
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','partnerHivStatus':'" + partnerHivStatus + "','clientEligibleForFP':'" + clientEligibleForFP + "','serviceForEligibleClient':'" + serviceForEligibleClient + "','reasonForFPIneligibility':'" + reasonForFPIneligibility + "','planningToConceive3M':'" + planningToConceive3M + "','regularMenses':'" + regularMenses + "','initiatedOnART':'" + initiatedOnART + "','userId':'" + userId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     var response = JSON.parse(response.d);
+                     $.when(addPregnancySymptoms(patientId, response.id, JSON.stringify(pregnancySymptoms))).then(function () {
+                         toastr.success(response.message);
+                         setTimeout(function () {
+                             $("#FemaleVitals").hide("fast");
+                         }, 2000);
+                     });
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+         }
+
+         function getPregnancyIntentionForm() {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPregnancyIntentionAssessment",
+                 data: "{'patientId':'" + patientId + "','visitDate':'" + visitDate + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $("#<%=PartnerHivStatus.ClientID%>").val(response.PartnerHivStatus);
+                        $("input[name='clientEligibleForFP'][value=" + response.ClientEligibleForFP + "]").attr("checked", true).change();
+                        $("#<%=FpServiceOffered.ClientID%>").val(response.ServiceForEligibleClient);
+                        $("input[name='planningToConceive3M'][value=" + response.PlanningToConceive3M + "]").attr("checked", true);
+                        $("input[name='regularMenses'][value=" + response.RegularMenses + "]").attr("checked", true);
+                        $("input[name='initiatedOnArt'][value=" + response.InitiatedOnArt + "]").attr("checked", true);
+
+                        getPregnancySymptoms(response.Id);
+
+                    }
+
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message);
+                }
+            });
+
+        }
+
+         function addPregnancySymptoms(patientId, patientPIAId, pregnancySymptoms) {
+             if (patientPIAId != null) {
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancySymptom",
+                     data: "{'patientId':'" + patientId + "','patientPIAId':'" + patientPIAId + "','patientPregnancySymptoms':'" + pregnancySymptoms + "'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+             }
+         }
+
+         function getPregnancySymptoms(patientPIAId) {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/GetPatientPIAPregancySymptoms",
+                 data: "{'patientPIAId':'" + patientPIAId + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d != '') {
+                         var response = JSON.parse(response.d);
+                         $.each(response, function () {
+                             $("#<%=pregnancySymptoms.ClientID%>").find("span[data-value=" + this.PregnancySymptomId + "]").children("input[type=checkbox]").attr("checked", true);
+                         })
+                     }
+
+                 },
+                 error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+
+         }
+
+
+         function doesPIAFormExist() {
+             $.ajax({
+                 type: "POST",
+                 url: "../WebService/FemaleVitalsWebservice.asmx/PregnancyIntentionFormExists",
+                 data: "{'patientId':'" + patientId + "','visitDate':'" + visitDate + "'}",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+                     if (response.d > 0) {
+                         return response.d;
+                     } else {
+                         return 0;
+                     }
+
+                     //console.log(response.d);
+                 }, error: function (xhr, errorType, exception) {
+                     var jsonError = jQuery.parseJSON(xhr.responseText);
+                     toastr.error("" + xhr.status + "" + jsonError.Message);
+                 }
+             });
+         }
+
          $("#btnSave").click(function () {
              $('#FemaleVitals').parsley().destroy();
              $('#FemaleVitals').parsley({
@@ -606,11 +1170,28 @@
                  var fpMethod = $("#fpMethod").val();
                  var fName = $("#<%=examinationPregnancyStatus.ClientID%>").find(":selected").text();
                  var fpOption = $("#<%=onFP.ClientID%>").find(":selected").text();
+                 var eligibleForFp = $("#w-ClientEligibleForFP").find(":checked").val();
+                 var fpService = $("#w-FpServiceOffered").find(":selected").text();
+                 var reasonNotOnFP = $("#divNoFP").find(":selected").text();
+
+
+
+                 if (fpOption == "No Family Planning(NOFP)" && eligibleForFp == undefined) {
+                     toastr.error("Please select if eligible for Family planning", "Family Planning Eligibility");
+                     return false;
+                 }
+
+                 if (eligibleForFp == "Y" && fpService == "select") {
+                     toastr.error("Please select Family Planning service offered", "Family Planning Service");
+                     return false;
+                 }
+
 
                  if (fpOption == "Family Planning(FP)" && fpMethod == null) {
                      toastr.error("Please select a family planning method", "Family Planning");
                      return false;
                  }
+
 
                  $.ajax({
                      type: "POST",
@@ -666,8 +1247,15 @@
                                              2000);
                                      });
                                      $.when(addPatientScreeningStiNotification()).then(function() {
-                                         $("#FemaleVitals").hide("fast");
-                                         //location.reload();
+                                         setTimeout(function () {
+                                             /*Save pregnancy intention assessment form*/
+                                             $.when(addPregnancyIntentionAsessment()).then(function () {
+                                                 setTimeout(function () {
+                                                     $("#FemaleVitals").hide("fast");
+                                                 }, 2000);
+                                             });
+
+                                         }, 2000);
                                      });
                                  },
                                  2000);
@@ -716,6 +1304,28 @@
                  }
              });
          });
+
+         var previousFemaleEncounters = $('#dtlPreviousFemaleEncounters').DataTable({
+             ajax: {
+                 type: "POST",
+                 url: "../WebService/PatientEncounterService.asmx/LoadFemaleEncounters",
+                 dataSrc: 'd',
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json"
+             },
+             paging: false,
+             searching: false,
+             info: false,
+             ordering: false,
+             columnDefs: [
+                 {
+                     "targets": [0],
+                     "visible": true,
+                     "searchable": false
+                 }
+             ]
+         });
+
 
      });
  </script>

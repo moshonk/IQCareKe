@@ -14,6 +14,7 @@ namespace Entities.CCC.Screening
     {
         [Column]
 
+        public int Id {get; set;}
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]

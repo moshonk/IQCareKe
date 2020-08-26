@@ -1768,7 +1768,7 @@ namespace IQCare.Web.CCC.WebService
 
             ArrayList rows = new ArrayList();
 
-            double[] i = new double[6] { categorizationParameters.SameRegimen12Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age };
+            double[] i = new double[12] { categorizationParameters.SameRegimen3Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age, categorizationParameters.OnART12Months, categorizationParameters.Muac, categorizationParameters.SameRegimen12Months, categorizationParameters.LdlVLInPast3Months, categorizationParameters.TwoConsecutiveLdlVl, categorizationParameters.NoAdr };
             rows.Add(i);
 
 
@@ -2281,6 +2281,24 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList LoadFemaleEncounters()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            DataTable theDT = patientEncounter.loadFemaleEncounters(Session["PatientPK"].ToString());
+            ArrayList rows = new ArrayList();
+
+            foreach (DataRow row in theDT.Rows)
+            {
+                string[] i = new string[10] { row["VisitDate"].ToString(), row["PregnancyStatus"].ToString(), row["LMP"].ToString(), row["EDD"].ToString(), row["CurrentlyOnFp"].ToString(),
+                row["ReasonNotOnFP"].ToString(), row["ClientEligibleForFP"].ToString(),row["FpMethods"].ToString(),row["PlanningToConceive3M"].ToString(),row["LinkedToANC"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+
         [WebMethod(EnableSession = true)]
         public ArrayList LoadPatientWHOStageList()
         {

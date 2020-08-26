@@ -34,13 +34,9 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                          unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId && x.Id >= x.Id)
-                               .OrderByDescending(x => x.Id)
-                             .FirstOrDefault();
-                //var vitals = unitOfWork.PatientVitalsRepository.GetAll().Where(x => x.PatientId == patientId && x.Id == unitOfWork.PatientVitalsRepository.GetAll().Max(i=>i.Id));
-                //       .DefaultIfEmpty(0)
-                //       .Max();
-                // var vitals = unitOfWork.PatientVitalsRepository
+                            unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
+                                .OrderByDescending(x => x.Id)
+                                .FirstOrDefault();
                 unitOfWork.Dispose();
                 return vitals;
             }

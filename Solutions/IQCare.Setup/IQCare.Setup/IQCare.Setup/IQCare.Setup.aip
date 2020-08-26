@@ -7,7 +7,7 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_FINDEXE_TITLE" Value="Select the installation package for [|ProductName]" ValueLocId="AI.Property.FindExeTitle"/>
     <ROW Property="AI_ThemeStyle" Value="aero" MultiBuildValue="DefaultBuild:style8" MsiKey="AI_ThemeStyle"/>
-    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ALLUSERS" Value="1" MultiBuildValue="DefaultBuild:2"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPNOREPAIR" MultiBuildValue="DefaultBuild:1"/>
     <ROW Property="ARPPRODUCTICON" Value="favicon.exe" Type="8"/>
@@ -44,8 +44,10 @@
     <ROW Directory="ClinicalService_Dir" Directory_Parent="IQCare_Dir" DefaultDir="CLINIC~2|ClinicalService" DirectoryOptions="3"/>
     <ROW Directory="Content_Dir" Directory_Parent="IQCare_Dir" DefaultDir="Content" DirectoryOptions="3"/>
     <ROW Directory="Data_Dir" Directory_Parent="CCC_Dir" DefaultDir="Data" DirectoryOptions="3"/>
+    <ROW Directory="DbMigration_Dir" Directory_Parent="APPDIR" DefaultDir="DBMIGR~1|DbMigration"/>
     <ROW Directory="Depression_1_Dir" Directory_Parent="UC_Dir" DefaultDir="DEPRES~1|Depression" DirectoryOptions="3"/>
     <ROW Directory="Depression_Dir" Directory_Parent="CCC_Dir" DefaultDir="DEPRES~1|Depression" DirectoryOptions="3"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="Encounter_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENCOUN~1|Encounter" DirectoryOptions="3"/>
     <ROW Directory="EnhanceAdherenceCounselling_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENHANC~1|EnhanceAdherenceCounselling" DirectoryOptions="3"/>
     <ROW Directory="Enrollment_Dir" Directory_Parent="CCC_Dir" DefaultDir="ENROLL~1|Enrollment" DirectoryOptions="3"/>
@@ -4807,6 +4809,10 @@
     <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
     <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiAppSearchComponent">
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_CU" Builds="DefaultBuild"/>
+    <ROW Property="AI_SETUPEXEPATH" Signature_="AI_EXE_PATH_LM" Builds="DefaultBuild"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
     <ROW Name="NetFirewall.dll" SourcePath="&lt;AI_CUSTACTS&gt;NetFirewall.dll"/>
     <ROW Name="PowerShellScriptLauncher.dll" SourcePath="&lt;AI_CUSTACTS&gt;PowerShellScriptLauncher.dll"/>
@@ -5778,6 +5784,18 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="favicon.exe" SourcePath="C:\KEHMIS.ChesterOsoro\IQCare.KeHMIS.chester.osoro\package\web\favicon.ico" Index="0"/>
   </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIniFileComponent">
+    <ROW IniFile="AppDir" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="AppDir" Value="[APPDIR]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ApplicationName" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ApplicationName" Value="[ProductName]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ApplicationVersion" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ApplicationVersion" Value="[ProductVersion]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="CheckFrequency" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="CheckFrequency" Value="2" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="CompanyName" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="CompanyName" Value="[Manufacturer]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="DefaultCommandLine" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="DefaultCommandLine" Value="/checknow" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="DownloadsFolder" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="DownloadsFolder" Value="[CommonAppDataFolder][Manufacturer]\[ProductName]\updates\" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="Flags" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="Flags" Value="PerMachine|ShowConfigOptionsButton" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="ID" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="ID" Value="[UpgradeCode]" Action="0" Component_="updater.exe"/>
+    <ROW IniFile="URL" FileName="UPDATE~1.INI|Update IQCare.ini" DirProperty="APPDIR" Section="General" Key="URL" Value="https://www.dropbox.com/s/856ku62dqwmvd02/updatefile.txt?dl=1" Action="0" Component_="updater.exe"/>
+  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
     <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
@@ -5838,6 +5856,9 @@
     <ROW Registry="AI_ExePath" Root="-1" Key="Software\Caphyon\Advanced Installer\LZMA\[ProductCode]\[ProductVersion]" Name="AI_ExePath" Value="[AI_SETUPEXEPATH]" Component_="AI_ExePath"/>
     <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="UpdateIQCare" Directory_="DesktopFolder" Name="UPDATE~1|Update IQCare" Component_="updater.exe" Target="[#updater.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>

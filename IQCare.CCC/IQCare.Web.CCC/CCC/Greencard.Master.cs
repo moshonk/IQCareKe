@@ -195,7 +195,6 @@ namespace IQCare.Web.CCC
             Response.Redirect("~/CCC/Screening/GBVScreening.aspx");
         }
 
-
         protected void New_Depression_Click(object sender,EventArgs e)
         {
             Response.Redirect("~/CCC/Screening/DepressionScreening.aspx");
@@ -256,6 +255,11 @@ namespace IQCare.Web.CCC
             Session["PatientInformation"] = null;
             Session["urlOrigin"] = "greencard";
             Response.Redirect("~/ClinicalForms/frmPatient_History.aspx");
+        }
+
+        protected void New_CxCaScreening_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Screening/CervicalCancerScreening.aspx");
         }
     }
 }

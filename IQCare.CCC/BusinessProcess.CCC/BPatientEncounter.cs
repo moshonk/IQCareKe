@@ -814,5 +814,17 @@ namespace BusinessProcess.CCC
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getTannersStaging", ClsUtility.ObjectEnum.DataTable);
             }
         }
+
+        public DataTable getPreviousFemaleEncounters(string patientID)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
+
+                return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getFemaleEncounters", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
     }
 }

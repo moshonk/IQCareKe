@@ -125,7 +125,11 @@ namespace DataAccess.CCC.Repository
         private IPatientPregnancyIndicatorRepository _PatientPregnancyIndicatorRepository;
         private IPatientPregnancyRepository _PatientPregnancyRepository;
         private IPatientScreeningRepository _PatientScreeningRepository;
+        private ICovid19ScreeningRepository _Covid19ScreeningRepository;
+        private IPatientCervicalCancerScreeningRepository _PatientCervicalCancerScreeningRepository;
         private IPatientAdverseEventOutcomeRepository _patientAdverseEventOutcomeRepository;
+        private IPatientPIAPregnancySymptomRepository _PatientPIAPregnancySymptomRepository;
+        private IPatientPregnancyIntentionAssessmentRepository _PatientPregnancyIntentionAssessmentRepository;
 
         /*Baseline*/
         // private IPatientDisclosureRepository _patientDisclosureRepository;
@@ -807,6 +811,21 @@ namespace DataAccess.CCC.Repository
                 return _PatientScreeningRepository ?? (_PatientScreeningRepository = new PatientScreeningRepository((GreencardContext)_context));
             }
         }
+        public ICovid19ScreeningRepository Covid19ScreeningRepository
+        {
+            get
+            {
+                return _Covid19ScreeningRepository ?? (_Covid19ScreeningRepository = new Covid19ScreeningRepository((GreencardContext)_context));
+            }
+        }
+
+        public IPatientCervicalCancerScreeningRepository PatientCervicalCancerScreeningRepository
+        {
+            get
+            {
+                return _PatientCervicalCancerScreeningRepository ?? (_PatientCervicalCancerScreeningRepository = new PatientCervicalCancerScreeningRepository((GreencardContext)_context));
+            }
+        }
 
         public IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository
         {
@@ -1007,6 +1026,16 @@ namespace DataAccess.CCC.Repository
         public object HIVEducationFollowup { get; set; }
 
         // public IPatientAdverseEventOutcomeRepository PatientAdverseEventOutcomeRepository => throw new NotImplementedException();
+
+        public IPatientPIAPregnancySymptomRepository PatientPIAPregnancySymptomRepository
+        {
+            get { return _PatientPIAPregnancySymptomRepository ?? (_PatientPIAPregnancySymptomRepository = new PatientPIAPregnancySymptomRepository((GreencardContext)_context)); }
+        }
+
+        public IPatientPregnancyIntentionAssessmentRepository PatientPregnancyIntentionAssessmentRepository
+        {
+            get { return _PatientPregnancyIntentionAssessmentRepository ?? (_PatientPregnancyIntentionAssessmentRepository = new PatientPregnancyIntentionAssessmentRepository((GreencardContext)_context)); }
+        }
 
         public int Complete()
         {
