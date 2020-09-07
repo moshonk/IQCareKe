@@ -73,6 +73,10 @@ namespace IQCare.Web.CCC.WebService
             string department,
             string screening_outcome,
             string pregnant,
+            string weight_loss,
+            string night_sweat,
+            string contact_tb_case,
+            string ever_tested,
             string created_by,
             DateTime date_created
             )
@@ -123,6 +127,10 @@ namespace IQCare.Web.CCC.WebService
                 department = department,
                 screening_outcome = screening_outcome,
                 pregnant = pregnant,
+                weight_loss = weight_loss,
+                night_sweat = night_sweat,
+                contact_tb_case = contact_tb_case,
+                ever_tested = ever_tested,
                 date_created = date_created,
                 created_by = created_by
             };

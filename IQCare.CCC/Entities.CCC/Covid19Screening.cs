@@ -105,6 +105,14 @@ namespace Entities.CCC
         [Column]
         public string pregnant { get; set; }
         [Column]
+        public string weight_loss { get; set; }
+        [Column]
+        public string night_sweat { get; set; }
+        [Column]
+        public string contact_tb_case { get; set; }
+        [Column]
+        public string ever_tested { get; set; }
+        [Column]
         public string created_by { get; set; }
         [Column]
         public DateTime? date_created { get; set; }
