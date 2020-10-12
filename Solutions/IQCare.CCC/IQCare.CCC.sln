@@ -44,8 +44,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.DTO", "..\..\IQCare.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Events", "..\..\IQCare.CCC\IQCare.Events\IQCare.Events.csproj", "{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessProcess.Security", "..\..\BusinessProcess\BusinessProcess.Security\BusinessProcess.Security.csproj", "{E5753796-926B-47B2-8856-0CAEA6BED4B6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface.Security", "..\..\Interfaces\Interface.Security\Interface.Security.csproj", "{E467EBA1-5014-43C1-9C72-3659181AA125}"
 EndProject
 Global
@@ -86,10 +84,6 @@ Global
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E1A1CC-ADC8-4843-ACB0-16E9C90BB980}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5753796-926B-47B2-8856-0CAEA6BED4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5753796-926B-47B2-8856-0CAEA6BED4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5753796-926B-47B2-8856-0CAEA6BED4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5753796-926B-47B2-8856-0CAEA6BED4B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E467EBA1-5014-43C1-9C72-3659181AA125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E467EBA1-5014-43C1-9C72-3659181AA125}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E467EBA1-5014-43C1-9C72-3659181AA125}.Release|Any CPU.ActiveCfg = Release|Any CPU

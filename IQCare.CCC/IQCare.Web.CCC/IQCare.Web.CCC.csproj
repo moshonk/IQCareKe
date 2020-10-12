@@ -293,7 +293,6 @@
     <Content Include="Content\pace\js\pace.js" />
     <Content Include="Content\toast\css\toastr.css" />
     <Content Include="Content\toast\js\toastr.js" />
-    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1256,9 +1255,6 @@
     <Compile Include="CCC\WebService\TannersStagingService.asmx.cs">
       <DependentUpon>TannersStagingService.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
