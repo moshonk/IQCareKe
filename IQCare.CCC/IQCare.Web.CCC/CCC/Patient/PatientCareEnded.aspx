@@ -411,6 +411,13 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
          });
 
+        $('#DateExpectedToReportpicker').datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            minDate: today,
+            useCurrent: false
+        });
+
          $("#DateOfDeath").datepicker({
                 date: null,
                 allowPastDates: true,
@@ -593,7 +600,9 @@
                 tracingOutome = tracingOutome == '' ? 0 : tracingOutome;
                 reasonLostToFollowup = reasonLostToFollowup == '' ? 0 : reasonLostToFollowup;
                 reasonsForDeath = reasonsForDeath == '' ? 0 : reasonsForDeath;
-                specificCausesOfDeath = specificCausesOfDeath == ('' || null) ? 0 : specificCausesOfDeath;
+				if(specificCausesOfDeath == '' || specificCausesOfDeath == null) {
+					specificCausesOfDeath = 0;
+				}
 
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
                 if (careEndedDate == "Invalid Date") {
@@ -606,13 +615,15 @@
                     return false;
                 }
 
-                dateOfDeath = moment(dateOfDeath, 'DD-MMM-YYYY');
-
-                if (dateOfDeath.isValid()) {    
-                    dateOfDeath = moment(dateOfDeath).format('DD-MMM-YYYY');
+                if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {    
+                    dateOfDeath = moment(moment(dateOfDeath, 'DD-MMM-YYYY')).format('DD-MMM-YYYY');
                 } else {
                     dateOfDeath = '';
                 }
+				
+				if(dateOfDeath == 'Invalid date') {
+					dateOfDeath = null;
+				}
 
                 $.ajax({
                     type: "POST",
@@ -720,7 +731,7 @@
 
             
             
-            function getCareEnded() {
+            /*function getCareEnded() {
                 $.ajax(
                 {
                     type: "POST",
@@ -749,7 +760,7 @@
                         return false;
                     }
                 });
-            }
+            }*/
 
 
             $("#reasonsForDeath").change(function () {

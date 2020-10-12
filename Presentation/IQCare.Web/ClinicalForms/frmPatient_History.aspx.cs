@@ -108,7 +108,17 @@ namespace IQCare.Web.Clinical
 
                     if (tmpYear == ((DateTime)theDR["TranDate"]).Year && tmpMonth == ((DateTime)theDR["TranDate"]).Month)
                     {
-                        int _locationId = Convert.ToInt32(theDS.Tables[0].Rows[0]["LocationID"].ToString());
+                        int _locationId = 0;
+
+                        if (theDS.Tables[0].Rows.Count > 0)
+                        {
+                            if (theDS.Tables[0].Rows[0]["LocationID"] != null)
+                            {
+
+                                _locationId = Convert.ToInt32(theDS.Tables[0].Rows[0]["LocationID"].ToString());
+                            }
+                        }
+                        
                         TreeNode theFrmRoot = new TreeNode();
                         theFrmRoot.Text = theDR["FormName"].ToString() + " ( " + ((DateTime)theDR["TranDate"]).ToString(Session["AppDateFormat"].ToString()) + " )";
                         string _formName = theDR["FormName"].ToString();

@@ -355,7 +355,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 foreach(var l in iptworkup)
                 {
-                    
+                    //startdateipt
                  
                    var startdateipt = l.IptStartDate;
                     
@@ -491,7 +491,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime TBRxStartDate, DateTime TBRxEndDate, int TBRxRegimen)
+        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime? TBRxStartDate, DateTime? TBRxEndDate, int TBRxRegimen)
         {
             PatientTBRx patientTBRX = new PatientTBRx()
             {
