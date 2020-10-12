@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "vs": "ng serve --open --proxy-config proxy.config.json",
-    "net": "dotnet watch run"
+    "net": "dotnet watch run",
+    "ng-high-memory": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --base-href /frontend/ --prod --aot --output-hashing=all"
   },
   "private": true,
   "dependencies": {
